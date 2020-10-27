@@ -20,43 +20,44 @@
  *********************************************************************************************************
  */
 
-	include ("library/checklogin.php");
-	$operator = $_SESSION['operator_user'];
+include("library/checklogin.php");
+$operator = $_SESSION['operator_user'];
 
-	//include('library/check_operator_perm.php');
-
-
-	//setting values for the order by and order type variables
-	isset($_REQUEST['orderBy']) ? $orderBy = $_REQUEST['orderBy'] : $orderBy = "id";
-	isset($_REQUEST['orderType']) ? $orderType = $_REQUEST['orderType'] : $orderType = "desc";
+//include('library/check_operator_perm.php');
 
 
-	include_once('library/config_read.php');
-	$log = "visited page: ";
-	$logQuery = "performed query on page: ";
-	$logDebugSQL = "";
+//setting values for the order by and order type variables
+isset($_REQUEST['orderBy']) ? $orderBy = $_REQUEST['orderBy'] : $orderBy = "id";
+isset($_REQUEST['orderType']) ? $orderType = $_REQUEST['orderType'] : $orderType = "desc";
+
+
+include_once('library/config_read.php');
+$log = "visited page: ";
+$logQuery = "performed query on page: ";
+$logDebugSQL = "";
 
 ?>
 
 <?php
+include('./_partials/head.php');
+include('./_partials/js.php');
+include("menu-reports-batch.php");
 
-    include ("menu-reports-batch.php");
-  	
-?>	
-
-
-	<div id="contentnorightbar">
-		
-		<h2 id="Intro"><a href="#"  onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','repbatchlist.php'); ?>
-		<h144>&#x2754;</h144></a></h2>
-
-		<div id="helpPage" style="display:none;visibility:visible" >
-			<?php echo t('helpPage','repbatchlist') ?>
-			<br/>
-		</div>
+?>
 
 
-<?php
+<div id="contentnorightbar">
+
+	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'repbatchlist.php'); ?>
+			<h144>&#x2754;</h144></a></h2>
+
+	<div id="helpPage" style="display:none;visibility:visible">
+		<?php echo t('helpPage', 'repbatchlist') ?>
+		<br />
+	</div>
+
+
+	<?php
 
 	include 'include/management/pages_common.php';
 	include 'library/opendb.php';
@@ -67,102 +68,102 @@
 	//reportQuery is assigned below to the SQL statement  in $sql
 	$_SESSION['reportQuery'] = "";
 	$_SESSION['reportType'] = "reportsBatchList";
-	
+
 	//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-	$sql = "SELECT ".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".id,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".batch_name,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".batch_description,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".batch_status,".
-			
-			"COUNT(DISTINCT(".$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".id)) as total_users,".
-			"COUNT(DISTINCT(".$configValues['CONFIG_DB_TBL_RADACCT'].".username)) as active_users,".
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".planname,".
-			$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].".plancost,".
-			$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].".name as HotspotName,".
-			
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".creationdate,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".creationby,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".updatedate,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".updateby ".
-			" FROM ".$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".id = ".
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".batch_id) ".
+	$sql = "SELECT " .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_description," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_status," .
 
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].".planname = ".
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".planname) ".
+		"COUNT(DISTINCT(" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".id)) as total_users," .
+		"COUNT(DISTINCT(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username)) as active_users," .
+		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname," .
+		$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".plancost," .
+		$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as HotspotName," .
 
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_RADACCT'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_RADACCT'].".username = ".
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".username) ".
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".creationdate," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".creationby," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".updatedate," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".updateby " .
+		" FROM " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id = " .
+		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id) " .
 
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".hotspot_id = ".
-			$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].".id) ".
-			
-			" GROUP by ".$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".batch_name ";
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".planname = " .
+		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname) " .
+
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username = " .
+		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username) " .
+
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".hotspot_id = " .
+		$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".id) " .
+
+		" GROUP by " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name ";
 
 	// set the session variable for report query (export)
 	$_SESSION['reportQuery'] = $sql;
-	
+
 	$res = $dbSocket->query($sql);
 	$numrows = $res->numRows();
 	$logDebugSQL .= $sql . "\n";
 
 
-	$sql = "SELECT ".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".id,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".batch_name,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".batch_description,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".batch_status,".
-			
-			"COUNT(DISTINCT(".$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".id)) as total_users,".
-			"COUNT(DISTINCT(".$configValues['CONFIG_DB_TBL_RADACCT'].".username)) as active_users,".
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".planname,".
-			$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].".plancost,".
-			$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].".plancurrency,".
-			$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].".name as HotspotName,".
-			
-			
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".creationdate,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".creationby,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".updatedate,".
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".updateby ".
-			" FROM ".$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".id = ".
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".batch_id) ".
+	$sql = "SELECT " .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_description," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_status," .
 
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].".planname = ".
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".planname) ".
+		"COUNT(DISTINCT(" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".id)) as total_users," .
+		"COUNT(DISTINCT(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username)) as active_users," .
+		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname," .
+		$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".plancost," .
+		$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".plancurrency," .
+		$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as HotspotName," .
 
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".hotspot_id = ".
-			$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].".id) ".
-			
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_RADACCT'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_RADACCT'].".username = ".
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].".username) ".
-			" GROUP by ".$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'].".batch_name ".
-			" ORDER BY $orderBy $orderType ".
-			" LIMIT $offset, $rowsPerPage;";
+
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".creationdate," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".creationby," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".updatedate," .
+		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".updateby " .
+		" FROM " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id = " .
+		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id) " .
+
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".planname = " .
+		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname) " .
+
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".hotspot_id = " .
+		$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".id) " .
+
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username = " .
+		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username) " .
+		" GROUP by " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name " .
+		" ORDER BY $orderBy $orderType " .
+		" LIMIT $offset, $rowsPerPage;";
 	$res = $dbSocket->query($sql);
 	$logDebugSQL .= $sql . "\n";
 
 
 	/* START - Related to pages_numbering.php */
-	$maxPage = ceil($numrows/$rowsPerPage);
+	$maxPage = ceil($numrows / $rowsPerPage);
 	/* END */
 
 	echo "<form name='listallusers' method='get' action='mng-del.php' >";
@@ -188,65 +189,65 @@
 			</tr>
 			</thead>
 			";
-	  $curOrderType = $orderType;
-        if ($orderType == "asc") {
-                $orderType = "desc";
-        } else  if ($orderType == "desc") {
-                $orderType = "asc";
-        }
-	
+	$curOrderType = $orderType;
+	if ($orderType == "asc") {
+		$orderType = "desc";
+	} else  if ($orderType == "desc") {
+		$orderType = "asc";
+	}
+
 	echo "<thread> <tr>
 		<th scope='col'> 
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=id&orderType=$orderType\">
-		".t('all','BatchName')."</a>
+		" . t('all', 'BatchName') . "</a>
 		</th>
 
 		<th scope='col'> 
-		".t('all','HotSpot')."
+		" . t('all', 'HotSpot') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','BatchStatus')."
+		" . t('all', 'BatchStatus') . "
 		</th>
 		
 		<th scope='col'> 
-		".t('all','TotalUsers')."
+		" . t('all', 'TotalUsers') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','ActiveUsers')."
+		" . t('all', 'ActiveUsers') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','PlanName')."
+		" . t('all', 'PlanName') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','PlanCost')."
+		" . t('all', 'PlanCost') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','BatchCost')."
+		" . t('all', 'BatchCost') . "
 		</th>
 
 		<th scope='col'> 
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=creationdate&orderType=$orderType\">
-		".t('all','CreationDate')."</a>
+		" . t('all', 'CreationDate') . "</a>
 		</th>
 
 		<th scope='col'> 
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=creationby&orderType=$orderType\">
-		".t('all','CreationBy')."</a>
+		" . t('all', 'CreationBy') . "</a>
 		</th>
 
 		</tr> </thread>";
 
-		
+
 	$active_users_per = 0;
 	$total_users = 0;
 	$active_users = 0;
 	$batch_cost = 0;
-	while($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+	while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 
 		$hotspot_name = $row['HotspotName'];
 		$batch_status = $row['batch_status'];
@@ -255,7 +256,7 @@
 		$active_users = $row['active_users'];
 		$batch_cost = ($active_users * $plancost);
 		$plan_currency = $row['plancurrency'];
-		
+
 		echo "
 			<tr>
 				<td>";
@@ -265,10 +266,10 @@
 					onclick='javascript:return false;'
 					tooltipText='
 					<a class=\"toolTip\" href=\"rep-batch-details.php?batch_name={$row['batch_name']}\">
-						".t('Tooltip','BatchDetails')."</a>
+						" . t('Tooltip', 'BatchDetails') . "</a>
 						<br/><br/>
 								<div id=\"divContainerUserInfo\">
-									<b>".t('all','batchDescription')."</b>:<br/><br/>
+									<b>" . t('all', 'batchDescription') . "</b>:<br/><br/>
 									{$row['batch_description']}
 								</div>
 								<br/>
@@ -276,56 +277,55 @@
 			>{$row['batch_name']}</a>
 			</td>
 		");
-		
+
 		echo "
 		
-				<td>".$hotspot_name."
+				<td>" . $hotspot_name . "
 					
 				</td>
 		
-				<td>".$batch_status."
+				<td>" . $batch_status . "
 					
 				</td>
 				
-				<td>".$total_users."
+				<td>" . $total_users . "
 					
 				</td>
 
-				<td>".$active_users."
+				<td>" . $active_users . "
 					
 				</td>
 
-				<td>".
-					$row['planname']."
+				<td>" .
+			$row['planname'] . "
 				</td>
 
-				<td>".$plancost."
+				<td>" . $plancost . "
 				</td>
 
-				<td>".$batch_cost."
+				<td>" . $batch_cost . "
 				</td>
 				
-				<td>".
-					$row['creationdate']."
+				<td>" .
+			$row['creationdate'] . "
 				</td>
 
-				<td>".
-					$row['creationby']."
+				<td>" .
+			$row['creationby'] . "
 				</td>
 
 
 			</tr>
 		";
-		
+
 		/*
 		printqn("
 			<td> <input type='checkbox' name='username[]' value='$row[0]'>$row[2]</td>
 			<td> 
 		");
 		*/
-
 	}
-	
+
 	echo "
 					<tfoot>
 							<tr>
@@ -341,36 +341,37 @@
 	echo "</form>";
 
 	include 'library/closedb.php';
-	
-?>
+
+	?>
 
 
 
-<?php
+	<?php
 	include('include/config/logging.php');
-?>
+	?>
 
 
 </div>
-	
-	<div id="footer">
-	
-<?php
-	include 'page-footer.php';
-?>
 
-	</div>
+<div id="footer">
+
+	<?php
+	include 'page-footer.php';
+	?>
+
+</div>
 
 </div>
 </div>
 
 <script type="text/javascript">
-        var tooltipObj = new DHTMLgoodies_formTooltip();
-        tooltipObj.setTooltipPosition('right');
-        tooltipObj.setPageBgColor('#EEEEEE');
-        tooltipObj.setTooltipCornerSize(15);
-        tooltipObj.initFormFieldTooltip();
+	var tooltipObj = new DHTMLgoodies_formTooltip();
+	tooltipObj.setTooltipPosition('right');
+	tooltipObj.setPageBgColor('#EEEEEE');
+	tooltipObj.setTooltipCornerSize(15);
+	tooltipObj.initFormFieldTooltip();
 </script>
 
 </body>
+
 </html>

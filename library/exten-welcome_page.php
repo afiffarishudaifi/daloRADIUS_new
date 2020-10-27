@@ -30,8 +30,6 @@ echo "
 		<h3> ".t('all','daloRADIUSVersion')." / ".$configValues['DALORADIUS_DATE']." </h3>
 		<h4> <a href=\"mailto:liran.tal@gmail.com\"> Liran Tal </a> </h4>
 		<br/><br/><br/>
-		<img src='images/daloradius_logo.jpg' border=0 />
+		<img src='images/daloradius_logo.jpg' border=0 height='200' />
 	</center>
 ";
-
-?>

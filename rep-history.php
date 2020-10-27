@@ -20,73 +20,74 @@
  *********************************************************************************************************
  */
 
-    include ("library/checklogin.php");
-    $operator = $_SESSION['operator_user'];
+include("library/checklogin.php");
+$operator = $_SESSION['operator_user'];
 
-	include('library/check_operator_perm.php');
-
-
-        //setting values for the order by and order type variables
-        isset($_REQUEST['orderBy']) ? $orderBy = $_REQUEST['orderBy'] : $orderBy = "updatedate,creationdate";
-        isset($_REQUEST['orderType']) ? $orderType = $_REQUEST['orderType'] : $orderType = "desc";
+include('library/check_operator_perm.php');
 
 
+//setting values for the order by and order type variables
+isset($_REQUEST['orderBy']) ? $orderBy = $_REQUEST['orderBy'] : $orderBy = "updatedate,creationdate";
+isset($_REQUEST['orderType']) ? $orderType = $_REQUEST['orderType'] : $orderType = "desc";
 
-	include_once('library/config_read.php');
-    $log = "visited page: ";
-    $logQuery = "performed query on page: ";
+
+
+include_once('library/config_read.php');
+$log = "visited page: ";
+$logQuery = "performed query on page: ";
 
 
 ?>
 
 <?php
+include('./_partials/head.php');
+include('./_partials/js.php');
+include("menu-reports.php");
 
-    include ("menu-reports.php");
-        	
-?>		
-		
-		
-		<div id="contentnorightbar">
-		
-		<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','rephistory.php'); ?>
-		<h144>&#x2754;</h144></a></h2>
+?>
 
-		<div id="helpPage" style="display:none;visibility:visible" >
-			<?php echo t('helpPage','rephistory') ?>
-			<br/>
-		</div>
-		<br/>
 
-<?php
+<div id="contentnorightbar">
+
+        <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'rephistory.php'); ?>
+                        <h144>&#x2754;</h144></a></h2>
+
+        <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'rephistory') ?>
+                <br />
+        </div>
+        <br />
+
+        <?php
 
         include 'include/management/pages_common.php';
         include 'library/opendb.php';
         include 'include/management/pages_numbering.php';               // must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-        $sql = "(SELECT 'proxy' as section, proxyname as item, creationdate,creationby,updatedate,updateby FROM proxys) UNION ".
-		" (SELECT 'realm' as section, realmname as item, creationdate,creationby,updatedate,updateby FROM realms) UNION ".
-		" (SELECT 'userinfo' as section, username as item, creationdate,creationby,updatedate,updateby FROM userinfo) UNION ".
-		" (SELECT 'operators' as section, username as item, creationdate,creationby,updatedate,updateby FROM operators) UNION ".
-        " (SELECT 'invoice' as section, id as item, creationdate,creationby,updatedate,updateby FROM invoice) UNION ".
-        " (SELECT 'payment' as section, id as item, creationdate,creationby,updatedate,updateby FROM payment) UNION ".
-		" (SELECT 'hotspot' as section, name as item, creationdate,creationby,updatedate,updateby FROM hotspots) ";
+        $sql = "(SELECT 'proxy' as section, proxyname as item, creationdate,creationby,updatedate,updateby FROM proxys) UNION " .
+                " (SELECT 'realm' as section, realmname as item, creationdate,creationby,updatedate,updateby FROM realms) UNION " .
+                " (SELECT 'userinfo' as section, username as item, creationdate,creationby,updatedate,updateby FROM userinfo) UNION " .
+                " (SELECT 'operators' as section, username as item, creationdate,creationby,updatedate,updateby FROM operators) UNION " .
+                " (SELECT 'invoice' as section, id as item, creationdate,creationby,updatedate,updateby FROM invoice) UNION " .
+                " (SELECT 'payment' as section, id as item, creationdate,creationby,updatedate,updateby FROM payment) UNION " .
+                " (SELECT 'hotspot' as section, name as item, creationdate,creationby,updatedate,updateby FROM hotspots) ";
         $res = $dbSocket->query($sql);
-	$numrows = $res->numRows();
+        $numrows = $res->numRows();
 
-        $sql = "(SELECT 'proxy' as section, proxyname as item, creationdate,creationby,updatedate,updateby FROM proxys) UNION ".
-		" (SELECT 'realm' as section, realmname as item, creationdate,creationby,updatedate,updateby FROM realms) UNION ".
-		" (SELECT 'userinfo' as section, username as item, creationdate,creationby,updatedate,updateby FROM userinfo) UNION ".
-		" (SELECT 'operators' as section, username as item, creationdate,creationby,updatedate,updateby FROM operators) UNION ".
-        " (SELECT 'invoice' as section, id as item, creationdate,creationby,updatedate,updateby FROM invoice) UNION ".
-        " (SELECT 'payment' as section, id as item, creationdate,creationby,updatedate,updateby FROM payment) UNION ".
-		" (SELECT 'hotspot' as section, name as item, creationdate,creationby,updatedate,updateby FROM hotspots) ".
-		" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
+        $sql = "(SELECT 'proxy' as section, proxyname as item, creationdate,creationby,updatedate,updateby FROM proxys) UNION " .
+                " (SELECT 'realm' as section, realmname as item, creationdate,creationby,updatedate,updateby FROM realms) UNION " .
+                " (SELECT 'userinfo' as section, username as item, creationdate,creationby,updatedate,updateby FROM userinfo) UNION " .
+                " (SELECT 'operators' as section, username as item, creationdate,creationby,updatedate,updateby FROM operators) UNION " .
+                " (SELECT 'invoice' as section, id as item, creationdate,creationby,updatedate,updateby FROM invoice) UNION " .
+                " (SELECT 'payment' as section, id as item, creationdate,creationby,updatedate,updateby FROM payment) UNION " .
+                " (SELECT 'hotspot' as section, name as item, creationdate,creationby,updatedate,updateby FROM hotspots) " .
+                " ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
         $res = $dbSocket->query($sql);
         $logDebugSQL = "";
         $logDebugSQL .= $sql . "\n";
 
         /* START - Related to pages_numbering.php */
-        $maxPage = ceil($numrows/$rowsPerPage);
+        $maxPage = ceil($numrows / $rowsPerPage);
         /* END */
 
         // creating the table:
@@ -116,39 +117,39 @@
         echo "<thread> <tr>
                 <th scope='col'>
                 <a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=section&orderType=$orderTypeNextPage\">
-		".t('all','Section')." 
+		" . t('all', 'Section') . " 
 		</th>
 
                 <th scope='col'>
                 <a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=item&orderType=$orderTypeNextPage\">
-		".t('all','Item')." 
+		" . t('all', 'Item') . " 
 		</th>
 
                 <th scope='col'>
                 <a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=creationdate&orderType=$orderTypeNextPage\">
-		".t('all','CreationDate')." 
+		" . t('all', 'CreationDate') . " 
 		</th>
 
                 <th scope='col'>
                 <a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=creationby&orderType=$orderTypeNextPage\">
-		".t('all','CreationBy')." 
+		" . t('all', 'CreationBy') . " 
 		</th>
 
                 <th scope='col'>
                 <a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=updatedate&orderType=$orderTypeNextPage\">
-		".t('all','UpdateDate')." 
+		" . t('all', 'UpdateDate') . " 
 		</th>
 
                 <th scope='col'>
                 <a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=updateby&orderType=$orderTypeNextPage\">
-		".t('all','UpdateBy')." 
+		" . t('all', 'UpdateBy') . " 
 		</th>
         </tr> </thread>";
 
 
-        while($row = $res->fetchRow()) {
+        while ($row = $res->fetchRow()) {
 
-	        printqn("<tr>
+                printqn("<tr>
                                 <td> $row[0] </td>
                                 <td> $row[1] </td>
                                 <td> $row[2] </td>
@@ -156,7 +157,6 @@
                                 <td> $row[4] </td>
                                 <td> $row[5] </td>
                 </tr>");
-
         }
 
         echo "
@@ -176,26 +176,27 @@
 
         include 'library/closedb.php';
 
-?>
+        ?>
 
 
-<?php
-	include('include/config/logging.php');
-?>
+        <?php
+        include('include/config/logging.php');
+        ?>
 
-		</div>
-		
-		<div id="footer">
-		
-								<?php
+</div>
+
+<div id="footer">
+
+        <?php
         include 'page-footer.php';
-?>
-		
-		</div>
-		
+        ?>
+
+</div>
+
 </div>
 </div>
 
 
 </body>
+
 </html>

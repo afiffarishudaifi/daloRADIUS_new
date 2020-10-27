@@ -20,46 +20,47 @@
  *********************************************************************************************************
  */
 
-	include ("library/checklogin.php");
-	$operator = $_SESSION['operator_user'];
+include("library/checklogin.php");
+$operator = $_SESSION['operator_user'];
 
-	//include('library/check_operator_perm.php');
-
-
-	//setting values for the order by and order type variables
-	isset($_REQUEST['orderBy']) ? $orderBy = $_REQUEST['orderBy'] : $orderBy = "time";
-	isset($_REQUEST['orderType']) ? $orderType = $_REQUEST['orderType'] : $orderType = "desc";
+//include('library/check_operator_perm.php');
 
 
-	include_once('library/config_read.php');
-	$log = "visited page: ";
-	$logQuery = "performed query on page: ";
-	$logDebugSQL = "";
-	
-	$softDelay = $configValues['CONFIG_DASHBOARD_DALO_DELAYSOFT'];
-	$hardDelay = $configValues['CONFIG_DASHBOARD_DALO_DELAYHARD'];
+//setting values for the order by and order type variables
+isset($_REQUEST['orderBy']) ? $orderBy = $_REQUEST['orderBy'] : $orderBy = "time";
+isset($_REQUEST['orderType']) ? $orderType = $_REQUEST['orderType'] : $orderType = "desc";
+
+
+include_once('library/config_read.php');
+$log = "visited page: ";
+$logQuery = "performed query on page: ";
+$logDebugSQL = "";
+
+$softDelay = $configValues['CONFIG_DASHBOARD_DALO_DELAYSOFT'];
+$hardDelay = $configValues['CONFIG_DASHBOARD_DALO_DELAYHARD'];
 
 ?>
 
 <?php
+include('./_partials/head.php');
+include('./_partials/js.php');
+include("menu-reports-hb.php");
 
-    include ("menu-reports-hb.php");
-  	
-?>	
-
-
-	<div id="contentnorightbar">
-		
-		<h2 id="Intro"><a href="#"  onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','rephbdashboard.php'); ?>
-		<h144>&#x2754;</h144></a></h2>
-
-		<div id="helpPage" style="display:none;visibility:visible" >
-			<?php echo t('helpPage','rephbdashboard') ?>
-			<br/>
-		</div>
+?>
 
 
-<?php
+<div id="contentnorightbar">
+
+	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'rephbdashboard.php'); ?>
+			<h144>&#x2754;</h144></a></h2>
+
+	<div id="helpPage" style="display:none;visibility:visible">
+		<?php echo t('helpPage', 'rephbdashboard') ?>
+		<br />
+	</div>
+
+
+	<?php
 
 	include 'include/management/pages_common.php';
 	include 'library/opendb.php';
@@ -67,77 +68,77 @@
 
 
 	//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-	$sql = "SELECT ".
-			$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].".name as hotspotname,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_iface,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_ip,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_mac,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_gateway,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_iface,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_ip,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_mac,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_ssid,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_key,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_channel,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".lan_iface,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".lan_mac,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".lan_ip,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".uptime,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".memfree,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".cpu,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_bup,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_bdown,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".firmware,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".firmware_revision,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".mac,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".time ".
-			" FROM ".$configValues['CONFIG_DB_TBL_DALONODE'].
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].".mac = ".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".mac) ";
+	$sql = "SELECT " .
+		$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as hotspotname," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_iface," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_ip," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_mac," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_gateway," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_iface," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_ip," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_mac," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_ssid," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_key," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_channel," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".lan_iface," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".lan_mac," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".lan_ip," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".uptime," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".memfree," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".cpu," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_bup," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_bdown," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".firmware," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".firmware_revision," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".mac," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".time " .
+		" FROM " . $configValues['CONFIG_DB_TBL_DALONODE'] .
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".mac = " .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".mac) ";
 	$res = $dbSocket->query($sql);
 	$numrows = $res->numRows();
 	$logDebugSQL .= $sql . "\n";
 
 
-	$sql = "SELECT ".
-			$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].".name as hotspotname,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_iface,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_ip,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_mac,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_gateway,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_iface,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_ip,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_mac,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_ssid,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_key,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wifi_channel,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".lan_iface,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".lan_mac,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".lan_ip,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".uptime,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".memfree,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_bup,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".wan_bdown,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".firmware,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".firmware_revision,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".mac,".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".time, ".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".cpu ".
-			" FROM ".$configValues['CONFIG_DB_TBL_DALONODE'].
-			" LEFT JOIN ".$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].
-			" ON ".
-			"(".$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'].".mac = ".
-			$configValues['CONFIG_DB_TBL_DALONODE'].".mac) ".
-			//" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-			" LIMIT $offset, $rowsPerPage;";
+	$sql = "SELECT " .
+		$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as hotspotname," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_iface," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_ip," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_mac," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_gateway," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_iface," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_ip," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_mac," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_ssid," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_key," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wifi_channel," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".lan_iface," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".lan_mac," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".lan_ip," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".uptime," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".memfree," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_bup," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".wan_bdown," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".firmware," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".firmware_revision," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".mac," .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".time, " .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".cpu " .
+		" FROM " . $configValues['CONFIG_DB_TBL_DALONODE'] .
+		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+		" ON " .
+		"(" . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".mac = " .
+		$configValues['CONFIG_DB_TBL_DALONODE'] . ".mac) " .
+		//" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+		" LIMIT $offset, $rowsPerPage;";
 	$res = $dbSocket->query($sql);
 	$logDebugSQL .= $sql . "\n";
 
 
 	/* START - Related to pages_numbering.php */
-	$maxPage = ceil($numrows/$rowsPerPage);
+	$maxPage = ceil($numrows / $rowsPerPage);
 	/* END */
 
 	echo "<form name='listallusers' method='get' action='mng-del.php' >";
@@ -161,75 +162,75 @@
 			</tr>
 			</thead>
 			";
-	  $curOrderType = $orderType;
-        if ($orderType == "asc") {
-                $orderType = "desc";
-        } else  if ($orderType == "desc") {
-                $orderType = "asc";
-        }
-	
+	$curOrderType = $orderType;
+	if ($orderType == "asc") {
+		$orderType = "desc";
+	} else  if ($orderType == "desc") {
+		$orderType = "asc";
+	}
+
 	echo "<thread> <tr>
 		<th scope='col'> 
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=id&orderType=$orderType\">
-		".t('all','HotSpot')."</a>
+		" . t('all', 'HotSpot') . "</a>
 		</th>
 
 		<th scope='col'> 
-		".t('all','Firmware')."
+		" . t('all', 'Firmware') . "
 		</th>
 		
 		<th scope='col'> 
-		".t('all','WanIface')."
+		" . t('all', 'WanIface') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','LanIface')."
+		" . t('all', 'LanIface') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','WifiIface')."
+		" . t('all', 'WifiIface') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','Uptime')."
+		" . t('all', 'Uptime') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','CPU')."
+		" . t('all', 'CPU') . "
 		</th>
 		
 		<th scope='col'> 
-		".t('all','Memfree')."
+		" . t('all', 'Memfree') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','BandwidthUp')."
+		" . t('all', 'BandwidthUp') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','BandwidthDown')."
+		" . t('all', 'BandwidthDown') . "
 		</th>
 
 		<th scope='col'> 
-		".t('all','CheckinTime')."
+		" . t('all', 'CheckinTime') . "
 		</th>
 
 		</tr> </thread>";
 
-	while($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+	while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 
-		
-		
+
+
 		//$js = "javascript:ajaxGeneric('include/management/retUserInfo.php','retBandwidthInfo','divContainerUserInfo','username=".$row[0]."');";
-		$content =  '<a class="toolTip" href="mng-hs-edit.php?name='.$row['hotspotname'].'">'.t('Tooltip','HotspotEdit').'</a>';
-		$content .= '<br/><br/><b>'.t('all','NASMAC').':</b> '.$row['mac'];
+		$content =  '<a class="toolTip" href="mng-hs-edit.php?name=' . $row['hotspotname'] . '">' . t('Tooltip', 'HotspotEdit') . '</a>';
+		$content .= '<br/><br/><b>' . t('all', 'NASMAC') . ':</b> ' . $row['mac'];
 		$str = addToolTipBalloon(array(
-									'content' => $content,
-									'onClick' => '',
-									'value' => '<b>'.$row['hotspotname'].'</b>',
-									'divId' => '',
-		
-							));
+			'content' => $content,
+			'onClick' => '',
+			'value' => '<b>' . $row['hotspotname'] . '</b>',
+			'divId' => '',
+
+		));
 
 		echo "
 			<tr>
@@ -237,131 +238,127 @@
 					$str
 				</td>
 			
-				<td>".
-					$row['firmware']."
-					<br/>".
-					$row['firmware_revision']."
+				<td>" .
+			$row['firmware'] . "
+					<br/>" .
+			$row['firmware_revision'] . "
 				</td>
 			";
-					
-					
-		$content = '<b>'.t('all','WanIface').":</b> ".$row['wan_iface'].
-					"<br/>".
-					'<b>'.t('all','WanMAC').":</b> ".$row['wan_mac'].
-					"<br/>".
-					'<b>'.t('all','WanIP').":</b> ".$row['wan_ip'].
-					"<br/>".
-					'<b>'.t('all','WanGateway').":</b> ".$row['wan_ip'];
-		$value = '<b>'.t('all','WanIP').":</b> ".$row['wan_ip'];
-		$str = addToolTipBalloon(array(
-									'content' => $content,
-									'onClick' => '',
-									'value' => $value,
-									'divId' => '',
-		
-							));
-							
-		echo "<td> $str </td>";
-				
-		
-		
-		$content = t('all','LanIface').":</b> ".$row['lan_iface'].
-						"<br/><b>".
-					t('all','LanMAC').":</b> ".$row['lan_mac'].
-						"<br/><b>".
-					t('all','LanIP').":</b> ".$row['lan_ip'];
-		$value = '<b>'.t('all','LanIP').":</b> ".$row['lan_ip'];
-		$str = addToolTipBalloon(array(
-									'content' => $content,
-									'onClick' => '',
-									'value' => $value,
-									'divId' => '',
-		
-							));
-							
-		echo "<td> $str </td>";
-				
-		
 
-		$content = t('all','WifiIface').":</b> ".$row['wifi_iface'].
-						"<br/><b>".
-					t('all','WifiMAC').":</b> ".$row['wifi_mac'].
-						"<br/><b>".
-					t('all','WifiIP').":</b> ".$row['wifi_ip'].
-						"<br/><b>".
-					t('all','WifiSSID').":</b> ".$row['wifi_ssid'].
-						"<br/><b>".
-					t('all','WifiKey').":</b> ".$row['wifi_key'].
-						"<br/><b>".
-					t('all','WifiChannel').":</b> ".$row['wifi_channel'];
-		$value = '<b>'.t('all','WifiSSID').":</b> ".$row['wifi_ssid'].
-					"<br/><b>".
-					t('all','WifiKey').":</b> ".$row['wifi_key'];
+
+		$content = '<b>' . t('all', 'WanIface') . ":</b> " . $row['wan_iface'] .
+			"<br/>" .
+			'<b>' . t('all', 'WanMAC') . ":</b> " . $row['wan_mac'] .
+			"<br/>" .
+			'<b>' . t('all', 'WanIP') . ":</b> " . $row['wan_ip'] .
+			"<br/>" .
+			'<b>' . t('all', 'WanGateway') . ":</b> " . $row['wan_ip'];
+		$value = '<b>' . t('all', 'WanIP') . ":</b> " . $row['wan_ip'];
 		$str = addToolTipBalloon(array(
-									'content' => $content,
-									'onClick' => '',
-									'value' => $value,
-									'divId' => '',
-		
-							));
-							
+			'content' => $content,
+			'onClick' => '',
+			'value' => $value,
+			'divId' => '',
+
+		));
+
 		echo "<td> $str </td>";
-	
-		
+
+
+
+		$content = t('all', 'LanIface') . ":</b> " . $row['lan_iface'] .
+			"<br/><b>" .
+			t('all', 'LanMAC') . ":</b> " . $row['lan_mac'] .
+			"<br/><b>" .
+			t('all', 'LanIP') . ":</b> " . $row['lan_ip'];
+		$value = '<b>' . t('all', 'LanIP') . ":</b> " . $row['lan_ip'];
+		$str = addToolTipBalloon(array(
+			'content' => $content,
+			'onClick' => '',
+			'value' => $value,
+			'divId' => '',
+
+		));
+
+		echo "<td> $str </td>";
+
+
+
+		$content = t('all', 'WifiIface') . ":</b> " . $row['wifi_iface'] .
+			"<br/><b>" .
+			t('all', 'WifiMAC') . ":</b> " . $row['wifi_mac'] .
+			"<br/><b>" .
+			t('all', 'WifiIP') . ":</b> " . $row['wifi_ip'] .
+			"<br/><b>" .
+			t('all', 'WifiSSID') . ":</b> " . $row['wifi_ssid'] .
+			"<br/><b>" .
+			t('all', 'WifiKey') . ":</b> " . $row['wifi_key'] .
+			"<br/><b>" .
+			t('all', 'WifiChannel') . ":</b> " . $row['wifi_channel'];
+		$value = '<b>' . t('all', 'WifiSSID') . ":</b> " . $row['wifi_ssid'] .
+			"<br/><b>" .
+			t('all', 'WifiKey') . ":</b> " . $row['wifi_key'];
+		$str = addToolTipBalloon(array(
+			'content' => $content,
+			'onClick' => '',
+			'value' => $value,
+			'divId' => '',
+
+		));
+
+		echo "<td> $str </td>";
+
+
 		// calculate time delay
-		$currTime = time(); 
+		$currTime = time();
 		$checkinTime = strtotime($row['time']);
-		if ($currTime - $checkinTime >= (60*$hardDelay)) {
+		if ($currTime - $checkinTime >= (60 * $hardDelay)) {
 
 			// this is hard delay
 			$delayColor = 'red';
-			
-		} elseif ( 
-			($currTime - $checkinTime >= (60*$softDelay))
-			&& ($currTime - $checkinTime < (60*$hardDelay))
-			)
-		{
+		} elseif (
+			($currTime - $checkinTime >= (60 * $softDelay))
+			&& ($currTime - $checkinTime < (60 * $hardDelay))
+		) {
 
 			// this is soft delay
 			$delayColor = 'orange';
-			
 		} else {
-			
+
 			// this is no delay at all, meaning not above 5 minutes delay
 			$delayColor = 'green';
 		}
-			
+
 		echo "
-				<td>".
-					time2str($row['uptime'])."
+				<td>" .
+			time2str($row['uptime']) . "
 				</td>
 
-				<td>".
-					$row['cpu']."
+				<td>" .
+			$row['cpu'] . "
 				</td>
 				
-				<td>".
-					$row['memfree']."
+				<td>" .
+			$row['memfree'] . "
 				</td>
 
-				<td>".
-					toxbyte($row['wan_bup'])."
+				<td>" .
+			toxbyte($row['wan_bup']) . "
 				</td>
 
-				<td>".
-					toxbyte($row['wan_bdown'])."
+				<td>" .
+			toxbyte($row['wan_bdown']) . "
 				</td>
 
-				<td> <font color='$delayColor'> ".
-					$row['time']."
+				<td> <font color='$delayColor'> " .
+			$row['time'] . "
 					</font>
 				</td>
 				
 			</tr>
 		";
-
 	}
-	
+
 	echo "
 					<tfoot>
 							<tr>
@@ -377,25 +374,25 @@
 	echo "</form>";
 
 	include 'library/closedb.php';
-	
-?>
+
+	?>
 
 
 
-<?php
+	<?php
 	include('include/config/logging.php');
-?>
+	?>
 
 
 </div>
-	
-	<div id="footer">
-	
-<?php
-	include 'page-footer.php';
-?>
 
-	</div>
+<div id="footer">
+
+	<?php
+	include 'page-footer.php';
+	?>
+
+</div>
 
 </div>
 </div>
@@ -410,4 +407,5 @@
 
 
 </body>
+
 </html>
