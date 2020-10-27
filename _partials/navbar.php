@@ -24,16 +24,16 @@
                     <a class="dropdown-item" href="mng-main.php"
                         <?php echo ($m_active == "Management") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Managment'); ?>
                     </a>
-                    <a class="dropdown-item" href="mng-users.php"><em>U</em>sers</a>
-                    <a class="dropdown-item" href="mng-batch.php"><em>B</em>atch Users</a>
-                    <a class="dropdown-item" href="mng-hs.php"><em>H</em>otspots</a>
-                    <a class="dropdown-item" href="mng-rad-nas.php"><em>N</em>as</a>
-                    <a class="dropdown-item" href="mng-rad-usergroup.php"><em>U</em>ser-Groups</a>
-                    <a class="dropdown-item" href="mng-rad-profiles.php"><em>P</em>rofiles</a>
-                    <a class="dropdown-item" href="mng-rad-hunt.php">HuntG<em>r</em>oups</a>
-                    <a class="dropdown-item" href="mng-rad-attributes.php"><em>A</em>ttributes</a>
-                    <a class="dropdown-item" href="mng-rad-realms.php"><em>R</em>ealms/Proxys </a>
-                    <a class="dropdown-item" href="mng-rad-ippool.php"><em>I</em>P-Pool </a>
+                    <a class="dropdown-item" href="mng-users.php">Users</a>
+                    <a class="dropdown-item" href="mng-batch.php">Batch Users</a>
+                    <a class="dropdown-item" href="mng-hs.php">Hotspots</a>
+                    <a class="dropdown-item" href="mng-rad-nas.php">Nas</a>
+                    <a class="dropdown-item" href="mng-rad-usergroup.php">User-Groups</a>
+                    <a class="dropdown-item" href="mng-rad-profiles.php">Profiles</a>
+                    <a class="dropdown-item" href="mng-rad-hunt.php">HuntGroups</a>
+                    <a class="dropdown-item" href="mng-rad-attributes.php">Attributes</a>
+                    <a class="dropdown-item" href="mng-rad-realms.php">Realms/Proxys </a>
+                    <a class="dropdown-item" href="mng-rad-ippool.php">IP-Pool </a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -46,11 +46,11 @@
                         <?php echo ($m_active == "Reports") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Reports'); ?>
                     </a>
 
-                    <a class="dropdown-item" href="rep-main.php"><em>G</em>eneral</a>
-                    <a class="dropdown-item" href="rep-logs.php"><em>L</em>ogs</a>
-                    <a class="dropdown-item" href="rep-status.php"><em>S</em>tatus</a>
-                    <a class="dropdown-item" href="rep-batch.php"><em>B</em>atch Users</a>
-                    <a class="dropdown-item" href="rep-hb.php"><em>D</em>ashboard</a>
+                    <a class="dropdown-item" href="rep-main.php">General</a>
+                    <a class="dropdown-item" href="rep-logs.php">Logs</a>
+                    <a class="dropdown-item" href="rep-status.php">Status</a>
+                    <a class="dropdown-item" href="rep-batch.php">Batch Users</a>
+                    <a class="dropdown-item" href="rep-hb.php">Dashboard</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -62,11 +62,11 @@
                     <a class="dropdown-item" href="rep-main.php"
                         <?php echo ($m_active == "Accounting") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Accounting'); ?>
                     </a>
-                    <a class="dropdown-item" href="acct-main.php"><em>G</em>eneral</a>
-                    <a class="dropdown-item" href="acct-plans.php"><em>P</em>lans</a>
-                    <a class="dropdown-item" href="acct-custom.php"><em>C</em>ustom</a>
-                    <a class="dropdown-item" href="acct-hotspot.php"><em>H</em>otspot</a>
-                    <a class="dropdown-item" href="acct-maintenance.php"><em>M</em>aintenance</a>
+                    <a class="dropdown-item" href="acct-main.php">General</a>
+                    <a class="dropdown-item" href="acct-plans.php">Plans</a>
+                    <a class="dropdown-item" href="acct-custom.php">Custom</a>
+                    <a class="dropdown-item" href="acct-hotspot.php">Hotspot</a>
+                    <a class="dropdown-item" href="acct-maintenance.php">Maintenance</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -78,13 +78,13 @@
                     <a class="dropdown-item" href="rep-main.php"
                         <?php echo ($m_active == "Billing") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Billing'); ?>
                     </a>
-                    <a class="dropdown-item" href="bill-pos.php"><em>P</em>OS</a>
-                    <a class="dropdown-item" href="bill-plans.php"><em>P</em>lans</a>
-                    <a class="dropdown-item" href="bill-rates.php"><em>R</em>ates</a>
-                    <a class="dropdown-item" href="bill-merchant.php"><em>M</em>erchant-Transactions</a>
-                    <a class="dropdown-item" href="bill-history.php"><em>B</em>illing-History</a>
-                    <a class="dropdown-item" href="bill-invoice.php"><em>I</em>nvoices</a>
-                    <a class="dropdown-item" href="bill-payments.php">Pa<em>y</em>ments</a>
+                    <a class="dropdown-item" href="bill-pos.php">POS</a>
+                    <a class="dropdown-item" href="bill-plans.php">Plans</a>
+                    <a class="dropdown-item" href="bill-rates.php">Rates</a>
+                    <a class="dropdown-item" href="bill-merchant.php">Merchant-Transactions</a>
+                    <a class="dropdown-item" href="bill-history.php">Billing-History</a>
+                    <a class="dropdown-item" href="bill-invoice.php">Invoices</a>
+                    <a class="dropdown-item" href="bill-payments.php">Payments</a>
                 </div>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
@@ -105,16 +105,26 @@
                     <a class="dropdown-item" href="rep-main.php"
                         <?php echo ($m_active == "Config") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Config'); ?>
                     </a>
-                    <a class="dropdown-item" href="config-main.php"><em>G</em>eneral</a>
-                    <a class="dropdown-item" href="config-reports.php"><em>R</em>eporting</a>
-                    <a class="dropdown-item" href="config-maint.php"><em>M</em>aintenance</a>
-                    <a class="dropdown-item" href="config-operators.php"><em>O</em>perators</a>
-                    <a class="dropdown-item" href="config-backup.php"><em>B</em>ackup</a>
+                    <a class="dropdown-item" href="config-main.php">General</a>
+                    <a class="dropdown-item" href="config-reports.php">Reporting</a>
+                    <a class="dropdown-item" href="config-maint.php">Maintenance</a>
+                    <a class="dropdown-item" href="config-operators.php">Operators</a>
+                    <a class="dropdown-item" href="config-backup.php">Backup</a>
                 </div>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a class="nav-link" href="help-main.php"
                     <?php echo ($m_active == "Help") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Help'); ?>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+                Pengguna<?php //echo $getUser; 
+                        ?>
+                <a href="graph-main.php">
+                    <span class="fa fa-sign-out" style="color: black;"></span>
                 </a>
             </li>
         </ul>
