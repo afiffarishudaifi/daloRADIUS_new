@@ -170,7 +170,7 @@ body {
 
 #sidebar {
 	background:#333;
-	width:200px;
+	width:100%;
 	padding:10px 20px 20px 20px;
 	float:left;
 	color:#666;

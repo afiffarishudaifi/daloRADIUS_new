@@ -4,58 +4,61 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-	include_once("lang/main.php");
-	?>
+    include_once("lang/main.php");
+    ?>
     <div id="wrapper">
         <div id="innerwrapper">
 
             <?php
-			$m_active = "Management";
-			// include_once("include/menu/menu-items.php");
-			// include_once("include/menu/management-subnav.php");
+            $m_active = "Management";
+            // include_once("include/menu/menu-items.php");
+            // include_once("include/menu/management-subnav.php");
 
-			include_once("./_partials/navbar.php");
-			include_once("./_partials/js.php");
-			?>
+            include_once("./_partials/navbar.php");
+            include_once("./_partials/js.php");
+            ?>
+            <br>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card" id="sidebar">
 
-            <div id="sidebar">
+                        <h2>Management</h2>
 
-                <h2>Management</h2>
+                        <h3>Batch Management</h3>
+                        <ul class="">
 
-                <h3>Batch Management</h3>
-                <ul class="subnav">
+                            <li><a href="mng-batch-list.php"><b>&raquo;</b>
+                                    <img src='images/icons/userList.gif' border='0'>
+                                    <?php echo t('button', 'ListBatches') ?></a>
+                            </li>
+                            <li><a href="mng-batch-add.php"><b>&raquo;</b>
+                                    <img src='images/icons/userNew.gif' border='0'>
+                                    <?php echo t('button', 'BatchAddUsers') ?></a>
+                            </li>
+                            <li><a href="mng-batch-del.php"><b>&raquo;</b>
+                                    <img src='images/icons/userRemove.gif' border='0'>
+                                    <?php echo t('button', 'RemoveBatch') ?>
+                                </a>
+                            </li>
 
-                    <li><a href="mng-batch-list.php"><b>&raquo;</b>
-                            <img src='images/icons/userList.gif' border='0'>
-                            <?php echo t('button', 'ListBatches') ?></a>
-                    </li>
-                    <li><a href="mng-batch-add.php"><b>&raquo;</b>
-                            <img src='images/icons/userNew.gif' border='0'>
-                            <?php echo t('button', 'BatchAddUsers') ?></a>
-                    </li>
-                    <li><a href="mng-batch-del.php"><b>&raquo;</b>
-                            <img src='images/icons/userRemove.gif' border='0'>
-                            <?php echo t('button', 'RemoveBatch') ?>
-                        </a>
-                    </li>
-
-                </ul>
-
-
-                <br /><br />
-
+                        </ul>
 
 
+                        <br /><br />
 
-            </div>
 
-            <?php
-			include_once("include/management/autocomplete.php");
 
-			if ($autoComplete) {
-				echo "<script type=\"text/javascript\">
+
+                    </div>
+                </div>
+
+                <?php
+                include_once("include/management/autocomplete.php");
+
+                if ($autoComplete) {
+                    echo "<script type=\"text/javascript\">
 			/** Making dictAttributesCustom interactive **/
 	              autoComEdit = new DHTMLSuite.autoComplete();
               </script>";
-			}
-			?>
+                }
+                ?>

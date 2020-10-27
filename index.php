@@ -14,25 +14,33 @@ include('./_partials/js.php');
 
 
 
-<div id="contentnorightbar">
+<!-- <div id="contentnorightbar"> -->
 
-    <h2 id="Intro"><a href="#"></a></h2>
-    <p>
+<div class="col-lg-9">
+    <div class="card">
 
-        <?php
-		include 'library/exten-welcome_page.php';
-		?>
-    </p>
+        <h2 id="Intro"><a href="#"></a></h2>
+        <p>
+
+            <?php
+            include 'library/exten-welcome_page.php';
+            ?>
+        </p>
+    </div>
+
 </div>
 
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 </div>
 
+</div>
+</div>
+</div>
 </div>
 </div>
 

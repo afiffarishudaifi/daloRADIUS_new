@@ -34,29 +34,32 @@ include("menu-mng-users.php");
 
 ?>
 
-<div id="contentnorightbar">
+<!-- <div id="contentnorightbar"> -->
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"><?php echo t('Intro', 'mngmain.php') ?></a></h2>
-    <p>
-        <table>
-            <center><br />
-                <img src="library/chart-mng-total-users.php" />
-        </table>
-        </center>
-    </p>
+        <h2 id="Intro"><a href="#"><?php echo t('Intro', 'mngmain.php') ?></a></h2>
+        <p>
+            <table>
+                <center><br />
+                    <img src="library/chart-mng-total-users.php" />
+            </table>
+            </center>
+        </p>
 
 
-    <?php
-	include('include/config/logging.php');
-	?>
+        <?php
+        include('include/config/logging.php');
+        ?>
 
+    </div>
 </div>
 
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 
 </div>
