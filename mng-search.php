@@ -44,7 +44,8 @@ include("menu-mng-users.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card"></div>
 
     <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngsearch.php'); ?>
             :: <?php if (isset($username)) {
@@ -204,7 +205,7 @@ include("menu-mng-users.php");
 	?>
 
 </div>
-
+</div>
 <div id="footer">
 
     <?php
@@ -216,7 +217,7 @@ include("menu-mng-users.php");
 
 </div>
 </div>
-
+</div>
 <script type="text/javascript">
 var tooltipObj = new DHTMLgoodies_formTooltip();
 tooltipObj.setTooltipPosition('right');

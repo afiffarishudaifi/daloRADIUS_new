@@ -13,15 +13,18 @@ include("menu-mng-hs.php");
 
 ?>
 
-<div id="contentnorightbar">
+<!-- <div id="contentnorightbar"> -->
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"><?php echo t('Intro', 'mngmain.php') ?></a></h2>
+        <h2 id="Intro"><a href="#"><?php echo t('Intro', 'mngmain.php') ?></a></h2>
 
 
-    <?php
-	include('include/config/logging.php');
-	?>
+        <?php
+		include('include/config/logging.php');
+		?>
 
+    </div>
 </div>
 
 <div id="footer">
@@ -33,6 +36,7 @@ include("menu-mng-hs.php");
 
 </div>
 
+</div>
 </div>
 </div>
 

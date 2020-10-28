@@ -50,44 +50,46 @@ include("menu-mng-hs.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mnghslist.php') ?>
-            <h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mnghslist.php') ?>
+                <h144>&#x2754;</h144></a></h2>
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mnghslist') ?>
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mnghslist') ?>
+            <br />
+        </div>
         <br />
-    </div>
-    <br />
 
 
-    <?php
+        <?php
 
 
-	include 'library/opendb.php';
-	include 'include/management/pages_common.php';
-	include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+		include 'library/opendb.php';
+		include 'include/management/pages_common.php';
+		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-	//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-	$sql = "SELECT id, name, owner, company, type FROM " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ";";
-	$res = $dbSocket->query($sql);
-	$numrows = $res->numRows();
+		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+		$sql = "SELECT id, name, owner, company, type FROM " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ";";
+		$res = $dbSocket->query($sql);
+		$numrows = $res->numRows();
 
-	$sql = "SELECT id, name, owner, company, type FROM " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-	$res = $dbSocket->query($sql);
-	$logDebugSQL = "";
-	$logDebugSQL .= $sql . "\n";
+		$sql = "SELECT id, name, owner, company, type FROM " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+		$res = $dbSocket->query($sql);
+		$logDebugSQL = "";
+		$logDebugSQL .= $sql . "\n";
 
-	/* START - Related to pages_numbering.php */
-	$maxPage = ceil($numrows / $rowsPerPage);
-	/* END */
+		/* START - Related to pages_numbering.php */
+		$maxPage = ceil($numrows / $rowsPerPage);
+		/* END */
 
 
-	echo "<form name='listallhotspots' method='post' action='mng-hs-del.php'>";
+		echo "<form name='listallhotspots' method='post' action='mng-hs-del.php'>";
 
-	echo "<table border='0' class='table1'>\n";
-	echo "
+		echo "<table border='0' class='table1'>\n";
+		echo "
 					<thead>
                                                         <tr>
                                                         <th colspan='10' align='left'>
@@ -101,21 +103,21 @@ include("menu-mng-hs.php");
 
         ";
 
-	if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-		setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-	echo " </th></tr>
+		echo " </th></tr>
                                         </thead>
 
                         ";
 
-	if ($orderType == "asc") {
-		$orderTypeNextPage = "desc";
-	} else  if ($orderType == "desc") {
-		$orderTypeNextPage = "asc";
-	}
+		if ($orderType == "asc") {
+			$orderTypeNextPage = "desc";
+		} else  if ($orderType == "desc") {
+			$orderTypeNextPage = "asc";
+		}
 
-	echo "<thread> <tr>
+		echo "<thread> <tr>
 		<th scope='col'>
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=id&orderType=$orderTypeNextPage\">
 		" . t('all', 'ID') . "</a>
@@ -142,8 +144,8 @@ include("menu-mng-hs.php");
 		</th>
 
 	</tr> </thread>";
-	while ($row = $res->fetchRow()) {
-		printqn("<tr>
+		while ($row = $res->fetchRow()) {
+			printqn("<tr>
                                 <td> <input type='checkbox' name='name[]' value='$row[1]'> $row[0] </td>
 
                         <td> <a class='tablenovisit' href='#'
@@ -167,32 +169,33 @@ include("menu-mng-hs.php");
 				<td> $row[3] </td>
 				<td> $row[4] </td>
 		</tr>");
-	}
+		}
 
-	echo "
+		echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='10' align='left'>
         ";
-	setupLinks($pageNum, $maxPage, $orderBy, $orderType);
-	echo "
+		setupLinks($pageNum, $maxPage, $orderBy, $orderType);
+		echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
 
-	echo "</table>";
-	echo "</form>";
+		echo "</table>";
+		echo "</form>";
 
-	include 'library/closedb.php';
-	?>
+		include 'library/closedb.php';
+		?>
 
 
-    <?php
-	include('include/config/logging.php');
-	?>
+        <?php
+		include('include/config/logging.php');
+		?>
 
+    </div>
 </div>
 
 <div id="footer">
@@ -204,6 +207,7 @@ include("menu-mng-hs.php");
 
 </div>
 
+</div>
 </div>
 </div>
 

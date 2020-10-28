@@ -31,37 +31,38 @@ include('./_partials/js.php');
 include("menu-mng-rad-realms.php");
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"
-            onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradrealms.php') ?>
-            <h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradrealms.php') ?>
+                <h144>&#x2754;</h144></a></h2>
 
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mngradrealms') ?>
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mngradrealms') ?>
+            <br />
+        </div>
         <br />
+
+        <?php
+        include('include/config/logging.php');
+        ?>
+
     </div>
-    <br />
-
-    <?php
-	include('include/config/logging.php');
-	?>
-
 </div>
-
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 
 </div>
 
 </div>
 </div>
-
+</div>
 
 </body>
 

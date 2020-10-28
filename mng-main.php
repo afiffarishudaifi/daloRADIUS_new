@@ -13,7 +13,6 @@ include("menu-mng-users.php");
 
 ?>
 
-<!-- <div id="contentnorightbar"> -->
 <div class="col-lg-9">
     <div class="card">
 

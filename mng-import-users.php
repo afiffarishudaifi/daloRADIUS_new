@@ -156,110 +156,112 @@ include("menu-mng-users.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"
-            onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngimportusers.php') ?>
-            <h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngimportusers.php') ?>
+                <h144>&#x2754;</h144></a></h2>
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mngimportusers') ?>
-        <br />
-    </div>
-    <?php
-	include_once('include/management/actionMessages.php');
-	?>
-
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-        <fieldset>
-
-            <h302> <?php echo t('title', 'ImportUsers'); ?> </h302>
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mngimportusers') ?>
             <br />
+        </div>
+        <?php
+		include_once('include/management/actionMessages.php');
+		?>
 
-            <ul>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-                Paste a CSV-formatted data input of users, expected format is: user,password<br />
-                Note: any CSV fields beyond the first 2 (user and password) are ignored<br />
+            <fieldset>
+
+                <h302> <?php echo t('title', 'ImportUsers'); ?> </h302>
                 <br />
 
+                <ul>
 
-                <li class='fieldset'>
-                    <label for='passwordType' class='form'><?php echo t('all', 'PasswordType') ?> </label>
-                    <select class='form' tabindex=102 name='passwordType'>
-                        <option value='Cleartext-Password'>Cleartext-Password</option>
-                        <option value='User-Password'>User-Password</option>
-                        <option value='Crypt-Password'>Crypt-Password</option>
-                        <option value='MD5-Password'>MD5-Password</option>
-                        <option value='SHA1-Password'>SHA1-Password</option>
-                        <option value='CHAP-Password'>CHAP-Password</option>
-                    </select>
-                </li>
-
-                <li class='fieldset'>
-                    <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
-                    <?php
-					include_once 'include/management/populate_selectbox.php';
-					populate_groups("Select Groups", "groups[]");
-					?>
-
-                    <a class='tablenovisit' href='#'
-                        onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroups',genericCounter('divCounter')+'&elemName=groups[]');">Add</a>
-                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                        onClick="javascript:toggleShowDiv('group')" />
-                    <div id='divContainerGroups'>
-                    </div>
-
-
-                <li class='fieldset'>
-                    <label for='planName' class='form'><?php echo t('all', 'PlanName') ?></label>
-                    <?php
-					populate_plans("Select Plan", "planName", "form");
-					?>
-                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                        onClick="javascript:toggleShowDiv('planNameTooltip')" />
-
-                    <div id='planNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                        <?php echo t('Tooltip', 'planNameTooltip') ?>
-                    </div>
-                </li>
-
-                <li class='fieldset'>
-                    <label for='userType' class='form'><?php echo t('all', 'UserType') ?></label>
-                    <input type='checkbox' name='userType' value='userType' /> If users are MAC or PIN based
-                    authentication, check this box
-                </li>
-
-
-
-
-
-
-                <li class='fieldset'>
-                    <label for='csvdata' class='form'><?php echo t('all', 'CSVData') ?></label>
-                    <textarea class='form_fileimport' name='csvdata' tabindex=101></textarea>
-                </li>
-
-
-                <li class='fieldset'>
+                    Paste a CSV-formatted data input of users, expected format is: user,password<br />
+                    Note: any CSV fields beyond the first 2 (user and password) are ignored<br />
                     <br />
-                    <hr><br />
-                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000
-                        class='button' />
-                </li>
 
-            </ul>
-        </fieldset>
 
-    </form>
+                    <li class='fieldset'>
+                        <label for='passwordType' class='form'><?php echo t('all', 'PasswordType') ?> </label>
+                        <select class='form' tabindex=102 name='passwordType'>
+                            <option value='Cleartext-Password'>Cleartext-Password</option>
+                            <option value='User-Password'>User-Password</option>
+                            <option value='Crypt-Password'>Crypt-Password</option>
+                            <option value='MD5-Password'>MD5-Password</option>
+                            <option value='SHA1-Password'>SHA1-Password</option>
+                            <option value='CHAP-Password'>CHAP-Password</option>
+                        </select>
+                    </li>
 
-    <?php
-	include('include/config/logging.php');
-	?>
+                    <li class='fieldset'>
+                        <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
+                        <?php
+						include_once 'include/management/populate_selectbox.php';
+						populate_groups("Select Groups", "groups[]");
+						?>
+
+                        <a class='tablenovisit' href='#'
+                            onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroups',genericCounter('divCounter')+'&elemName=groups[]');">Add</a>
+                        <img src='images/icons/comment.png' alt='Tip' border='0'
+                            onClick="javascript:toggleShowDiv('group')" />
+                        <div id='divContainerGroups'>
+                        </div>
+
+
+                    <li class='fieldset'>
+                        <label for='planName' class='form'><?php echo t('all', 'PlanName') ?></label>
+                        <?php
+						populate_plans("Select Plan", "planName", "form");
+						?>
+                        <img src='images/icons/comment.png' alt='Tip' border='0'
+                            onClick="javascript:toggleShowDiv('planNameTooltip')" />
+
+                        <div id='planNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                            <img src='images/icons/comment.png' alt='Tip' border='0' />
+                            <?php echo t('Tooltip', 'planNameTooltip') ?>
+                        </div>
+                    </li>
+
+                    <li class='fieldset'>
+                        <label for='userType' class='form'><?php echo t('all', 'UserType') ?></label>
+                        <input type='checkbox' name='userType' value='userType' /> If users are MAC or PIN based
+                        authentication, check this box
+                    </li>
+
+
+
+
+
+
+                    <li class='fieldset'>
+                        <label for='csvdata' class='form'><?php echo t('all', 'CSVData') ?></label>
+                        <textarea class='form_fileimport' name='csvdata' tabindex=101></textarea>
+                    </li>
+
+
+                    <li class='fieldset'>
+                        <br />
+                        <hr><br />
+                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000
+                            class='button' />
+                    </li>
+
+                </ul>
+            </fieldset>
+
+        </form>
+
+        <?php
+		include('include/config/logging.php');
+		?>
+
+    </div>
 
 </div>
-
 <div id="footer">
 
     <?php
@@ -269,6 +271,7 @@ include("menu-mng-users.php");
 
 </div>
 
+</div>
 </div>
 </div>
 

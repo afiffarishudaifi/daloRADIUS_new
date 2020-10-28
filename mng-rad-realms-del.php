@@ -92,51 +92,53 @@ include("menu-mng-rad-realms.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"
-            onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradrealmsdel.php') ?>
-            <h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradrealmsdel.php') ?>
+                <h144>&#x2754;</h144></a></h2>
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mngradrealmsdel') ?>
-        <br />
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mngradrealmsdel') ?>
+            <br />
+        </div>
+        <?php
+		include_once('include/management/actionMessages.php');
+		?>
+
+
+        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                <fieldset>
+
+                    <h302> <?php echo t('title', 'RealmInfo') ?> </h302>
+                    <br />
+
+                    <label for='realmname' class='form'><?php echo t('all', 'RealmName') ?></label>
+                    <input name='realmname[]' type='text' id='realmname' value='<?php echo $realmname ?>'
+                        tabindex=100 />
+                    <br />
+
+                    <br /><br />
+                    <hr><br />
+
+                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000
+                        class='button' />
+
+                </fieldset>
+
+            </form>
+        </div>
+
+
+        <?php
+		include('include/config/logging.php');
+		?>
+
     </div>
-    <?php
-	include_once('include/management/actionMessages.php');
-	?>
-
-
-    <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <fieldset>
-
-                <h302> <?php echo t('title', 'RealmInfo') ?> </h302>
-                <br />
-
-                <label for='realmname' class='form'><?php echo t('all', 'RealmName') ?></label>
-                <input name='realmname[]' type='text' id='realmname' value='<?php echo $realmname ?>' tabindex=100 />
-                <br />
-
-                <br /><br />
-                <hr><br />
-
-                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000
-                    class='button' />
-
-            </fieldset>
-
-        </form>
-    </div>
-
-
-    <?php
-	include('include/config/logging.php');
-	?>
-
 </div>
-
 <div id="footer">
 
     <?php
@@ -148,7 +150,7 @@ include("menu-mng-rad-realms.php");
 
 </div>
 </div>
-
+</div>
 
 </body>
 

@@ -1,29 +1,32 @@
- 
-<body>
-<?php
-    include_once ("lang/main.php");
-?>
+ <body>
+     <?php
+		include_once("lang/main.php");
+		?>
 
-<div id="wrapper">
-<div id="innerwrapper">
+     <div id="wrapper">
+         <div id="innerwrapper">
 
-<?php
-    $m_active = "Help";
-    include_once ("include/menu/menu-items.php");
-	include_once ("include/menu/help-subnav.php");
-?>
+             <?php
+				$m_active = "Help";
 
-<div id="sidebar">
+				include_once("./_partials/navbar.php");
+				include_once("./_partials/js.php");
+				?>
 
-	<h2>Help</h2>
+             <br>
+             <div class="row">
+                 <div class="col-lg-3">
+                     <div class="card" id="sidebar">
 
-	<h3>Support</h3>
+                         <h2>Help</h2>
 
-	<p class="news">
-		daloRADIUS version svn-trnk
-		RADIUS Management 
-		<a href="https://github.com/lirantal/daloradius" class="more">Read More &raquo;</a>
-	</p>
+                         <h3>Support</h3>
 
-</div>
-		
+                         <p class="news">
+                             daloRADIUS version svn-trnk
+                             RADIUS Management
+                             <a href="https://github.com/lirantal/daloradius" class="more">Read More &raquo;</a>
+                         </p>
+
+                     </div>
+                 </div>

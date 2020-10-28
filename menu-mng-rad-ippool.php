@@ -17,40 +17,44 @@
             include_once("./_partials/navbar.php");
             include_once("./_partials/js.php");
             ?>
+            <br>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card" id="sidebar">
 
-            <div id="sidebar">
+                        <h2>Management</h2>
 
-                <h2>Management</h2>
+                        <h3>IP Pools</h3>
+                        <ul class="">
 
-                <h3>IP Pools</h3>
-                <ul class="subnav">
+                            <li><a href="mng-rad-ippool-list.php"
+                                    tabindex=1><b>&raquo;</b><?php echo t('button', 'ListIPPools') ?></a></li>
+                            <li><a href="mng-rad-ippool-new.php"
+                                    tabindex=2><b>&raquo;</b><?php echo t('button', 'NewIPPool') ?></a></li>
+                            <li><a href="javascript:document.mngradippooledit.submit();"
+                                    tabindex=3><b>&raquo;</b><?php echo t('button', 'EditIPPool') ?></a>
+                                <form name="mngradippooledit" action="mng-rad-ippool-edit.php" method="get"
+                                    class="sidebar">
+                                    <input name="poolname" type="text"
+                                        tooltipText='<?php echo t('Tooltip', 'PoolName'); ?> <br/>'
+                                        value="<?php if (isset($poolname)) echo $poolname ?>" tabindex=4>
+                                    <input name="ipaddressold" type="text"
+                                        tooltipText='<?php echo t('Tooltip', 'IPAddress'); ?> <br/>'
+                                        value="<?php if (isset($ipaddressold)) echo $ipaddressold  ?>" tabindex=4>
+                                </form>
+                            </li>
+                            <li><a href="mng-rad-ippool-del.php"
+                                    tabindex=5><b>&raquo;</b><?php echo t('button', 'RemoveIPPool') ?></a></li>
 
-                    <li><a href="mng-rad-ippool-list.php"
-                            tabindex=1><b>&raquo;</b><?php echo t('button', 'ListIPPools') ?></a></li>
-                    <li><a href="mng-rad-ippool-new.php"
-                            tabindex=2><b>&raquo;</b><?php echo t('button', 'NewIPPool') ?></a></li>
-                    <li><a href="javascript:document.mngradippooledit.submit();"
-                            tabindex=3><b>&raquo;</b><?php echo t('button', 'EditIPPool') ?></a>
-                        <form name="mngradippooledit" action="mng-rad-ippool-edit.php" method="get" class="">
-                            <input name="poolname" type="text"
-                                tooltipText='<?php echo t('Tooltip', 'PoolName'); ?> <br/>'
-                                value="<?php if (isset($poolname)) echo $poolname ?>" tabindex=4>
-                            <input name="ipaddressold" type="text"
-                                tooltipText='<?php echo t('Tooltip', 'IPAddress'); ?> <br/>'
-                                value="<?php if (isset($ipaddressold)) echo $ipaddressold  ?>" tabindex=4>
-                        </form>
-                    </li>
-                    <li><a href="mng-rad-ippool-del.php"
-                            tabindex=5><b>&raquo;</b><?php echo t('button', 'RemoveIPPool') ?></a></li>
+                        </ul>
 
-                </ul>
+                    </div>
+                </div>
 
-            </div>
-
-            <script type="text/javascript">
-            var tooltipObj = new DHTMLgoodies_formTooltip();
-            tooltipObj.setTooltipPosition('right');
-            tooltipObj.setPageBgColor('#EEEEEE');
-            tooltipObj.setTooltipCornerSize(15);
-            tooltipObj.initFormFieldTooltip();
-            </script>
+                <script type="text/javascript">
+                var tooltipObj = new DHTMLgoodies_formTooltip();
+                tooltipObj.setTooltipPosition('right');
+                tooltipObj.setPageBgColor('#EEEEEE');
+                tooltipObj.setTooltipCornerSize(15);
+                tooltipObj.initFormFieldTooltip();
+                </script>

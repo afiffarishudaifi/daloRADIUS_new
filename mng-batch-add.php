@@ -536,74 +536,67 @@ include("menu-mng-batch.php");
 
 <!-- <div id="contentnorightbar"> -->
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngbatch.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+		<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngbatch.php') ?>
+				<h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngbatch') ?>
-            <br />
-        </div>
-        <?php
+		<div id="helpPage" style="display:none;visibility:visible">
+			<?php echo t('helpPage', 'mngbatch') ?>
+			<br />
+		</div>
+		<?php
 		include_once('include/management/actionMessages.php');
 		?>
 
-        <form name="batchuser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+		<form name="batchuser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-            <div class="tabber">
+			<div class="tabber">
 
-                <div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
+				<div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
 
-                    <fieldset>
+					<fieldset>
 
-                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
-                        <br />
+						<h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+						<br />
 
-                        <ul>
+						<ul>
 
 
-                            <li class='fieldset'>
-                                <label for='batchName' class='form'><?php echo t('all', 'batchName') ?></label>
-                                <input name='batch_name' type='text' id='batch_name' value='' tabindex='100' />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('batchNameTooltip')" />
+							<li class='fieldset'>
+								<label for='batchName' class='form'><?php echo t('all', 'batchName') ?></label>
+								<input name='batch_name' type='text' id='batch_name' value='' tabindex='100' />
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('batchNameTooltip')" />
 
-                                <div id='batchNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'batchNameTooltip') ?>
-                                </div>
-                            </li>
+								<div id='batchNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'batchNameTooltip') ?>
+								</div>
+							</li>
 
-                            <li class='fieldset'>
-                                <label for='batchDescription'
-                                    class='form'><?php echo t('all', 'batchDescription') ?></label>
-                                <input name='batch_description' type='text' id='batch_description' value=''
-                                    tabindex='101' />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('batchDescriptionTooltip')" />
+							<li class='fieldset'>
+								<label for='batchDescription' class='form'><?php echo t('all', 'batchDescription') ?></label>
+								<input name='batch_description' type='text' id='batch_description' value='' tabindex='101' />
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('batchDescriptionTooltip')" />
 
-                                <div id='batchDescriptionTooltip' style='display:none;visibility:visible'
-                                    class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'batchDescriptionTooltip') ?>
-                                </div>
-                            </li>
+								<div id='batchDescriptionTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'batchDescriptionTooltip') ?>
+								</div>
+							</li>
 
-                            <li class='fieldset'>
-                                <label for='hotspot' class='form'><?php echo t('all', 'HotSpot') ?></label>
-                                <?php
+							<li class='fieldset'>
+								<label for='hotspot' class='form'><?php echo t('all', 'HotSpot') ?></label>
+								<?php
 								include_once('include/management/populate_selectbox.php');
 								populate_hotspots("Select Hotspot", "hotspot_id");
 								?>
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('hotspot')" />
-                                <div id='hotspotTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'hotspotTooltip') ?>
-                                </div>
-                            </li>
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('hotspot')" />
+								<div id='hotspotTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'hotspotTooltip') ?>
+								</div>
+							</li>
 
 
 
@@ -611,209 +604,176 @@ include("menu-mng-batch.php");
 
 
 
-                            <br />
-                            <br />
+							<br />
+							<br />
 
-                            <li class='fieldset'>
-                                <label for='usernamePrefix'
-                                    class='form'><?php echo t('all', 'UsernamePrefix') ?></label>
-                                <input name='username_prefix' type='text' id='username_prefix' value=''
-                                    tabindex='102' />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('usernamePrefixTooltip')" />
+							<li class='fieldset'>
+								<label for='usernamePrefix' class='form'><?php echo t('all', 'UsernamePrefix') ?></label>
+								<input name='username_prefix' type='text' id='username_prefix' value='' tabindex='102' />
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('usernamePrefixTooltip')" />
 
-                                <div id='usernamePrefixTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'usernamePrefixTooltip') ?>
-                                </div>
-                            </li>
+								<div id='usernamePrefixTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'usernamePrefixTooltip') ?>
+								</div>
+							</li>
 
-                            <br />
+							<br />
 
-                            <li class='fieldset'>
-                                <input checked type='radio' value="createRandomUsers" name="createBatchUsersType"
-                                    onclick="javascript:toggleRandomUsers()" />
-                                <b> <?php echo t('all', 'CreateRandomUsers') ?> </b>
-                                <br />
-                            </li>
+							<li class='fieldset'>
+								<input checked type='radio' value="createRandomUsers" name="createBatchUsersType" onclick="javascript:toggleRandomUsers()" />
+								<b> <?php echo t('all', 'CreateRandomUsers') ?> </b>
+								<br />
+							</li>
 
-                            <li class='fieldset'>
-                                <label for='usernameLength'
-                                    class='form'><?php echo t('all', 'UsernameLength') ?></label>
-                                <input class="integer" name='length_user' type='text' id='length_user' value='8'
-                                    tabindex='103' />
-                                <img src="images/icons/bullet_arrow_up.png" alt="+"
-                                    onclick="javascript:changeInteger('length_user','increment')" />
-                                <img src="images/icons/bullet_arrow_down.png" alt="-"
-                                    onclick="javascript:changeInteger('length_user','decrement')" />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('lengthOfUsernameTooltip')" />
+							<li class='fieldset'>
+								<label for='usernameLength' class='form'><?php echo t('all', 'UsernameLength') ?></label>
+								<input class="integer" name='length_user' type='text' id='length_user' value='8' tabindex='103' />
+								<img src="images/icons/bullet_arrow_up.png" alt="+" onclick="javascript:changeInteger('length_user','increment')" />
+								<img src="images/icons/bullet_arrow_down.png" alt="-" onclick="javascript:changeInteger('length_user','decrement')" />
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('lengthOfUsernameTooltip')" />
 
-                                <div id='lengthOfUsernameTooltip' style='display:none;visibility:visible'
-                                    class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'lengthOfUsernameTooltip') ?>
-                                </div>
-                            </li>
+								<div id='lengthOfUsernameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'lengthOfUsernameTooltip') ?>
+								</div>
+							</li>
 
 
 
-                            <br />
-                            <li class='fieldset'>
-                                <input type='radio' value="createIncrementUsers" name="createBatchUsersType"
-                                    onclick="javascript:toggleIncrementUsers()" />
-                                <b> <?php echo t('all', 'CreateIncrementingUsers') ?> </b>
-                                <br />
-                            </li>
+							<br />
+							<li class='fieldset'>
+								<input type='radio' value="createIncrementUsers" name="createBatchUsersType" onclick="javascript:toggleIncrementUsers()" />
+								<b> <?php echo t('all', 'CreateIncrementingUsers') ?> </b>
+								<br />
+							</li>
 
-                            <li class='fieldset'>
-                                <label for='startingIndex' class='form'><?php echo t('all', 'StartingIndex') ?></label>
-                                <input class="integerLarge" name='startingIndex' type='text' id='startingIndex'
-                                    value='1' disabled tabindex='104' />
-                                <img src="images/icons/bullet_arrow_up.png" alt="+"
-                                    onclick="javascript:changeInteger('startingIndex','increment')" />
-                                <img src="images/icons/bullet_arrow_down.png" alt="-"
-                                    onclick="javascript:changeInteger('startingIndex','decrement')" />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('startingIndexTooltip')" />
+							<li class='fieldset'>
+								<label for='startingIndex' class='form'><?php echo t('all', 'StartingIndex') ?></label>
+								<input class="integerLarge" name='startingIndex' type='text' id='startingIndex' value='1' disabled tabindex='104' />
+								<img src="images/icons/bullet_arrow_up.png" alt="+" onclick="javascript:changeInteger('startingIndex','increment')" />
+								<img src="images/icons/bullet_arrow_down.png" alt="-" onclick="javascript:changeInteger('startingIndex','decrement')" />
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('startingIndexTooltip')" />
 
-                                <div id='startingIndexTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'startingIndexTooltip') ?>
-                                </div>
-                            <li>
+								<div id='startingIndexTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'startingIndexTooltip') ?>
+								</div>
+							<li>
 
 
-                                <br />
+								<br />
 
-                            <li class='fieldset'>
-                                <label for='passwordType' class='form'><?php echo t('all', 'PasswordType') ?></label>
-                                <?php
+							<li class='fieldset'>
+								<label for='passwordType' class='form'><?php echo t('all', 'PasswordType') ?></label>
+								<?php
 								include_once('include/management/populate_selectbox.php');
 								populate_password_types("passwordType");
 								?>
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('passwordTypeTooltip')" />
-                                <div id='passwordTypeTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'passwordTypeTooltip') ?>
-                                </div>
-                            </li>
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('passwordTypeTooltip')" />
+								<div id='passwordTypeTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'passwordTypeTooltip') ?>
+								</div>
+							</li>
 
-                            <li class='fieldset'>
-                                <label for='passwordLength'
-                                    class='form'><?php echo t('all', 'PasswordLength') ?></label>
-                                <input class="integer" name='length_pass' type='text' id='length_pass' value='8'
-                                    tabindex='105' />
-                                <img src="images/icons/bullet_arrow_up.png" alt="+"
-                                    onclick="javascript:changeInteger('length_pass','increment')" />
-                                <img src="images/icons/bullet_arrow_down.png" alt="-"
-                                    onclick="javascript:changeInteger('length_pass','decrement')" />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('lengthOfPasswordTooltip')" />
+							<li class='fieldset'>
+								<label for='passwordLength' class='form'><?php echo t('all', 'PasswordLength') ?></label>
+								<input class="integer" name='length_pass' type='text' id='length_pass' value='8' tabindex='105' />
+								<img src="images/icons/bullet_arrow_up.png" alt="+" onclick="javascript:changeInteger('length_pass','increment')" />
+								<img src="images/icons/bullet_arrow_down.png" alt="-" onclick="javascript:changeInteger('length_pass','decrement')" />
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('lengthOfPasswordTooltip')" />
 
-                                <div id='lengthOfPasswordTooltip' style='display:none;visibility:visible'
-                                    class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'lengthOfPasswordTooltip') ?>
-                                </div>
-                            </li>
+								<div id='lengthOfPasswordTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'lengthOfPasswordTooltip') ?>
+								</div>
+							</li>
 
-                            <li class='fieldset'>
-                                <label for='numberInstances'
-                                    class='form'><?php echo t('all', 'NumberInstances') ?></label>
-                                <input class="integer" name='number' type='text' id='number' value='1' tabindex='106' />
-                                <img src="images/icons/bullet_arrow_up.png" alt="+"
-                                    onclick="javascript:changeInteger('number','increment')" />
-                                <img src="images/icons/bullet_arrow_down.png" alt="-"
-                                    onclick="javascript:changeInteger('number','decrement')" />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('instancesToCreateTooltip')" />
+							<li class='fieldset'>
+								<label for='numberInstances' class='form'><?php echo t('all', 'NumberInstances') ?></label>
+								<input class="integer" name='number' type='text' id='number' value='1' tabindex='106' />
+								<img src="images/icons/bullet_arrow_up.png" alt="+" onclick="javascript:changeInteger('number','increment')" />
+								<img src="images/icons/bullet_arrow_down.png" alt="-" onclick="javascript:changeInteger('number','decrement')" />
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('instancesToCreateTooltip')" />
 
-                                <div id='instancesToCreateTooltip' style='display:none;visibility:visible'
-                                    class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'instancesToCreateTooltip') ?>
-                                </div>
-                            <li>
+								<div id='instancesToCreateTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'instancesToCreateTooltip') ?>
+								</div>
+							<li>
 
-                            <li class='fieldset'>
-                                <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
-                                <?php
+							<li class='fieldset'>
+								<label for='group' class='form'><?php echo t('all', 'Group') ?></label>
+								<?php
 								include_once('include/management/populate_selectbox.php');
 								populate_groups("Select Groups", "group");
 								?>
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('group')" />
-                                <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'groupTooltip') ?>
-                                </div>
-                            </li>
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('group')" />
+								<div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'groupTooltip') ?>
+								</div>
+							</li>
 
-                            <li class='fieldset'>
-                                <label for='groupPriority' class='form'><?php echo t('all', 'GroupPriority') ?></label>
-                                <input class="integer" name='group_priority' type='text' id='group_priority' value='0'
-                                    tabindex='107' />
-                                <img src="images/icons/bullet_arrow_up.png" alt="+"
-                                    onclick="javascript:changeInteger('group_priority','increment')" />
-                                <img src="images/icons/bullet_arrow_down.png" alt="-"
-                                    onclick="javascript:changeInteger('group_priority','decrement')" />
-                            </li>
+							<li class='fieldset'>
+								<label for='groupPriority' class='form'><?php echo t('all', 'GroupPriority') ?></label>
+								<input class="integer" name='group_priority' type='text' id='group_priority' value='0' tabindex='107' />
+								<img src="images/icons/bullet_arrow_up.png" alt="+" onclick="javascript:changeInteger('group_priority','increment')" />
+								<img src="images/icons/bullet_arrow_down.png" alt="-" onclick="javascript:changeInteger('group_priority','decrement')" />
+							</li>
 
-                            <li class='fieldset'>
-                                <label for='plan' class='form'><?php echo t('all', 'PlanName') ?></label>
-                                <?php
+							<li class='fieldset'>
+								<label for='plan' class='form'><?php echo t('all', 'PlanName') ?></label>
+								<?php
 								include_once('include/management/populate_selectbox.php');
 								populate_plans("Select Plan", "plan");
 								?>
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('plan')" />
-                                <div id='planTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'planTooltip') ?>
-                                </div>
-                            </li>
+								<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('plan')" />
+								<div id='planTooltip' style='display:none;visibility:visible' class='ToolTip'>
+									<img src='images/icons/comment.png' alt='Tip' border='0' />
+									<?php echo t('Tooltip', 'planTooltip') ?>
+								</div>
+							</li>
 
-                            <li class='fieldset'>
-                                <br /><br />
-                                <hr><br />
-                                <input type="submit" name="submit" value="<?php echo t('buttons', 'apply') ?> "
-                                    tabindex=1000 class='button' />
-                            </li>
-                        </ul>
-                    </fieldset>
+							<li class='fieldset'>
+								<br /><br />
+								<hr><br />
+								<input type="submit" name="submit" value="<?php echo t('buttons', 'apply') ?> " tabindex=1000 class='button' />
+							</li>
+						</ul>
+					</fieldset>
 
 
-                </div>
+				</div>
 
-                <div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
-                    <?php
+				<div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
+					<?php
 					$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
 					include_once('include/management/userinfo.php');
 					?>
-                </div>
+				</div>
 
-                <div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
-                    <?php
+				<div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
+					<?php
 					$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
 					include_once('include/management/userbillinfo.php');
 					?>
-                </div>
+				</div>
 
-                <div class="tabbertab" title="<?php echo t('title', 'Attributes'); ?>">
-                    <?php
+				<div class="tabbertab" title="<?php echo t('title', 'Attributes'); ?>">
+					<?php
 					include_once('include/management/attributes.php');
 					?>
-                </div>
+				</div>
 
-            </div>
+			</div>
 
 
 
-            <br />
+			<br />
 
-    </div>
+	</div>
 </div>
 
 </div>
@@ -829,13 +789,14 @@ include('include/config/logging.php');
 
 <div id="footer">
 
-    <?php
+	<?php
 	include 'page-footer.php';
 	?>
 
 
 </div>
 
+</div>
 </div>
 </div>
 

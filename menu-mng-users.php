@@ -44,7 +44,7 @@
                             <li><a href="javascript:document.mngedit.submit();""><b>&raquo;</b>
 			<img src='images/icons/userEdit.gif' border='0'>
 			<?php echo t('button', 'EditUser') ?></a>
-			<form name=" mngedit" action="mng-edit.php" method="get" class="">
+			<form name=" mngedit" action="mng-edit.php" method="get" class="sidebar">
                                     <input name="username" type="text" id="usernameEdit" autocomplete="off"
                                         tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>'
                                         value="<?php if (isset($edit_username)) echo $edit_username; ?>" tabindex=1>
@@ -53,7 +53,7 @@
                             <li><a href="javascript:document.mngsearch.submit();""><b>&raquo;</b>
 			<img src='images/icons/userSearch.gif' border='0'>
 			<?php echo t('button', 'SearchUsers') ?></a>
-			<form name=" mngsearch" action="mng-search.php" method="get" class="">
+			<form name=" mngsearch" action="mng-search.php" method="get" class="sidebar">
                                     <input name="username" type="text" id="usernameSearch" autocomplete="off"
                                         tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/> <?php echo t('Tooltip', 'UsernameWildcard'); ?>'
                                         value="<?php if (isset($search_username)) echo $search_username; ?>" tabindex=2>

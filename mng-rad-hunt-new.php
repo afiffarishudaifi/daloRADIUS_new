@@ -95,61 +95,62 @@ include_once("library/tabber/tab-layout.php");
 include("menu-mng-rad-hunt.php");
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"
-            onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradhuntnew.php') ?>
-            <h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradhuntnew.php') ?>
+                <h144>&#x2754;</h144></a></h2>
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mngradhuntnew') ?>
-        <br />
-    </div>
-    <?php
-	include_once('include/management/actionMessages.php');
-	?>
-
-
-    <form name="newhg" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <div class="tabber">
-
-            <div class="tabbertab" title="<?php echo t('title', 'HGInfo'); ?>">
-
-                <fieldset>
-
-                    <h302> <?php echo t('title', 'HGInfo') ?> </h302>
-                    <br />
-
-                    <label for='nasipaddress' class='form'><?php echo t('all', 'HgIPHost') ?></label>
-                    <input name='nasipaddress' type='text' id='nasipaddress' value='' tabindex=100 />
-                    <br />
-
-
-                    <label for='groupname' class='form'><?php echo t('all', 'HgGroupName') ?></label>
-                    <input name='groupname' type='text' id='groupname' value='' tabindex=101 />
-                    <br />
-
-                    <label for='nasportid' class='form'><?php echo t('all', 'HgPortId') ?></label>
-                    <input name='nasportid' type='text' id='nasportid' value='0' tabindex=105 />
-                    <br /><br />
-                    <hr><br />
-
-                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-
-                </fieldset>
-
-
-            </div>
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mngradhuntnew') ?>
+            <br />
         </div>
-    </form>
+        <?php
+		include_once('include/management/actionMessages.php');
+		?>
 
 
-    <?php
-	include('include/config/logging.php');
-	?>
+        <form name="newhg" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <div class="tabber">
 
+                <div class="tabbertab" title="<?php echo t('title', 'HGInfo'); ?>">
+
+                    <fieldset>
+
+                        <h302> <?php echo t('title', 'HGInfo') ?> </h302>
+                        <br />
+
+                        <label for='nasipaddress' class='form'><?php echo t('all', 'HgIPHost') ?></label>
+                        <input name='nasipaddress' type='text' id='nasipaddress' value='' tabindex=100 />
+                        <br />
+
+
+                        <label for='groupname' class='form'><?php echo t('all', 'HgGroupName') ?></label>
+                        <input name='groupname' type='text' id='groupname' value='' tabindex=101 />
+                        <br />
+
+                        <label for='nasportid' class='form'><?php echo t('all', 'HgPortId') ?></label>
+                        <input name='nasportid' type='text' id='nasportid' value='0' tabindex=105 />
+                        <br /><br />
+                        <hr><br />
+
+                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
+
+                    </fieldset>
+
+
+                </div>
+            </div>
+        </form>
+
+
+        <?php
+		include('include/config/logging.php');
+		?>
+
+    </div>
 </div>
-
 <div id="footer">
 
     <?php
@@ -161,7 +162,7 @@ include("menu-mng-rad-hunt.php");
 
 </div>
 </div>
-
+</div>
 
 </body>
 

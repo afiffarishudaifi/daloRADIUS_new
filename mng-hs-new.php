@@ -46,54 +46,54 @@ $logAction = "";
 $logDebugSQL = "";
 
 if (isset($_POST["submit"])) {
-	$name = $_REQUEST['name'];
-	$macaddress = $_REQUEST['macaddress'];
-	$geocode = $_REQUEST['geocode'];
+    $name = $_REQUEST['name'];
+    $macaddress = $_REQUEST['macaddress'];
+    $geocode = $_REQUEST['geocode'];
 
-	include 'library/opendb.php';
+    include 'library/opendb.php';
 
-	$sql = "SELECT * FROM " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " WHERE name='" . $dbSocket->escapeSimple($name) . "'";
-	$res = $dbSocket->query($sql);
-	$logDebugSQL .= $sql . "\n";
+    $sql = "SELECT * FROM " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " WHERE name='" . $dbSocket->escapeSimple($name) . "'";
+    $res = $dbSocket->query($sql);
+    $logDebugSQL .= $sql . "\n";
 
-	if ($res->numRows() == 0) {
-		if (trim($name) != "" and trim($macaddress) != "") {
+    if ($res->numRows() == 0) {
+        if (trim($name) != "" and trim($macaddress) != "") {
 
-			$currDate = date('Y-m-d H:i:s');
-			$currBy = $_SESSION['operator_user'];
+            $currDate = date('Y-m-d H:i:s');
+            $currBy = $_SESSION['operator_user'];
 
-			// insert hotspot info
-			$sql = "INSERT INTO " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
-				" (id, name, mac, geocode, owner, email_owner, manager, email_manager, address, company, " .
-				"  phone1, phone2, type, companywebsite, companyemail, companycontact, companyphone, " .
-				"  creationdate, creationby, updatedate, updateby) " .
-				" VALUES (0, '" . $dbSocket->escapeSimple($name) . "', '" .
-				$dbSocket->escapeSimple($macaddress) . "', '" .
-				$dbSocket->escapeSimple($geocode) . "','" . $dbSocket->escapeSimple($owner) . "','" .
-				$dbSocket->escapeSimple($email_owner) . "','" . $dbSocket->escapeSimple($manager) . "','" .
-				$dbSocket->escapeSimple($email_manager) . "','" .
-				$dbSocket->escapeSimple($address) . "','" . $dbSocket->escapeSimple($company) . "','" .
-				$dbSocket->escapeSimple($phone1) . "','" . $dbSocket->escapeSimple($phone2) . "','" .
-				$dbSocket->escapeSimple($hotspot_type) . "','" . $dbSocket->escapeSimple($companywebsite) . "','" .
-				$dbSocket->escapeSimple($companyemail) . "','" .
-				$dbSocket->escapeSimple($companycontact) . "','" .
-				$dbSocket->escapeSimple($companyphone) .	"', " .
-				" '$currDate', '$currBy', NULL, NULL)";
-			$res = $dbSocket->query($sql);
-			$logDebugSQL .= $sql . "\n";
+            // insert hotspot info
+            $sql = "INSERT INTO " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+                " (id, name, mac, geocode, owner, email_owner, manager, email_manager, address, company, " .
+                "  phone1, phone2, type, companywebsite, companyemail, companycontact, companyphone, " .
+                "  creationdate, creationby, updatedate, updateby) " .
+                " VALUES (0, '" . $dbSocket->escapeSimple($name) . "', '" .
+                $dbSocket->escapeSimple($macaddress) . "', '" .
+                $dbSocket->escapeSimple($geocode) . "','" . $dbSocket->escapeSimple($owner) . "','" .
+                $dbSocket->escapeSimple($email_owner) . "','" . $dbSocket->escapeSimple($manager) . "','" .
+                $dbSocket->escapeSimple($email_manager) . "','" .
+                $dbSocket->escapeSimple($address) . "','" . $dbSocket->escapeSimple($company) . "','" .
+                $dbSocket->escapeSimple($phone1) . "','" . $dbSocket->escapeSimple($phone2) . "','" .
+                $dbSocket->escapeSimple($hotspot_type) . "','" . $dbSocket->escapeSimple($companywebsite) . "','" .
+                $dbSocket->escapeSimple($companyemail) . "','" .
+                $dbSocket->escapeSimple($companycontact) . "','" .
+                $dbSocket->escapeSimple($companyphone) .    "', " .
+                " '$currDate', '$currBy', NULL, NULL)";
+            $res = $dbSocket->query($sql);
+            $logDebugSQL .= $sql . "\n";
 
-			$successMsg = "Added to database new hotspot: <b>$name</b>";
-			$logAction .= "Successfully added new hotspot [$name] on page: ";
-		} else {
-			$failureMsg = "you must provide atleast a hotspot name and mac-address";
-			$logAction .= "Failed adding new hotspot [$name] on page: ";
-		}
-	} else {
-		$failureMsg = "You have tried to add a hotspot that already exist in the database: $name";
-		$logAction .= "Failed adding new hotspot already in database [$name] on page: ";
-	}
+            $successMsg = "Added to database new hotspot: <b>$name</b>";
+            $logAction .= "Successfully added new hotspot [$name] on page: ";
+        } else {
+            $failureMsg = "you must provide atleast a hotspot name and mac-address";
+            $logAction .= "Failed adding new hotspot [$name] on page: ";
+        }
+    } else {
+        $failureMsg = "You have tried to add a hotspot that already exist in the database: $name";
+        $logAction .= "Failed adding new hotspot already in database [$name] on page: ";
+    }
 
-	include 'library/closedb.php';
+    include 'library/closedb.php';
 }
 
 
@@ -115,108 +115,113 @@ include("menu-mng-hs.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mnghsnew.php') ?>
-            <h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mnghsnew.php') ?>
+                <h144>&#x2754;</h144></a></h2>
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mnghsnew') ?>
-        <br />
-    </div>
-    <?php
-	include_once('include/management/actionMessages.php');
-	?>
-
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-        <div class="tabber">
-
-            <div class="tabbertab" title="<?php echo t('title', 'HotspotInfo'); ?>">
-
-                <fieldset>
-
-                    <h302> <?php echo t('title', 'HotspotInfo'); ?> </h302>
-                    <br />
-
-                    <ul>
-
-                        <li class='fieldset'>
-                            <label for='name' class='form'><?php echo t('all', 'HotSpotName') ?></label>
-                            <input name='name' type='text' id='name' value='' tabindex=100 />
-                            <img src='images/icons/comment.png' alt='Tip' border='0'
-                                onClick="javascript:toggleShowDiv('hotspotNameTooltip')" />
-
-                            <div id='hotspotNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                <?php echo t('Tooltip', 'hotspotNameTooltip') ?>
-                            </div>
-                        </li>
-
-                        <li class='fieldset'>
-                            <label for='macaddress' class='form'><?php echo t('all', 'MACAddress') ?></label>
-                            <input name='macaddress' type='text' id='macaddress' value='' tabindex=101 />
-                            <img src='images/icons/comment.png' alt='Tip' border='0'
-                                onClick="javascript:toggleShowDiv('hotspotMacaddressTooltip')" />
-
-                            <div id='hotspotMacaddressTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                <?php echo t('Tooltip', 'hotspotMacaddressTooltip') ?>
-                            </div>
-                        </li>
-
-                        <li class='fieldset'>
-                            <label for='geocode' class='form'><?php echo t('all', 'Geocode') ?></label>
-                            <input name='geocode' type='text' id='geocode' value='' tabindex=102 />
-                            <img src='images/icons/comment.png' alt='Tip' border='0'
-                                onClick="javascript:toggleShowDiv('geocodeTooltip')" />
-
-                            <div id='geocodeTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                <?php echo t('Tooltip', 'geocodeTooltip') ?>
-                            </div>
-                        </li>
-
-                        <li class='fieldset'>
-                            <br />
-                            <hr><br />
-                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                tabindex=10000 class='button' />
-                        </li>
-
-                    </ul>
-                </fieldset>
-
-            </div>
-
-
-            <div class="tabbertab" title="<?php echo t('title', 'ContactInfo'); ?>">
-
-                <?php
-				include_once('include/management/contactinfo.php');
-				?>
-
-            </div>
-
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mnghsnew') ?>
+            <br />
         </div>
+        <?php
+        include_once('include/management/actionMessages.php');
+        ?>
 
-    </form>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-    <?php
-	include('include/config/logging.php');
-	?>
+            <div class="tabber">
 
+                <div class="tabbertab" title="<?php echo t('title', 'HotspotInfo'); ?>">
+
+                    <fieldset>
+
+                        <h302> <?php echo t('title', 'HotspotInfo'); ?> </h302>
+                        <br />
+
+                        <ul>
+
+                            <li class='fieldset'>
+                                <label for='name' class='form'><?php echo t('all', 'HotSpotName') ?></label>
+                                <input name='name' type='text' id='name' value='' tabindex=100 />
+                                <img src='images/icons/comment.png' alt='Tip' border='0'
+                                    onClick="javascript:toggleShowDiv('hotspotNameTooltip')" />
+
+                                <div id='hotspotNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                    <?php echo t('Tooltip', 'hotspotNameTooltip') ?>
+                                </div>
+                            </li>
+
+                            <li class='fieldset'>
+                                <label for='macaddress' class='form'><?php echo t('all', 'MACAddress') ?></label>
+                                <input name='macaddress' type='text' id='macaddress' value='' tabindex=101 />
+                                <img src='images/icons/comment.png' alt='Tip' border='0'
+                                    onClick="javascript:toggleShowDiv('hotspotMacaddressTooltip')" />
+
+                                <div id='hotspotMacaddressTooltip' style='display:none;visibility:visible'
+                                    class='ToolTip'>
+                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                    <?php echo t('Tooltip', 'hotspotMacaddressTooltip') ?>
+                                </div>
+                            </li>
+
+                            <li class='fieldset'>
+                                <label for='geocode' class='form'><?php echo t('all', 'Geocode') ?></label>
+                                <input name='geocode' type='text' id='geocode' value='' tabindex=102 />
+                                <img src='images/icons/comment.png' alt='Tip' border='0'
+                                    onClick="javascript:toggleShowDiv('geocodeTooltip')" />
+
+                                <div id='geocodeTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                    <?php echo t('Tooltip', 'geocodeTooltip') ?>
+                                </div>
+                            </li>
+
+                            <li class='fieldset'>
+                                <br />
+                                <hr><br />
+                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                    tabindex=10000 class='button' />
+                            </li>
+
+                        </ul>
+                    </fieldset>
+
+                </div>
+
+
+                <div class="tabbertab" title="<?php echo t('title', 'ContactInfo'); ?>">
+
+                    <?php
+                    include_once('include/management/contactinfo.php');
+                    ?>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <?php
+        include('include/config/logging.php');
+        ?>
+
+    </div>
 </div>
 
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 
 </div>
 
+</div>
 </div>
 </div>
 

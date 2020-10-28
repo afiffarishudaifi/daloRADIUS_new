@@ -363,6 +363,7 @@ include("menu-mng-batch.php");
 
 </div>
 </div>
+</div>
 
 <script type="text/javascript">
 var tooltipObj = new DHTMLgoodies_formTooltip();

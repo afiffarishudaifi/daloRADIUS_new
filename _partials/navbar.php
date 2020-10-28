@@ -1,3 +1,5 @@
+<?php include("library/checklogin.php");
+$operator = $_SESSION['operator_user']; ?>
 <nav class="navbar navbar-expand-lg navbar-lightblue navbar-light">
     <a class="navbar-brand" href="#"> <img src="images/daloradius_small.png" width="90" height="30"
             alt="Malas Ngoding"></a>
@@ -21,9 +23,6 @@
                     <?php echo t('menu', 'Managment'); ?> </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="mng-main.php"
-                        <?php echo ($m_active == "Management") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Managment'); ?>
-                    </a>
                     <a class="dropdown-item" href="mng-users.php">Users</a>
                     <a class="dropdown-item" href="mng-batch.php">Batch Users</a>
                     <a class="dropdown-item" href="mng-hs.php">Hotspots</a>
@@ -42,10 +41,6 @@
                     <?php echo ($m_active == "Reports") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Reports'); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="rep-main.php"
-                        <?php echo ($m_active == "Reports") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Reports'); ?>
-                    </a>
-
                     <a class="dropdown-item" href="rep-main.php">General</a>
                     <a class="dropdown-item" href="rep-logs.php">Logs</a>
                     <a class="dropdown-item" href="rep-status.php">Status</a>
@@ -59,9 +54,6 @@
                     <?php echo ($m_active == "Accounting") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Accounting'); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="rep-main.php"
-                        <?php echo ($m_active == "Accounting") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Accounting'); ?>
-                    </a>
                     <a class="dropdown-item" href="acct-main.php">General</a>
                     <a class="dropdown-item" href="acct-plans.php">Plans</a>
                     <a class="dropdown-item" href="acct-custom.php">Custom</a>
@@ -75,9 +67,6 @@
                     <?php echo ($m_active == "Billing") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Billing'); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="rep-main.php"
-                        <?php echo ($m_active == "Billing") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Billing'); ?>
-                    </a>
                     <a class="dropdown-item" href="bill-pos.php">POS</a>
                     <a class="dropdown-item" href="bill-plans.php">Plans</a>
                     <a class="dropdown-item" href="bill-rates.php">Rates</a>
@@ -102,9 +91,6 @@
                     <?php echo ($m_active == "Config") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Config'); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="rep-main.php"
-                        <?php echo ($m_active == "Config") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Config'); ?>
-                    </a>
                     <a class="dropdown-item" href="config-main.php">General</a>
                     <a class="dropdown-item" href="config-reports.php">Reporting</a>
                     <a class="dropdown-item" href="config-maint.php">Maintenance</a>
@@ -121,8 +107,8 @@
         <ul class="navbar-nav ml-auto">
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
-                Pengguna<?php //echo $getUser; 
-                        ?>
+                <?php echo $operator;
+                ?>
                 <a href="graph-main.php">
                     <span class="fa fa-sign-out" style="color: black;"></span>
                 </a>

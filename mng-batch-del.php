@@ -241,7 +241,7 @@ include("menu-mng-batch.php");
 
 </div>
 </div>
-
+</div>
 
 </body>
 

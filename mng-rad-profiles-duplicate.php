@@ -100,57 +100,59 @@ include('./_partials/js.php');
 include("menu-mng-rad-profiles.php");
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"
-            onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradprofilesduplicate.php') ?>
-            :: <?php if (isset($profile)) {
-					echo $profile;
-				} ?><h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradprofilesduplicate.php') ?>
+                :: <?php if (isset($profile)) {
+						echo $profile;
+					} ?><h144>&#x2754;</h144></a></h2>
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mngradprofilesduplicate') ?>
-        <br />
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mngradprofilesduplicate') ?>
+            <br />
+        </div>
+        <?php
+		include_once('include/management/actionMessages.php');
+		?>
+
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+            <fieldset>
+
+                <h302> <?php echo t('title', 'ProfileInfo') ?> </h302>
+                <br />
+
+                <label for='sourceProfile' class='form'>Profile Name to Duplicate</label>
+                <?php
+				// include 'include/management/populate_selectbox.php'; // already included in menu-mng-rad-profile.php
+				populate_groups("Select Profile", "sourceProfile", "form");
+				?>
+                <br />
+
+                <label for='profile' class='form'>New Profile Name</label>
+                <input name='targetProfile' type='text' id='profile' value='<?php echo $targetProfile ?>'
+                    tabindex=101 />
+                <br />
+
+                <br /><br />
+                <hr><br />
+
+                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
+
+            </fieldset>
+
+        </form>
+
+
+
+        <?php
+		include('include/config/logging.php');
+		?>
+
     </div>
-    <?php
-	include_once('include/management/actionMessages.php');
-	?>
-
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-        <fieldset>
-
-            <h302> <?php echo t('title', 'ProfileInfo') ?> </h302>
-            <br />
-
-            <label for='sourceProfile' class='form'>Profile Name to Duplicate</label>
-            <?php
-			// include 'include/management/populate_selectbox.php'; // already included in menu-mng-rad-profile.php
-			populate_groups("Select Profile", "sourceProfile", "form");
-			?>
-            <br />
-
-            <label for='profile' class='form'>New Profile Name</label>
-            <input name='targetProfile' type='text' id='profile' value='<?php echo $targetProfile ?>' tabindex=101 />
-            <br />
-
-            <br /><br />
-            <hr><br />
-
-            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-
-        </fieldset>
-
-    </form>
-
-
-
-    <?php
-	include('include/config/logging.php');
-	?>
-
 </div>
-
 <div id="footer">
 
     <?php
@@ -162,7 +164,7 @@ include("menu-mng-rad-profiles.php");
 
 </div>
 </div>
-
+</div>
 
 </body>
 

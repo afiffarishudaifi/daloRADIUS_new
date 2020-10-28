@@ -20,59 +20,61 @@
  *********************************************************************************************************
  */
 
-    include ("library/checklogin.php");
-    $operator = $_SESSION['operator_user'];
+include("library/checklogin.php");
+$operator = $_SESSION['operator_user'];
 
-	include('library/check_operator_perm.php');
-	
-	//setting values for the order by and order type variables
-	isset($_GET['orderBy']) ? $orderBy = $_GET['orderBy'] : $orderBy = "radacctid";
-	isset($_GET['orderType']) ? $orderType = $_GET['orderType'] : $orderType = "asc";
+include('library/check_operator_perm.php');
 
-
-	isset($_GET['fields']) ? $where = $_GET['fields'] : $where = "";
-	isset($_GET['sqlfields']) ? $sqlfields = $_GET['sqlfields'] : $sqlfields = "";
-	isset($_GET['operator']) ? $op = $_GET['operator'] : $op = "=";
-	isset($_GET['where_field']) ? $value = $_GET['where_field'] : $value = "";
-	isset($_GET['startdate']) ? $startdate = $_GET['startdate'] : $startdate = "";
-	isset($_GET['enddate']) ? $enddate = $_GET['enddate'] : $enddate = "";
+//setting values for the order by and order type variables
+isset($_GET['orderBy']) ? $orderBy = $_GET['orderBy'] : $orderBy = "radacctid";
+isset($_GET['orderType']) ? $orderType = $_GET['orderType'] : $orderType = "asc";
 
 
-	//feed the sidebar variables
-	$accounting_custom_startdate = $startdate;
-	$accounting_custom_enddate = $enddate;
-	$accounting_custom_value = $value;
+isset($_GET['fields']) ? $where = $_GET['fields'] : $where = "";
+isset($_GET['sqlfields']) ? $sqlfields = $_GET['sqlfields'] : $sqlfields = "";
+isset($_GET['operator']) ? $op = $_GET['operator'] : $op = "=";
+isset($_GET['where_field']) ? $value = $_GET['where_field'] : $value = "";
+isset($_GET['startdate']) ? $startdate = $_GET['startdate'] : $startdate = "";
+isset($_GET['enddate']) ? $enddate = $_GET['enddate'] : $enddate = "";
 
 
-	include_once('library/config_read.php');
-    $log = "visited page: ";
-    $logQuery = "performed query for all accounting records on page: ";
+//feed the sidebar variables
+$accounting_custom_startdate = $startdate;
+$accounting_custom_enddate = $enddate;
+$accounting_custom_value = $value;
+
+
+include_once('library/config_read.php');
+$log = "visited page: ";
+$logQuery = "performed query for all accounting records on page: ";
 
 ?>
 
 <?php
-	
-	include("menu-accounting-custom.php");
-	
+
+include("menu-accounting-custom.php");
+
 ?>
 
-		<div id="contentnorightbar">
-		
-		<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','acctcustomquery.php')?>
-		<h144>&#x2754;</h144></a></h2>
-				
-		<div id="helpPage" style="display:none;visibility:visible" >
-			<?php echo t('helpPage','acctcustomquery') ?>
-			<br/>
-		</div>
-		<br/>
+<div class="col-lg-9">
+    <div class="card">
+
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctcustomquery.php') ?>
+                <h144>&#x2754;</h144></a></h2>
+
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'acctcustomquery') ?>
+            <br />
+        </div>
+        <br />
 
 
 
-<?php
+        <?php
 
 		include 'library/opendb.php';
-		include 'include/management/pages_common.php';	
+		include 'include/management/pages_common.php';
 		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
 
@@ -91,7 +93,7 @@
 		// to be processed through POST but rather using GET only (with the current design anyway).
 		// For this reason, I need to build the GET query which I will later use in the page number's links
 
-		$getFields = "";		
+		$getFields = "";
 		$counter = 0;
 		foreach ($sqlfields as $elements) {
 			$getFields .= "&sqlfields[$counter]=$elements";
@@ -107,35 +109,35 @@
 		$getQuery .= "&startdate=$startdate&enddate=$enddate";
 
 
-	
+
 		$select = implode(",", $sqlfields);
 		// sanitizing the array passed to us in the get request
 		$select = $dbSocket->escapeSimple($select);
 
 
-		$sql = "SELECT $select FROM ".$configValues['CONFIG_DB_TBL_RADACCT']." WHERE ($where $op '$value') AND (AcctStartTime>'$startdate'
+		$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE ($where $op '$value') AND (AcctStartTime>'$startdate'
 			 AND AcctStartTime<'$enddate');";
 		$res = $dbSocket->query($sql);
 		$numrows = $res->numRows();
 
 
-		$sql = "SELECT $select FROM ".$configValues['CONFIG_DB_TBL_RADACCT']." WHERE ($where $op '$value') AND (AcctStartTime>'$startdate'
+		$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE ($where $op '$value') AND (AcctStartTime>'$startdate'
 			AND AcctStartTime<'$enddate') ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
 		$res = $dbSocket->query($sql);
 		$logDebugSQL = "";
 		$logDebugSQL .= $sql . "\n";
 
 
-	/* START - Related to pages_numbering.php */
-	$maxPage = ceil($numrows/$rowsPerPage);
-	/* END */
+		/* START - Related to pages_numbering.php */
+		$maxPage = ceil($numrows / $rowsPerPage);
+		/* END */
 
 
-	echo "<table border='0' class='table1'>\n";
-	echo "
+		echo "<table border='0' class='table1'>\n";
+		echo "
 					<thead>
 							<tr>
-							<th colspan='25'>".t('all','Records')."</th>
+							<th colspan='25'>" . t('all', 'Records') . "</th>
 							</tr>
 
                                                         <tr>
@@ -143,70 +145,71 @@
                 <br/>
         ";
 
-        if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-                setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, $getFields, $getQuery);
+		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, $getFields, $getQuery);
 
-        echo " </th></tr>
+		echo " </th></tr>
                                         </thead>
 
                         ";
 
 
-	// building the dybamic table list fields
-	echo "<thread> <tr>";
-	foreach ($sqlfields as $value) {
-		echo "<th scope='col'> $value   </th>";
-	} //foreach $sqlfields
-	echo "</tr> </thread>";
-
-
-	// inserting the values of each field from the database to the table
-	while($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-		echo "<tr>";
+		// building the dybamic table list fields
+		echo "<thread> <tr>";
 		foreach ($sqlfields as $value) {
-			echo "<td> " . $row[$value] . "</td>";
-		}
-		echo "</tr>";
-	}
+			echo "<th scope='col'> $value   </th>";
+		} //foreach $sqlfields
+		echo "</tr> </thread>";
 
-        echo "
+
+		// inserting the values of each field from the database to the table
+		while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			echo "<tr>";
+			foreach ($sqlfields as $value) {
+				echo "<td> " . $row[$value] . "</td>";
+			}
+			echo "</tr>";
+		}
+
+		echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='25' align='left'>
         ";
-        setupLinks($pageNum, $maxPage, $orderBy, $orderType, $getFields, $getQuery);
-        echo "
+		setupLinks($pageNum, $maxPage, $orderBy, $orderType, $getFields, $getQuery);
+		echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-	echo "</table>";
+		echo "</table>";
 
-	include 'library/closedb.php';
+		include 'library/closedb.php';
 
-?>
+		?>
 
 
 
-<?php
-	include('include/config/logging.php');
-?>
+        <?php
+		include('include/config/logging.php');
+		?>
 
-		</div>
-		
-		<div id="footer">
-		
-								<?php
-        include 'page-footer.php';
-?>
-
-		
-		</div>
-		
+    </div>
 </div>
+<div id="footer">
+
+    <?php
+	include 'page-footer.php';
+	?>
+
+
 </div>
 
+</div>
+</div>
+</div>
 
 </body>
+
 </html>

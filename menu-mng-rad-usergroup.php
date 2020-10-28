@@ -18,52 +18,56 @@
             include_once("./_partials/js.php");
             include_once("include/management/autocomplete.php");
             ?>
-
-            <div id="sidebar">
-
-
-                <h2>Management</h2>
-
-                <h3>User-Group Management</h3>
-                <ul class="subnav">
-
-                    <li><a
-                            href="mng-rad-usergroup-list.php"><b>&raquo;</b><?php echo t('button', 'ListUserGroup') ?></a>
-                    </li>
-                    <li><a href="javascript:document.mngradusrgrplist.submit();""><b>&raquo;</b><?php echo t('button', 'ListUsersGroup') ?><a>
-			<form name=" mngradusrgrplist" action="mng-rad-usergroup-list-user.php" method="get" class="">
-                            <input name="username" type="text" id="usernameList"
-                                <?php if ($autoComplete) echo "autocomplete='off'"; ?>
-                                tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>' />
-                            </form>
-                    </li>
-
-                    <li><a href="mng-rad-usergroup-new.php"><b>&raquo;</b><?php echo t('button', 'NewUserGroup') ?></a>
-                    </li>
-                    <li><a href="javascript:document.mngradusrgrpedit.submit();""><b>&raquo;</b><?php echo t('button', 'EditUserGroup') ?><a>
-			<form name=" mngradusrgrpedit" action="mng-rad-usergroup-edit.php" method="get" class="">
-                            <input name="username" type="text" value="" id="usernameEdit"
-                                <?php if ($autoComplete) echo "autocomplete='off'"; ?>
-                                tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>' />
-                            <input name="group" type="text" value="" id="groupnameEdit"
-                                <?php if ($autoComplete) echo "autocomplete='off'"; ?>
-                                tooltipText='<?php echo t('Tooltip', 'GroupName'); ?> <br/>' />
-                            </form>
-                    </li>
+            <br>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card" id="sidebar">
 
 
-                    <li><a
-                            href="mng-rad-usergroup-del.php"><b>&raquo;</b><?php echo t('button', 'RemoveUserGroup') ?></a>
-                    </li>
-                </ul>
+                        <h2>Management</h2>
 
-            </div>
+                        <h3>User-Group Management</h3>
+                        <ul class="">
 
-            <?php
-            include_once("include/management/autocomplete.php");
+                            <li><a
+                                    href="mng-rad-usergroup-list.php"><b>&raquo;</b><?php echo t('button', 'ListUserGroup') ?></a>
+                            </li>
+                            <li><a href="javascript:document.mngradusrgrplist.submit();""><b>&raquo;</b><?php echo t('button', 'ListUsersGroup') ?><a>
+			<form name=" mngradusrgrplist" action="mng-rad-usergroup-list-user.php" method="get" class="sidebar">
+                                    <input name="username" type="text" id="usernameList"
+                                        <?php if ($autoComplete) echo "autocomplete='off'"; ?>
+                                        tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>' />
+                                    </form>
+                            </li>
 
-            if ($autoComplete) {
-                echo "<script type=\"text/javascript\">
+                            <li><a
+                                    href="mng-rad-usergroup-new.php"><b>&raquo;</b><?php echo t('button', 'NewUserGroup') ?></a>
+                            </li>
+                            <li><a href="javascript:document.mngradusrgrpedit.submit();""><b>&raquo;</b><?php echo t('button', 'EditUserGroup') ?><a>
+			<form name=" mngradusrgrpedit" action="mng-rad-usergroup-edit.php" method="get" class="sidebar">
+                                    <input name="username" type="text" value="" id="usernameEdit"
+                                        <?php if ($autoComplete) echo "autocomplete='off'"; ?>
+                                        tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>' />
+                                    <input name="group" type="text" value="" id="groupnameEdit"
+                                        <?php if ($autoComplete) echo "autocomplete='off'"; ?>
+                                        tooltipText='<?php echo t('Tooltip', 'GroupName'); ?> <br/>' />
+                                    </form>
+                            </li>
+
+
+                            <li><a
+                                    href="mng-rad-usergroup-del.php"><b>&raquo;</b><?php echo t('button', 'RemoveUserGroup') ?></a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <?php
+                include_once("include/management/autocomplete.php");
+
+                if ($autoComplete) {
+                    echo "<script type=\"text/javascript\">
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('usernameList','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
 
@@ -73,14 +77,14 @@
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('groupnameEdit','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteGroupName');
                       </script>";
-            }
+                }
 
-            ?>
+                ?>
 
-            <script type="text/javascript">
-            var tooltipObj = new DHTMLgoodies_formTooltip();
-            tooltipObj.setTooltipPosition('right');
-            tooltipObj.setPageBgColor('#EEEEEE');
-            tooltipObj.setTooltipCornerSize(15);
-            tooltipObj.initFormFieldTooltip();
-            </script>
+                <script type="text/javascript">
+                var tooltipObj = new DHTMLgoodies_formTooltip();
+                tooltipObj.setTooltipPosition('right');
+                tooltipObj.setPageBgColor('#EEEEEE');
+                tooltipObj.setTooltipCornerSize(15);
+                tooltipObj.initFormFieldTooltip();
+                </script>

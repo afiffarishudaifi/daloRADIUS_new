@@ -19,54 +19,58 @@
  *
  *********************************************************************************************************
  */
- 
-    include ("library/checklogin.php");
-    $operator = $_SESSION['operator_user'];
+
+include("library/checklogin.php");
+$operator = $_SESSION['operator_user'];
 
 
-	include_once('library/config_read.php');
-	$log = "visited page: ";
-
+include_once('library/config_read.php');
+$log = "visited page: ";
+include('./_partials/head.php');
+include('./_partials/js.php');
 ?>
 
 <?php
-	
-	include("menu-accounting-maintenance.php");
-	
-?>
-		
-		
-		
-		<div id="contentnorightbar">
-		
-		<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','acctmaintenance.php'); ?>
-		<h144>&#x2754;</h144></a></h2>
-				
-		<div id="helpPage" style="display:none;visibility:visible" >
-			<?php echo t('helpPage','acctmaintenance') ?>
-			<br/>
-		</div>
-		<br/>
 
+include("menu-accounting-maintenance.php");
 
-<?php
-	include('include/config/logging.php');
 ?>
 
-		</div>
-		
-		<div id="footer">
-		
-<?php
-        include 'page-footer.php';
-?>
 
-		
-		</div>
-		
+
+<div class="col-lg-9">
+    <div class="card">
+
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctmaintenance.php'); ?>
+                <h144>&#x2754;</h144></a></h2>
+
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'acctmaintenance') ?>
+            <br />
+        </div>
+        <br />
+
+
+        <?php
+		include('include/config/logging.php');
+		?>
+
+    </div>
+</div>
+<div id="footer">
+
+    <?php
+	include 'page-footer.php';
+	?>
+
+
+</div>
+
 </div>
 </div>
-
+</div>
 
 </body>
+
 </html>

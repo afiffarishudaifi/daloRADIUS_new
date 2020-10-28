@@ -41,52 +41,53 @@ include('./_partials/js.php');
 include("menu-mng-rad-usergroup.php");
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"
-            onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradusergrouplist') ?>
-            <h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradusergrouplist') ?>
+                <h144>&#x2754;</h144></a></h2>
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mngradusergrouplist') ?>
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mngradusergrouplist') ?>
+            <br />
+        </div>
         <br />
-    </div>
-    <br />
 
-    <?php
+        <?php
 
-	include 'library/opendb.php';
-	include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+		include 'library/opendb.php';
+		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-	//orig: used as maethod to get total rows - this is required for the pages_numbering.php page	
-	$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".UserName), " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName, " .
-		$configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".priority, " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".firstname, " .
-		$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".lastname " .
-		" FROM " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . " ON " .
-		$configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".username " .
-		" GROUP BY UserName;";
-	$res = $dbSocket->query($sql);
-	$numrows = $res->numRows();
+		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page	
+		$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".UserName), " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName, " .
+			$configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".priority, " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".firstname, " .
+			$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".lastname " .
+			" FROM " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . " ON " .
+			$configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".username " .
+			" GROUP BY UserName;";
+		$res = $dbSocket->query($sql);
+		$numrows = $res->numRows();
 
 
-	$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".UserName), " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName, " .
-		$configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".priority, " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".firstname, " .
-		$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".lastname " .
-		" FROM " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . " ON " .
-		$configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".username " .
-		" GROUP BY UserName ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-	$res = $dbSocket->query($sql);
-	$logDebugSQL = "";
-	$logDebugSQL .= $sql . "\n";
+		$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".UserName), " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName, " .
+			$configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".priority, " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".firstname, " .
+			$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".lastname " .
+			" FROM " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . " ON " .
+			$configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".username " .
+			" GROUP BY UserName ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+		$res = $dbSocket->query($sql);
+		$logDebugSQL = "";
+		$logDebugSQL .= $sql . "\n";
 
-	/* START - Related to pages_numbering.php */
-	$maxPage = ceil($numrows / $rowsPerPage);
-	/* END */
+		/* START - Related to pages_numbering.php */
+		$maxPage = ceil($numrows / $rowsPerPage);
+		/* END */
 
-	echo "<form name='listallusergroup' method='post' action='mng-rad-usergroup-del.php'>";
+		echo "<form name='listallusergroup' method='post' action='mng-rad-usergroup-del.php'>";
 
-	echo "<table border='0' class='table1'>\n";
-	echo "
+		echo "<table border='0' class='table1'>\n";
+		echo "
 		<thead>
 			<tr>
 			<th colspan='10' align='left'>
@@ -101,20 +102,20 @@ include("menu-mng-rad-usergroup.php");
 	";
 
 
-	if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-		setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-	echo "	</th></tr>
+		echo "	</th></tr>
 			</thead>
 	";
 
-	if ($orderType == "asc") {
-		$orderTypeNextPage = "desc";
-	} else  if ($orderType == "desc") {
-		$orderTypeNextPage = "asc";
-	}
+		if ($orderType == "asc") {
+			$orderTypeNextPage = "desc";
+		} else  if ($orderType == "desc") {
+			$orderTypeNextPage = "asc";
+		}
 
-	echo "<thread> <tr>
+		echo "<thread> <tr>
 		<th scope='col'>
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=username&orderType=$orderTypeNextPage\">
 		" . t('all', 'Username') . "</a>
@@ -136,8 +137,8 @@ include("menu-mng-rad-usergroup.php");
 		</th>
 
 	</tr> </thread>";
-	while ($row = $res->fetchRow()) {
-		echo "<tr>
+		while ($row = $res->fetchRow()) {
+			echo "<tr>
 			<td> <input type='checkbox' name='usergroup[]' value='$row[0]||$row[1]'> $row[0] </td>
 			<td> $row[3] $row[4] </td>
 			<td> <a class='tablenovisit' href='#'
@@ -150,33 +151,33 @@ include("menu-mng-rad-usergroup.php");
 					>$row[1]</a></td>
 				<td> $row[2] </td>
 		</tr>";
-	}
+		}
 
-	echo "
+		echo "
 		<tfoot>
 			<tr>
 			<th colspan='10' align='left'>
 	";
-	setupLinks($pageNum, $maxPage, $orderBy, $orderType);
-	echo "
+		setupLinks($pageNum, $maxPage, $orderBy, $orderType);
+		echo "
 			</th>
 			</tr>
 		</tfoot>
 	";
 
 
-	echo "</table></form>";
+		echo "</table></form>";
 
-	include 'library/closedb.php';
-	?>
+		include 'library/closedb.php';
+		?>
 
 
-    <?php
-	include('include/config/logging.php');
-	?>
+        <?php
+		include('include/config/logging.php');
+		?>
 
+    </div>
 </div>
-
 <div id="footer">
 
     <?php
@@ -188,7 +189,7 @@ include("menu-mng-rad-usergroup.php");
 
 </div>
 </div>
-
+</div>
 <script type="text/javascript">
 var tooltipObj = new DHTMLgoodies_formTooltip();
 tooltipObj.setTooltipPosition('right');

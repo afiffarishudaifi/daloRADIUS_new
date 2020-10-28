@@ -150,66 +150,67 @@ include("menu-mng-rad-attributes.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-    <h2 id="Intro"><a href="#"
-            onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradattributesimport.php') ?>
-            <h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradattributesimport.php') ?>
+                <h144>&#x2754;</h144></a></h2>
 
-    <div id="helpPage" style="display:none;visibility:visible">
-        <?php echo t('helpPage', 'mngradattributesimport') ?>
-        <br />
-    </div>
-    <?php
-	include_once('include/management/actionMessages.php');
-	?>
-
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-        <fieldset>
-
-            <h302> <?php echo t('title', 'VendorAttribute'); ?> </h302>
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'mngradattributesimport') ?>
             <br />
+        </div>
+        <?php
+		include_once('include/management/actionMessages.php');
+		?>
 
-            <ul>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-                <li class='fieldset'>
-                    <label for='vendor' class='form'><?php echo t('all', 'VendorName') ?></label>
-                    <input name='vendor' type='text' id='vendor' value='<?php if (isset($vendor)) echo $vendor ?>'
-                        tabindex=100 />
-                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                        onClick="javascript:toggleShowDiv('vendorNameTooltip')" />
+            <fieldset>
 
-                    <div id='vendorNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                        <?php echo t('Tooltip', 'vendorNameTooltip') ?>
-                    </div>
-                </li>
+                <h302> <?php echo t('title', 'VendorAttribute'); ?> </h302>
+                <br />
 
-                <li class='fieldset'>
-                    <label for='dictionary' class='form'><?php echo t('all', 'Dictionary') ?></label>
-                    <textarea class='form_fileimport' name='dictionary' tabindex=102></textarea>
-                </li>
+                <ul>
+
+                    <li class='fieldset'>
+                        <label for='vendor' class='form'><?php echo t('all', 'VendorName') ?></label>
+                        <input name='vendor' type='text' id='vendor' value='<?php if (isset($vendor)) echo $vendor ?>'
+                            tabindex=100 />
+                        <img src='images/icons/comment.png' alt='Tip' border='0'
+                            onClick="javascript:toggleShowDiv('vendorNameTooltip')" />
+
+                        <div id='vendorNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                            <img src='images/icons/comment.png' alt='Tip' border='0' />
+                            <?php echo t('Tooltip', 'vendorNameTooltip') ?>
+                        </div>
+                    </li>
+
+                    <li class='fieldset'>
+                        <label for='dictionary' class='form'><?php echo t('all', 'Dictionary') ?></label>
+                        <textarea class='form_fileimport' name='dictionary' tabindex=102></textarea>
+                    </li>
 
 
-                <li class='fieldset'>
-                    <br />
-                    <hr><br />
-                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000
-                        class='button' />
-                </li>
+                    <li class='fieldset'>
+                        <br />
+                        <hr><br />
+                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000
+                            class='button' />
+                    </li>
 
-            </ul>
-        </fieldset>
+                </ul>
+            </fieldset>
 
-    </form>
+        </form>
 
-    <?php
-	include('include/config/logging.php');
-	?>
+        <?php
+		include('include/config/logging.php');
+		?>
 
+    </div>
 </div>
-
 <div id="footer">
 
     <?php
@@ -221,7 +222,7 @@ include("menu-mng-rad-attributes.php");
 
 </div>
 </div>
-
+</div>
 
 </body>
 
