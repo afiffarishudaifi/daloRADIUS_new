@@ -12,29 +12,18 @@
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
 	include_once("lang/main.php");
-	?>
-
-    <div id="wrapper">
-        <div id="innerwrapper">
-
-            <?php
+	?> <div id="wrapper">
+        <div id="innerwrapper"> <?php
 			$m_active = "Config";
 			include_once("./_partials/navbar.php");
 			include_once("./_partials/js.php");
-			?>
-
-            <br>
+			?> <br>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
-
                         <h2>Configuration</h2>
-
                         <h3>Backup</h3>
-
-
                         <ul class="">
-
                             <li><a href="config-backup-managebackups.php"><b>&raquo;</b>
                                     <img src='images/icons/configMaintenance.png' border='0'>
                                     <?php echo t('button', 'ManageBackups') ?></a>
@@ -43,8 +32,6 @@
                                     <img src='images/icons/configMaintenance.png' border='0'>
                                     <?php echo t('button', 'CreateBackups') ?></a>
                             </li>
-
                         </ul>
-
                     </div>
                 </div>

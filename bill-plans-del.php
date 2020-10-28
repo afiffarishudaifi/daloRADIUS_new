@@ -19,154 +19,147 @@
  *
  *********************************************************************************************************
  */
- 
-    include ("library/checklogin.php");
-    $operator = $_SESSION['operator_user'];
 
-	include('library/check_operator_perm.php');
+include("library/checklogin.php");
+$operator = $_SESSION['operator_user'];
 
-	isset($_REQUEST['planName']) ? $plans = $_REQUEST['planName'] : $plans = "";
-	$logAction = "";
-	$logDebugSQL = "";
+include('library/check_operator_perm.php');
 
-	$showRemoveDiv = "block";
+isset($_REQUEST['planName']) ? $plans = $_REQUEST['planName'] : $plans = "";
+$logAction = "";
+$logDebugSQL = "";
 
-	if (isset($_REQUEST['planName'])) {
+$showRemoveDiv = "block";
 
-		if (!is_array($plans))
-			$plans = array($plans);
+if (isset($_REQUEST['planName'])) {
 
-		$allPlans = "";
+	if (!is_array($plans))
+		$plans = array($plans);
 
-		include 'library/opendb.php';
-	
-		foreach ($plans as $variable=>$value) {
-			if (trim($value) != "") {
+	$allPlans = "";
 
-				$planName = $value;
-				$allPlans .= $planName . ", ";
+	include 'library/opendb.php';
 
-				// remove the plan entry from the plans table
-				$sql = "DELETE FROM ".$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].
-						" WHERE planName='".$dbSocket->escapeSimple($planName)."'";
-				$res = $dbSocket->query($sql);
-				$logDebugSQL .= $sql . "\n";
-				
-				// remove plan's association with profiles from the plans_profiles table
-				$sql = "DELETE FROM ".$configValues['CONFIG_DB_TBL_DALOBILLINGPLANSPROFILES'].
-						" WHERE plan_name='".$dbSocket->escapeSimple($planName)."'";
-				$res = $dbSocket->query($sql);
-				$logDebugSQL .= $sql . "\n";
-				
-				$successMsg = "Deleted billing plan(s): <b> $allPlans </b>";
-				$logAction .= "Successfully deleted billing plan(s) [$allPlans] on page: ";
-				
-			} else { 
-				$failureMsg = "no billing plan name was entered, please specify a billing plan name to remove from database";
-				$logAction .= "Failed deleting billing plan(s) [$allPlans] on page: ";
-			}
+	foreach ($plans as $variable => $value) {
+		if (trim($value) != "") {
 
-		} //foreach
+			$planName = $value;
+			$allPlans .= $planName . ", ";
 
-		$plans = "";
-		include 'library/closedb.php';
+			// remove the plan entry from the plans table
+			$sql = "DELETE FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] .
+				" WHERE planName='" . $dbSocket->escapeSimple($planName) . "'";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL .= $sql . "\n";
 
-		$showRemoveDiv = "none";
-	} 
+			// remove plan's association with profiles from the plans_profiles table
+			$sql = "DELETE FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANSPROFILES'] .
+				" WHERE plan_name='" . $dbSocket->escapeSimple($planName) . "'";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL .= $sql . "\n";
+
+			$successMsg = "Deleted billing plan(s): <b> $allPlans </b>";
+			$logAction .= "Successfully deleted billing plan(s) [$allPlans] on page: ";
+		} else {
+			$failureMsg = "no billing plan name was entered, please specify a billing plan name to remove from database";
+			$logAction .= "Failed deleting billing plan(s) [$allPlans] on page: ";
+		}
+	} //foreach
+
+	$plans = "";
+	include 'library/closedb.php';
+
+	$showRemoveDiv = "none";
+}
 
 
-	include_once('library/config_read.php');
-    $log = "visited page: ";
+include_once('library/config_read.php');
+$log = "visited page: ";
 
 ?>
 
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-<title>daloRADIUS</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="css/1.css" type="text/css" media="screen,projection" />
-</head>
 <script src="library/javascript/pages_common.js" type="text/javascript"></script>
 <?php
-	include ("menu-bill-plans.php");
-?>		
 
-<div id="contentnorightbar">
+include('./_partials/head.php');
+include('./_partials/js.php');
+include("menu-bill-plans.php");
+?>
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','billplansdel.php') ?>
-	:: <?php if (isset($plans)) { echo $plans; } ?><h144>&#x2754;</h144></a></h2>
+<div class="col-lg-9">
+    <div class="card">
 
-	<div id="helpPage" style="display:none;visibility:visible" >
-		<?php echo t('helpPage','billplansdel') ?>
-		<br/>
-	</div>
-	<?php
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billplansdel.php') ?>
+                :: <?php if (isset($plans)) {
+						echo $plans;
+					} ?><h144>&#x2754;</h144></a></h2>
+
+        <div id="helpPage" style="display:none;visibility:visible">
+            <?php echo t('helpPage', 'billplansdel') ?>
+            <br />
+        </div>
+        <?php
 		include_once('include/management/actionMessages.php');
-	?>
+		?>
 
-	<div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible" >
-	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-	<fieldset>
+                <fieldset>
 
-		<h302> <?php echo t('title','PlanRemoval') ?> </h302>
-		<br/>
+                    <h302> <?php echo t('title', 'PlanRemoval') ?> </h302>
+                    <br />
 
-		<label for='planNname' class='form'><?php echo t('all','PlanName') ?></label>
-		<input name='planName[]' type='text' id='planName' value='<?php echo $plans ?>' tabindex=100 autocomplete="off" />
-		<br/>
+                    <label for='planNname' class='form'><?php echo t('all', 'PlanName') ?></label>
+                    <input name='planName[]' type='text' id='planName' value='<?php echo $plans ?>' tabindex=100
+                        autocomplete="off" />
+                    <br />
 
-		<br/><br/>
-		<hr><br/>
+                    <br /><br />
+                    <hr><br />
 
-		<input type='submit' name='submit' value='<?php echo t('buttons','apply') ?>' tabindex=1000 
-			class='button' />
+                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000
+                        class='button' />
 
-	</fieldset>
+                </fieldset>
 
-	</form>
-	</div>
+            </form>
+        </div>
 
 
-<?php
-        include_once("include/management/autocomplete.php");
+        <?php
+		include_once("include/management/autocomplete.php");
 
-        if ($autoComplete) {
-                echo "<script type=\"text/javascript\">
+		if ($autoComplete) {
+			echo "<script type=\"text/javascript\">
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('planName','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteBillingPlans');
                       </script>";
-        }
+		}
 
-?>
+		?>
 
 
-<?php
-	include('include/config/logging.php');
-?>
+        <?php
+		include('include/config/logging.php');
+		?>
 
-		</div>
-	
-		<div id="footer">
-	
-<?php
+    </div>
+</div>
+<div id="footer">
+
+    <?php
 	include 'page-footer.php';
-?>
+	?>
 
-		
-		</div>
-		
-</div>
+
 </div>
 
+</div>
+</div>
+</div>
 
 </body>
+
 </html>
-
-
-
-
-

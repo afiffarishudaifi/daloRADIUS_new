@@ -33,7 +33,6 @@
             // include_once ("include/menu/menu-items.php");
             // include_once ("include/menu/accounting-subnav.php");
             include_once("./_partials/navbar.php");
-            include_once("./_partials/js.php");
             ?>
             <br>
             <div class="row">

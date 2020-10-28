@@ -14,6 +14,7 @@
     <script src="library/javascript/form-field-tooltip.js" type="text/javascript"></script>
     <script type="text/javascript" src="library/javascript/ajax.js"></script>
     <script type="text/javascript" src="library/javascript/dynamic_attributes.js"></script>
+    <script type="text/javascript" src="library/javascript/ajaxGeneric.js"></script>
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
@@ -31,4 +32,5 @@
 
     <!-- responsive navbar -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>

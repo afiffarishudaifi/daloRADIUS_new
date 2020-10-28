@@ -12,28 +12,18 @@
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
 	include_once("lang/main.php");
-	?>
-
-    <div id="wrapper">
-        <div id="innerwrapper">
-
-            <?php
+	?> <div id="wrapper">
+        <div id="innerwrapper"> <?php
 			$m_active = "Config";
 			include_once("./_partials/navbar.php");
 			include_once("./_partials/js.php");
-			?>
-
-            <br>
+			?> <br>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
-
                         <h2>Configuration</h2>
-
                         <h3>Global Settings</h3>
-
                         <ul class="">
-
                             <li><a href="config-user.php"><b>&raquo;</b><?php echo t('button', 'UserSettings') ?></a>
                             </li>
                             <li><a href="config-db.php"><b>&raquo;</b><?php echo t('button', 'DatabaseSettings') ?></a>
@@ -49,8 +39,6 @@
                             </li>
                             <li><a href="config-mail.php"><b>&raquo;</b><?php echo t('button', 'MailSettings') ?></a>
                             </li>
-
                         </ul>
-
                     </div>
                 </div>

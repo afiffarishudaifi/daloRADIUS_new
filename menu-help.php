@@ -1,17 +1,17 @@
  <body>
      <?php
-		include_once("lang/main.php");
-		?>
+        include_once("lang/main.php");
+        ?>
 
      <div id="wrapper">
          <div id="innerwrapper">
 
              <?php
-				$m_active = "Help";
+                $m_active = "Help";
 
-				include_once("./_partials/navbar.php");
-				include_once("./_partials/js.php");
-				?>
+                include_once("./_partials/navbar.php");
+                include_once("./_partials/js.php");
+                ?>
 
              <br>
              <div class="row">

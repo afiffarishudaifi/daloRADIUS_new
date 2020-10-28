@@ -11,36 +11,22 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-	include_once("lang/main.php");
-	?>
-
-    <div id="wrapper">
-        <div id="innerwrapper">
-
-            <?php
-			$m_active = "Config";
-			include_once("./_partials/navbar.php");
-			include_once("./_partials/js.php");
-			?>
-
-            <br>
+    include_once("lang/main.php");
+    ?> <div id="wrapper">
+        <div id="innerwrapper"> <?php
+                                $m_active = "Config";
+                                include_once("./_partials/navbar.php");
+                                include_once("./_partials/js.php");
+                                ?> <br>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
-
                         <h2>Configuration</h2>
-
                         <h3>Reporting Settings</h3>
-
-
                         <ul class="subnav">
-
                             <li><a href="config-reports-dashboard.php"><b>&raquo;</b>
                                     <?php echo t('button', 'DashboardSettings') ?></a>
                             </li>
-
-
                         </ul>
-
                     </div>
                 </div>

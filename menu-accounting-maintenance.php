@@ -28,7 +28,6 @@
             <?php
             $m_active = "Accounting";
             include_once("./_partials/navbar.php");
-            include_once("./_partials/js.php");
             ?>
 
             <br>

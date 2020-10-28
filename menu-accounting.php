@@ -21,7 +21,7 @@
 <script type="text/javascript" src="library/javascript/ajax.js"></script>
 <script type="text/javascript" src="library/javascript/ajaxGeneric.js"></script>
 
-<body>
+<body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
 
     <?php
     include_once("lang/main.php");
@@ -33,7 +33,6 @@
             <?php
             $m_active = "Accounting";
             include_once("./_partials/navbar.php");
-            include_once("./_partials/js.php");
             include_once("include/management/autocomplete.php");
             ?>
 

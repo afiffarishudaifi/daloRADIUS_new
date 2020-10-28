@@ -20,135 +20,127 @@
  *
  *********************************************************************************************************
  */
- 
-    include ("library/checklogin.php");
-    $operator = $_SESSION['operator_user'];
 
-	include('library/check_operator_perm.php');
+include("library/checklogin.php");
+$operator = $_SESSION['operator_user'];
 
-	isset($_REQUEST['paymentname']) ? $paymentname = $_REQUEST['paymentname'] : $paymentname = "";
-	$logAction = "";
-	$logDebugSQL = "";
+include('library/check_operator_perm.php');
 
-	$showRemoveDiv = "block";
+isset($_REQUEST['paymentname']) ? $paymentname = $_REQUEST['paymentname'] : $paymentname = "";
+$logAction = "";
+$logDebugSQL = "";
 
-	if (isset($_REQUEST['paymentname'])) {
+$showRemoveDiv = "block";
 
-		if (!is_array($paymentname))
-			$paymentname = array($paymentname);
+if (isset($_REQUEST['paymentname'])) {
 
-		$allPayments = "";
+	if (!is_array($paymentname))
+		$paymentname = array($paymentname);
 
-		include 'library/opendb.php';
-	
-		foreach ($paymentname as $variable=>$value) {
-			if (trim($value) != "") {
+	$allPayments = "";
 
-				$name = $value;
-				$allPayments .= $name . ", ";
+	include 'library/opendb.php';
 
-				// delete all payment types 
-				$sql = "DELETE FROM ".$configValues['CONFIG_DB_TBL_DALOPAYMENTTYPES']." WHERE value='".
-						$dbSocket->escapeSimple($name)."'";
-				$res = $dbSocket->query($sql);
-				$logDebugSQL .= $sql . "\n";
-				
-				$successMsg = "Deleted payment type(s): <b> $allPayments </b>";
-				$logAction .= "Successfully deleted payment type(s) [$allPayments] on page: ";
-				
-			} else { 
-				$failureMsg = "no payment type was entered, please specify a rapayment type name to remove from database";
-				$logAction .= "Failed deleting payment type(s) [$allPayments] on page: ";
-			}
+	foreach ($paymentname as $variable => $value) {
+		if (trim($value) != "") {
 
-		} //foreach
+			$name = $value;
+			$allPayments .= $name . ", ";
 
-		include 'library/closedb.php';
+			// delete all payment types 
+			$sql = "DELETE FROM " . $configValues['CONFIG_DB_TBL_DALOPAYMENTTYPES'] . " WHERE value='" .
+				$dbSocket->escapeSimple($name) . "'";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL .= $sql . "\n";
 
-		$showRemoveDiv = "none";
-	} 
+			$successMsg = "Deleted payment type(s): <b> $allPayments </b>";
+			$logAction .= "Successfully deleted payment type(s) [$allPayments] on page: ";
+		} else {
+			$failureMsg = "no payment type was entered, please specify a rapayment type name to remove from database";
+			$logAction .= "Failed deleting payment type(s) [$allPayments] on page: ";
+		}
+	} //foreach
+
+	include 'library/closedb.php';
+
+	$showRemoveDiv = "none";
+}
 
 
-	include_once('library/config_read.php');
-    $log = "visited page: ";
+include_once('library/config_read.php');
+$log = "visited page: ";
 
 ?>
 
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-<title>daloRADIUS</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="css/1.css" type="text/css" media="screen,projection" />
-</head>
 <script src="library/javascript/pages_common.js" type="text/javascript"></script>
 <?php
+include('./_partials/head.php');
+include('./_partials/js.php');
+include("menu-bill-payments.php");
 
-	include ("menu-bill-payments.php");
-	
-?>		
+?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+    <div class="card">
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','paymenttypesdel.php') ?>
-	:: <?php if (isset($paymentname)) { echo $paymentname; } ?><h144>&#x2754;</h144></a></h2>
+        <h2 id="Intro"><a href="#"
+                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'paymenttypesdel.php') ?>
+                :: <?php if (isset($paymentname)) {
+						echo $paymentname;
+					} ?><h144>&#x2754;</h144></a></h2>
 
-	<div id="helpPage" style="display:none;visibility:visible" >		<?php echo t('helpPage','paymenttypesdel') ?>
-		<br/>
-	</div>
-	<?php
+        <div id="helpPage" style="display:none;visibility:visible"> <?php echo t('helpPage', 'paymenttypesdel') ?>
+            <br />
+        </div>
+        <?php
 		include_once('include/management/actionMessages.php');
+		?>
+
+        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                <fieldset>
+
+                    <h302> <?php echo t('title', 'PayTypeInfo') ?> </h302>
+                    <br />
+
+                    <label for='paymentname' class='form'><?php echo t('all', 'PayTypeName') ?></label>
+                    <input name='paymentname[]' type='text' id='paymentname' value='<?php echo $paymentname ?>'
+                        tabindex=100 />
+                    <br />
+
+                    <br /><br />
+                    <hr><br />
+
+                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000
+                        class='button' />
+
+                </fieldset>
+
+            </form>
+        </div>
+
+
+        <?php
+		include('include/config/logging.php');
+		?>
+
+    </div>
+</div>
+<div id="footer">
+
+    <?php
+	include 'page-footer.php';
 	?>
 
-	<div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible" >
-	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-	<fieldset>
-
-		<h302> <?php echo t('title','PayTypeInfo') ?> </h302>
-		<br/>
-
-		<label for='paymentname' class='form'><?php echo t('all','PayTypeName') ?></label>
-		<input name='paymentname[]' type='text' id='paymentname' value='<?php echo $paymentname ?>' tabindex=100 />
-		<br/>
-
-		<br/><br/>
-		<hr><br/>
-
-		<input type='submit' name='submit' value='<?php echo t('buttons','apply') ?>' tabindex=1000 
-			class='button' />
-
-	</fieldset>
-
-	</form>
-	</div>
-
-
-<?php
-	include('include/config/logging.php');
-?>
-
-		</div>
-	
-		<div id="footer">
-	
-<?php
-	include 'page-footer.php';
-?>
-
-		
-		</div>
-		
-</div>
 </div>
 
+</div>
+</div>
+</div>
 
 </body>
+
 </html>
-
-
-
-
-

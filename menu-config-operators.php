@@ -14,29 +14,19 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-	include_once("lang/main.php");
-	?>
-
-    <div id="wrapper">
-        <div id="innerwrapper">
-
-            <?php
-			$m_active = "Config";
-			include_once("./_partials/navbar.php");
-			include_once("./_partials/js.php");
-			?>
-
-            <br>
+    include_once("lang/main.php");
+    ?> <div id="wrapper">
+        <div id="innerwrapper"> <?php
+                                $m_active = "Config";
+                                include_once("./_partials/navbar.php");
+                                include_once("./_partials/js.php");
+                                ?> <br>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
-
                         <h2>Configuration</h2>
-
                         <h3>Management</h3>
-
                         <ul class="">
-
                             <li><a
                                     href="config-operators-list.php"><b>&raquo;</b><?php echo t('button', 'ListOperators') ?></a>
                             </li>
@@ -49,16 +39,12 @@
                                         tooltipText='<?php echo t('Tooltip', 'OperatorName'); ?> <br/>' />
                                     </form>
                             </li>
-
                             <li><a
                                     href="config-operators-del.php"><b>&raquo;</b><?php echo t('button', 'RemoveOperator') ?></a>
                             </li>
-
                         </ul>
-
                     </div>
                 </div>
-
                 <script type="text/javascript">
                 var tooltipObj = new DHTMLgoodies_formTooltip();
                 tooltipObj.setTooltipPosition('right');
