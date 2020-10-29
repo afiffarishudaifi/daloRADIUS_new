@@ -23,24 +23,28 @@
                         <h2>Management</h2>
 
                         <h3>NAS Management</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
-                            <li><a href="mng-rad-nas-list.php"
-                                    tabindex=1><b>&raquo;</b><?php echo t('button', 'ListNAS') ?></a>
+                            <li><a href="mng-rad-nas-list.php" tabindex=1><b>&raquo;</b><img
+                                        src='images/icons/userList.gif' border='0'>
+                                    <?php echo t('button', 'ListNAS') ?></a>
                             </li>
-                            <li><a href="mng-rad-nas-new.php"
-                                    tabindex=2><b>&raquo;</b><?php echo t('button', 'NewNAS') ?></a>
+                            <li><a href="mng-rad-nas-new.php" tabindex=2><b>&raquo;</b><img
+                                        src='images/icons/userNew.gif' border='0'>
+                                    <?php echo t('button', 'NewNAS') ?></a>
                             </li>
-                            <li><a href="javascript:document.mngradnasedit.submit();"
-                                    tabindex=3><b>&raquo;</b><?php echo t('button', 'EditNAS') ?></a>
-                                <form name="mngradnasedit" action="mng-rad-nas-edit.php" method="get" class="sidebar">
+                            <li><a href="javascript:document.mngradnasedit.submit();" tabindex=3><b>&raquo;</b><img
+                                        src='images/icons/userEdit.gif' border='0'>
+                                    <?php echo t('button', 'EditNAS') ?></a>
+                                <form name="mngradnasedit" action="mng-rad-nas-edit.php" method="get" class="">
                                     <input name="nashost" type="text" id="nashostEdit"
                                         <?php if ($autoComplete) echo "autocomplete='off'"; ?>
                                         tooltipText='<?php echo t('Tooltip', 'NasName'); ?> <br/>' tabindex=4>
                                 </form>
                             </li>
-                            <li><a href="mng-rad-nas-del.php"
-                                    tabindex=5><b>&raquo;</b><?php echo t('button', 'RemoveNAS') ?></a></li>
+                            <li><a href="mng-rad-nas-del.php" tabindex=5><b>&raquo;</b><img
+                                        src='images/icons/userRemove.gif' border='0'>
+                                    <?php echo t('button', 'RemoveNAS') ?></a></li>
 
                         </ul>
 

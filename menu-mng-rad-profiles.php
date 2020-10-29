@@ -19,7 +19,7 @@
                         <h2>Management</h2>
 
                         <h3>Profiles Management</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
                             <li><a href="mng-rad-profiles-list.php"><b>&raquo;</b>
                                     <img src='images/icons/groupsList.png' border='0'>
@@ -30,7 +30,7 @@
                             <li><a href="javascript:document.mngradprofileedit.submit();""><b>&raquo;</b>
 			<img src='images/icons/groupsEdit.png' border='0'>
 			<?php echo t('button', 'EditProfile') ?><a>
-			<form name=" mngradprofileedit" action="mng-rad-profiles-edit.php" method="get" class="sidebar">
+			<form name=" mngradprofileedit" action="mng-rad-profiles-edit.php" method="get" class="">
                                     <?php
                                     include 'include/management/populate_selectbox.php';
                                     populate_groups("Select Profile", "profile", "");

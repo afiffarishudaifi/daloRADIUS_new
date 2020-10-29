@@ -42,9 +42,9 @@
                         <h2>Accounting</h2>
 
                         <h3>Custom Query</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
-                            <form name="acctcustomquery" action="acct-custom-query.php" method="get" class="sidebar">
+                            <form name="acctcustomquery" action="acct-custom-query.php" method="get" class="">
 
                                 <input class="sidebutton" type="submit" name="submit"
                                     value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />

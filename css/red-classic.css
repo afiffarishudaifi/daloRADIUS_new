@@ -399,12 +399,12 @@ h3 {
 
 form {
 	padding:10px;
-	border:1px solid #f6f6f6;
+	/* border:1px solid #333; */
 }
 
 form.sidebar {
 	padding:10px;
-	border:0px solid #f6f6f6;
+	/* border:0px solid #333; */
 }
 
 

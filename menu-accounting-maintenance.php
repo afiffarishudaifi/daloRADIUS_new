@@ -38,11 +38,15 @@
                         <h2>Accounting</h2>
 
                         <h3>Maintenance</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
-                            <li><a href="acct-maintenance-cleanup.php"><b>&raquo;</b><?php echo t('button', 'CleanupStaleSessions') ?>
+                            <li><a href="acct-maintenance-cleanup.php"><b>&raquo;</b><i
+                                        class="far fa-circle nav-icon"></i>
+                                    <?php echo t('button', 'CleanupStaleSessions') ?>
                                 </a></li>
-                            <li><a href="acct-maintenance-delete.php"><b>&raquo;</b><?php echo t('button', 'DeleteAccountingRecords') ?>
+                            <li><a href="acct-maintenance-delete.php"><b>&raquo;</b><i
+                                        class="far fa-circle nav-icon"></i>
+                                    <?php echo t('button', 'DeleteAccountingRecords') ?>
                                 </a></li>
                         </ul>
 
