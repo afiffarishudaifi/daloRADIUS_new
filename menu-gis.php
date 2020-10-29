@@ -44,7 +44,7 @@
 
                             <li><a href="javascript:document.gisregister.submit();" /><b>&raquo;</b><?php echo t('button', 'RegisterGoogleMapsAPI') ?>
                                 </a>
-                                <form name="gisregister" action="gis-main.php" method="get" class="sidebar">
+                                <form name="gisregister" action="gis-main.php" method="get" class="">
                                     <input class="form-control-sm" name="code" type="text">
                                     <input class="sidebutton" name="submit" type="submit" value="Register code">
                                 </form>

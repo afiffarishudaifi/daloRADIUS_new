@@ -31,7 +31,7 @@
 									<b>&raquo;</b>
 									<img src='images/icons/reportsLogs.png' border='0'>&nbsp;<?php echo t('button', 'daloRADIUSLog') ?>
 								</a>
-								<form name="daloradius_log" action="rep-logs-daloradius.php" method="get" class="sidebar">
+								<form name="daloradius_log" action="rep-logs-daloradius.php" method="get" class="">
 									<select class="form-control-sm" name="daloradiusLineCount" type="text">
 										<?php if (isset($daloradiusLineCount)) {
 											echo "<option value='$daloradiusLineCount'> $daloradiusLineCount Lines </option>";
@@ -70,7 +70,7 @@
 									<b>&raquo;</b>
 									<img src='images/icons/reportsLogs.png' border='0'>&nbsp;<?php echo t('button', 'RadiusLog') ?>
 								</a>
-								<form name="radius_log" action="rep-logs-radius.php" method="get" class="sidebar">
+								<form name="radius_log" action="rep-logs-radius.php" method="get" class="">
 									<select class="form-control-sm" name="radiusLineCount" type="text">
 										<?php if (isset($radiusLineCount)) {
 											echo "<option value='$radiusLineCount'> $radiusLineCount Lines </option>";
@@ -108,7 +108,7 @@
 									<b>&raquo;</b>
 									<img src='images/icons/reportsLogs.png' border='0'>&nbsp;<?php echo t('button', 'SystemLog') ?>
 								</a>
-								<form name="system_log" action="rep-logs-system.php" method="get" class="sidebar">
+								<form name="system_log" action="rep-logs-system.php" method="get" class="">
 									<select class="form-control-sm" name="systemLineCount" type="text">
 										<?php if (isset($systemLineCount)) {
 											echo "<option value='$systemLineCount'> $systemLineCount Lines </option>";
@@ -133,7 +133,7 @@
 									<b>&raquo;</b>
 									<img src='images/icons/reportsLogs.png' border='0'>&nbsp;<?php echo t('button', 'BootLog') ?>
 								</a>
-								<form name="boot_log" action="rep-logs-boot.php" method="get" class="sidebar">
+								<form name="boot_log" action="rep-logs-boot.php" method="get" class="">
 									<select class="form-control-sm" name="bootLineCount" type="text">
 										<?php if (isset($bootLineCount)) {
 											echo "<option value='$bootLineCount'> $bootLineCount Lines </option>";

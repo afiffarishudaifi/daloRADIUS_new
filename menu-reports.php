@@ -28,27 +28,27 @@
 						<h2>Reports</h2>
 
 						<h3>Users Reports</h3>
-						<ul class="nav nav-pills nav-sidebar flex-column">
+						<ul class="nav nav-pills nav-sidebar flex-column subnav">
 							<li class="nav-item">
 								<a href="javascript:document.reponline.submit();">
-									<!-- <b>&raquo;</b> -->
+									<b>&raquo;</b>
 									<img src='images/icons/reportsOnlineUsers.gif' border='0'>
 									<?php echo t('button', 'OnlineUsers') ?>
 								</a>
 
-								<form name="reponline" action="rep-online.php" method="get" class="sidebar">
+								<form name="reponline" action="rep-online.php" method="get" class="">
 									<input class="form-control-sm" name="usernameOnline" type="text" id="usernameOnline" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/> <?php echo t('Tooltip', 'UsernameWildcard') ?> <br/>' value="<?php if (isset($usernameOnline)) echo $usernameOnline ?>" tabindex=1>
 								</form>
 							</li>
 
 							<li class="nav-item">
 								<a href="javascript:document.replastconnect.submit();">
-									<!-- <b>&raquo;</b> -->
+									<b>&raquo;</b>
 									<img src='images/icons/reportsLastConnection.png' border='0'>
 									<?php echo t('button', 'LastConnectionAttempts') ?>
 								</a>
 
-								<form name="replastconnect" action="rep-lastconnect.php" method="get" class="sidebar">
+								<form name="replastconnect" action="rep-lastconnect.php" method="get" class="">
 									<input class="form-control-sm" name="usernameLastConnect" type="text" id="usernameLastConnect" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/> <?php echo t('Tooltip', 'UsernameWildcard') ?> <br/>' value="<?php if (isset($usernameLastConnect)) echo $usernameLastConnect ?>" tabindex=2>
 									<select class="form-control-sm" name="radiusreply" tabindex=3>
 										<option value="Any">Any</option>
@@ -78,12 +78,12 @@
 
 							<li class="nav-item">
 								<a href="javascript:document.repnewusers.submit();">
-									<!-- <b>&raquo;</b> -->
+									<b>&raquo;</b>
 									<img src='images/icons/userList.gif' border='0'>
 									<?php echo t('button', 'NewUsers') ?>
 								</a>
 
-								<form name="repnewusers" action="rep-newusers.php" method="get" class="sidebar">
+								<form name="repnewusers" action="rep-newusers.php" method="get" class="">
 									<h6>
 
 										<img src="library/js_date/calendar.gif" onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
@@ -106,11 +106,11 @@
 
 							<li>
 								<a href="javascript:document.topusers.submit();">
-									<!-- <b>&raquo;</b> -->
+									<b>&raquo;</b>
 									<img src='images/icons/reportsTopUsers.png' border='0'>
 									<?php echo t('button', 'TopUser') ?>
 								</a>
-								<form name="topusers" action="rep-topusers.php" method="get" class="sidebar">
+								<form name="topusers" action="rep-topusers.php" method="get" class="">
 									<select class="form-control-sm" name="limit" type="text" tabindex=3>
 										<option value="5"> 5 </option>
 										<option value="10"> 10 </option>
@@ -155,7 +155,7 @@
 							</li>
 							<li>
 								<a href="rep-history.php">
-									<!-- <b>&raquo;</b> -->
+									<b>&raquo;</b>
 									<img src='images/icons/reportsHistory.png' border='0'>
 									<?php echo t('button', 'History') ?>
 								</a>

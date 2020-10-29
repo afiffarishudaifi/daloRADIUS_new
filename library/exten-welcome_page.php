@@ -27,9 +27,9 @@ echo "
 	<center>
 
 		<h2> daloRADIUS Web Management Server </h2>
-		<h3> ".t('all','daloRADIUSVersion')." / ".$configValues['DALORADIUS_DATE']." </h3>
+		<h3> " . t('all', 'daloRADIUSVersion') . " / " . $configValues['DALORADIUS_DATE'] . " </h3>
 		<h4> <a href=\"mailto:liran.tal@gmail.com\"> Liran Tal </a> </h4>
 		<br/><br/><br/>
-		<img src='images/daloradius_logo.jpg' border=0 height='200' />
+		<img src='images/logo.png' border=0 height='200' />
 	</center>
 ";

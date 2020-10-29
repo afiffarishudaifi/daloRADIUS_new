@@ -26,16 +26,24 @@
                         <h2>Configuration</h2>
                         <h3>Management</h3>
                         <ul class="subnav">
-                            <li><a href="config-operators-list.php"><b>&raquo;</b><?php echo t('button', 'ListOperators') ?></a>
+                            <li><a href="config-operators-list.php"><b>&raquo;</b>
+                                    <img src='images/icons/userList.gif' border='0'>
+                                    &nbsp;<?php echo t('button', 'ListOperators') ?></a>
                             </li>
-                            <li><a href="config-operators-new.php"><b>&raquo;</b><?php echo t('button', 'NewOperator') ?></a>
+                            <li><a href="config-operators-new.php"><b>&raquo;</b>
+                                    <img src='images/icons/userNew.gif' border='0'>
+                                    &nbsp;<?php echo t('button', 'NewOperator') ?></a>
                             </li>
-                            <li><a href="javascript:document.mngedit.submit();""><b>&raquo;</b><?php echo t('button', 'EditOperator') ?></a>
-			<form name=" mngedit" action="config-operators-edit.php" method="get" class="sidebar">
+                            <li><a href="javascript:document.mngedit.submit();""><b>&raquo;</b>
+                            <img src='images/icons/userNew.gif' border='0'>
+                            &nbsp;<?php echo t('button', 'EditOperator') ?></a>
+			<form name=" mngedit" action="config-operators-edit.php" method="get" class="">
                                     <input name="operator_username" type="text" tooltipText='<?php echo t('Tooltip', 'OperatorName'); ?> <br/>' />
                                     </form>
                             </li>
-                            <li><a href="config-operators-del.php"><b>&raquo;</b><?php echo t('button', 'RemoveOperator') ?></a>
+                            <li><a href="config-operators-del.php"><b>&raquo;</b>
+                                    <img src='images/icons/userRemove.gif' border='0'>
+                                    &nbsp;<?php echo t('button', 'RemoveOperator') ?></a>
                             </li>
                         </ul>
                     </div>
