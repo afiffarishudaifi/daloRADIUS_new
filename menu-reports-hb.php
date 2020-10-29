@@ -17,21 +17,24 @@
 			include_once("./_partials/navbar.php");
 			?>
 
-			<div id="sidebar">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="card" id="sidebar">
 
-				<h2>Heartbeat</h2>
-				<ul class="subnav">
+						<h2>Heartbeat</h2>
+						<ul class="subnav">
 
-					<h3>Dashboard</h3>
+							<h3>Dashboard</h3>
 
-					<li><a href="rep-hb-dashboard.php"><b>&raquo;</b><?php echo t('button', 'Dashboard') ?></a></li>
+							<li><a href="rep-hb-dashboard.php"><b>&raquo;</b><?php echo t('button', 'Dashboard') ?></a></li>
 
-				</ul>
-
-
-				<br /><br />
-
+						</ul>
 
 
+						<br /><br />
 
-			</div>
+
+
+
+					</div>
+				</div>

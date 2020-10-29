@@ -36,23 +36,27 @@ include("menu-reports-batch.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+	<div class="card">
+		<div class="card-body">
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'repbatch.php'); ?>
-			<h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'repbatch.php'); ?>
+					<h144>&#x2754;</h144></a></h2>
 
-	<div id="helpPage" style="display:none;visibility:visible">
-		<?php echo t('helpPage', 'repbatch') ?>
-		<br />
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'repbatch') ?>
+				<br />
+			</div>
+			<br />
+
+
+
+			<?php
+			include('include/config/logging.php');
+			?>
+
+		</div>
 	</div>
-	<br />
-
-
-
-	<?php
-	include('include/config/logging.php');
-	?>
-
 </div>
 
 <div id="footer">

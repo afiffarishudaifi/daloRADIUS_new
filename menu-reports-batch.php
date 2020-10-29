@@ -19,51 +19,53 @@
 			?>
 
 
-			<div id="sidebar">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="card" id="sidebar">
 
-				<h2>Batch Users</h2>
-				<ul class="subnav">
+						<h2>Batch Users</h2>
+						<ul class="subnav">
 
-					<h3>List</h3>
+							<h3>List</h3>
 
-					<li>
-						<a href="rep-batch-list.php"><b>&raquo;</b><?php echo t('button', 'BatchHistory') ?></a>
+							<li>
+								<a href="rep-batch-list.php"><b>&raquo;</b><?php echo t('button', 'BatchHistory') ?></a>
 
-					</li>
-
-
-
-					<li>
-						<a href="javascript:document.batch_name_details.submit();"><b>&raquo;</b><?php echo t('button', 'BatchDetails') ?></a>
-						<form name="batch_name_details" action="rep-batch-details.php" method="get" class="">
-							<input name="batch_name" type="text" id="batchNameDetails" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'BatchName'); ?>' value="<?php if (isset($batch_name_details)) echo $batch_name_details; ?>">
-						</form>
-					</li>
-
-				</ul>
-
-
-				<br /><br />
+							</li>
 
 
 
+							<li>
+								<a href="javascript:document.batch_name_details.submit();"><b>&raquo;</b><?php echo t('button', 'BatchDetails') ?></a>
+								<form name="batch_name_details" action="rep-batch-details.php" method="get" class="sidebar">
+									<input name="batch_name" type="text" id="batchNameDetails" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'BatchName'); ?>' value="<?php if (isset($batch_name_details)) echo $batch_name_details; ?>">
+								</form>
+							</li>
 
-			</div>
+						</ul>
 
-			<?php
 
-			if ($autoComplete) {
-				echo "<script type=\"text/javascript\">
+						<br /><br />
+
+
+
+					</div>
+				</div>
+
+				<?php
+
+				if ($autoComplete) {
+					echo "<script type=\"text/javascript\">
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('batchNameDetails','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteBatchNames');
                       </script>";
-			}
-			?>
+				}
+				?>
 
-			<script type="text/javascript">
-				var tooltipObj = new DHTMLgoodies_formTooltip();
-				tooltipObj.setTooltipPosition('right');
-				tooltipObj.setPageBgColor('#EEEEEE');
-				tooltipObj.setTooltipCornerSize(15);
-				tooltipObj.initFormFieldTooltip();
-			</script>
+				<script type="text/javascript">
+					var tooltipObj = new DHTMLgoodies_formTooltip();
+					tooltipObj.setTooltipPosition('right');
+					tooltipObj.setPageBgColor('#EEEEEE');
+					tooltipObj.setTooltipCornerSize(15);
+					tooltipObj.initFormFieldTooltip();
+				</script>

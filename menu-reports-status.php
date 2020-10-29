@@ -15,37 +15,44 @@
 			include_once("./_partials/navbar.php");
 			?>
 
-			<div id="sidebar">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="card" id="sidebar">
 
-				<h2>Status</h2>
-				<ul class="subnav">
+						<h2>Status</h2>
 
-					<h3>Status</h3>
+						<ul class="subnav">
 
-					<li><a href="rep-stat-server.php"><b>&raquo;</b>
-							<img src='images/icons/reportsStatus.png' border='0'>&nbsp;<?php echo t('button', 'ServerStatus') ?></a></li>
-					<li><a href="rep-stat-services.php"><b>&raquo;</b>
-							<img src='images/icons/reportsStatus.png' border='0'>&nbsp;<?php echo t('button', 'ServicesStatus') ?></a></li>
+							<h3>Status</h3>
+							<li class="nav-item">
+								<a href="rep-stat-server.php">
+									<!-- <b>&raquo;</b> -->
+									<img src='images/icons/reportsStatus.png' border='0'>&nbsp;<?php echo t('button', 'ServerStatus') ?>
+								</a>
+							</li>
+							<li>
+								<a href="rep-stat-services.php">
+									<!-- <b>&raquo;</b> -->
+									<img src='images/icons/reportsStatus.png' border='0'>&nbsp;<?php echo t('button', 'ServicesStatus') ?>
+								</a>
+							</li>
+						</ul>
 
-				</ul>
+						<ul class="subnav">
+							<h3>Extended Peripherals</h3>
 
-				<ul class="subnav">
-					<h3>Extended Peripherals</h3>
-
-					<li><a href="rep-stat-cron.php"><b>&raquo;</b>
-							<img src='images/icons/reportsStatus.png' border='0'>&nbsp;CRON Status</a></li>
-					<li><a href="rep-stat-ups.php"><b>&raquo;</b>
-							<img src='images/icons/reportsStatus.png' border='0'>&nbsp;UPS Status</a></li>
-					<li><a href="rep-stat-raid.php"><b>&raquo;</b>
-							<img src='images/icons/reportsStatus.png' border='0'>&nbsp;RAID Status</a></li>
+							<li><a href="rep-stat-cron.php"><b>&raquo;</b>
+									<img src='images/icons/reportsStatus.png' border='0'>&nbsp;CRON Status</a></li>
+							<li><a href="rep-stat-ups.php"><b>&raquo;</b>
+									<img src='images/icons/reportsStatus.png' border='0'>&nbsp;UPS Status</a></li>
+							<li><a href="rep-stat-raid.php"><b>&raquo;</b>
+									<img src='images/icons/reportsStatus.png' border='0'>&nbsp;RAID Status</a></li>
 
 
-				</ul>
+						</ul>
 
 
-				<br /><br />
+						<br /><br />
 
-
-
-
-			</div>
+					</div>
+				</div>
