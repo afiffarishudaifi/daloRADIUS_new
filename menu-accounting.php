@@ -44,11 +44,11 @@
                         <h2>Accounting</h2>
 
                         <h3>Users Accounting</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
                             <li><a
                                     href="javascript:document.acctusername.submit();"><b>&raquo;</b><?php echo t('button', 'UserAccounting') ?></a>
-                                <form name="acctusername" action="acct-username.php" method="get" class="sidebar">
+                                <form name="acctusername" action="acct-username.php" method="get" class="">
                                     <input name="username" type="text" id="usernameAcct"
                                         <?php if ($autoComplete) echo "autocomplete='off'"; ?>
                                         tooltipText='<?php echo t('Tooltip', 'Username'); ?>'
@@ -58,7 +58,7 @@
 
                             <li><a
                                     href="javascript:document.acctipaddress.submit();"><b>&raquo;</b><?php echo t('button', 'IPAccounting') ?></a>
-                                <form name="acctipaddress" action="acct-ipaddress.php" method="get" class="sidebar">
+                                <form name="acctipaddress" action="acct-ipaddress.php" method="get" class="">
                                     <input name="ipaddress" type="text"
                                         tooltipText='<?php echo t('Tooltip', 'IPAddress'); ?>'
                                         value="<?php if (isset($accounting_ipaddress)) echo $accounting_ipaddress; ?>">
@@ -67,8 +67,7 @@
 
                             <li><a
                                     href="javascript:document.acctnasipaddress.submit();"><b>&raquo;</b><?php echo t('button', 'NASIPAccounting') ?></a>
-                                <form name="acctnasipaddress" action="acct-nasipaddress.php" method="get"
-                                    class="sidebar">
+                                <form name="acctnasipaddress" action="acct-nasipaddress.php" method="get" class="">
                                     <input name="nasipaddress" type="text"
                                         tooltipText='<?php echo t('Tooltip', 'IPAddress'); ?>'
                                         value="<?php if (isset($accounting_nasipaddress)) echo $accounting_nasipaddress; ?>">
@@ -77,7 +76,7 @@
 
                             <li><a
                                     href="javascript:document.acctdate.submit();"><b>&raquo;</b><?php echo t('button', 'DateAccounting') ?></a>
-                                <form name="acctdate" action="acct-date.php" method="get" class="sidebar">
+                                <form name="acctdate" action="acct-date.php" method="get" class="">
                                     <input name="username" type="text" id="usernameDate"
                                         <?php if ($autoComplete) echo "autocomplete='off'"; ?>
                                         tooltipText='<?php echo t('Tooltip', 'Username'); ?>'

@@ -24,24 +24,24 @@
                         <h2>Management</h2>
 
                         <h3>User-Group Management</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
-                            <li><a
-                                    href="mng-rad-usergroup-list.php"><b>&raquo;</b><?php echo t('button', 'ListUserGroup') ?></a>
+                            <li><a href="mng-rad-usergroup-list.php"><b>&raquo;</b><img src='images/icons/userList.gif'
+                                        border='0'> <?php echo t('button', 'ListUserGroup') ?></a>
                             </li>
-                            <li><a href="javascript:document.mngradusrgrplist.submit();""><b>&raquo;</b><?php echo t('button', 'ListUsersGroup') ?><a>
-			<form name=" mngradusrgrplist" action="mng-rad-usergroup-list-user.php" method="get" class="sidebar">
+                            <li><a href="javascript:document.mngradusrgrplist.submit();""><b>&raquo;</b><img src='images/icons/userList.gif' border='0'> <?php echo t('button', 'ListUsersGroup') ?><a>
+			<form name=" mngradusrgrplist" action="mng-rad-usergroup-list-user.php" method="get" class="">
                                     <input name="username" type="text" id="usernameList"
                                         <?php if ($autoComplete) echo "autocomplete='off'"; ?>
                                         tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>' />
                                     </form>
                             </li>
 
-                            <li><a
-                                    href="mng-rad-usergroup-new.php"><b>&raquo;</b><?php echo t('button', 'NewUserGroup') ?></a>
+                            <li><a href="mng-rad-usergroup-new.php"><b>&raquo;</b><img src='images/icons/userNew.gif'
+                                        border='0'> <?php echo t('button', 'NewUserGroup') ?></a>
                             </li>
-                            <li><a href="javascript:document.mngradusrgrpedit.submit();""><b>&raquo;</b><?php echo t('button', 'EditUserGroup') ?><a>
-			<form name=" mngradusrgrpedit" action="mng-rad-usergroup-edit.php" method="get" class="sidebar">
+                            <li><a href="javascript:document.mngradusrgrpedit.submit();""><b>&raquo;</b><img src='images/icons/userEdit.gif' border='0'> <?php echo t('button', 'EditUserGroup') ?><a>
+			<form name=" mngradusrgrpedit" action="mng-rad-usergroup-edit.php" method="get" class="">
                                     <input name="username" type="text" value="" id="usernameEdit"
                                         <?php if ($autoComplete) echo "autocomplete='off'"; ?>
                                         tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>' />
@@ -52,11 +52,11 @@
                             </li>
 
 
-                            <li><a
-                                    href="mng-rad-usergroup-del.php"><b>&raquo;</b><?php echo t('button', 'RemoveUserGroup') ?></a>
+                            <li><a href="mng-rad-usergroup-del.php"><b>&raquo;</b>
+                                    <img src='images/icons/userRemove.gif' border='0'>
+                                    <?php echo t('button', 'RemoveUserGroup') ?></a>
                             </li>
                         </ul>
-
                     </div>
                 </div>
 

@@ -22,13 +22,15 @@
                         <h2>Management</h2>
 
                         <h3>Hotspots Management</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
-                            <li><a href="mng-hs-list.php"><b>&raquo;</b><?php echo t('button', 'ListHotspots') ?></a>
+                            <li><a href="mng-hs-list.php"><b>&raquo;</b><img src='images/icons/userList.gif' border='0'>
+                                    <?php echo t('button', 'ListHotspots') ?></a>
                             </li>
-                            <li><a href="mng-hs-new.php"><b>&raquo;</b><?php echo t('button', 'NewHotspot') ?></a></li>
-                            <li><a href="javascript:document.mnghsedit.submit();""><b>&raquo;</b><?php echo t('button', 'EditHotspot') ?><a>
-			<form name=" mnghsedit" action="mng-hs-edit.php" method="get" class="sidebar">
+                            <li><a href="mng-hs-new.php"><b>&raquo;</b><img src='images/icons/userNew.gif' border='0'>
+                                    <?php echo t('button', 'NewHotspot') ?></a></li>
+                            <li><a href="javascript:document.mnghsedit.submit();""><b>&raquo;</b><img src='images/icons/userEdit.gif' border='0'> <?php echo t('button', 'EditHotspot') ?><a>
+			<form name=" mnghsedit" action="mng-hs-edit.php" method="get" class="">
                                     <input name="name" type="text" id="hotspotEdit" autocomplete="off"
                                         tooltipText='<?php echo t('Tooltip', 'HotspotName'); ?> <br/>'
                                         value="<?php if (isset($edit_hotspotname)) echo $edit_hotspotname; ?>"
@@ -36,13 +38,13 @@
                                     </form>
                             </li>
 
-                            <li><a href="mng-hs-del.php"><b>&raquo;</b><?php echo t('button', 'RemoveHotspot') ?></a>
+                            <li><a href="mng-hs-del.php"><b>&raquo;</b><img src='images/icons/userRemove.gif'
+                                        border='0'> <?php echo t('button', 'RemoveHotspot') ?></a>
                             </li>
 
                         </ul>
 
                         <br /><br />
-
 
                     </div>
 

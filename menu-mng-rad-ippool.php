@@ -22,16 +22,18 @@
                         <h2>Management</h2>
 
                         <h3>IP Pools</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
-                            <li><a href="mng-rad-ippool-list.php"
-                                    tabindex=1><b>&raquo;</b><?php echo t('button', 'ListIPPools') ?></a></li>
-                            <li><a href="mng-rad-ippool-new.php"
-                                    tabindex=2><b>&raquo;</b><?php echo t('button', 'NewIPPool') ?></a></li>
-                            <li><a href="javascript:document.mngradippooledit.submit();"
-                                    tabindex=3><b>&raquo;</b><?php echo t('button', 'EditIPPool') ?></a>
-                                <form name="mngradippooledit" action="mng-rad-ippool-edit.php" method="get"
-                                    class="sidebar">
+                            <li><a href="mng-rad-ippool-list.php" tabindex=1><b>&raquo;</b><img
+                                        src='images/icons/userList.gif' border='0'>
+                                    <?php echo t('button', 'ListIPPools') ?></a></li>
+                            <li><a href="mng-rad-ippool-new.php" tabindex=2><b>&raquo;</b><img
+                                        src='images/icons/userNew.gif' border='0'>
+                                    <?php echo t('button', 'NewIPPool') ?></a></li>
+                            <li><a href="javascript:document.mngradippooledit.submit();" tabindex=3><b>&raquo;</b><img
+                                        src='images/icons/userEdit.gif' border='0'>
+                                    <?php echo t('button', 'EditIPPool') ?></a>
+                                <form name="mngradippooledit" action="mng-rad-ippool-edit.php" method="get" class="">
                                     <input name="poolname" type="text"
                                         tooltipText='<?php echo t('Tooltip', 'PoolName'); ?> <br/>'
                                         value="<?php if (isset($poolname)) echo $poolname ?>" tabindex=4>
@@ -40,8 +42,9 @@
                                         value="<?php if (isset($ipaddressold)) echo $ipaddressold  ?>" tabindex=4>
                                 </form>
                             </li>
-                            <li><a href="mng-rad-ippool-del.php"
-                                    tabindex=5><b>&raquo;</b><?php echo t('button', 'RemoveIPPool') ?></a></li>
+                            <li><a href="mng-rad-ippool-del.php" tabindex=5><b>&raquo;</b><img
+                                        src='images/icons/userRemove.gif' border='0'>
+                                    <?php echo t('button', 'RemoveIPPool') ?></a></li>
 
                         </ul>
 

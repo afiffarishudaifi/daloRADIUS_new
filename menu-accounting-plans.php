@@ -44,11 +44,11 @@
                         <h2>Plan Accounting</h2>
 
                         <h3>Accounting</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column subnav">
 
                             <li><a
                                     href="javascript:document.acctdate.submit();"><b>&raquo;</b><?php echo t('button', 'PlanUsage') ?></a>
-                                <form name="acctdate" action="acct-plans-usage.php" method="get" class="sidebar">
+                                <form name="acctdate" action="acct-plans-usage.php" method="get" class="">
                                     <input name="username" type="text" id="usernamePlan"
                                         <?php if ($autoComplete) echo "autocomplete='off'"; ?>
                                         tooltipText='<?php echo t('Tooltip', 'Username'); ?>'
