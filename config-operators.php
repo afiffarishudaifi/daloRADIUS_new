@@ -37,29 +37,31 @@ include("menu-config-operators.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configoperators.php') ?>
-                <h144>&#x2754;</h144></a></h2>
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'configoperators') ?>
-            <br />
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configoperators.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'configoperators') ?>
+                <br />
+            </div>
+            <?php
+            include_once('include/management/actionMessages.php');
+            ?>
+
+            <?php
+            include('include/config/logging.php');
+            ?>
+
         </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
-
-        <?php
-		include('include/config/logging.php');
-		?>
-
     </div>
 </div>
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 </div>
 

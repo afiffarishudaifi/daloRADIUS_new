@@ -109,51 +109,54 @@ include("menu-mng-rad-hunt.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradhuntdel.php') ?>
-                :: <?php if (isset($nasipaddress)) {
-                                                echo $nasipaddress;
-                                        } ?><h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradhuntdel.php') ?>
+                    :: <?php if (isset($nasipaddress)) {
+                                                        echo $nasipaddress;
+                                                } ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngradhuntdel') ?>
-            <br />
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngradhuntdel') ?>
+                <br />
+            </div>
+            <?php
+                        include_once('include/management/actionMessages.php');
+                        ?>
+
+            <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+
+                    <fieldset>
+
+                        <h302> <?php echo t('title', 'HGInfo') ?> </h302>
+                        <br />
+
+                        <label for='nasipaddress' class='form'><?php echo t('all', 'HgIPHost') ?></label>
+                        <input name='nasipaddress' type='text' id='nasipaddress' value='' tabindex=100 />
+                        <br />
+
+                        <label for='nasportid' class='form'><?php echo t('all', 'HgPortId') ?></label>
+                        <input name='nasportid' type='text' id='nasportid' value='<?php echo $nasportid ?>'
+                            tabindex=101 />
+                        <br />
+
+                        <br /><br />
+                        <hr><br />
+
+                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
+
+                    </fieldset>
+
+                </form>
+            </div>
+
+            <?php
+                        include('include/config/logging.php');
+                        ?>
+
         </div>
-        <?php
-                include_once('include/management/actionMessages.php');
-                ?>
-
-        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-
-                <fieldset>
-
-                    <h302> <?php echo t('title', 'HGInfo') ?> </h302>
-                    <br />
-
-                    <label for='nasipaddress' class='form'><?php echo t('all', 'HgIPHost') ?></label>
-                    <input name='nasipaddress' type='text' id='nasipaddress' value='' tabindex=100 />
-                    <br />
-
-                    <label for='nasportid' class='form'><?php echo t('all', 'HgPortId') ?></label>
-                    <input name='nasportid' type='text' id='nasportid' value='<?php echo $nasportid ?>' tabindex=101 />
-                    <br />
-
-                    <br /><br />
-                    <hr><br />
-
-                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-
-                </fieldset>
-
-            </form>
-        </div>
-
-        <?php
-                include('include/config/logging.php');
-                ?>
-
     </div>
 </div>
 <div id="footer">

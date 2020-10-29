@@ -174,62 +174,64 @@ include("menu-mng-batch.php");
 <!-- <div id="contentnorightbar"> -->
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngbatchdel.php') ?>
-                :: <?php if (isset($username)) {
-						echo $username;
-					} ?><h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngbatchdel.php') ?>
+                    :: <?php if (isset($username)) {
+							echo $username;
+						} ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngbatchdel') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngbatchdel') ?>
+                <br />
+            </div>
+            <?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+            <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
 
-                <fieldset>
+                    <fieldset>
 
-                    <h302> <?php echo t('title', 'BatchRemoval') ?> </h302>
-                    <br />
+                        <h302> <?php echo t('title', 'BatchRemoval') ?> </h302>
+                        <br />
 
-                    <label for='batch_name' class='form'><?php echo t('all', 'BatchName') ?></label>
-                    <input name='batch_name' type='text' id='batch_name' value='' tabindex=100 />
+                        <label for='batch_name' class='form'><?php echo t('all', 'BatchName') ?></label>
+                        <input name='batch_name' type='text' id='batch_name' value='' tabindex=100 />
 
-                    <br /><br />
-                    <hr><br />
-                    <input type="submit" name="submit" value="<?php echo t('buttons', 'apply') ?>" tabindex=1000
-                        class='button' />
+                        <br /><br />
+                        <hr><br />
+                        <input type="submit" name="submit" value="<?php echo t('buttons', 'apply') ?>" tabindex=1000
+                            class='button' />
 
-                </fieldset>
+                    </fieldset>
 
-            </form>
-        </div>
+                </form>
+            </div>
 
 
-        <?php
-		include_once("include/management/autocomplete.php");
+            <?php
+			include_once("include/management/autocomplete.php");
 
-		if ($autoComplete) {
-			echo "<script type=\"text/javascript\">
+			if ($autoComplete) {
+				echo "<script type=\"text/javascript\">
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('batch_name','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteBatchNames');
                       </script>";
-		}
-		?>
+			}
+			?>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
 
+        </div>
     </div>
-</div>
 
+</div>
 <div id="footer">
 
     <?php

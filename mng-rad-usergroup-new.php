@@ -89,73 +89,77 @@ include("menu-mng-rad-usergroup.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradusergroupnew.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradusergroupnew.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngradusergroupnew') ?>
-            <br />
-        </div>
-        <?php
-        include_once('include/management/actionMessages.php');
-        ?>
-
-        <form name="newusergroup" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <fieldset>
-
-                <h302> <?php echo t('title', 'GroupInfo') ?> </h302>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngradusergroupnew') ?>
                 <br />
-
-                <ul>
-
-                    <li class='fieldset'>
-                        <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
-                        <input name='username' type='text' id='username' value='<?php echo $username ?>' tabindex=100 />
-                    </li>
-
-                    <li class='fieldset'>
-                        <label for='group' class='form'><?php echo t('all', 'Groupname') ?></label>
-                        <?php
-                        include 'include/management/populate_selectbox.php';
-                        populate_groups("Select Groups", "group", "long");
-                        ?>
-                        <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                            <img src='images/icons/comment.png' alt='Tip' border='0' />
-                            <?php echo t('Tooltip', 'groupTooltip') ?>
-                        </div>
-                    </li>
-
-
-                    <li class='fieldset'>
-                        <label for='priority' class='form'><?php echo t('all', 'Priority') ?></label>
-                        <input class='integer' name='priority' type='text' id='priority' value='0' tabindex=102 />
-                        <img src="images/icons/bullet_arrow_up.png" alt="+"
-                            onclick="javascript:changeInteger('priority','increment')" />
-                        <img src="images/icons/bullet_arrow_down.png" alt="-"
-                            onclick="javascript:changeInteger('priority','decrement')" />
-                    </li>
-
-                    <li class='fieldset'>
-                        <br />
-                        <hr><br />
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-                    </li>
-
-
-                </ul>
-            </fieldset>
-
-
-
-
+            </div>
             <?php
-            include('include/config/logging.php');
+            include_once('include/management/actionMessages.php');
             ?>
 
+            <form name="newusergroup" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                <fieldset>
+
+                    <h302> <?php echo t('title', 'GroupInfo') ?> </h302>
+                    <br />
+
+                    <ul>
+
+                        <li class='fieldset'>
+                            <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
+                            <input name='username' type='text' id='username' value='<?php echo $username ?>'
+                                tabindex=100 />
+                        </li>
+
+                        <li class='fieldset'>
+                            <label for='group' class='form'><?php echo t('all', 'Groupname') ?></label>
+                            <?php
+                            include 'include/management/populate_selectbox.php';
+                            populate_groups("Select Groups", "group", "long");
+                            ?>
+                            <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                <?php echo t('Tooltip', 'groupTooltip') ?>
+                            </div>
+                        </li>
+
+
+                        <li class='fieldset'>
+                            <label for='priority' class='form'><?php echo t('all', 'Priority') ?></label>
+                            <input class='integer' name='priority' type='text' id='priority' value='0' tabindex=102 />
+                            <img src="images/icons/bullet_arrow_up.png" alt="+"
+                                onclick="javascript:changeInteger('priority','increment')" />
+                            <img src="images/icons/bullet_arrow_down.png" alt="-"
+                                onclick="javascript:changeInteger('priority','decrement')" />
+                        </li>
+
+                        <li class='fieldset'>
+                            <br />
+                            <hr><br />
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                class='button' />
+                        </li>
+
+
+                    </ul>
+                </fieldset>
+
+
+
+
+                <?php
+                include('include/config/logging.php');
+                ?>
+
+        </div>
     </div>
 </div>
 <div id="footer">

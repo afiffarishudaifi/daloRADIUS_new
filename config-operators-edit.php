@@ -186,80 +186,84 @@ include("menu-config-operators.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configoperatorsedit.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configoperatorsedit.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'configoperatorsedit') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
-
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <input type="hidden" value="<?php echo $operator_username ?>" name="operator_username" />
-
-            <div class="tabber">
-
-                <div class="tabbertab" title="Operator Info">
-
-                    <fieldset>
-
-                        <h302> Operator Settings </h302>
-                        <br />
-
-                        <label for='operator_password' class='form'>Operator Password</label>
-                        <input name='password' id='password' <?php
-																if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes")
-																	echo "type='password'";
-																else
-																	echo "type='text'";
-																?> value='<?php if (isset($operator_password)) echo $operator_password ?>' tabindex=101 />
-                        <br />
-
-                        <br /><br />
-                        <hr><br />
-
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-
-                    </fieldset>
-
-
-                </div>
-                <div class="tabbertab" title="Contact Info">
-
-                    <?php
-					include_once('include/management/operatorinfo.php');
-					?>
-
-
-                </div>
-                <div class="tabbertab" title="ACL Settings">
-
-                    <fieldset>
-                        <?php
-						include_once('include/management/operator_acls.php');
-						drawOperatorACLs($curr_operator_id);
-						?>
-                        <br />
-
-                        <br /><br />
-                        <hr><br />
-
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-                    </fieldset>
-
-                </div>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'configoperatorsedit') ?>
+                <br />
             </div>
+            <?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        </form>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <input type="hidden" value="<?php echo $operator_username ?>" name="operator_username" />
 
-        <?php
-		include('include/config/logging.php');
-		?>
+                <div class="tabber">
+
+                    <div class="tabbertab" title="Operator Info">
+
+                        <fieldset>
+
+                            <h302> Operator Settings </h302>
+                            <br />
+
+                            <label for='operator_password' class='form'>Operator Password</label>
+                            <input name='password' id='password' <?php
+																	if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes")
+																		echo "type='password'";
+																	else
+																		echo "type='text'";
+																	?> value='<?php if (isset($operator_password)) echo $operator_password ?>' tabindex=101 />
+                            <br />
+
+                            <br /><br />
+                            <hr><br />
+
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                class='button' />
+
+                        </fieldset>
+
+
+                    </div>
+                    <div class="tabbertab" title="Contact Info">
+
+                        <?php
+						include_once('include/management/operatorinfo.php');
+						?>
+
+
+                    </div>
+                    <div class="tabbertab" title="ACL Settings">
+
+                        <fieldset>
+                            <?php
+							include_once('include/management/operator_acls.php');
+							drawOperatorACLs($curr_operator_id);
+							?>
+                            <br />
+
+                            <br /><br />
+                            <hr><br />
+
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                class='button' />
+                        </fieldset>
+
+                    </div>
+                </div>
+
+            </form>
+
+            <?php
+			include('include/config/logging.php');
+			?>
+        </div>
     </div>
 </div>
 <div id="footer">

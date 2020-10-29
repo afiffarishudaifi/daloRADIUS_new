@@ -23,7 +23,7 @@
             include_once("./_partials/navbar.php");
             ?>
 
-            <br>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -31,7 +31,7 @@
 
                         <h3>Status</h3>
 
-                        <ul>
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a
                                     href="rep-stat-server.php"><b>&raquo;</b><?php echo t('button', 'ServerStatus') ?></a>

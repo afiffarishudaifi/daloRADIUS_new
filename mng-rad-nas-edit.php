@@ -157,121 +157,130 @@ include("menu-mng-rad-nas.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradnasedit.php') ?>
-                :: <?php if (isset($nashost)) {
-                        echo $nashost;
-                    } ?><h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradnasedit.php') ?>
+                    :: <?php if (isset($nashost)) {
+                            echo $nashost;
+                        } ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngradnasedit') ?>
-            <br />
-        </div>
-        <?php
-        include_once('include/management/actionMessages.php');
-        ?>
-
-        <form name="newnas" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <div class="tabber">
-
-                <div class="tabbertab" title="<?php echo t('title', 'NASInfo'); ?>">
-                    <input type="hidden" value="<?php echo $nashost ?>" name="nashostold" />
-
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'NASInfo') ?> </h302>
-                        <br />
-
-                        <label for='nashost' class='form'><?php echo t('all', 'NasIPHost') ?></label>
-                        <input name='nashost' type='text' id='nashost' value='<?php echo $nashost ?>' tabindex=100 />
-                        <br />
-
-                        <label for='nassecret' class='form'><?php echo t('all', 'NasSecret') ?></label>
-                        <input name='nassecret' type='text' id='nassecret' value='<?php echo $nassecret ?>'
-                            tabindex=101 />
-                        <br />
-
-                        <label for='nastype' class='form'><?php echo t('all', 'NasType') ?></label>
-                        <input name='nastype' type='text' id='nastype' value='<?php echo $nastype ?>' tabindex=102 />
-                        <select onChange="javascript:setStringText(this.id,'nastype')" id="optionSele" tabindex=103
-                            class='form'>
-                            <option value="">Select Type...</option>
-                            <option value="other">other</option>
-                            <option value="cisco">cisco</option>
-                            <option value="livingston">livingston</option>
-                            <option value="computon">computon</option>
-                            <option value="max40xx">max40xx</option>
-                            <option value="multitech">multitech</option>
-                            <option value="natserver">natserver</option>
-                            <option value="pathras">pathras</option>
-                            <option value="patton">patton</option>
-                            <option value="portslave">portslave</option>
-                            <option value="tc">tc</option>
-                            <option value="usrhiper">usrhiper</option>
-                        </select>
-                        <br />
-
-
-                        <label for='nasname' class='form'><?php echo t('all', 'NasShortname') ?></label>
-                        <input name='nasname' type='text' id='nasname' value='<?php echo $nasname ?>' tabindex=104 />
-                        <br />
-
-
-
-                        <br /><br />
-                        <hr><br />
-
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-
-                    </fieldset>
-
-                    <br />
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'NASAdvanced') ?> </h302>
-                        <br />
-
-                        <label for='nasports' class='form'><?php echo t('all', 'NasPorts') ?></label>
-                        <input name='nasports' type='text' id='nasports' value='<?php echo $nasports ?>' tabindex=105 />
-                        <br />
-
-                        <label for='nascommunity' class='form'><?php echo t('all', 'NasCommunity') ?></label>
-                        <input name='nascommunity' type='text' id='nascommunity' value='<?php echo $nascommunity ?>'
-                            tabindex=106 />
-                        <br />
-
-                        <label for='nasvirtualserver' class='form'><?php echo t('all', 'NasVirtualServer') ?></label>
-                        <input name='nasvirtualserver' type='text' id='nasvirtualserver'
-                            value='<?php echo $nasvirtualserver ?>' tabindex=107>
-                        <br />
-
-                        <label for='nasdescription' class='form'><?php echo t('all', 'NasDescription') ?></label>
-                        <textarea class='form' name='nasdescription' id='nasdescription'
-                            tabindex=108><?php echo $nasdescription ?></textarea>
-                        <br />
-
-                        <br /><br />
-                        <hr><br />
-
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-
-                    </fieldset>
-
-                </div>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngradnasedit') ?>
+                <br />
             </div>
+            <?php
+            include_once('include/management/actionMessages.php');
+            ?>
 
-        </form>
+            <form name="newnas" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                <div class="tabber">
+
+                    <div class="tabbertab" title="<?php echo t('title', 'NASInfo'); ?>">
+                        <input type="hidden" value="<?php echo $nashost ?>" name="nashostold" />
+
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'NASInfo') ?> </h302>
+                            <br />
+
+                            <label for='nashost' class='form'><?php echo t('all', 'NasIPHost') ?></label>
+                            <input name='nashost' type='text' id='nashost' value='<?php echo $nashost ?>'
+                                tabindex=100 />
+                            <br />
+
+                            <label for='nassecret' class='form'><?php echo t('all', 'NasSecret') ?></label>
+                            <input name='nassecret' type='text' id='nassecret' value='<?php echo $nassecret ?>'
+                                tabindex=101 />
+                            <br />
+
+                            <label for='nastype' class='form'><?php echo t('all', 'NasType') ?></label>
+                            <input name='nastype' type='text' id='nastype' value='<?php echo $nastype ?>'
+                                tabindex=102 />
+                            <select onChange="javascript:setStringText(this.id,'nastype')" id="optionSele" tabindex=103
+                                class='form'>
+                                <option value="">Select Type...</option>
+                                <option value="other">other</option>
+                                <option value="cisco">cisco</option>
+                                <option value="livingston">livingston</option>
+                                <option value="computon">computon</option>
+                                <option value="max40xx">max40xx</option>
+                                <option value="multitech">multitech</option>
+                                <option value="natserver">natserver</option>
+                                <option value="pathras">pathras</option>
+                                <option value="patton">patton</option>
+                                <option value="portslave">portslave</option>
+                                <option value="tc">tc</option>
+                                <option value="usrhiper">usrhiper</option>
+                            </select>
+                            <br />
+
+
+                            <label for='nasname' class='form'><?php echo t('all', 'NasShortname') ?></label>
+                            <input name='nasname' type='text' id='nasname' value='<?php echo $nasname ?>'
+                                tabindex=104 />
+                            <br />
 
 
 
-        <?php
-        include('include/config/logging.php');
-        ?>
+                            <br /><br />
+                            <hr><br />
 
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                class='button' />
+
+                        </fieldset>
+
+                        <br />
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'NASAdvanced') ?> </h302>
+                            <br />
+
+                            <label for='nasports' class='form'><?php echo t('all', 'NasPorts') ?></label>
+                            <input name='nasports' type='text' id='nasports' value='<?php echo $nasports ?>'
+                                tabindex=105 />
+                            <br />
+
+                            <label for='nascommunity' class='form'><?php echo t('all', 'NasCommunity') ?></label>
+                            <input name='nascommunity' type='text' id='nascommunity' value='<?php echo $nascommunity ?>'
+                                tabindex=106 />
+                            <br />
+
+                            <label for='nasvirtualserver'
+                                class='form'><?php echo t('all', 'NasVirtualServer') ?></label>
+                            <input name='nasvirtualserver' type='text' id='nasvirtualserver'
+                                value='<?php echo $nasvirtualserver ?>' tabindex=107>
+                            <br />
+
+                            <label for='nasdescription' class='form'><?php echo t('all', 'NasDescription') ?></label>
+                            <textarea class='form' name='nasdescription' id='nasdescription'
+                                tabindex=108><?php echo $nasdescription ?></textarea>
+                            <br />
+
+                            <br /><br />
+                            <hr><br />
+
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                class='button' />
+
+                        </fieldset>
+
+                    </div>
+                </div>
+
+            </form>
+
+
+
+            <?php
+            include('include/config/logging.php');
+            ?>
+
+        </div>
     </div>
 </div>
 <div id="footer">

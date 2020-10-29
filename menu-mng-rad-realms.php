@@ -9,7 +9,7 @@
             $m_active = "Management";
             include_once("./_partials/navbar.php");
             ?>
-            <br>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -18,7 +18,7 @@
                         <h2>Management</h2>
 
                         <h3>Realms Management</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="mng-rad-realms-list.php"><b>&raquo;</b>List Realms</a></li>
                             <li><a href="mng-rad-realms-new.php"><b>&raquo;</b>New Realm</a></li>
@@ -35,7 +35,7 @@
 
 
                         <h3>Proxys Management</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="mng-rad-proxys-list.php"><b>&raquo;</b>List Proxys</a></li>
                             <li><a href="mng-rad-proxys-new.php"><b>&raquo;</b>New Proxy</a></li>

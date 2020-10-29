@@ -48,47 +48,48 @@ include("menu-config-operators.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configoperatorslist.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configoperatorslist.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'configoperatorslist') ?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'configoperatorslist') ?>
+                <br />
+            </div>
             <br />
-        </div>
-        <br />
 
-        <?php
+            <?php
 
-		include 'library/opendb.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+			include 'library/opendb.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-		$sql = "SELECT id, username, firstname, lastname, title FROM " . $configValues['CONFIG_DB_TBL_DALOOPERATORS'];
-		$res = $dbSocket->query($sql);
-		$logDebugSQL .= $sql . "\n";
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+			$sql = "SELECT id, username, firstname, lastname, title FROM " . $configValues['CONFIG_DB_TBL_DALOOPERATORS'];
+			$res = $dbSocket->query($sql);
+			$logDebugSQL .= $sql . "\n";
 
-		$numrows = $res->numRows();
+			$numrows = $res->numRows();
 
 
-		/* we are searching for both kind of attributes for the password, being User-Password, the more
+			/* we are searching for both kind of attributes for the password, being User-Password, the more
 	   common one and the other which is Password, this is also done for considerations of backwards
 	   compatibility with version 0.7        */
 
-		$sql = "SELECT id, username, password, firstname, lastname, title FROM " . $configValues['CONFIG_DB_TBL_DALOOPERATORS'] .
-			" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL .= $sql . "\n";
+			$sql = "SELECT id, username, password, firstname, lastname, title FROM " . $configValues['CONFIG_DB_TBL_DALOOPERATORS'] .
+				" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL .= $sql . "\n";
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
-		echo "<form name='listoperators' method='post' action='config-operators-del.php' >";
+			echo "<form name='listoperators' method='post' action='config-operators-del.php' >";
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			echo "<table border='0' class='table1'>\n";
+			echo "
 					<thead>
                                                         <tr>
                                                         <th colspan='12' align='left'>
@@ -102,15 +103,15 @@ include("menu-config-operators.php");
                 ";
 
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-		echo " </th></tr>
+			echo " </th></tr>
                                         </thead>
 
                         ";
 
-		echo "<thread> <tr>
+			echo "<thread> <tr>
 		<th scope='col'>
 		<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=id&orderType=asc\">
 			<img src='images/icons/arrow_up.png' alt='>' border='0' /></a>
@@ -149,51 +150,52 @@ include("menu-config-operators.php");
 
 	</tr> </thread>";
 
-		while ($row = $res->fetchRow()) {
+			while ($row = $res->fetchRow()) {
 
-			if (($row[4] == "") && ($row[3] == ""))
-				$fullname = "";
-			else
-				$fullname = "$row[4], $row[3]";
+				if (($row[4] == "") && ($row[3] == ""))
+					$fullname = "";
+				else
+					$fullname = "$row[4], $row[3]";
 
-			echo "<tr>
+				echo "<tr>
 			<td> <input type='checkbox' name='operator_username[]' value='$row[1]'>$row[0]</td>
 			<td> <a class='tablenovisit' href='config-operators-edit.php?operator_username=$row[1]' title='" .
-				t('Tooltip', 'UserEdit') . "'>$row[1]</a> </td>
+					t('Tooltip', 'UserEdit') . "'>$row[1]</a> </td>
 			";
-			if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
-				echo "<td>[Password is hidden]</td>";
-			} else {
-				echo "<td>$row[2]</td>";
-			}
-			echo "
+				if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
+					echo "<td>[Password is hidden]</td>";
+				} else {
+					echo "<td>$row[2]</td>";
+				}
+				echo "
 			<td>$fullname</td>
 			<td>$row[5]</td>
 
 		</tr>";
-		}
+			}
 
-		echo "
+			echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='12' align='left'>
         ";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType);
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType);
+			echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-		echo "</table>";
-		include 'library/closedb.php';
+			echo "</table>";
+			include 'library/closedb.php';
 
-		?>
+			?>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
+        </div>
     </div>
 </div>
 <div id="footer">

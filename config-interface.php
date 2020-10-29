@@ -33,16 +33,16 @@ include("library/config_read.php");
 
 if (isset($_REQUEST['submit'])) {
 
-	if (isset($_REQUEST['config_iface_pass_hidden']))
-		$configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] = $_REQUEST['config_iface_pass_hidden'];
-	if (isset($_REQUEST['config_iface_tableslisting']))
-		$configValues['CONFIG_IFACE_TABLES_LISTING'] = $_REQUEST['config_iface_tableslisting'];
-	if (isset($_REQUEST['config_iface_tableslisting_num']))
-		$configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] = $_REQUEST['config_iface_tableslisting_num'];
-	if (isset($_REQUEST['config_iface_auto_complete']))
-		$configValues['CONFIG_IFACE_AUTO_COMPLETE'] = $_REQUEST['config_iface_auto_complete'];
+    if (isset($_REQUEST['config_iface_pass_hidden']))
+        $configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] = $_REQUEST['config_iface_pass_hidden'];
+    if (isset($_REQUEST['config_iface_tableslisting']))
+        $configValues['CONFIG_IFACE_TABLES_LISTING'] = $_REQUEST['config_iface_tableslisting'];
+    if (isset($_REQUEST['config_iface_tableslisting_num']))
+        $configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] = $_REQUEST['config_iface_tableslisting_num'];
+    if (isset($_REQUEST['config_iface_auto_complete']))
+        $configValues['CONFIG_IFACE_AUTO_COMPLETE'] = $_REQUEST['config_iface_auto_complete'];
 
-	include("library/config_write.php");
+    include("library/config_write.php");
 }
 
 
@@ -58,95 +58,98 @@ include("menu-config.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configinterface.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configinterface.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'configinterface') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
-
-        <form name="interfacesettings" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <fieldset>
-
-                <h302> <?php echo t('title', 'Settings'); ?> </h302>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'configinterface') ?>
                 <br />
+            </div>
+            <?php
+            include_once('include/management/actionMessages.php');
+            ?>
 
-                <ul>
+            <form name="interfacesettings" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-                    <li class='fieldset'>
-                        <label for='config_iface_pass_hidden'
-                            class='form'><?php echo t('all', 'PasswordHidden') ?></label>
-                        <select name="config_iface_pass_hidden" class='form'>
-                            <option value="<?php echo $configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] ?>">
-                                <?php echo $configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] ?> </option>
-                            <option value=""> </option>
-                            <option value="no"> no </option>
-                            <option value="yes"> yes </option>
-                        </select>
-                    </li>
+                <fieldset>
 
-                    <li class='fieldset'>
-                        <label for='config_iface_tablelisting'
-                            class='form'><?php echo t('all', 'TablesListing') ?></label>
-                        <input value="<?php echo $configValues['CONFIG_IFACE_TABLES_LISTING'] ?>"
-                            name="config_iface_tableslisting" />
-                    </li>
+                    <h302> <?php echo t('title', 'Settings'); ?> </h302>
+                    <br />
 
-                    <li class='fieldset'>
-                        <label for='config_iface_tableslisting_num'
-                            class='form'><?php echo t('all', 'TablesListingNum') ?></label>
-                        <select class='form' name="config_iface_tableslisting_num">
-                            <option value="<?php echo $configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] ?>">
-                                <?php echo $configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] ?> </option>
-                            <option value=""> </option>
-                            <option value="no"> no </option>
-                            <option value="yes"> yes </option>
-                        </select>
-                    </li>
+                    <ul>
 
-                    <li class='fieldset'>
-                        <label for='config_iface_auto_complete'
-                            class='form'><?php echo t('all', 'AjaxAutoComplete') ?></label>
-                        <select class='form' name="config_iface_auto_complete">
-                            <option value="<?php echo $configValues['CONFIG_IFACE_AUTO_COMPLETE'] ?>">
-                                <?php echo $configValues['CONFIG_IFACE_AUTO_COMPLETE'] ?> </option>
-                            <option value=""> </option>
-                            <option value="no"> no </option>
-                            <option value="yes"> yes </option>
-                        </select>
-                    </li>
+                        <li class='fieldset'>
+                            <label for='config_iface_pass_hidden'
+                                class='form'><?php echo t('all', 'PasswordHidden') ?></label>
+                            <select name="config_iface_pass_hidden" class='form'>
+                                <option value="<?php echo $configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] ?>">
+                                    <?php echo $configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] ?> </option>
+                                <option value=""> </option>
+                                <option value="no"> no </option>
+                                <option value="yes"> yes </option>
+                            </select>
+                        </li>
 
-                    <li class='fieldset'>
-                        <br />
-                        <hr><br />
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-                    </li>
+                        <li class='fieldset'>
+                            <label for='config_iface_tablelisting'
+                                class='form'><?php echo t('all', 'TablesListing') ?></label>
+                            <input value="<?php echo $configValues['CONFIG_IFACE_TABLES_LISTING'] ?>"
+                                name="config_iface_tableslisting" />
+                        </li>
 
-                </ul>
+                        <li class='fieldset'>
+                            <label for='config_iface_tableslisting_num'
+                                class='form'><?php echo t('all', 'TablesListingNum') ?></label>
+                            <select class='form' name="config_iface_tableslisting_num">
+                                <option value="<?php echo $configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] ?>">
+                                    <?php echo $configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] ?> </option>
+                                <option value=""> </option>
+                                <option value="no"> no </option>
+                                <option value="yes"> yes </option>
+                            </select>
+                        </li>
 
-            </fieldset>
+                        <li class='fieldset'>
+                            <label for='config_iface_auto_complete'
+                                class='form'><?php echo t('all', 'AjaxAutoComplete') ?></label>
+                            <select class='form' name="config_iface_auto_complete">
+                                <option value="<?php echo $configValues['CONFIG_IFACE_AUTO_COMPLETE'] ?>">
+                                    <?php echo $configValues['CONFIG_IFACE_AUTO_COMPLETE'] ?> </option>
+                                <option value=""> </option>
+                                <option value="no"> no </option>
+                                <option value="yes"> yes </option>
+                            </select>
+                        </li>
+
+                        <li class='fieldset'>
+                            <br />
+                            <hr><br />
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                class='button' />
+                        </li>
+
+                    </ul>
+
+                </fieldset>
 
 
-        </form>
+            </form>
 
 
-        <br /><br />
+            <br /><br />
 
 
+        </div>
     </div>
 </div>
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 </div>
 

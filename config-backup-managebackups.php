@@ -159,98 +159,100 @@ include("menu-config-backup.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configbackupmanagebackups.php') ?>
-                <h144>&#x2754;</h144></a></h2>
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'configbackupmanagebackups') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configbackupmanagebackups.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'configbackupmanagebackups') ?>
+                <br />
+            </div>
+            <?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        <form name="managebackups" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-
-
+            <form name="managebackups" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
 
-            <table border='0' class='table1'>
 
-                <thead>
+
+
+                <table border='0' class='table1'>
+
+                    <thead>
+                        <tr>
+                            <th colspan='10' align='left'>
+                            </th>
+                        </tr>
+                    </thead>
+
                     <tr>
-                        <th colspan='10' align='left'>
-                        </th>
+                        <td> Time of Creation </td>
+                        <td> Filename </td>
+                        <td> File size </td>
+                        <td> Perform Action </td>
                     </tr>
-                </thead>
 
-                <tr>
-                    <td> Time of Creation </td>
-                    <td> Filename </td>
-                    <td> File size </td>
-                    <td> Perform Action </td>
-                </tr>
+                    <?php
 
-                <?php
+					include_once('library/config_read.php');
 
-				include_once('library/config_read.php');
+					$filePath = $configValues['CONFIG_PATH_DALO_VARIABLE_DATA'] . "/backup";
 
-				$filePath = $configValues['CONFIG_PATH_DALO_VARIABLE_DATA'] . "/backup";
+					if (is_dir($filePath)) {
+						$dirHandler = opendir($filePath);
+						while ($file = readdir($dirHandler)) {
+							if (($file != '.') && ($file != '..') && ($file != '.svn')) {
 
-				if (is_dir($filePath)) {
-					$dirHandler = opendir($filePath);
-					while ($file = readdir($dirHandler)) {
-						if (($file != '.') && ($file != '..') && ($file != '.svn')) {
+								list($junk, $date, $time) = explode("-", $file);
 
-							list($junk, $date, $time) = explode("-", $file);
+								$fileDate = substr($date, 0, 4) . "-" . substr($date, 4, 2) . "-" . substr($date, 6, 2);
+								$fileTime = substr($time, 0, 2) . ":" . substr($time, 2, 2) . ":" . substr($time, 4, 2);
 
-							$fileDate = substr($date, 0, 4) . "-" . substr($date, 4, 2) . "-" . substr($date, 6, 2);
-							$fileTime = substr($time, 0, 2) . ":" . substr($time, 2, 2) . ":" . substr($time, 4, 2);
+								$fileSize = filesize($filePath . "/" . $file);
 
-							$fileSize = filesize($filePath . "/" . $file);
+								echo "<tr>";
+								echo "<td>";
+								echo $fileDate . " " . $fileTime;
+								echo "</td>";
 
-							echo "<tr>";
-							echo "<td>";
-							echo $fileDate . " " . $fileTime;
-							echo "</td>";
+								echo "<td>";
+								echo $file;
+								echo "</td>";
 
-							echo "<td>";
-							echo $file;
-							echo "</td>";
+								echo "<td>";
+								echo $fileSize . " bytes";
+								echo "</td>";
 
-							echo "<td>";
-							echo $fileSize . " bytes";
-							echo "</td>";
+								echo "<td>";
+								echo "<a class='tablenovisit' href='?file=$file&action=download' >" . t('all', 'Download') . "</a>";
 
-							echo "<td>";
-							echo "<a class='tablenovisit' href='?file=$file&action=download' >" . t('all', 'Download') . "</a>";
+								echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
-							echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-
-							echo "<a class='tablenovisit' href='#' onClick=\"javascript:backupRollback('$file');\">" . t('all', 'Rollback') . "</a>";
-							echo "</td>";
+								echo "<a class='tablenovisit' href='#' onClick=\"javascript:backupRollback('$file');\">" . t('all', 'Rollback') . "</a>";
+								echo "</td>";
+							}
 						}
 					}
-				}
 
 
 
-				?>
+					?>
 
 
-            </table>
+                </table>
 
 
 
-        </form>
+            </form>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
 
+        </div>
     </div>
 </div>
 <div id="footer">

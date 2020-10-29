@@ -19,17 +19,17 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-        include_once("lang/main.php");
-        ?>
+    include_once("lang/main.php");
+    ?>
     <div id="wrapper">
         <div id="innerwrapper">
 
             <?php
-                        $m_active = "Billing";
-                        include_once("./_partials/navbar.php");
-                        include_once("./_partials/js.php");
-                        ?>
-            <br>
+            $m_active = "Billing";
+            include_once("./_partials/navbar.php");
+            include_once("./_partials/js.php");
+            ?>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -37,7 +37,7 @@
                         <h2>Billing</h2>
 
                         <h3>Track PayPal Transactions</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <form name="billpaypaltransactions" action="bill-merchant-transactions.php" method="get"
                                 class="sidebar">
@@ -50,16 +50,15 @@
 
                                 <input name="startdate" type="text" id="startdate"
                                     value="<?php if (isset($billing_date_startdate)) echo $billing_date_startdate;
-                                                                                                                                else echo date("Y-m-01"); ?>">
+                                                                                            else echo date("Y-m-01"); ?>">
 
                                 <img src="library/js_date/calendar.gif"
                                     onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
                                 <div id="chooserSpan" class="dateChooser select-free"
                                     style="display: none; visibility: hidden;       width: 160px;"></div>
 
-                                <input name="enddate" type="text" id="enddate"
-                                    value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
-                                                                                                                        else echo date("Y-m-t"); ?>">
+                                <input name="enddate" type="text" id="enddate" value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
+                                                                                        else echo date("Y-m-t"); ?>">
 
                                 <img src="library/js_date/calendar.gif"
                                     onclick="showChooser(this, 'enddate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
@@ -70,9 +69,9 @@
                                 <h109><?php echo t('all', 'VendorType'); ?></h109> <br />
                                 <select name="vendor_type" size="1">
                                     <option value="<?php if (isset($billing_paypal_vendor_type)) echo $billing_paypal_vendor_type;
-                                                                                        else echo "%"; ?>">
+                                                    else echo "%"; ?>">
                                         <?php if (isset($billing_paypal_vendor_type)) echo $billing_paypal_vendor_type;
-                                                                                else echo "Any"; ?>
+                                        else echo "Any"; ?>
                                     </option>
                                     <option value=""></option>
                                     <option value="%">Any</option>
@@ -82,17 +81,16 @@
                                 <br /><br />
 
                                 <h109><?php echo t('all', 'PayerEmail'); ?></h109> <br />
-                                <input name="payer_email" type="text"
-                                    value="<?php if (isset($billing_paypal_payeremail)) echo $billing_paypal_payeremail;
-                                                                                                                else echo "*"; ?>">
+                                <input name="payer_email" type="text" value="<?php if (isset($billing_paypal_payeremail)) echo $billing_paypal_payeremail;
+                                                                                else echo "*"; ?>">
                                 <br />
 
                                 <h109><?php echo t('all', 'PaymentStatus'); ?></h109> <br />
                                 <select name="payment_status" size="1">
                                     <option value="<?php if (isset($billing_paypal_paymentstatus)) echo $billing_paypal_paymentstatus;
-                                                                                        else echo "%"; ?>">
+                                                    else echo "%"; ?>">
                                         <?php if (isset($billing_paypal_paymentstatus)) echo $billing_paypal_paymentstatus;
-                                                                                else echo "Any"; ?>
+                                        else echo "Any"; ?>
                                     </option>
                                     <option value=""></option>
                                     <option value="Completed">Completed</option>

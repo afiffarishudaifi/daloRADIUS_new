@@ -58,83 +58,84 @@ include("menu-accounting-custom.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctcustomquery.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctcustomquery.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'acctcustomquery') ?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'acctcustomquery') ?>
+                <br />
+            </div>
             <br />
-        </div>
-        <br />
 
 
 
-        <?php
+            <?php
 
-		include 'library/opendb.php';
-		include 'include/management/pages_common.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
-
-
-		if ($op == "LIKE") {						// if the op is LIKE then the SQL syntax uses % for pattern matching
-			$value = "%$value%";					// and we sorround the $value with % as a wildcard
-		}
-
-		// let's sanitize the values passed to us:
-		$where = $dbSocket->escapeSimple($where);
-		$operator = $dbSocket->escapeSimple($operator);
-		$value = $dbSocket->escapeSimple($value);
-		$startdate = $dbSocket->escapeSimple($startdate);
-		$enddate = $dbSocket->escapeSimple($enddate);
-
-		// since we need to span through pages, which we do using GET queries I can't rely on this page
-		// to be processed through POST but rather using GET only (with the current design anyway).
-		// For this reason, I need to build the GET query which I will later use in the page number's links
-
-		$getFields = "";
-		$counter = 0;
-		foreach ($sqlfields as $elements) {
-			$getFields .= "&sqlfields[$counter]=$elements";
-			$counter++;
-		}
-
-		// we should also sanitize the array that we will be passing to this page in the next query
-		$getFields = $dbSocket->escapeSimple($getFields);
+			include 'library/opendb.php';
+			include 'include/management/pages_common.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
 
-		$getQuery = "";
-		$getQuery .= "&fields=$where&operator=$op&where_field=$value";
-		$getQuery .= "&startdate=$startdate&enddate=$enddate";
+			if ($op == "LIKE") {						// if the op is LIKE then the SQL syntax uses % for pattern matching
+				$value = "%$value%";					// and we sorround the $value with % as a wildcard
+			}
+
+			// let's sanitize the values passed to us:
+			$where = $dbSocket->escapeSimple($where);
+			$operator = $dbSocket->escapeSimple($operator);
+			$value = $dbSocket->escapeSimple($value);
+			$startdate = $dbSocket->escapeSimple($startdate);
+			$enddate = $dbSocket->escapeSimple($enddate);
+
+			// since we need to span through pages, which we do using GET queries I can't rely on this page
+			// to be processed through POST but rather using GET only (with the current design anyway).
+			// For this reason, I need to build the GET query which I will later use in the page number's links
+
+			$getFields = "";
+			$counter = 0;
+			foreach ($sqlfields as $elements) {
+				$getFields .= "&sqlfields[$counter]=$elements";
+				$counter++;
+			}
+
+			// we should also sanitize the array that we will be passing to this page in the next query
+			$getFields = $dbSocket->escapeSimple($getFields);
+
+
+			$getQuery = "";
+			$getQuery .= "&fields=$where&operator=$op&where_field=$value";
+			$getQuery .= "&startdate=$startdate&enddate=$enddate";
 
 
 
-		$select = implode(",", $sqlfields);
-		// sanitizing the array passed to us in the get request
-		$select = $dbSocket->escapeSimple($select);
+			$select = implode(",", $sqlfields);
+			// sanitizing the array passed to us in the get request
+			$select = $dbSocket->escapeSimple($select);
 
 
-		$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE ($where $op '$value') AND (AcctStartTime>'$startdate'
+			$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE ($where $op '$value') AND (AcctStartTime>'$startdate'
 			 AND AcctStartTime<'$enddate');";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
 
-		$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE ($where $op '$value') AND (AcctStartTime>'$startdate'
+			$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE ($where $op '$value') AND (AcctStartTime>'$startdate'
 			AND AcctStartTime<'$enddate') ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
 
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			echo "<table border='0' class='table1'>\n";
+			echo "
 					<thead>
 							<tr>
 							<th colspan='25'>" . t('all', 'Records') . "</th>
@@ -145,56 +146,57 @@ include("menu-accounting-custom.php");
                 <br/>
         ";
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, $getFields, $getQuery);
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, $getFields, $getQuery);
 
-		echo " </th></tr>
+			echo " </th></tr>
                                         </thead>
 
                         ";
 
 
-		// building the dybamic table list fields
-		echo "<thread> <tr>";
-		foreach ($sqlfields as $value) {
-			echo "<th scope='col'> $value   </th>";
-		} //foreach $sqlfields
-		echo "</tr> </thread>";
-
-
-		// inserting the values of each field from the database to the table
-		while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			echo "<tr>";
+			// building the dybamic table list fields
+			echo "<thread> <tr>";
 			foreach ($sqlfields as $value) {
-				echo "<td> " . $row[$value] . "</td>";
-			}
-			echo "</tr>";
-		}
+				echo "<th scope='col'> $value   </th>";
+			} //foreach $sqlfields
+			echo "</tr> </thread>";
 
-		echo "
+
+			// inserting the values of each field from the database to the table
+			while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+				echo "<tr>";
+				foreach ($sqlfields as $value) {
+					echo "<td> " . $row[$value] . "</td>";
+				}
+				echo "</tr>";
+			}
+
+			echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='25' align='left'>
         ";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType, $getFields, $getQuery);
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType, $getFields, $getQuery);
+			echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-		echo "</table>";
+			echo "</table>";
 
-		include 'library/closedb.php';
+			include 'library/closedb.php';
 
-		?>
+			?>
 
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
 
+        </div>
     </div>
 </div>
 <div id="footer">

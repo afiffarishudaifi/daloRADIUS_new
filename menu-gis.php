@@ -6,8 +6,8 @@
     <title>daloRADIUS</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <?php
-	include "library/googlemaps.php";
-	?>
+    include "library/googlemaps.php";
+    ?>
 </head>
 
 <link rel="stylesheet" href="css/1.css" type="text/css" media="screen,projection" />
@@ -17,18 +17,18 @@
     class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
 
     <?php
-	include_once("lang/main.php");
-	?>
+    include_once("lang/main.php");
+    ?>
 
     <div id="wrapper">
         <div id="innerwrapper">
 
             <?php
-			$m_active = "Gis";
-			include_once("./_partials/navbar.php");
-			include_once("./_partials/js.php");
-			?>
-            <br>
+            $m_active = "Gis";
+            include_once("./_partials/navbar.php");
+            include_once("./_partials/js.php");
+            ?>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -36,13 +36,13 @@
                         <h2>GIS</h2>
 
                         <h3>GIS Mapping</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
                             <li><a href="gis-viewmap.php"><b>&raquo;</b><?php echo t('button', 'ViewMAP') ?></a></li>
                             <li><a href="gis-editmap.php"><b>&raquo;</b><?php echo t('button', 'EditMAP') ?></a></li>
                         </ul>
 
                         <h3>Settings</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a
                                     href="javascript:document.gisregister.submit();" /><b>&raquo;</b><?php echo t('button', 'RegisterGoogleMapsAPI') ?>

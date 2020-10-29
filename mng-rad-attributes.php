@@ -36,6 +36,7 @@ include("menu-mng-rad-attributes.php");
 ?>
 <div class="col-lg-9">
     <div class="card">
+<div class="card-body">
 
         <h2 id="Intro"><a href="#"
                 onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradattributes.php') ?>

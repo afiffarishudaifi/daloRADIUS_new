@@ -18,18 +18,20 @@ include('./_partials/js.php');
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"></a></h2>
-        <p>
+            <h2 id="Intro"><a href="#"></a></h2>
+            <p>
 
-            <?php
-            include 'library/exten-welcome_page.php';
-            ?>
-        </p>
+                <?php
+                include 'library/exten-welcome_page.php';
+                ?>
+            </p>
+        </div>
+
     </div>
 
 </div>
-
 <div id="footer">
 
     <?php

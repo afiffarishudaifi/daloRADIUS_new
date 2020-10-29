@@ -30,50 +30,52 @@ include_once("library/tabber/tab-layout.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'graphsalltimetrafficcompare.php'); ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'graphsalltimetrafficcompare.php'); ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'graphsalltimetrafficcompare') ?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'graphsalltimetrafficcompare') ?>
+                <br />
+            </div>
             <br />
-        </div>
-        <br />
 
-        <div class="tabber">
+            <div class="tabber">
 
-            <div class="tabbertab" title="Download Graph">
-                <br />
-                <?php
-				echo "<center>";
-				echo "<img src=\"library/graphs-alltime-traffic-download.php?type=$type&size=$size\" />";
-				echo "</center>";
-				?>
+                <div class="tabbertab" title="Download Graph">
+                    <br />
+                    <?php
+                    echo "<center>";
+                    echo "<img src=\"library/graphs-alltime-traffic-download.php?type=$type&size=$size\" />";
+                    echo "</center>";
+                    ?>
+                </div>
+                <div class="tabbertab" title="Upload Graph">
+                    <br />
+
+                    <?php
+                    echo "<center>";
+                    echo "<img src=\"library/graphs-alltime-traffic-upload.php?type=$type&size=$size\" />";
+                    echo "</center>";
+                    ?>
+                </div>
             </div>
-            <div class="tabbertab" title="Upload Graph">
-                <br />
 
-                <?php
-				echo "<center>";
-				echo "<img src=\"library/graphs-alltime-traffic-upload.php?type=$type&size=$size\" />";
-				echo "</center>";
-				?>
-            </div>
+
+            <?php
+            include('include/config/logging.php');
+            ?>
+
         </div>
-
-
-        <?php
-		include('include/config/logging.php');
-		?>
-
     </div>
 </div>
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 
 </div>

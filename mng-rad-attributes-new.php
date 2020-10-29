@@ -87,139 +87,142 @@ include("menu-mng-rad-attributes.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradattributesnew.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradattributesnew.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngradattributesnew') ?>
-            <br />
-        </div>
-        <?php
-        include_once('include/management/actionMessages.php');
-        ?>
-
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <fieldset>
-
-                <h302> <?php echo t('title', 'VendorAttribute'); ?> </h302>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngradattributesnew') ?>
                 <br />
+            </div>
+            <?php
+            include_once('include/management/actionMessages.php');
+            ?>
 
-                <ul>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-                    <li class='fieldset'>
-                        <label for='vendor' class='form'><?php echo t('all', 'VendorName') ?></label>
-                        <input name='vendor' type='text' id='vendor' value='' tabindex=100 />
-                        <img src='images/icons/comment.png' alt='Tip' border='0'
-                            onClick="javascript:toggleShowDiv('vendorNameTooltip')" />
+                <fieldset>
 
-                        <div id='vendorNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                            <img src='images/icons/comment.png' alt='Tip' border='0' />
-                            <?php echo t('Tooltip', 'vendorNameTooltip') ?>
-                        </div>
-                    </li>
+                    <h302> <?php echo t('title', 'VendorAttribute'); ?> </h302>
+                    <br />
 
-                    <li class='fieldset'>
-                        <label for='attribute' class='form'><?php echo t('all', 'Attribute') ?></label>
-                        <input name='attribute' type='text' id='attribute' value='' tabindex=101 />
-                        <img src='images/icons/comment.png' alt='Tip' border='0'
-                            onClick="javascript:toggleShowDiv('attributeTooltip')" />
+                    <ul>
 
-                        <div id='attributeTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                            <img src='images/icons/comment.png' alt='Tip' border='0' />
-                            <?php echo t('Tooltip', 'attributeTooltip') ?>
-                        </div>
-                    </li>
+                        <li class='fieldset'>
+                            <label for='vendor' class='form'><?php echo t('all', 'VendorName') ?></label>
+                            <input name='vendor' type='text' id='vendor' value='' tabindex=100 />
+                            <img src='images/icons/comment.png' alt='Tip' border='0'
+                                onClick="javascript:toggleShowDiv('vendorNameTooltip')" />
 
-                    <li class='fieldset'>
-                        <label for='type' class='form'><?php echo t('all', 'Type') ?></label>
-                        <select name='type' type='text' id='type' class='form' tabindex=102 />
-                        <option value=''>Select Type...</option>
-                        <?php
-                        include_once('include/management/populate_selectbox.php');
-                        drawTypes();
-                        ?>
-                        </select>
-                        <img src='images/icons/comment.png' alt='Tip' border='0'
-                            onClick="javascript:toggleShowDiv('typeTooltip')" />
+                            <div id='vendorNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                <?php echo t('Tooltip', 'vendorNameTooltip') ?>
+                            </div>
+                        </li>
 
-                        <div id='typeTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                            <img src='images/icons/comment.png' alt='Tip' border='0' />
-                            <?php echo t('Tooltip', 'typeTooltip') ?>
-                        </div>
-                    </li>
+                        <li class='fieldset'>
+                            <label for='attribute' class='form'><?php echo t('all', 'Attribute') ?></label>
+                            <input name='attribute' type='text' id='attribute' value='' tabindex=101 />
+                            <img src='images/icons/comment.png' alt='Tip' border='0'
+                                onClick="javascript:toggleShowDiv('attributeTooltip')" />
 
-                    <li class='fieldset'>
-                        <label for='RecommendedOP' class='form'><?php echo t('all', 'RecommendedOP') ?></label>
-                        <select name='RecommendedOP' id='RecommendedOP' class='form' tabindex=103 />
-                        <option value=''>Select OP...</option>
-                        <?php
-                        include_once('include/management/populate_selectbox.php');
-                        drawOptions();
-                        ?>
-                        </select>
-                        <img src='images/icons/comment.png' alt='Tip' border='0'
-                            onClick="javascript:toggleShowDiv('RecommendedOPTooltip')" />
+                            <div id='attributeTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                <?php echo t('Tooltip', 'attributeTooltip') ?>
+                            </div>
+                        </li>
 
-                        <div id='RecommendedOPTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                            <img src='images/icons/comment.png' alt='Tip' border='0' />
-                            <?php echo t('Tooltip', 'RecommendedOPTooltip') ?>
-                        </div>
-                    </li>
+                        <li class='fieldset'>
+                            <label for='type' class='form'><?php echo t('all', 'Type') ?></label>
+                            <select name='type' type='text' id='type' class='form' tabindex=102 />
+                            <option value=''>Select Type...</option>
+                            <?php
+                            include_once('include/management/populate_selectbox.php');
+                            drawTypes();
+                            ?>
+                            </select>
+                            <img src='images/icons/comment.png' alt='Tip' border='0'
+                                onClick="javascript:toggleShowDiv('typeTooltip')" />
 
-                    <li class='fieldset'>
-                        <label for='RecommendedTable' class='form'><?php echo t('all', 'RecommendedTable') ?></label>
-                        <select name='RecommendedTable' id='RecommendedTable' class='form' tabindex=104 />
-                        <option value=''>Select Table...</option>
-                        <?php
-                        include_once('include/management/populate_selectbox.php');
-                        drawTables();
-                        ?>
-                        </select>
-                        <img src='images/icons/comment.png' alt='Tip' border='0'
-                            onClick="javascript:toggleShowDiv('RecommendedTableTooltip')" />
+                            <div id='typeTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                <?php echo t('Tooltip', 'typeTooltip') ?>
+                            </div>
+                        </li>
 
-                        <div id='RecommendedTableTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                            <img src='images/icons/comment.png' alt='Tip' border='0' />
-                            <?php echo t('Tooltip', 'RecommendedTableTooltip') ?>
-                        </div>
-                    </li>
+                        <li class='fieldset'>
+                            <label for='RecommendedOP' class='form'><?php echo t('all', 'RecommendedOP') ?></label>
+                            <select name='RecommendedOP' id='RecommendedOP' class='form' tabindex=103 />
+                            <option value=''>Select OP...</option>
+                            <?php
+                            include_once('include/management/populate_selectbox.php');
+                            drawOptions();
+                            ?>
+                            </select>
+                            <img src='images/icons/comment.png' alt='Tip' border='0'
+                                onClick="javascript:toggleShowDiv('RecommendedOPTooltip')" />
 
-                    <li class='fieldset'>
-                        <label for='RecommendedTooltip'
-                            class='form'><?php echo t('all', 'RecommendedTooltip') ?></label>
-                        <textarea class='form' name='RecommendedTooltip' type='text' id='RecommendedTooltip'
-                            tabindex=105 /></textarea>
-                        <img src='images/icons/comment.png' alt='Tip' border='0'
-                            onClick="javascript:toggleShowDiv('RecommendedTooltipTooltip')" />
-                        <div id='RecommendedTooltipTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                            <img src='images/icons/comment.png' alt='Tip' border='0' />
-                            <?php echo t('Tooltip', 'RecommendedTooltipTooltip') ?>
-                        </div>
-                    </li>
+                            <div id='RecommendedOPTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                <?php echo t('Tooltip', 'RecommendedOPTooltip') ?>
+                            </div>
+                        </li>
+
+                        <li class='fieldset'>
+                            <label for='RecommendedTable'
+                                class='form'><?php echo t('all', 'RecommendedTable') ?></label>
+                            <select name='RecommendedTable' id='RecommendedTable' class='form' tabindex=104 />
+                            <option value=''>Select Table...</option>
+                            <?php
+                            include_once('include/management/populate_selectbox.php');
+                            drawTables();
+                            ?>
+                            </select>
+                            <img src='images/icons/comment.png' alt='Tip' border='0'
+                                onClick="javascript:toggleShowDiv('RecommendedTableTooltip')" />
+
+                            <div id='RecommendedTableTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                <?php echo t('Tooltip', 'RecommendedTableTooltip') ?>
+                            </div>
+                        </li>
+
+                        <li class='fieldset'>
+                            <label for='RecommendedTooltip'
+                                class='form'><?php echo t('all', 'RecommendedTooltip') ?></label>
+                            <textarea class='form' name='RecommendedTooltip' type='text' id='RecommendedTooltip'
+                                tabindex=105 /></textarea>
+                            <img src='images/icons/comment.png' alt='Tip' border='0'
+                                onClick="javascript:toggleShowDiv('RecommendedTooltipTooltip')" />
+                            <div id='RecommendedTooltipTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                <?php echo t('Tooltip', 'RecommendedTooltipTooltip') ?>
+                            </div>
+                        </li>
 
 
-                    <li class='fieldset'>
-                        <br />
-                        <hr><br />
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000
-                            class='button' />
-                    </li>
+                        <li class='fieldset'>
+                            <br />
+                            <hr><br />
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                tabindex=10000 class='button' />
+                        </li>
 
-                </ul>
-            </fieldset>
+                    </ul>
+                </fieldset>
 
-        </form>
+            </form>
 
-        <?php
-        include('include/config/logging.php');
-        ?>
+            <?php
+            include('include/config/logging.php');
+            ?>
 
+        </div>
     </div>
-</div>
 
+</div>
 <div id="footer">
 
     <?php

@@ -543,257 +543,265 @@ include("menu-mng-users.php");
 ?>
 <div class="col-lg-9">
     <div class="card">
-
-        <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngnew.php') ?>
-                <h144>&#x2754;</h144></a></h2>
-
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngnew') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
-
-        <form name="newuser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <div class="tabber">
-
-                <div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
-
-                        <input checked type='radio' value="userAuth" name="authType"
-                            onclick="javascript:toggleUserAuth()" />
-                        <b> Username Authentication </b>
-                        <br />
-
-                        <ul>
-
-                            <div id='UserContainer'>
-                                <li class='fieldset'>
-                                    <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
-                                    <input name='username' type='text' id='username' value='' tabindex=100 />
-                                    <input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('username',8,<?php
-																																			echo "'" . $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] . "'" ?>)" />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('usernameTooltip')" />
-
-                                    <div id='usernameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'usernameTooltip') ?>
-                                    </div>
-                                </li>
-
-                                <li class='fieldset'>
-                                    <label for='password' class='form'><?php echo t('all', 'Password') ?></label>
-                                    <input name='password' type='text' id='password' value=''
-                                        <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> tabindex=101 />
-                                    <input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',8,<?php
-																																			echo "'" . $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] . "'" ?>)" />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('passwordTooltip')" />
-
-                                    <div id='passwordTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'passwordTooltip') ?>
-                                    </div>
-                                </li>
-                            </div>
-
-
-                            <li class='fieldset'>
-                                <label for='passwordType' class='form'><?php echo t('all', 'PasswordType') ?> </label>
-                                <select class='form' tabindex=102 name='passwordType'>
-                                    <option value='Cleartext-Password'>Cleartext-Password</option>
-                                    <option value='User-Password'>User-Password</option>
-                                    <option value='Crypt-Password'>Crypt-Password</option>
-                                    <option value='MD5-Password'>MD5-Password</option>
-                                    <option value='SHA1-Password'>SHA1-Password</option>
-                                    <option value='CHAP-Password'>CHAP-Password</option>
-                                </select>
-                            </li>
-
-
-                            <li class='fieldset'>
-                                <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
-                                <?php
-								include_once 'include/management/populate_selectbox.php';
-								populate_groups("Select Groups", "groups[]");
-								?>
-
-                                <a class='tablenovisit' href='#'
-                                    onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroups',genericCounter('divCounter')+'&elemName=groups[]');">Add</a>
-
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('group')" />
-
-                                <div id='divContainerGroups'>
-                                </div>
-
-
-                                <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'groupTooltip') ?>
-                                </div>
-                            </li>
-
-
-                            <li class='fieldset'>
-                                <br />
-                                <hr><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    class='button' />
-                            </li>
-
-                        </ul>
-
-                    </fieldset>
-
-                    <br />
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
-
-
-                        <input type='radio' name="authType" value="macAuth" onclick="javascript:toggleMacAuth()" />
-                        <b> MAC Address Authentication </b>
-                        <br />
-
-                        <ul>
-
-                            <li class='fieldset'>
-                                <label for='macaddress' class='form'><?php echo t('all', 'MACAddress') ?></label>
-                                <input name='macaddress' type='text' id='macaddress' value='' tabindex=105 disabled />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('macaddressTooltip')" />
-
-                                <div id='macaddressTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'macaddressTooltip') ?>
-                                </div>
-                            </li>
-
-                            <li class='fieldset'>
-                                <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
-                                <?php
-								include_once 'include/management/populate_selectbox.php';
-								populate_groups("Select Groups", "group_macaddress[]", "form", "disabled");
-								?>
-
-                                <a class='tablenovisit' href='#'
-                                    onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroupsMacAuth',genericCounter('divCounter')+'&elemName=group_macaddress[]');">Add</a>
-
-                                <div id='divContainerGroupsMacAuth'>
-                                </div>
-                            </li>
-
-
-                            <li class='fieldset'>
-                                <br />
-                                <hr><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    class='button' />
-                            </li>
-
-                        </ul>
-
-                    </fieldset>
-
-
-                    <br />
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
-
-                        <input type='radio' name="authType" value="pincodeAuth" onclick="javascript:togglePinCode()" />
-                        <b> PIN Code Authentication </b>
-                        <br />
-
-                        <ul>
-
-                            <li class='fieldset'>
-                                <label for='pincode' class='form'><?php echo t('all', 'PINCode') ?></label>
-                                <input name='pincode' type='text' id='pincode' value='' tabindex=106 disabled />
-                                <input type='button' value='Generate' class='button'
-                                    onclick="javascript:randomAlphanumeric('pincode',10)" />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('pincodeTooltip')" />
-
-                                <div id='pincodeTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'pincodeTooltip') ?>
-                                </div>
-                            </li>
-
-                            <li class='fieldset'>
-                                <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
-                                <?php
-								include_once 'include/management/populate_selectbox.php';
-								populate_groups("Select Groups", "group_pincode[]", "form", "disabled");
-								?>
-
-                                <a class='tablenovisit' href='#'
-                                    onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroupsPinAuth',genericCounter('divCounter')+'&elemName=group_pincode[]');">Add</a>
-
-                                <div id='divContainerGroupsPinAuth'>
-                                </div>
-                            </li>
-
-
-                            <li class='fieldset'>
-                                <br />
-                                <hr><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    class='button' />
-                            </li>
-
-                        </ul>
-
-                    </fieldset>
-
-                </div>
-
-
-
-                <div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
-                    <?php
-					$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
-					include_once('include/management/userinfo.php');
-					?>
-                </div>
-
-                <div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
-                    <?php
-					$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
-					include_once('include/management/userbillinfo.php');
-					?>
-                </div>
-
-                <div class="tabbertab" title="<?php echo t('title', 'Attributes'); ?>">
-                    <?php
-					include_once('include/management/attributes.php');
-					?>
-                </div>
-
-
+        <div class="card-body">
+
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngnew.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
+
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngnew') ?>
+                <br />
             </div>
+            <?php
+			include_once('include/management/actionMessages.php');
+			?>
+
+            <form name="newuser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                <div class="tabber">
+
+                    <div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+
+                            <input checked type='radio' value="userAuth" name="authType"
+                                onclick="javascript:toggleUserAuth()" />
+                            <b> Username Authentication </b>
+                            <br />
+
+                            <ul>
+
+                                <div id='UserContainer'>
+                                    <li class='fieldset'>
+                                        <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
+                                        <input name='username' type='text' id='username' value='' tabindex=100 />
+                                        <input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('username',8,<?php
+																																				echo "'" . $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] . "'" ?>)" />
+                                        <img src='images/icons/comment.png' alt='Tip' border='0'
+                                            onClick="javascript:toggleShowDiv('usernameTooltip')" />
+
+                                        <div id='usernameTooltip' style='display:none;visibility:visible'
+                                            class='ToolTip'>
+                                            <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                            <?php echo t('Tooltip', 'usernameTooltip') ?>
+                                        </div>
+                                    </li>
+
+                                    <li class='fieldset'>
+                                        <label for='password' class='form'><?php echo t('all', 'Password') ?></label>
+                                        <input name='password' type='text' id='password' value=''
+                                            <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> tabindex=101 />
+                                        <input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',8,<?php
+																																				echo "'" . $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] . "'" ?>)" />
+                                        <img src='images/icons/comment.png' alt='Tip' border='0'
+                                            onClick="javascript:toggleShowDiv('passwordTooltip')" />
+
+                                        <div id='passwordTooltip' style='display:none;visibility:visible'
+                                            class='ToolTip'>
+                                            <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                            <?php echo t('Tooltip', 'passwordTooltip') ?>
+                                        </div>
+                                    </li>
+                                </div>
 
 
-        </form>
+                                <li class='fieldset'>
+                                    <label for='passwordType' class='form'><?php echo t('all', 'PasswordType') ?>
+                                    </label>
+                                    <select class='form' tabindex=102 name='passwordType'>
+                                        <option value='Cleartext-Password'>Cleartext-Password</option>
+                                        <option value='User-Password'>User-Password</option>
+                                        <option value='Crypt-Password'>Crypt-Password</option>
+                                        <option value='MD5-Password'>MD5-Password</option>
+                                        <option value='SHA1-Password'>SHA1-Password</option>
+                                        <option value='CHAP-Password'>CHAP-Password</option>
+                                    </select>
+                                </li>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+                                <li class='fieldset'>
+                                    <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
+                                    <?php
+									include_once 'include/management/populate_selectbox.php';
+									populate_groups("Select Groups", "groups[]");
+									?>
 
+                                    <a class='tablenovisit' href='#'
+                                        onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroups',genericCounter('divCounter')+'&elemName=groups[]');">Add</a>
+
+                                    <img src='images/icons/comment.png' alt='Tip' border='0'
+                                        onClick="javascript:toggleShowDiv('group')" />
+
+                                    <div id='divContainerGroups'>
+                                    </div>
+
+
+                                    <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                        <?php echo t('Tooltip', 'groupTooltip') ?>
+                                    </div>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <br />
+                                    <hr><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                        class='button' />
+                                </li>
+
+                            </ul>
+
+                        </fieldset>
+
+                        <br />
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+
+
+                            <input type='radio' name="authType" value="macAuth" onclick="javascript:toggleMacAuth()" />
+                            <b> MAC Address Authentication </b>
+                            <br />
+
+                            <ul>
+
+                                <li class='fieldset'>
+                                    <label for='macaddress' class='form'><?php echo t('all', 'MACAddress') ?></label>
+                                    <input name='macaddress' type='text' id='macaddress' value='' tabindex=105
+                                        disabled />
+                                    <img src='images/icons/comment.png' alt='Tip' border='0'
+                                        onClick="javascript:toggleShowDiv('macaddressTooltip')" />
+
+                                    <div id='macaddressTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                        <?php echo t('Tooltip', 'macaddressTooltip') ?>
+                                    </div>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
+                                    <?php
+									include_once 'include/management/populate_selectbox.php';
+									populate_groups("Select Groups", "group_macaddress[]", "form", "disabled");
+									?>
+
+                                    <a class='tablenovisit' href='#'
+                                        onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroupsMacAuth',genericCounter('divCounter')+'&elemName=group_macaddress[]');">Add</a>
+
+                                    <div id='divContainerGroupsMacAuth'>
+                                    </div>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <br />
+                                    <hr><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                        class='button' />
+                                </li>
+
+                            </ul>
+
+                        </fieldset>
+
+
+                        <br />
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+
+                            <input type='radio' name="authType" value="pincodeAuth"
+                                onclick="javascript:togglePinCode()" />
+                            <b> PIN Code Authentication </b>
+                            <br />
+
+                            <ul>
+
+                                <li class='fieldset'>
+                                    <label for='pincode' class='form'><?php echo t('all', 'PINCode') ?></label>
+                                    <input name='pincode' type='text' id='pincode' value='' tabindex=106 disabled />
+                                    <input type='button' value='Generate' class='button'
+                                        onclick="javascript:randomAlphanumeric('pincode',10)" />
+                                    <img src='images/icons/comment.png' alt='Tip' border='0'
+                                        onClick="javascript:toggleShowDiv('pincodeTooltip')" />
+
+                                    <div id='pincodeTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                        <?php echo t('Tooltip', 'pincodeTooltip') ?>
+                                    </div>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
+                                    <?php
+									include_once 'include/management/populate_selectbox.php';
+									populate_groups("Select Groups", "group_pincode[]", "form", "disabled");
+									?>
+
+                                    <a class='tablenovisit' href='#'
+                                        onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroupsPinAuth',genericCounter('divCounter')+'&elemName=group_pincode[]');">Add</a>
+
+                                    <div id='divContainerGroupsPinAuth'>
+                                    </div>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <br />
+                                    <hr><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                        class='button' />
+                                </li>
+
+                            </ul>
+
+                        </fieldset>
+
+                    </div>
+
+
+
+                    <div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
+                        <?php
+						$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
+						include_once('include/management/userinfo.php');
+						?>
+                    </div>
+
+                    <div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
+                        <?php
+						$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
+						include_once('include/management/userbillinfo.php');
+						?>
+                    </div>
+
+                    <div class="tabbertab" title="<?php echo t('title', 'Attributes'); ?>">
+                        <?php
+						include_once('include/management/attributes.php');
+						?>
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+
+            <?php
+			include('include/config/logging.php');
+			?>
+
+        </div>
     </div>
-</div>
 
+</div>
 <div id="footer">
 
     <?php

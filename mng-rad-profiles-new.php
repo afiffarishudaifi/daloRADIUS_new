@@ -110,6 +110,7 @@ include("menu-mng-rad-profiles.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
         <h2 id="Intro"><a href="#"
                 onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradprofilesnew.php') ?>
@@ -159,7 +160,8 @@ include("menu-mng-rad-profiles.php");
 
     </div>
 </div>
-<div id="footer">
+</div>
+        <div id="footer">
 
     <?php
 	include 'page-footer.php';

@@ -701,421 +701,427 @@ include("menu-mng-users.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngedit.php') ?>
-                :: <?php if (isset($username)) {
-						echo $username;
-					} ?><h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngedit.php') ?>
+                    :: <?php if (isset($username)) {
+							echo $username;
+						} ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngedit') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngedit') ?>
+                <br />
+            </div>
+            <?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        <?php
-		include_once('include/management/userOperations.php');
-		checkDisabled($username);
-		?>
+            <?php
+			include_once('include/management/userOperations.php');
+			checkDisabled($username);
+			?>
 
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-            <input type="hidden" value="<?php echo $username ?>" name="username" />
+                <input type="hidden" value="<?php echo $username ?>" name="username" />
 
-            <div class="tabber">
-                <div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
+                <div class="tabber">
+                    <div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
 
-                    <fieldset>
+                        <fieldset>
 
-                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+                            <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
 
-                        <ul>
+                            <ul>
 
-                            <div id='UserContainer'>
-                                <li class='fieldset'>
-                                    <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
-                                    <input name='username' type='hidden'
-                                        value='<?php if (isset($username)) echo $username ?>' />
-                                    <input name='username' type='text' id='username'
-                                        value='<?php if (isset($username)) echo $username ?>' disabled tabindex=100 />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('usernameTooltip')" />
+                                <div id='UserContainer'>
+                                    <li class='fieldset'>
+                                        <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
+                                        <input name='username' type='hidden'
+                                            value='<?php if (isset($username)) echo $username ?>' />
+                                        <input name='username' type='text' id='username'
+                                            value='<?php if (isset($username)) echo $username ?>' disabled
+                                            tabindex=100 />
+                                        <img src='images/icons/comment.png' alt='Tip' border='0'
+                                            onClick="javascript:toggleShowDiv('usernameTooltip')" />
 
-                                    <div id='usernameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'usernameTooltip') ?>
-                                    </div>
-                                </li>
+                                        <div id='usernameTooltip' style='display:none;visibility:visible'
+                                            class='ToolTip'>
+                                            <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                            <?php echo t('Tooltip', 'usernameTooltip') ?>
+                                        </div>
+                                    </li>
 
-                                <li class='fieldset'>
-                                    <label for='password' class='form'><?php echo t('all', 'Password') ?></label>
-                                    <input name='password' type='text' id='password'
-                                        value='<?php if (isset($user_password)) echo $user_password ?>'
-                                        <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> disabled
-                                        tabindex=101 />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('passwordTooltip')" />
+                                    <li class='fieldset'>
+                                        <label for='password' class='form'><?php echo t('all', 'Password') ?></label>
+                                        <input name='password' type='text' id='password'
+                                            value='<?php if (isset($user_password)) echo $user_password ?>'
+                                            <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> disabled
+                                            tabindex=101 />
+                                        <img src='images/icons/comment.png' alt='Tip' border='0'
+                                            onClick="javascript:toggleShowDiv('passwordTooltip')" />
 
-                                    <div id='passwordTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'passwordTooltip') ?>
-                                    </div>
-                                </li>
-                            </div>
-
-
-
-                            <li class='fieldset'>
-                                <label for='planName' class='form'><?php echo t('all', 'PlanName') ?></label>
-                                <input name='oldplanName' type='hidden'
-                                    value='<?php if (isset($bi_planname)) echo $bi_planname ?>' />
-                                <?php
-								include 'include/management/populate_selectbox.php';
-								populate_plans($bi_planname, "planName", "form");
-								?>
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('planNameTooltip')" />
-
-                                <div id='planNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'planNameTooltip') ?>
+                                        <div id='passwordTooltip' style='display:none;visibility:visible'
+                                            class='ToolTip'>
+                                            <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                            <?php echo t('Tooltip', 'passwordTooltip') ?>
+                                        </div>
+                                    </li>
                                 </div>
-                            </li>
 
 
-                            <li class='fieldset'>
+
+                                <li class='fieldset'>
+                                    <label for='planName' class='form'><?php echo t('all', 'PlanName') ?></label>
+                                    <input name='oldplanName' type='hidden'
+                                        value='<?php if (isset($bi_planname)) echo $bi_planname ?>' />
+                                    <?php
+									include 'include/management/populate_selectbox.php';
+									populate_plans($bi_planname, "planName", "form");
+									?>
+                                    <img src='images/icons/comment.png' alt='Tip' border='0'
+                                        onClick="javascript:toggleShowDiv('planNameTooltip')" />
+
+                                    <div id='planNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                        <?php echo t('Tooltip', 'planNameTooltip') ?>
+                                    </div>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <br /><br />
+                                    <hr><br />
+
+                                    <?php
+									include 'include/management/buttons.php';
+									?>
+
+                                    <br />
+
+                                    <input class='button' type='button' value='Enable User'
+                                        onClick='javascript:enableUser()' />
+
+                                    <input class='button' type='button' value='Disable User'
+                                        onClick='javascript:disableUser()' />
+
+                                    <br /><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                        tabindex=10000 class='button' />
+
+                                    <div style="float: right; text-align: right;">
+                                        <a href="<?php echo $_SESSION['PREV_LIST_PAGE']; ?>">Back to Listing Page</a>
+                                    </div>
+
+                                </li>
+
+                            </ul>
+
+                        </fieldset>
+
+                    </div>
+
+
+                    <div class="tabbertab" title="<?php echo t('title', 'RADIUSCheck'); ?>">
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'RADIUSCheck'); ?> </h302>
+                            <br />
+
+                            <ul>
+                                <?php
+
+								include 'library/opendb.php';
+								include_once('include/management/pages_common.php');
+								include_once('include/management/populate_selectbox.php');
+
+								$editCounter = 0;
+
+								$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute, " .
+									$configValues['CONFIG_DB_TBL_RADCHECK'] . ".op, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Value, " .
+									$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".Type, " .
+									$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".RecommendedTooltip, " .
+									$configValues['CONFIG_DB_TBL_RADCHECK'] . ".id " .
+									" FROM " .
+									$configValues['CONFIG_DB_TBL_RADCHECK'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALODICTIONARY'] .
+									" ON " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute=" .
+									$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".attribute " .
+									" AND " . $configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".Value IS NULL " .
+									" WHERE " .
+									$configValues['CONFIG_DB_TBL_RADCHECK'] . ".UserName='" . $dbSocket->escapeSimple($username) . "'";
+
+								$res = $dbSocket->query($sql);
+								$logDebugSQL .= $sql . "\n";
+
+								if ($numrows = $res->numRows() == 0) {
+									echo "<center>";
+									echo t('messages', 'noCheckAttributesForUser');
+									echo "</center>";
+								}
+
+								while ($row = $res->fetchRow()) {
+
+									echo "<label class='attributes'>";
+									echo "<a class='tablenovisit' href='mng-del.php?username=$username&attribute=$row[5]__$row[0]&tablename=radcheck'>
+				<img src='images/icons/delete.png' border=0 alt='Remove' /> </a>";
+									echo "</label>";
+									echo "<label for='attribute' class='attributes'>&nbsp;&nbsp;&nbsp;$row[0]</label>";
+
+									echo "<input type='hidden' name='editValues" . $editCounter . "[]' value='$row[5]__$row[0]' />";
+
+									if (preg_match("/.*-Password/", $row[0])) {
+										if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
+											echo "<input type='password' value='$row[2]' name='editValues" . $editCounter . "[]'  style='width: 115px' />";
+											echo "<input type='hidden' value='$row[2]' name='passwordOrig' />";
+										} else {
+											echo "<input type='text' value='$row[2]' name='editValues" . $editCounter . "[]'  style='width: 115px' />";
+											echo "<input type='hidden' value='$row[2]' name='passwordOrig' />";
+										}
+									} else {
+										echo "<input value='$row[2]' name='editValues" . $editCounter . "[]' style='width: 115px' />";
+									}
+									echo "&nbsp;";
+									echo "<select name='editValues" . $editCounter . "[]' style='width: 45px' class='form'>";
+									echo "<option value='$row[1]'>$row[1]</option>";
+									drawOptions();
+									echo "</select>";
+
+									echo "<input type='hidden' name='editValues" . $editCounter . "[]' value='radcheck' style='width: 90px'>";
+
+									$editCounter++;			// we increment the counter for the html elements of the edit attributes
+
+
+									if (!$row[3])
+										$row[3] = "unavailable";
+									if (!$row[4])
+										$row[4] = "unavailable";
+
+									printq("
+			<img src='images/icons/comment.png' alt='Tip' border='0' onClick=\"javascript:toggleShowDiv('$row[0]Tooltip')\" />
+			<br/>
+	                <div id='$row[0]Tooltip'  style='display:none;visibility:visible' class='ToolTip2'>
+	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<i><b>Type:</b> $row[3]</i><br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<i><b>Tooltip Description:</b> $row[4]</i><br/>
+				<br/>
+	                </div>
+		");
+								}
+
+								?>
                                 <br /><br />
                                 <hr><br />
 
-                                <?php
-								include 'include/management/buttons.php';
-								?>
-
+                                <br />
+                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                    class='button' />
                                 <br />
 
-                                <input class='button' type='button' value='Enable User'
-                                    onClick='javascript:enableUser()' />
+                            </ul>
 
-                                <input class='button' type='button' value='Disable User'
-                                    onClick='javascript:disableUser()' />
+                        </fieldset>
+                    </div>
 
+                    <div class='tabbertab' title='<?php echo t('title', 'RADIUSReply') ?>'>
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'RADIUSReply'); ?> </h302>
+                            <br />
+
+                            <ul>
+
+                                <?php
+
+								$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADREPLY'] . ".Attribute, " .
+									$configValues['CONFIG_DB_TBL_RADREPLY'] . ".op, " . $configValues['CONFIG_DB_TBL_RADREPLY'] . ".Value, " .
+									$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".Type, " .
+									$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".RecommendedTooltip, " .
+									$configValues['CONFIG_DB_TBL_RADREPLY'] . ".id " .
+									" FROM " .
+									$configValues['CONFIG_DB_TBL_RADREPLY'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALODICTIONARY'] .
+									" ON " . $configValues['CONFIG_DB_TBL_RADREPLY'] . ".Attribute=" .
+									$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".attribute " .
+									" AND " . $configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".Value IS NULL " .
+									" WHERE " .
+									$configValues['CONFIG_DB_TBL_RADREPLY'] . ".UserName='" . $dbSocket->escapeSimple($username) . "'";
+
+
+								$res = $dbSocket->query($sql);
+								$logDebugSQL .= $sql . "\n";
+
+								if ($numrows = $res->numRows() == 0) {
+									echo "<center>";
+									echo t('messages', 'noReplyAttributesForUser');
+									echo "</center>";
+								}
+
+								while ($row = $res->fetchRow()) {
+
+									echo "<label class='attributes'>";
+									echo "<a class='tablenovisit' href='mng-del.php?username=$username&attribute=$row[5]__$row[0]&tablename=radreply'>
+				<img src='images/icons/delete.png' border=0 alt='Remove' /> </a>";
+									echo "</label>";
+									echo "<label for='attribute' class='attributes'>&nbsp;&nbsp;&nbsp;$row[0]</label>";
+
+									echo "<input type='hidden' name='editValues" . $editCounter . "[]' value='$row[5]__$row[0]' />";
+
+									if (($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") and (preg_match("/.*-Password/", $row[0]))) {
+										echo "<input type='password' value='$row[2]' name='editValues" . $editCounter . "[]'  style='width: 115px' />";
+										echo "&nbsp;";
+										echo "<select name='editValues" . $editCounter . "[]' style='width: 45px' class='form'>";
+										echo "<option value='$row[1]'>$row[1]</option>";
+										drawOptions();
+										echo "</select>";
+									} else {
+										echo "<input value='$row[2]' name='editValues" . $editCounter . "[]' style='width: 115px' />";
+										echo "&nbsp;";
+										echo "<select name='editValues" . $editCounter . "[]' style='width: 45px' class='form'>";
+										echo "<option value='$row[1]'>$row[1]</option>";
+										drawOptions();
+										echo "</select>";
+									}
+
+									echo "<input type='hidden' name='editValues" . $editCounter . "[]' value='radreply' style='width: 90px'>";
+									$editCounter++;			// we increment the counter for the html elements of the edit attributes
+
+									if (!$row[3])
+										$row[3] = "unavailable";
+									if (!$row[4])
+										$row[4] = "unavailable";
+
+									printq("
+			<img src='images/icons/comment.png' alt='Tip' border='0' onClick=\"javascript:toggleShowDiv('$row[0]Tooltip')\" />
+			<br/>
+	                <div id='$row[0]Tooltip'  style='display:none;visibility:visible' class='ToolTip2'>
+	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<i><b>Type:</b> $row[3]</i><br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<i><b>Tooltip Description:</b> $row[4]</i><br/>
+				<br/>
+	                </div>
+		");
+								}
+
+								?>
                                 <br /><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    tabindex=10000 class='button' />
+                                <hr><br />
 
-                                <div style="float: right; text-align: right;">
-                                    <a href="<?php echo $_SESSION['PREV_LIST_PAGE']; ?>">Back to Listing Page</a>
+                                <br />
+                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                    class='button' />
+                                <br />
+
+                            </ul>
+
+                        </fieldset>
+                    </div>
+
+                    <?php
+					include 'library/closedb.php';
+					?>
+
+
+                    <div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
+                        <?php
+						$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
+						include_once('include/management/userinfo.php');
+						?>
+                    </div>
+
+                    <div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
+                        <?php
+						$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
+						include_once('include/management/userbillinfo.php');
+						?>
+                    </div>
+
+                    <div class="tabbertab" title="<?php echo t('title', 'Attributes'); ?>">
+                        <?php
+						include_once('include/management/attributes.php');
+						?>
+                    </div>
+
+                    <div class="tabbertab" title="<?php echo t('title', 'Groups'); ?>">
+
+                        <?php
+						include 'library/opendb.php';
+						include_once('include/management/groups.php');
+						include 'library/closedb.php';
+						?>
+
+                        </ul>
+
+                        <br />
+                        <h301> Assign New Groups </h301>
+                        <br />
+                        <ul>
+
+                            <li class='fieldset'>
+
+                            <li class='fieldset'>
+                                <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
+                                <?php
+								include_once 'include/management/populate_selectbox.php';
+								populate_groups("Select Groups", "newgroups[]");
+								?>
+
+                                <a class='tablenovisit' href='#'
+                                    onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroups',genericCounter('divCounter')+'&elemName=newgroups[]');">Add</a>
+
+                                <img src='images/icons/comment.png' alt='Tip' border='0'
+                                    onClick="javascript:toggleShowDiv('group')" />
+
+                                <div id='divContainerGroups'>
                                 </div>
 
+
+                                <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                    <?php echo t('Tooltip', 'groupTooltip') ?>
+                                </div>
+                            </li>
+
+
+
+                            <br /><br />
+
+                            <br />
+                            <hr><br />
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                class='button' />
                             </li>
 
                         </ul>
 
-                    </fieldset>
-
-                </div>
-
-
-                <div class="tabbertab" title="<?php echo t('title', 'RADIUSCheck'); ?>">
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'RADIUSCheck'); ?> </h302>
+                        </fieldset>
                         <br />
 
-                        <ul>
-                            <?php
-
-							include 'library/opendb.php';
-							include_once('include/management/pages_common.php');
-							include_once('include/management/populate_selectbox.php');
-
-							$editCounter = 0;
-
-							$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute, " .
-								$configValues['CONFIG_DB_TBL_RADCHECK'] . ".op, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Value, " .
-								$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".Type, " .
-								$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".RecommendedTooltip, " .
-								$configValues['CONFIG_DB_TBL_RADCHECK'] . ".id " .
-								" FROM " .
-								$configValues['CONFIG_DB_TBL_RADCHECK'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALODICTIONARY'] .
-								" ON " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute=" .
-								$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".attribute " .
-								" AND " . $configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".Value IS NULL " .
-								" WHERE " .
-								$configValues['CONFIG_DB_TBL_RADCHECK'] . ".UserName='" . $dbSocket->escapeSimple($username) . "'";
-
-							$res = $dbSocket->query($sql);
-							$logDebugSQL .= $sql . "\n";
-
-							if ($numrows = $res->numRows() == 0) {
-								echo "<center>";
-								echo t('messages', 'noCheckAttributesForUser');
-								echo "</center>";
-							}
-
-							while ($row = $res->fetchRow()) {
-
-								echo "<label class='attributes'>";
-								echo "<a class='tablenovisit' href='mng-del.php?username=$username&attribute=$row[5]__$row[0]&tablename=radcheck'>
-				<img src='images/icons/delete.png' border=0 alt='Remove' /> </a>";
-								echo "</label>";
-								echo "<label for='attribute' class='attributes'>&nbsp;&nbsp;&nbsp;$row[0]</label>";
-
-								echo "<input type='hidden' name='editValues" . $editCounter . "[]' value='$row[5]__$row[0]' />";
-
-								if (preg_match("/.*-Password/", $row[0])) {
-									if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
-										echo "<input type='password' value='$row[2]' name='editValues" . $editCounter . "[]'  style='width: 115px' />";
-										echo "<input type='hidden' value='$row[2]' name='passwordOrig' />";
-									} else {
-										echo "<input type='text' value='$row[2]' name='editValues" . $editCounter . "[]'  style='width: 115px' />";
-										echo "<input type='hidden' value='$row[2]' name='passwordOrig' />";
-									}
-								} else {
-									echo "<input value='$row[2]' name='editValues" . $editCounter . "[]' style='width: 115px' />";
-								}
-								echo "&nbsp;";
-								echo "<select name='editValues" . $editCounter . "[]' style='width: 45px' class='form'>";
-								echo "<option value='$row[1]'>$row[1]</option>";
-								drawOptions();
-								echo "</select>";
-
-								echo "<input type='hidden' name='editValues" . $editCounter . "[]' value='radcheck' style='width: 90px'>";
-
-								$editCounter++;			// we increment the counter for the html elements of the edit attributes
-
-
-								if (!$row[3])
-									$row[3] = "unavailable";
-								if (!$row[4])
-									$row[4] = "unavailable";
-
-								printq("
-			<img src='images/icons/comment.png' alt='Tip' border='0' onClick=\"javascript:toggleShowDiv('$row[0]Tooltip')\" />
-			<br/>
-	                <div id='$row[0]Tooltip'  style='display:none;visibility:visible' class='ToolTip2'>
-	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<i><b>Type:</b> $row[3]</i><br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<i><b>Tooltip Description:</b> $row[4]</i><br/>
-				<br/>
-	                </div>
-		");
-							}
-
-							?>
-                            <br /><br />
-                            <hr><br />
-
-                            <br />
-                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                class='button' />
-                            <br />
-
-                        </ul>
-
-                    </fieldset>
-                </div>
-
-                <div class='tabbertab' title='<?php echo t('title', 'RADIUSReply') ?>'>
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'RADIUSReply'); ?> </h302>
-                        <br />
-
-                        <ul>
-
-                            <?php
-
-							$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADREPLY'] . ".Attribute, " .
-								$configValues['CONFIG_DB_TBL_RADREPLY'] . ".op, " . $configValues['CONFIG_DB_TBL_RADREPLY'] . ".Value, " .
-								$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".Type, " .
-								$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".RecommendedTooltip, " .
-								$configValues['CONFIG_DB_TBL_RADREPLY'] . ".id " .
-								" FROM " .
-								$configValues['CONFIG_DB_TBL_RADREPLY'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALODICTIONARY'] .
-								" ON " . $configValues['CONFIG_DB_TBL_RADREPLY'] . ".Attribute=" .
-								$configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".attribute " .
-								" AND " . $configValues['CONFIG_DB_TBL_DALODICTIONARY'] . ".Value IS NULL " .
-								" WHERE " .
-								$configValues['CONFIG_DB_TBL_RADREPLY'] . ".UserName='" . $dbSocket->escapeSimple($username) . "'";
-
-
-							$res = $dbSocket->query($sql);
-							$logDebugSQL .= $sql . "\n";
-
-							if ($numrows = $res->numRows() == 0) {
-								echo "<center>";
-								echo t('messages', 'noReplyAttributesForUser');
-								echo "</center>";
-							}
-
-							while ($row = $res->fetchRow()) {
-
-								echo "<label class='attributes'>";
-								echo "<a class='tablenovisit' href='mng-del.php?username=$username&attribute=$row[5]__$row[0]&tablename=radreply'>
-				<img src='images/icons/delete.png' border=0 alt='Remove' /> </a>";
-								echo "</label>";
-								echo "<label for='attribute' class='attributes'>&nbsp;&nbsp;&nbsp;$row[0]</label>";
-
-								echo "<input type='hidden' name='editValues" . $editCounter . "[]' value='$row[5]__$row[0]' />";
-
-								if (($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") and (preg_match("/.*-Password/", $row[0]))) {
-									echo "<input type='password' value='$row[2]' name='editValues" . $editCounter . "[]'  style='width: 115px' />";
-									echo "&nbsp;";
-									echo "<select name='editValues" . $editCounter . "[]' style='width: 45px' class='form'>";
-									echo "<option value='$row[1]'>$row[1]</option>";
-									drawOptions();
-									echo "</select>";
-								} else {
-									echo "<input value='$row[2]' name='editValues" . $editCounter . "[]' style='width: 115px' />";
-									echo "&nbsp;";
-									echo "<select name='editValues" . $editCounter . "[]' style='width: 45px' class='form'>";
-									echo "<option value='$row[1]'>$row[1]</option>";
-									drawOptions();
-									echo "</select>";
-								}
-
-								echo "<input type='hidden' name='editValues" . $editCounter . "[]' value='radreply' style='width: 90px'>";
-								$editCounter++;			// we increment the counter for the html elements of the edit attributes
-
-								if (!$row[3])
-									$row[3] = "unavailable";
-								if (!$row[4])
-									$row[4] = "unavailable";
-
-								printq("
-			<img src='images/icons/comment.png' alt='Tip' border='0' onClick=\"javascript:toggleShowDiv('$row[0]Tooltip')\" />
-			<br/>
-	                <div id='$row[0]Tooltip'  style='display:none;visibility:visible' class='ToolTip2'>
-	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<i><b>Type:</b> $row[3]</i><br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<i><b>Tooltip Description:</b> $row[4]</i><br/>
-				<br/>
-	                </div>
-		");
-							}
-
-							?>
-                            <br /><br />
-                            <hr><br />
-
-                            <br />
-                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                class='button' />
-                            <br />
-
-                        </ul>
-
-                    </fieldset>
-                </div>
-
-                <?php
-				include 'library/closedb.php';
-				?>
-
-
-                <div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
-                    <?php
-					$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
-					include_once('include/management/userinfo.php');
-					?>
-                </div>
-
-                <div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
-                    <?php
-					$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
-					include_once('include/management/userbillinfo.php');
-					?>
-                </div>
-
-                <div class="tabbertab" title="<?php echo t('title', 'Attributes'); ?>">
-                    <?php
-					include_once('include/management/attributes.php');
-					?>
-                </div>
-
-                <div class="tabbertab" title="<?php echo t('title', 'Groups'); ?>">
-
-                    <?php
-					include 'library/opendb.php';
-					include_once('include/management/groups.php');
-					include 'library/closedb.php';
-					?>
-
-                    </ul>
-
-                    <br />
-                    <h301> Assign New Groups </h301>
-                    <br />
-                    <ul>
-
-                        <li class='fieldset'>
-
-                        <li class='fieldset'>
-                            <label for='group' class='form'><?php echo t('all', 'Group') ?></label>
-                            <?php
-							include_once 'include/management/populate_selectbox.php';
-							populate_groups("Select Groups", "newgroups[]");
-							?>
-
-                            <a class='tablenovisit' href='#'
-                                onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerGroups',genericCounter('divCounter')+'&elemName=newgroups[]');">Add</a>
-
-                            <img src='images/icons/comment.png' alt='Tip' border='0'
-                                onClick="javascript:toggleShowDiv('group')" />
-
-                            <div id='divContainerGroups'>
-                            </div>
-
-
-                            <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                <?php echo t('Tooltip', 'groupTooltip') ?>
-                            </div>
-                        </li>
-
-
-
-                        <br /><br />
-
-                        <br />
-                        <hr><br />
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-                        </li>
-
-                    </ul>
-
-                    </fieldset>
-                    <br />
+                    </div>
 
                 </div>
 
-            </div>
-
-        </form>
+            </form>
 
 
-        <?php
-		include_once('include/management/userReports.php');
-		userPlanInformation($username, 1);
-		userSubscriptionAnalysis($username, 1);			// userSubscriptionAnalysis with argument set to 1 for drawing the table
-		userConnectionStatus($username, 1);			// userConnectionStatus (same as above)
-		?>
+            <?php
+			include_once('include/management/userReports.php');
+			userPlanInformation($username, 1);
+			userSubscriptionAnalysis($username, 1);			// userSubscriptionAnalysis with argument set to 1 for drawing the table
+			userConnectionStatus($username, 1);			// userConnectionStatus (same as above)
+			?>
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
 
+        </div>
     </div>
-</div>
 
+</div>
 <div id="footer">
 
     <?php

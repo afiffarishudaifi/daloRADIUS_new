@@ -11,18 +11,18 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-        include_once("lang/main.php");
-        ?>
+    include_once("lang/main.php");
+    ?>
     <div id="wrapper">
         <div id="innerwrapper">
 
             <?php
-                        $m_active = "Billing";
-                        include_once("./_partials/navbar.php");
-                        include_once("./_partials/js.php");
-                        include_once("include/management/autocomplete.php");
-                        ?>
-            <br>
+            $m_active = "Billing";
+            include_once("./_partials/navbar.php");
+            include_once("./_partials/js.php");
+            include_once("include/management/autocomplete.php");
+            ?>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -30,27 +30,27 @@
                         <h2>Billing</h2>
 
                         <h3>Track Rates</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a
                                     href="javascript:document.billrates.submit();"><b>&raquo;</b><?php echo t('button', 'DateAccounting') ?></a>
                                 <form name="billrates" action="bill-rates-date.php" method="get" class="sidebar">
                                     <select name="ratename" size="1">
                                         <option value="<?php if (isset($billing_date_ratename)) echo $billing_date_ratename;
-                                                                                                else echo ""; ?>">
+                                                        else echo ""; ?>">
                                             <?php if (isset($billing_date_ratename)) echo $billing_date_ratename;
-                                                                                        else echo "Choose Rate"; ?>
+                                            else echo "Choose Rate"; ?>
                                         </option>
                                         <?php
-                                                                                include 'library/opendb.php';
+                                        include 'library/opendb.php';
 
-                                                                                $sql = "SELECT rateName FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ";";
-                                                                                $res = $dbSocket->query($sql);
+                                        $sql = "SELECT rateName FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ";";
+                                        $res = $dbSocket->query($sql);
 
-                                                                                while ($row = $res->fetchRow()) {
-                                                                                        echo "<option value='$row[0]'>$row[0]</option>";
-                                                                                }
-                                                                                ?>
+                                        while ($row = $res->fetchRow()) {
+                                            echo "<option value='$row[0]'>$row[0]</option>";
+                                        }
+                                        ?>
                                     </select>
 
                                     <input name="username" type="text" id="username"
@@ -60,7 +60,7 @@
                                     <input name="startdate" type="text" id="startdate"
                                         tooltipText='<?php echo t('Tooltip', 'Date'); ?> <br/>'
                                         value="<?php if (isset($billing_date_startdate)) echo $billing_date_startdate;
-                                                                                                                                                                                                else echo date("Y-m-01"); ?>">
+                                                                                                                                                        else echo date("Y-m-01"); ?>">
 
                                     <img src="library/js_date/calendar.gif"
                                         onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
@@ -70,7 +70,7 @@
                                     <input name="enddate" type="text" id="enddate"
                                         tooltipText='<?php echo t('Tooltip', 'Date'); ?> <br/>'
                                         value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
-                                                                                                                                                                                        else echo date("Y-m-t"); ?>">
+                                                                                                                                                    else echo date("Y-m-t"); ?>">
 
                                     <img src="library/js_date/calendar.gif"
                                         onclick="showChooser(this, 'enddate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
@@ -83,7 +83,7 @@
                         </ul>
 
                         <h3>Rates Management</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="bill-rates-list.php"><b>&raquo;</b><?php echo t('button', 'ListRates') ?></a>
                             </li>
@@ -109,18 +109,18 @@
                 </div>
 
                 <?php
-                                include_once("include/management/autocomplete.php");
+                include_once("include/management/autocomplete.php");
 
-                                if ($autoComplete) {
-                                        echo "<script type=\"text/javascript\">
+                if ($autoComplete) {
+                    echo "<script type=\"text/javascript\">
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('username','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
 
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('ratename','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteRateName');
                       </script>";
-                                }
-                                ?>
+                }
+                ?>
 
                 <script type="text/javascript">
                 var tooltipObj = new DHTMLgoodies_formTooltip();

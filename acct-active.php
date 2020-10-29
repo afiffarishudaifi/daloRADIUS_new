@@ -50,69 +50,70 @@ include("menu-accounting.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctactive.php'); ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctactive.php'); ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'acctactive') ?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'acctactive') ?>
+                <br />
+            </div>
             <br />
-        </div>
-        <br />
 
 
-        <?php
+            <?php
 
-		include 'library/opendb.php';
-		include 'library/datediff.php';
-		include 'include/management/pages_common.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
-		$currdate = date("j M Y");
+			include 'library/opendb.php';
+			include 'library/datediff.php';
+			include 'include/management/pages_common.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+			$currdate = date("j M Y");
 
-		// we can only use the $dbSocket after we have included 'library/opendb.php' which initialzes the connection and the $dbSocket object
-		$username = $dbSocket->escapeSimple($username);
-		$enddate = $dbSocket->escapeSimple($enddate);
-		$startdate = $dbSocket->escapeSimple($startdate);
+			// we can only use the $dbSocket after we have included 'library/opendb.php' which initialzes the connection and the $dbSocket object
+			$username = $dbSocket->escapeSimple($username);
+			$enddate = $dbSocket->escapeSimple($enddate);
+			$startdate = $dbSocket->escapeSimple($startdate);
 
-		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
 
-		$sql = "select distinct(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName) as username, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".attribute as attribute, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Value maxtimeexpiration, sum(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime) as usedtime from " . $configValues['CONFIG_DB_TBL_RADACCT'] . ", " . $configValues['CONFIG_DB_TBL_RADCHECK'] . " where (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username = " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".UserName) and (" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute = 'Max-All-Session' or " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute = 'Expiration') group by " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName;";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			$sql = "select distinct(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName) as username, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".attribute as attribute, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Value maxtimeexpiration, sum(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime) as usedtime from " . $configValues['CONFIG_DB_TBL_RADACCT'] . ", " . $configValues['CONFIG_DB_TBL_RADCHECK'] . " where (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username = " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".UserName) and (" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute = 'Max-All-Session' or " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute = 'Expiration') group by " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName;";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
-		$sql = "select distinct(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName) as username, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".attribute as attribute, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Value maxtimeexpiration, sum(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime) as usedtime from " . $configValues['CONFIG_DB_TBL_RADACCT'] . ", " . $configValues['CONFIG_DB_TBL_RADCHECK'] . " where (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username = " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".UserName) and (" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute = 'Max-All-Session' or " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute = 'Expiration') group by " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName  ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
+			$sql = "select distinct(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName) as username, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".attribute as attribute, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Value maxtimeexpiration, sum(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime) as usedtime from " . $configValues['CONFIG_DB_TBL_RADACCT'] . ", " . $configValues['CONFIG_DB_TBL_RADCHECK'] . " where (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username = " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".UserName) and (" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute = 'Max-All-Session' or " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".Attribute = 'Expiration') group by " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName  ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
 
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			echo "<table border='0' class='table1'>\n";
+			echo "
 		<thead>
 				<tr>
 				<th colspan='12' align='left'>
 		<br/>
 	";
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&username=$username&startdate=$startdate&enddate=$enddate");
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&username=$username&startdate=$startdate&enddate=$enddate");
 
-		echo " </th></tr>
+			echo " </th></tr>
 			</thead>
 	";
 
-		if ($orderType == "asc") {
-			$orderTypeNextPage = "desc";
-		} else  if ($orderType == "desc") {
-			$orderTypeNextPage = "asc";
-		}
+			if ($orderType == "asc") {
+				$orderTypeNextPage = "desc";
+			} else  if ($orderType == "desc") {
+				$orderTypeNextPage = "asc";
+			}
 
-		echo "<thread> <tr>
+			echo "<thread> <tr>
 		<th scope='col'>
 		<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=username&orderType=$orderTypeNextPage\">
 		" . t('all', 'Username') . "</a>
@@ -133,23 +134,23 @@ include("menu-accounting.php");
 		<th scope='col'> " . t('all', 'Usage') . " </th>
 		</tr> </thread>";
 
-		while ($row = $res->fetchRow()) {
-			$status = "Active";
+			while ($row = $res->fetchRow()) {
+				$status = "Active";
 
-			if ($row[1] == "Expiration") {
-				if (datediff('d', $row[2], "$currdate", false) > 0) {
-					$status = "Expired";
+				if ($row[1] == "Expiration") {
+					if (datediff('d', $row[2], "$currdate", false) > 0) {
+						$status = "Expired";
+					}
 				}
-			}
 
 
-			if ($row[1] == "Max-All-Session") {
-				if ($row[3] >= $row[2]) {
-					$status = "End";
+				if ($row[1] == "Max-All-Session") {
+					if ($row[3] >= $row[2]) {
+						$status = "End";
+					}
 				}
-			}
 
-			printqn("<tr>
+				printqn("<tr>
                         <td> <a class='tablenovisit' href='#'
                                 onClick='javascript:ajaxGeneric(\"include/management/retUserInfo.php\",\"retBandwidthInfo\",\"divContainerUserInfo\",\"username=$row[0]\");return false;'
                                 tooltipText='
@@ -170,50 +171,51 @@ include("menu-accounting.php");
                         <td> $status </td>
 			<td> ");
 
-			if ($row[1] == "Expiration") {
-				$difference = datediff('d', $row[2], "$currdate", false);
-				if ($difference > 0)
-					echo "<h100> " . " $difference days since expired" . "</h100> ";
-				else
-					echo substr($difference, 1) . " days until expiration";
-			}
-
-			if ($row[1] == "Max-All-Session") {
-				if ($status == "End") {
-					echo "<h100> " . abs($row[2] - $row[3]) . " seconds overdue credit" . "</h100>";
-				} else {
-					echo $row[2] - $row[3];
-					echo " left on credit";
+				if ($row[1] == "Expiration") {
+					$difference = datediff('d', $row[2], "$currdate", false);
+					if ($difference > 0)
+						echo "<h100> " . " $difference days since expired" . "</h100> ";
+					else
+						echo substr($difference, 1) . " days until expiration";
 				}
+
+				if ($row[1] == "Max-All-Session") {
+					if ($status == "End") {
+						echo "<h100> " . abs($row[2] - $row[3]) . " seconds overdue credit" . "</h100>";
+					} else {
+						echo $row[2] - $row[3];
+						echo " left on credit";
+					}
+				}
+
+
+				echo "	</td>
+                </tr>";
 			}
 
-
-			echo "	</td>
-                </tr>";
-		}
-
-		echo "
+			echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='12' align='left'>
         ";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&username=$username&startdate=$startdate&enddate=$enddate");
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&username=$username&startdate=$startdate&enddate=$enddate");
+			echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-		echo "</table>";
+			echo "</table>";
 
-		include 'library/closedb.php';
-		?>
+			include 'library/closedb.php';
+			?>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
 
+        </div>
     </div>
 </div>
 <div id="footer">

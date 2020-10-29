@@ -51,86 +51,87 @@ include("menu-accounting.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctusername.php'); ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctusername.php'); ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'acctusername') ?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'acctusername') ?>
+                <br />
+            </div>
             <br />
-        </div>
-        <br />
 
 
 
-        <?php
+            <?php
 
-		include 'library/opendb.php';
-		include 'include/management/pages_common.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+			include 'library/opendb.php';
+			include 'include/management/pages_common.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-		// we can only use the $dbSocket after we have included 'library/opendb.php' which initialzes the connection and the $dbSocket object	
-		$username = $dbSocket->escapeSimple($username);
+			// we can only use the $dbSocket after we have included 'library/opendb.php' which initialzes the connection and the $dbSocket object	
+			$username = $dbSocket->escapeSimple($username);
 
-		// setup php session variables for exporting
-		$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
-		$_SESSION['reportQuery'] = " WHERE UserName='$username'";
-		$_SESSION['reportType'] = "accountingGeneric";
+			// setup php session variables for exporting
+			$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
+			$_SESSION['reportQuery'] = " WHERE UserName='$username'";
+			$_SESSION['reportType'] = "accountingGeneric";
 
-		include 'library/closedb.php';
+			include 'library/closedb.php';
 
-		include_once('include/management/userReports.php');
-		userPlanInformation($username, 1);
-		userSubscriptionAnalysis($username, 1);                 // userSubscriptionAnalysis with argument set to 1 for drawing the table
-		userConnectionStatus($username, 1);                     // userConnectionStatus (same as above)
+			include_once('include/management/userReports.php');
+			userPlanInformation($username, 1);
+			userSubscriptionAnalysis($username, 1);                 // userSubscriptionAnalysis with argument set to 1 for drawing the table
+			userConnectionStatus($username, 1);                     // userConnectionStatus (same as above)
 
 
-		include 'library/opendb.php';
+			include 'library/opendb.php';
 
-		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-		$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".RadAcctId, " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
-			".name as hotspot, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".UserName, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".FramedIPAddress, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctStopTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctInputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctOutputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctTerminateCause, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".NASIPAddress FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
-			" ON " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".calledstationid = " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
-			".mac WHERE UserName='$username';";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+			$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".RadAcctId, " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+				".name as hotspot, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".UserName, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".FramedIPAddress, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctStopTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctInputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctOutputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctTerminateCause, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".NASIPAddress FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+				" ON " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".calledstationid = " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+				".mac WHERE UserName='$username';";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
-		$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".RadAcctId, " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
-			".name as hotspot, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".UserName, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".FramedIPAddress, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctStopTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctInputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctOutputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".AcctTerminateCause, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".NASIPAddress FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
-			" ON " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-			".calledstationid = " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
-			".mac WHERE UserName='$username' ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL .= $sql . "\n";
+			$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".RadAcctId, " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+				".name as hotspot, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".UserName, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".FramedIPAddress, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctStopTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctInputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctOutputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctTerminateCause, " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".NASIPAddress FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+				" ON " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".calledstationid = " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+				".mac WHERE UserName='$username' ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL .= $sql . "\n";
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			echo "<table border='0' class='table1'>\n";
+			echo "
 			<thead>
 			<tr>
 				<th colspan='12' align='left'>
@@ -143,18 +144,18 @@ include("menu-accounting.php");
 		";
 
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&username=$username");
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&username=$username");
 
-		echo " </th></tr></thead>";
+			echo " </th></tr></thead>";
 
-		if ($orderType == "asc") {
-			$orderTypeNextPage = "desc";
-		} else  if ($orderType == "desc") {
-			$orderTypeNextPage = "asc";
-		}
+			if ($orderType == "asc") {
+				$orderTypeNextPage = "desc";
+			} else  if ($orderType == "desc") {
+				$orderTypeNextPage = "asc";
+			}
 
-		echo "<thread> <tr>
+			echo "<thread> <tr>
 			<th scope='col'> 
 			<br/>
 			<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?username=$username&orderBy=radacctid&orderType=$orderTypeNextPage\">
@@ -212,9 +213,9 @@ include("menu-accounting.php");
 			</th>
 			</tr> </thread>";
 
-		while ($row = $res->fetchRow()) {
+			while ($row = $res->fetchRow()) {
 
-			printqn("<tr>
+				printqn("<tr>
 						<td> $row[0] </td>
 						<td> <a class='tablenovisit' href='#'
 								onClick='javascript:ajaxGeneric(\"include/management/retHotspotInfo.php\",\"retHotspotGeneralStat\",\"divContainerHotspotInfo\",\"hotspot=$row[1]\");return false;'
@@ -256,33 +257,34 @@ include("menu-accounting.php");
 						<td> $row[9] </td>
 						<td> $row[10] </td>
 				</tr>");
-		}
+			}
 
-		echo "
+			echo "
 				<tfoot>
 					<tr>
 					<th colspan='12' align='left'>
 	        ";
 
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&username=$username");
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&username=$username");
+			echo "
 				</th>
 				</tr>
 			</tfoot>
 			";
 
-		echo "</table>";
+			echo "</table>";
 
 
-		include 'library/closedb.php';
-		?>
+			include 'library/closedb.php';
+			?>
 
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
 
+        </div>
     </div>
 </div>
 <div id="footer">

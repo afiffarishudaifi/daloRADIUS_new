@@ -20,13 +20,13 @@
                                 $m_active = "Config";
                                 include_once("./_partials/navbar.php");
                                 include_once("./_partials/js.php");
-                                ?> <br>
+                                ?>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
                         <h2>Configuration</h2>
                         <h3>Management</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
                             <li><a
                                     href="config-operators-list.php"><b>&raquo;</b><?php echo t('button', 'ListOperators') ?></a>
                             </li>

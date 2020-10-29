@@ -11,19 +11,19 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-        include_once("lang/main.php");
-        ?>
+    include_once("lang/main.php");
+    ?>
     <div id="wrapper">
         <div id="innerwrapper">
 
             <?php
-                        $m_active = "Billing";
-                        include_once("./_partials/navbar.php");
-                        include_once("./_partials/js.php");
-                        include_once("include/management/autocomplete.php");
-                        ?>
+            $m_active = "Billing";
+            include_once("./_partials/navbar.php");
+            include_once("./_partials/js.php");
+            include_once("include/management/autocomplete.php");
+            ?>
 
-            <br>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -31,7 +31,7 @@
                         <h2>Billing</h2>
 
                         <h3>Payments Management</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a
                                     href="javascript:document.paymentslist.submit();"><b>&raquo;</b><?php echo t('button', 'ListPayments') ?></a>
@@ -66,7 +66,7 @@
 
 
                         <h3>Payment Types Management</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a
                                     href="bill-payment-types-list.php"><b>&raquo;</b><?php echo t('button', 'ListPayTypes') ?></a>
@@ -100,16 +100,16 @@
                 </div>
 
                 <?php
-                                include_once("include/management/autocomplete.php");
+                include_once("include/management/autocomplete.php");
 
-                                if ($autoComplete) {
-                                        echo "<script type=\"text/javascript\">
+                if ($autoComplete) {
+                    echo "<script type=\"text/javascript\">
                         /** Making usernameEdit interactive **/
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('username','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
                       </script>";
-                                }
-                                ?>
+                }
+                ?>
 
                 <script type="text/javascript">
                 var tooltipObj = new DHTMLgoodies_formTooltip();

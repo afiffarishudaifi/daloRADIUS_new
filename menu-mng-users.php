@@ -17,7 +17,7 @@
             include_once("./_partials/navbar.php");
             ?>
 
-            <br>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -25,7 +25,7 @@
                         <h2>Management</h2>
 
                         <h3>Users Management</h3>
-                        <ul>
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="mng-list-all.php"><b>&raquo;</b>
                                     <img src='images/icons/userList.gif' border='0'>
@@ -68,7 +68,7 @@
 
                         <br />
                         <h3>Extended Capabilities</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="mng-import-users.php"><b>&raquo;</b>
                                     <img src='images/icons/userNew.gif' border='0'>

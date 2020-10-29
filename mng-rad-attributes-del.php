@@ -103,76 +103,78 @@ include("menu-mng-rad-attributes.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradattributesdel.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradattributesdel.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngradattributesdel') ?>
-            <br />
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngradattributesdel') ?>
+                <br />
+            </div>
+            <?php
+            include_once('include/management/actionMessages.php');
+            ?>
+
+            <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                    <fieldset>
+
+                        <h302> <?php echo t('title', 'VendorAttribute'); ?> </h302>
+                        <br />
+
+                        <ul>
+
+                            <li class='fieldset'>
+                                <label for='vendor' class='form'><?php echo t('all', 'VendorName') ?></label>
+                                <input name='vendor' type='text' id='vendor'
+                                    value='<?php if (isset($vendor)) echo $vendor ?>' tabindex=100 />
+                                <img src='images/icons/comment.png' alt='Tip' border='0'
+                                    onClick="javascript:toggleShowDiv('vendorNameTooltip')" />
+
+                                <div id='vendorNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                    <?php echo t('Tooltip', 'vendorNameTooltip') ?>
+                                </div>
+                            </li>
+
+                            <li class='fieldset'>
+                                <label for='attribute' class='form'><?php echo t('all', 'Attribute') ?></label>
+                                <input name='attribute' type='text' id='attribute'
+                                    value='<?php if (isset($attribute)) echo $attribute ?>' tabindex=101 />
+                                <img src='images/icons/comment.png' alt='Tip' border='0'
+                                    onClick="javascript:toggleShowDiv('attributeTooltip')" />
+
+                                <div id='attributeTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                    <?php echo t('Tooltip', 'attributeTooltip') ?>
+                                </div>
+                            </li>
+
+
+                            <li class='fieldset'>
+                                <br />
+                                <hr><br />
+                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                    tabindex=10000 class='button' />
+                            </li>
+
+                        </ul>
+                    </fieldset>
+
+                </form>
+            </div>
+
+            <?php
+            include('include/config/logging.php');
+            ?>
+
         </div>
-        <?php
-        include_once('include/management/actionMessages.php');
-        ?>
-
-        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-                <fieldset>
-
-                    <h302> <?php echo t('title', 'VendorAttribute'); ?> </h302>
-                    <br />
-
-                    <ul>
-
-                        <li class='fieldset'>
-                            <label for='vendor' class='form'><?php echo t('all', 'VendorName') ?></label>
-                            <input name='vendor' type='text' id='vendor'
-                                value='<?php if (isset($vendor)) echo $vendor ?>' tabindex=100 />
-                            <img src='images/icons/comment.png' alt='Tip' border='0'
-                                onClick="javascript:toggleShowDiv('vendorNameTooltip')" />
-
-                            <div id='vendorNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                <?php echo t('Tooltip', 'vendorNameTooltip') ?>
-                            </div>
-                        </li>
-
-                        <li class='fieldset'>
-                            <label for='attribute' class='form'><?php echo t('all', 'Attribute') ?></label>
-                            <input name='attribute' type='text' id='attribute'
-                                value='<?php if (isset($attribute)) echo $attribute ?>' tabindex=101 />
-                            <img src='images/icons/comment.png' alt='Tip' border='0'
-                                onClick="javascript:toggleShowDiv('attributeTooltip')" />
-
-                            <div id='attributeTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                <?php echo t('Tooltip', 'attributeTooltip') ?>
-                            </div>
-                        </li>
-
-
-                        <li class='fieldset'>
-                            <br />
-                            <hr><br />
-                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                tabindex=10000 class='button' />
-                        </li>
-
-                    </ul>
-                </fieldset>
-
-            </form>
-        </div>
-
-        <?php
-        include('include/config/logging.php');
-        ?>
-
     </div>
-</div>
 
+</div>
 <div id="footer">
 
     <?php

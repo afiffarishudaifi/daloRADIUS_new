@@ -44,47 +44,48 @@ include("menu-accounting.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctall.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'acctall.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'acctall') ?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'acctall') ?>
+                <br />
+            </div>
             <br />
-        </div>
-        <br />
 
 
 
-        <?php
+            <?php
 
-		include 'library/opendb.php';
-		include 'include/management/pages_common.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+			include 'library/opendb.php';
+			include 'include/management/pages_common.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-		// setup php session variables for exporting
-		$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
-		$_SESSION['reportQuery'] = "";
-		$_SESSION['reportType'] = "accountingGeneric";
+			// setup php session variables for exporting
+			$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
+			$_SESSION['reportQuery'] = "";
+			$_SESSION['reportType'] = "accountingGeneric";
 
-		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-		$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".RadAcctId, " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as hotspot, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctInputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctOutputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctTerminateCause, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " ON " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".calledstationid = " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".mac;";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+			$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".RadAcctId, " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as hotspot, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctInputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctOutputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctTerminateCause, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " ON " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".calledstationid = " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".mac;";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
 
-		$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".RadAcctId, " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as hotspot, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctInputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctOutputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctTerminateCause, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " ON " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".calledstationid = " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".mac  ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
+			$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".RadAcctId, " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as hotspot, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".UserName, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctInputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctOutputOctets, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctTerminateCause, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " ON " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".calledstationid = " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".mac  ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			echo "<table border='0' class='table1'>\n";
+			echo "
                 <thead>
                         <tr>
                         <th colspan='12' align='left'>
@@ -96,20 +97,20 @@ include("menu-accounting.php");
                 <br/>
         ";
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-		echo " </th></tr>
+			echo " </th></tr>
 			</thead>
 	";
 
-		if ($orderType == "asc") {
-			$orderTypeNextPage = "desc";
-		} else  if ($orderType == "desc") {
-			$orderTypeNextPage = "asc";
-		}
+			if ($orderType == "asc") {
+				$orderTypeNextPage = "desc";
+			} else  if ($orderType == "desc") {
+				$orderTypeNextPage = "asc";
+			}
 
-		echo "<thread> <tr>
+			echo "<thread> <tr>
 		<th scope='col'> 
 		<br/>
 		<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=radacctid&orderType=$orderTypeNextPage\">
@@ -167,9 +168,9 @@ include("menu-accounting.php");
 		</th>
 		</tr> </thread>";
 
-		while ($row = $res->fetchRow()) {
+			while ($row = $res->fetchRow()) {
 
-			printqn("<tr>
+				printqn("<tr>
 				<td> $row[0] </td>
 
                         <td> <a class='tablenovisit' href='#'
@@ -212,31 +213,32 @@ include("menu-accounting.php");
 				<td> $row[9] </td>
 				<td> $row[10] </td>
 		</tr>");
-		}
+			}
 
-		echo "
+			echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='12' align='left'>
         ";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType);
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType);
+			echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-		echo "</table>";
+			echo "</table>";
 
-		include 'library/closedb.php';
-		?>
+			include 'library/closedb.php';
+			?>
 
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
 
+        </div>
     </div>
 </div>
 <div id="footer">

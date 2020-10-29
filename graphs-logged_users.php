@@ -34,41 +34,43 @@ include_once("library/tabber/tab-layout.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'graphsloggedusers.php'); ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'graphsloggedusers.php'); ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'graphsloggedusers') ?>
-            <br />
-        </div>
-        <br />
-
-        <div class="tabber">
-
-            <div class="tabbertab" title="Graph">
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'graphsloggedusers') ?>
                 <br />
-                <?php
-				echo "<center>";
-				echo "<img src=\"library/graphs-logged_users.php?day=$day&month=$month&year=$year\" />";
-				echo "</center>";
-				?>
             </div>
+            <br />
+
+            <div class="tabber">
+
+                <div class="tabbertab" title="Graph">
+                    <br />
+                    <?php
+                    echo "<center>";
+                    echo "<img src=\"library/graphs-logged_users.php?day=$day&month=$month&year=$year\" />";
+                    echo "</center>";
+                    ?>
+                </div>
+            </div>
+
+
+            <?php
+            include('include/config/logging.php');
+            ?>
+
         </div>
-
-
-        <?php
-		include('include/config/logging.php');
-		?>
-
     </div>
 </div>
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 
 </div>

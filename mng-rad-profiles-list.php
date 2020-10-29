@@ -43,60 +43,61 @@ include("menu-mng-rad-profiles.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradprofiles.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradprofiles.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngradprofileslist') ?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngradprofileslist') ?>
+                <br />
+            </div>
             <br />
-        </div>
-        <br />
 
-        <?php
+            <?php
 
-		include 'library/opendb.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+			include 'library/opendb.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page	
-		$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName), count(distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username)) " .
-			" AS Users FROM " .
-			$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " ON " .
-			$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName=" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName GROUP BY " .
-			$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName " .
-			" UNION " .
-			" SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName), count(distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username)) FROM " .
-			$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " ON " .
-			$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName=" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName GROUP BY " .
-			$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName;";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page	
+			$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName), count(distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username)) " .
+				" AS Users FROM " .
+				$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " ON " .
+				$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName=" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName GROUP BY " .
+				$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName " .
+				" UNION " .
+				" SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName), count(distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username)) FROM " .
+				$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " ON " .
+				$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName=" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName GROUP BY " .
+				$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName;";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
 
-		$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName), count(distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username)) " .
-			" AS Users FROM " .
-			$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " ON " .
-			$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName=" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName GROUP BY " .
-			$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName " .
-			" UNION " .
-			" SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName), count(distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username)) FROM " .
-			$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " ON " .
-			$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName=" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName GROUP BY " .
-			$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName " .
-			" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
+			$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName), count(distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username)) " .
+				" AS Users FROM " .
+				$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " ON " .
+				$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName=" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName GROUP BY " .
+				$configValues['CONFIG_DB_TBL_RADGROUPREPLY'] . ".GroupName " .
+				" UNION " .
+				" SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName), count(distinct(" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".username)) FROM " .
+				$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . " LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " ON " .
+				$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName=" . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . ".GroupName GROUP BY " .
+				$configValues['CONFIG_DB_TBL_RADGROUPCHECK'] . ".GroupName " .
+				" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
-		echo "<form name='listprofiles' method='post' action='mng-rad-profiles-del.php'>";
+			echo "<form name='listprofiles' method='post' action='mng-rad-profiles-del.php'>";
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			echo "<table border='0' class='table1'>\n";
+			echo "
 		<thead>
 			<tr>
 			<th colspan='10' align='left'>
@@ -108,20 +109,20 @@ include("menu-mng-rad-profiles.php");
 			<br/><br/>
 	";
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-		echo "	</th></tr>
+			echo "	</th></tr>
 			</thead>
 	";
 
-		if ($orderType == "asc") {
-			$orderTypeNextPage = "desc";
-		} else  if ($orderType == "desc") {
-			$orderTypeNextPage = "asc";
-		}
+			if ($orderType == "asc") {
+				$orderTypeNextPage = "desc";
+			} else  if ($orderType == "desc") {
+				$orderTypeNextPage = "asc";
+			}
 
-		echo "<thread> <tr>
+			echo "<thread> <tr>
 		<th scope='col'>
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=groupname&orderType=$orderTypeNextPage\">
 		" . t('all', 'Groupname') . "</a>
@@ -133,8 +134,8 @@ include("menu-mng-rad-profiles.php");
 		</th>
 
 	</tr> </thread>";
-		while ($row = $res->fetchRow()) {
-			echo "<tr>
+			while ($row = $res->fetchRow()) {
+				echo "<tr>
 			<td> <input type='checkbox' name='profile[]' value='$row[0]'>
 				<a class='tablenovisit' href='#'
 								onclick='javascript:return false;'
@@ -144,30 +145,31 @@ include("menu-mng-rad-profiles.php");
 				>$row[0]</a></td>
 			<td>$row[1]</td>
 		</tr>";
-		}
+			}
 
-		echo "
+			echo "
 		<tfoot>
 			<tr>
 			<th colspan='10' align='left'>
 	";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType);
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType);
+			echo "
 			</th>
 			</tr>
 		</tfoot>
 	";
 
-		echo "</table></form>";
+			echo "</table></form>";
 
-		include 'library/closedb.php';
-		?>
+			include 'library/closedb.php';
+			?>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+            <?php
+			include('include/config/logging.php');
+			?>
 
+        </div>
     </div>
 </div>
 <div id="footer">

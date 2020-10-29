@@ -34,7 +34,7 @@
             // include_once ("include/menu/accounting-subnav.php");
             include_once("./_partials/navbar.php");
             ?>
-            <br>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -42,7 +42,7 @@
                         <h2>Accounting</h2>
 
                         <h3>Custom Query</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <form name="acctcustomquery" action="acct-custom-query.php" method="get" class="sidebar">
 

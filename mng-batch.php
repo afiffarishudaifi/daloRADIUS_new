@@ -28,12 +28,14 @@ include("menu-mng-batch.php"); ?>
 <!-- <div id="contentnorightbar"> -->
 <div class="col-lg-9">
     <div class="card">
-        <h2 id="Intro"><a href="#"><?php echo t('Intro', 'mngbatch.php') ?></a></h2>
-        <p>
-        </p>
-        <?php
-        include('include/config/logging.php');
-        ?>
+        <div class="card-body">
+            <h2 id="Intro"><a href="#"><?php echo t('Intro', 'mngbatch.php') ?></a></h2>
+            <p>
+            </p>
+            <?php
+            include('include/config/logging.php');
+            ?>
+        </div>
     </div>
 </div>
 <div id="footer"> <?php

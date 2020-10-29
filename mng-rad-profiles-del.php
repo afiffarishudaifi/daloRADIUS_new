@@ -131,53 +131,55 @@ include("menu-mng-rad-profiles.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradprofilesdel.php') ?>
-                :: <?php if (isset($profile)) {
-						echo $profile;
-					} ?><h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradprofilesdel.php') ?>
+                    :: <?php if (isset($profile)) {
+							echo $profile;
+						} ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngradprofilesdel') ?>
-            <br />
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngradprofilesdel') ?>
+                <br />
+            </div>
+            <?php
+			include_once('include/management/actionMessages.php');
+			?>
+
+            <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                    <fieldset>
+
+                        <h302> <?php echo t('title', 'ProfileInfo') ?> </h302>
+                        <br />
+
+                        <label for='profile' class='form'>Profile Name</label>
+                        <input name='profile[]' type='text' id='profile' value='<?php echo $profile ?>' tabindex=100 />
+                        <br />
+
+                        <label for='profile' class='form'>Remove all user associations with this profile(s)</label>
+                        <input name='profile_delete_assoc' type='checkbox' id='profile_delete_assoc' value='1'
+                            tabindex=100 />
+                        <br />
+
+                        <br /><br />
+                        <hr><br />
+
+                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
+
+                    </fieldset>
+
+                </form>
+            </div>
+
+
+            <?php
+			include('include/config/logging.php');
+			?>
+
         </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
-
-        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-                <fieldset>
-
-                    <h302> <?php echo t('title', 'ProfileInfo') ?> </h302>
-                    <br />
-
-                    <label for='profile' class='form'>Profile Name</label>
-                    <input name='profile[]' type='text' id='profile' value='<?php echo $profile ?>' tabindex=100 />
-                    <br />
-
-                    <label for='profile' class='form'>Remove all user associations with this profile(s)</label>
-                    <input name='profile_delete_assoc' type='checkbox' id='profile_delete_assoc' value='1'
-                        tabindex=100 />
-                    <br />
-
-                    <br /><br />
-                    <hr><br />
-
-                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-
-                </fieldset>
-
-            </form>
-        </div>
-
-
-        <?php
-		include('include/config/logging.php');
-		?>
-
     </div>
 </div>
 <div id="footer">

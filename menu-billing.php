@@ -19,17 +19,17 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-	include_once("lang/main.php");
-	?>
+    include_once("lang/main.php");
+    ?>
     <div id="wrapper">
         <div id="innerwrapper">
 
             <?php
-			$m_active = "Billing";
-			include_once("./_partials/navbar.php");
-			include_once("./_partials/js.php");
-			?>
-            <br>
+            $m_active = "Billing";
+            include_once("./_partials/navbar.php");
+            include_once("./_partials/js.php");
+            ?>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -37,7 +37,7 @@
                         <h2>Billing</h2>
 
                         <h3>Billing Engine</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="javascript:document.billprepaidhotspot.submit();""><b>&raquo;</b>Prepaid Accounting</a>
 							<form name=" billprepaidhotspot" action="bill-prepaid.php" method="get" class="sidebar">
@@ -46,20 +46,20 @@
                                             <?php
 
 
-											include 'library/opendb.php';
+                                            include 'library/opendb.php';
 
-											// Grabing the last 
+                                            // Grabing the last 
 
-											$sql = "select name from " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . "";
-											$res = $dbSocket->query($sql);
+                                            $sql = "select name from " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . "";
+                                            $res = $dbSocket->query($sql);
 
-											while ($row = $res->fetchRow()) {
-												echo "
+                                            while ($row = $res->fetchRow()) {
+                                                echo "
                         <option value='$row[0]'> $row[0]
 			";
-											}
-											include 'library/closedb.php';
-											?>
+                                            }
+                                            include 'library/closedb.php';
+                                            ?>
                                     </select><br />
 
 
@@ -88,21 +88,21 @@
                                             <?php
 
 
-											include 'library/opendb.php';
+                                            include 'library/opendb.php';
 
-											// Grabing the list of hotspots 
+                                            // Grabing the list of hotspots 
 
-											$sql = "select name from " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . "";
-											$res = $dbSocket->query($sql);
+                                            $sql = "select name from " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . "";
+                                            $res = $dbSocket->query($sql);
 
-											while ($row = $res->fetchRow()) {
-												echo "
+                                            while ($row = $res->fetchRow()) {
+                                                echo "
                         <option value='$row[0]'> $row[0]
 			";
-											}
+                                            }
 
-											include 'library/closedb.php';
-											?>
+                                            include 'library/closedb.php';
+                                            ?>
                                     </select><br />
 
 
@@ -124,7 +124,7 @@
                         </ul>
 
                         <h3>Rates Management</h3>
-                        <ul class="">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="bill-rates-list.php"><b>&raquo;</b>Show rates</a></li>
                             <li><a href="bill-rates-new.php"><b>&raquo;</b>New rate</a></li>
@@ -148,30 +148,30 @@
 
                 <?php
 
-				if ((isset($actionStatus)) && ($actionStatus == "success")) {
-					echo <<<EOF
+                if ((isset($actionStatus)) && ($actionStatus == "success")) {
+                    echo <<<EOF
                         <div id="contentnorightbar">
                         <h9 id="Intro"> Success </h9>
                         <br/><br/>
                         <font color='#0000FF'>
 EOF;
-					echo $actionMsg;
+                    echo $actionMsg;
 
-					echo "</font></div>";
-				}
+                    echo "</font></div>";
+                }
 
 
-				if ((isset($actionStatus)) && ($actionStatus == "failure")) {
-					echo <<<EOF
+                if ((isset($actionStatus)) && ($actionStatus == "failure")) {
+                    echo <<<EOF
                         <div id="contentnorightbar">
                         <h8 id="Intro"> Failure </h8>
                         <br/><br/>
                         <font color='#FF0000'>
 EOF;
-					echo $actionMsg;
+                    echo $actionMsg;
 
-					echo "</font></div>";
-				}
+                    echo "</font></div>";
+                }
 
 
-				?>
+                ?>

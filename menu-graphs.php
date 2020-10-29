@@ -14,20 +14,20 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-	include_once("lang/main.php");
-	?>
+    include_once("lang/main.php");
+    ?>
 
     <div id="wrapper">
         <div id="innerwrapper">
 
             <?php
-			$m_active = "Graphs";
-			include_once("./_partials/navbar.php");
-			include_once("./_partials/js.php");
-			include_once("include/management/autocomplete.php");
-			?>
+            $m_active = "Graphs";
+            include_once("./_partials/navbar.php");
+            include_once("./_partials/js.php");
+            include_once("include/management/autocomplete.php");
+            ?>
 
-            <br>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -35,7 +35,7 @@
                         <h2>Graphs</h2>
 
                         <h3>User Graph</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="javascript:document.overall_logins.submit();"><b>&raquo;</b>
                                     <img src='images/icons/graphsGeneral.gif' border='0'>
@@ -101,7 +101,7 @@
                         </ul>
 
                         <h3>Statistics</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
 
                             <li><a href="javascript:document.alltime_logins.submit();"><b>&raquo;</b>
@@ -146,12 +146,12 @@
                                     <?php $d = date("j"); ?>
                                     <select class="generic" name="day" type="text">
                                         <?php
-										$i = 1;
-										while ($i < 32) :
-										?>
+                                        $i = 1;
+                                        while ($i < 32) :
+                                        ?>
                                         <option value="<?php echo $i ?>" <?php if ($d == $i) echo "selected" ?>>
                                             <?php echo $i ?> </option>
-                                        <?php $i++; 	?>
+                                        <?php $i++;     ?>
                                         <?php endwhile; ?>
                                     </select>
                                     <?php echo t('graphs', 'Month'); ?>:</br>
@@ -185,11 +185,11 @@
                                     <?php echo t('graphs', 'Year'); ?>:</br>
                                     <select class="generic" name="year" type="text">
                                         <?php
-										for ($i = 0; $i <= 10; $i++) {
-											$myDate = date('Y', mktime(0, 0, 0, 1, 1, (date('Y') - $i)));
-											echo "<option value='$myDate'>$myDate</option>";
-										}
-										?>
+                                        for ($i = 0; $i <= 10; $i++) {
+                                            $myDate = date('Y', mktime(0, 0, 0, 1, 1, (date('Y') - $i)));
+                                            echo "<option value='$myDate'>$myDate</option>";
+                                        }
+                                        ?>
                                     </select>
 
                         </ul>
@@ -201,10 +201,10 @@
                 </div>
 
                 <?php
-				include_once("include/management/autocomplete.php");
+                include_once("include/management/autocomplete.php");
 
-				if ($autoComplete) {
-					echo "<script type=\"text/javascript\">
+                if ($autoComplete) {
+                    echo "<script type=\"text/javascript\">
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('usernameLogins','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
 
@@ -214,8 +214,8 @@
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('usernameUploads','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
                       </script>";
-				}
-				?>
+                }
+                ?>
 
                 <script type="text/javascript">
                 var tooltipObj = new DHTMLgoodies_formTooltip();

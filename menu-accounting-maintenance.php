@@ -30,7 +30,7 @@
             include_once("./_partials/navbar.php");
             ?>
 
-            <br>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -38,7 +38,7 @@
                         <h2>Accounting</h2>
 
                         <h3>Maintenance</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a href="acct-maintenance-cleanup.php"><b>&raquo;</b><?php echo t('button', 'CleanupStaleSessions') ?>
                                 </a></li>

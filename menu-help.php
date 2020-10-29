@@ -13,7 +13,7 @@
                 include_once("./_partials/js.php");
                 ?>
 
-             <br>
+
              <div class="row">
                  <div class="col-lg-3">
                      <div class="card" id="sidebar">

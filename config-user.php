@@ -34,17 +34,17 @@ include("library/config_read.php");
 
 if (isset($_REQUEST['submit'])) {
 
-	if (isset($_REQUEST['config_user_allowedrandomchars'])) {
-		$config_user_allowedrandomchars = str_replace('\'', '', $_REQUEST['config_user_allowedrandomchars']);
-		$config_user_allowedrandomchars = str_replace('"', '', $config_user_allowedrandomchars);
-		$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] = $config_user_allowedrandomchars;
-	}
+    if (isset($_REQUEST['config_user_allowedrandomchars'])) {
+        $config_user_allowedrandomchars = str_replace('\'', '', $_REQUEST['config_user_allowedrandomchars']);
+        $config_user_allowedrandomchars = str_replace('"', '', $config_user_allowedrandomchars);
+        $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] = $config_user_allowedrandomchars;
+    }
 
-	// this should probably move to some other page at some point
-	if (isset($_REQUEST['config_db_pass_encrypt']))
-		$configValues['CONFIG_DB_PASSWORD_ENCRYPTION'] = $_REQUEST['config_db_pass_encrypt'];
+    // this should probably move to some other page at some point
+    if (isset($_REQUEST['config_db_pass_encrypt']))
+        $configValues['CONFIG_DB_PASSWORD_ENCRYPTION'] = $_REQUEST['config_db_pass_encrypt'];
 
-	include("library/config_write.php");
+    include("library/config_write.php");
 }
 
 
@@ -61,85 +61,87 @@ include_once("library/tabber/tab-layout.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configuser.php'); ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configuser.php'); ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'configuser') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'configuser') ?>
+                <br />
+            </div>
+            <?php
+            include_once('include/management/actionMessages.php');
+            ?>
 
-        <form name="usersettings" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <form name="usersettings" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-            <div class="tabber">
+                <div class="tabber">
 
-                <div class="tabbertab" title="<?php echo t('title', 'Settings'); ?>">
+                    <div class="tabbertab" title="<?php echo t('title', 'Settings'); ?>">
 
-                    <fieldset>
+                        <fieldset>
 
-                        <h302><?php echo t('title', 'Settings'); ?></h302>
-                        <br />
+                            <h302><?php echo t('title', 'Settings'); ?></h302>
+                            <br />
 
-                        <ul>
+                            <ul>
 
-                            <li class='fieldset'>
-                                <label for='' class='form'><?php echo t('all', 'DBPasswordEncryption') ?></label>
-                                <select class='form' name="config_db_pass_encrypt">
-                                    <option value="<?php echo $configValues['CONFIG_DB_PASSWORD_ENCRYPTION'] ?>">
-                                        <?php echo $configValues['CONFIG_DB_PASSWORD_ENCRYPTION'] ?> </option>
-                                    <option value=""></option>
-                                    <option value="cleartext">cleartext</option>
-                                    <option value="crypt">unix crypt</option>
-                                    <option value="md5">md5</option>
-                                </select>
-                            </li>
-
-
-                            <li class='fieldset'>
-                                <label for='config_user_allowedrandomchars'
-                                    class='form'><?php echo t('all', 'RandomChars') ?></label>
-                                <input type='text'
-                                    value="<?php echo htmlentities($configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']) ?>"
-                                    name="config_user_allowedrandomchars" />
-                            </li>
+                                <li class='fieldset'>
+                                    <label for='' class='form'><?php echo t('all', 'DBPasswordEncryption') ?></label>
+                                    <select class='form' name="config_db_pass_encrypt">
+                                        <option value="<?php echo $configValues['CONFIG_DB_PASSWORD_ENCRYPTION'] ?>">
+                                            <?php echo $configValues['CONFIG_DB_PASSWORD_ENCRYPTION'] ?> </option>
+                                        <option value=""></option>
+                                        <option value="cleartext">cleartext</option>
+                                        <option value="crypt">unix crypt</option>
+                                        <option value="md5">md5</option>
+                                    </select>
+                                </li>
 
 
+                                <li class='fieldset'>
+                                    <label for='config_user_allowedrandomchars'
+                                        class='form'><?php echo t('all', 'RandomChars') ?></label>
+                                    <input type='text'
+                                        value="<?php echo htmlentities($configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']) ?>"
+                                        name="config_user_allowedrandomchars" />
+                                </li>
 
 
 
-                            <li class='fieldset'>
-                                <br />
-                                <hr><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    class='button' />
-                            </li>
 
-                        </ul>
 
-                    </fieldset>
+                                <li class='fieldset'>
+                                    <br />
+                                    <hr><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                        class='button' />
+                                </li>
+
+                            </ul>
+
+                        </fieldset>
+
+                    </div>
 
                 </div>
 
-            </div>
+
+            </form>
 
 
-        </form>
+            <br /><br />
 
-
-        <br /><br />
-
+        </div>
     </div>
 </div>
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 </div>
 

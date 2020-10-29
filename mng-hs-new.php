@@ -117,101 +117,104 @@ include("menu-mng-hs.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mnghsnew.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mnghsnew.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mnghsnew') ?>
-            <br />
-        </div>
-        <?php
-        include_once('include/management/actionMessages.php');
-        ?>
-
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <div class="tabber">
-
-                <div class="tabbertab" title="<?php echo t('title', 'HotspotInfo'); ?>">
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'HotspotInfo'); ?> </h302>
-                        <br />
-
-                        <ul>
-
-                            <li class='fieldset'>
-                                <label for='name' class='form'><?php echo t('all', 'HotSpotName') ?></label>
-                                <input name='name' type='text' id='name' value='' tabindex=100 />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('hotspotNameTooltip')" />
-
-                                <div id='hotspotNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'hotspotNameTooltip') ?>
-                                </div>
-                            </li>
-
-                            <li class='fieldset'>
-                                <label for='macaddress' class='form'><?php echo t('all', 'MACAddress') ?></label>
-                                <input name='macaddress' type='text' id='macaddress' value='' tabindex=101 />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('hotspotMacaddressTooltip')" />
-
-                                <div id='hotspotMacaddressTooltip' style='display:none;visibility:visible'
-                                    class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'hotspotMacaddressTooltip') ?>
-                                </div>
-                            </li>
-
-                            <li class='fieldset'>
-                                <label for='geocode' class='form'><?php echo t('all', 'Geocode') ?></label>
-                                <input name='geocode' type='text' id='geocode' value='' tabindex=102 />
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('geocodeTooltip')" />
-
-                                <div id='geocodeTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'geocodeTooltip') ?>
-                                </div>
-                            </li>
-
-                            <li class='fieldset'>
-                                <br />
-                                <hr><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    tabindex=10000 class='button' />
-                            </li>
-
-                        </ul>
-                    </fieldset>
-
-                </div>
-
-
-                <div class="tabbertab" title="<?php echo t('title', 'ContactInfo'); ?>">
-
-                    <?php
-                    include_once('include/management/contactinfo.php');
-                    ?>
-
-                </div>
-
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mnghsnew') ?>
+                <br />
             </div>
+            <?php
+            include_once('include/management/actionMessages.php');
+            ?>
 
-        </form>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-        <?php
-        include('include/config/logging.php');
-        ?>
+                <div class="tabber">
 
+                    <div class="tabbertab" title="<?php echo t('title', 'HotspotInfo'); ?>">
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'HotspotInfo'); ?> </h302>
+                            <br />
+
+                            <ul>
+
+                                <li class='fieldset'>
+                                    <label for='name' class='form'><?php echo t('all', 'HotSpotName') ?></label>
+                                    <input name='name' type='text' id='name' value='' tabindex=100 />
+                                    <img src='images/icons/comment.png' alt='Tip' border='0'
+                                        onClick="javascript:toggleShowDiv('hotspotNameTooltip')" />
+
+                                    <div id='hotspotNameTooltip' style='display:none;visibility:visible'
+                                        class='ToolTip'>
+                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                        <?php echo t('Tooltip', 'hotspotNameTooltip') ?>
+                                    </div>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='macaddress' class='form'><?php echo t('all', 'MACAddress') ?></label>
+                                    <input name='macaddress' type='text' id='macaddress' value='' tabindex=101 />
+                                    <img src='images/icons/comment.png' alt='Tip' border='0'
+                                        onClick="javascript:toggleShowDiv('hotspotMacaddressTooltip')" />
+
+                                    <div id='hotspotMacaddressTooltip' style='display:none;visibility:visible'
+                                        class='ToolTip'>
+                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                        <?php echo t('Tooltip', 'hotspotMacaddressTooltip') ?>
+                                    </div>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='geocode' class='form'><?php echo t('all', 'Geocode') ?></label>
+                                    <input name='geocode' type='text' id='geocode' value='' tabindex=102 />
+                                    <img src='images/icons/comment.png' alt='Tip' border='0'
+                                        onClick="javascript:toggleShowDiv('geocodeTooltip')" />
+
+                                    <div id='geocodeTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                        <?php echo t('Tooltip', 'geocodeTooltip') ?>
+                                    </div>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <br />
+                                    <hr><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                        tabindex=10000 class='button' />
+                                </li>
+
+                            </ul>
+                        </fieldset>
+
+                    </div>
+
+
+                    <div class="tabbertab" title="<?php echo t('title', 'ContactInfo'); ?>">
+
+                        <?php
+                        include_once('include/management/contactinfo.php');
+                        ?>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <?php
+            include('include/config/logging.php');
+            ?>
+
+        </div>
     </div>
-</div>
 
+</div>
 <div id="footer">
 
     <?php

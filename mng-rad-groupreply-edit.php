@@ -121,64 +121,66 @@ include("menu-mng-rad-groups.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradgroupreplyedit.php') ?>
-                <?php echo $groupname ?><h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'mngradgroupreplyedit.php') ?>
+                    <?php echo $groupname ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'mngradgroupreplyedit') ?>
-            <br />
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'mngradgroupreplyedit') ?>
+                <br />
+            </div>
+            <?php
+			include_once('include/management/actionMessages.php');
+			?>
+
+            <form name="newuser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                <input type="hidden" value="<?php echo $groupname ?>" name="groupname" />
+                <input type="hidden" value="<?php echo $valueOld ?>" name="valueOld" />
+
+                <fieldset>
+
+                    <h302> <?php echo t('title', 'GroupInfo') ?> </h302>
+                    <br />
+
+                    <label for='attribute' class='form'><?php echo t('all', 'Attribute') ?></label>
+                    <input name='attribute' type='text' id='attribute' value='<?php echo $attribute ?>' tabindex=100 />
+                    <br />
+
+                    <label for='op' class='form'><?php echo t('all', 'Operator') ?></label>
+                    <select name='op' id='op' class='form' tabindex=101 />
+                    <option value='<?php echo $op ?>'><?php echo $op ?></option>
+                    <?php
+					include 'include/management/populate_selectbox.php';
+					drawOptions();
+					?>
+                    </select>
+                    <br />
+
+
+                    <label for='newvalue' class='form'><?php echo t('all', 'NewValue') ?></label>
+                    <input name='value' type='text' id='value' value='<?php echo $value ?>' tabindex=102 />
+                    <br />
+
+                    <br /><br />
+                    <hr><br />
+
+                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
+
+                </fieldset>
+
+            </form>
+
+
+
+
+            <?php
+			include('include/config/logging.php');
+			?>
+
         </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
-
-        <form name="newuser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <input type="hidden" value="<?php echo $groupname ?>" name="groupname" />
-            <input type="hidden" value="<?php echo $valueOld ?>" name="valueOld" />
-
-            <fieldset>
-
-                <h302> <?php echo t('title', 'GroupInfo') ?> </h302>
-                <br />
-
-                <label for='attribute' class='form'><?php echo t('all', 'Attribute') ?></label>
-                <input name='attribute' type='text' id='attribute' value='<?php echo $attribute ?>' tabindex=100 />
-                <br />
-
-                <label for='op' class='form'><?php echo t('all', 'Operator') ?></label>
-                <select name='op' id='op' class='form' tabindex=101 />
-                <option value='<?php echo $op ?>'><?php echo $op ?></option>
-                <?php
-				include 'include/management/populate_selectbox.php';
-				drawOptions();
-				?>
-                </select>
-                <br />
-
-
-                <label for='newvalue' class='form'><?php echo t('all', 'NewValue') ?></label>
-                <input name='value' type='text' id='value' value='<?php echo $value ?>' tabindex=102 />
-                <br />
-
-                <br /><br />
-                <hr><br />
-
-                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-
-            </fieldset>
-
-        </form>
-
-
-
-
-        <?php
-		include('include/config/logging.php');
-		?>
-
     </div>
 </div>
 <div id="footer">

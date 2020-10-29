@@ -19,17 +19,17 @@
 
 <body class="hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
     <?php
-        include_once("lang/main.php");
-        ?>
+    include_once("lang/main.php");
+    ?>
     <div id="wrapper">
         <div id="innerwrapper">
 
             <?php
-                        $m_active = "Billing";
-                        include_once("./_partials/navbar.php");
-                        include_once("./_partials/js.php");
-                        ?>
-            <br>
+            $m_active = "Billing";
+            include_once("./_partials/navbar.php");
+            include_once("./_partials/js.php");
+            ?>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -49,16 +49,15 @@
 
                                 <input name="startdate" type="text" id="startdate"
                                     value="<?php if (isset($billing_date_startdate)) echo $billing_date_startdate;
-                                                                                                                else echo date("Y-m-01"); ?>">
+                                                                                            else echo date("Y-m-01"); ?>">
 
                                 <img src="library/js_date/calendar.gif"
                                     onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
                                 <div id="chooserSpan" class="dateChooser select-free"
                                     style="display: none; visibility: hidden;       width: 160px;"></div>
 
-                                <input name="enddate" type="text" id="enddate"
-                                    value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
-                                                                                                        else echo date("Y-m-t"); ?>">
+                                <input name="enddate" type="text" id="enddate" value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
+                                                                                        else echo date("Y-m-t"); ?>">
 
                                 <img src="library/js_date/calendar.gif"
                                     onclick="showChooser(this, 'enddate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
@@ -69,14 +68,14 @@
 
                                 <h109><?php echo t('all', 'Username'); ?></h109> <br />
                                 <input name="username" type="text" value="<?php if (isset($billing_history_username)) echo $billing_history_username;
-                                                                                                else echo "*"; ?>">
+                                                                            else echo "*"; ?>">
 
                                 <h109><?php echo t('all', 'BillAction'); ?></h109> <br />
                                 <select name="billaction" size="1">
                                     <option value="<?php if (isset($billing_history_billaction)) echo $billing_history_billaction;
-                                                                        else echo "%"; ?>">
+                                                    else echo "%"; ?>">
                                         <?php if (isset($billing_history_billaction)) echo $billing_history_billaction;
-                                                                else echo "Any"; ?>
+                                        else echo "Any"; ?>
                                     </option>
                                     <option value=""></option>
                                     <option value="Refill Session Time">Refill Session Time</option>

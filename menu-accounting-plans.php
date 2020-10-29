@@ -36,7 +36,7 @@
             include_once("include/management/autocomplete.php");
             ?>
 
-            <br>
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card" id="sidebar">
@@ -44,7 +44,7 @@
                         <h2>Plan Accounting</h2>
 
                         <h3>Accounting</h3>
-                        <ul class="subnav">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
 
                             <li><a
                                     href="javascript:document.acctdate.submit();"><b>&raquo;</b><?php echo t('button', 'PlanUsage') ?></a>

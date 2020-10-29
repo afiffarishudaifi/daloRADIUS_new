@@ -12,13 +12,13 @@ $operator = $_SESSION['operator_user']; ?>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link" href="index.php"
+                <a style="color:white;" class="nav-link" href="index.php"
                     <?php echo ($m_active == "Home") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Home'); ?>
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="mng-main.php"
+                <a style="color:white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="mng-main.php"
                     <?php echo ($m_active == "Management") ? "class=\"active\"" : "" ?>>
                     <?php echo t('menu', 'Managment'); ?> </a>
 
@@ -36,8 +36,8 @@ $operator = $_SESSION['operator_user']; ?>
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="rep-main.php"
+                <a style="color:white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="rep-main.php"
                     <?php echo ($m_active == "Reports") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Reports'); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -49,8 +49,8 @@ $operator = $_SESSION['operator_user']; ?>
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="acct-main.php"
+                <a style="color:white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="acct-main.php"
                     <?php echo ($m_active == "Accounting") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Accounting'); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -62,11 +62,12 @@ $operator = $_SESSION['operator_user']; ?>
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="acct-main.php"
+                <a style="color:white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="acct-main.php"
                     <?php echo ($m_active == "Billing") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Billing'); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="bill-main.php">Billing Main</a>
                     <a class="dropdown-item" href="bill-pos.php">POS</a>
                     <a class="dropdown-item" href="bill-plans.php">Plans</a>
                     <a class="dropdown-item" href="bill-rates.php">Rates</a>
@@ -77,17 +78,17 @@ $operator = $_SESSION['operator_user']; ?>
                 </div>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link" href="gis-main.php"
+                <a style="color:white;" class="nav-link" href="gis-main.php"
                     <?php echo ($m_active == "Gis") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Gis'); ?>
                 </a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link" href="graph-main.php"
+                <a style="color:white;" class="nav-link" href="graph-main.php"
                     <?php echo ($m_active == "Graphs") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Graphs'); ?>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="acct-main.php"
+                <a style="color:white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="acct-main.php"
                     <?php echo ($m_active == "Config") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Config'); ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -99,7 +100,7 @@ $operator = $_SESSION['operator_user']; ?>
                 </div>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link" href="help-main.php"
+                <a style="color:white;" class="nav-link" href="help-main.php"
                     <?php echo ($m_active == "Help") ? "class=\"active\"" : "" ?>><?php echo t('menu', 'Help'); ?>
                 </a>
             </li>
@@ -109,8 +110,8 @@ $operator = $_SESSION['operator_user']; ?>
             <li class="dropdown user user-menu">
                 <?php echo $operator;
                 ?>
-                <a href="graph-main.php">
-                    <span class="fa fa-sign-out" style="color: black;"></span>
+                <a style="color:white;" href="graph-main.php">
+                    <span class="fa fa-sign-out" style="color: white;"></span>
                 </a>
             </li>
         </ul>

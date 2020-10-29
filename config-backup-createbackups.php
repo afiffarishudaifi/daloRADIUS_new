@@ -358,455 +358,478 @@ include("menu-config-backup.php");
 
 
 <div class="col-lg-9">
-	<div class="card">
-
-		<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configbackupcreatebackups.php') ?>
-				<h144>&#x2754;</h144></a></h2>
-		<div id="helpPage" style="display:none;visibility:visible">
-			<?php echo t('helpPage', 'configbackupcreatebackups') ?>
-			<br />
-		</div>
-		<?php
-		include_once('include/management/actionMessages.php');
-		?>
-
-		<form name="createbackups" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-			<div class="tabber">
-
-				<div class="tabbertab" title="<?php echo t('title', 'FreeRADIUSTables'); ?>">
-
-					<fieldset>
-
-						<h302> <?php echo t('title', 'Backups'); ?> </h302>
-						<br />
-
-						<label class='form'>Select database tables to backup:</label>
-
-						<ul>
-
-							<li class='fieldset'>
-								<label for='backup_radacct' class='form'>radacct</label>
-								<select class='form' name="radacct">
-									<option value="<?php echo $radacctTable ?>"><?php echo $radacctTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_radcheck' class='form'>radcheck</label>
-								<select class='form' name="radcheck">
-									<option value="<?php echo $radcheckTable ?>"><?php echo $radcheckTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_radreply' class='form'>radreply</label>
-								<select class='form' name="radreply">
-									<option value="<?php echo $radreplyTable ?>"><?php echo $radreplyTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_radgroupcheck' class='form'>radgroupcheck</label>
-								<select class='form' name="radgroupcheck">
-									<option value="<?php echo $radgroupcheckTable ?>"><?php echo $radgroupcheckTable ?>
-									</option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_radgroupreply' class='form'>radgroupreply</label>
-								<select class='form' name="radgroupreply">
-									<option value="<?php echo $radgroupreplyTable ?>"><?php echo $radgroupreplyTable ?>
-									</option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_radusergroup' class='form'>radusergroup</label>
-								<select class='form' name="radusergroup">
-									<option value="<?php echo $radusergroupTable ?>"><?php echo $radusergroupTable ?>
-									</option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_radpostauth' class='form'>radpostauth</label>
-								<select class='form' name="radpostauth">
-									<option value="<?php echo $radpostauthTable ?>"><?php echo $radpostauthTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_ippool' class='form'>ippool</label>
-								<select class='form' name="ippool">
-									<option value="<?php echo $ippoolTable ?>"><?php echo $ippoolTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_nas' class='form'>nas</label>
-								<select class='form' name="nas">
-									<option value="<?php echo $nasTable ?>"><?php echo $nasTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<br />
-								<hr><br />
-								<input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-							</li>
-
-						</ul>
-					</fieldset>
-
-				</div>
-
-				<div class="tabbertab" title="<?php echo t('title', 'daloRADIUSTables'); ?>">
-
-					<fieldset>
-
-						<h302> <?php echo t('title', 'Backups'); ?> </h302>
-						<br />
-
-						<label class='form'>Select databases tables to backup:</label>
-
-						<ul>
-
-
-							<li class='fieldset'>
-								<label for='backup_dalooperators' class='form'>operators</label>
-								<select class='form' name="operators">
-									<option value="<?php echo $dalooperatorsTable ?>"><?php echo $dalooperatorsTable ?>
-									</option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_dalohotspots' class='form'>hotspots</label>
-								<select class='form' name="hotspots">
-									<option value="<?php echo $dalohotspotsTable ?>"><?php echo $dalohotspotsTable ?>
-									</option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_daloproxys' class='form'>proxys</label>
-								<select class='form' name="proxys">
-									<option value="<?php echo $daloproxysTable ?>"><?php echo $daloproxysTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_dalorealms' class='form'>realms</label>
-								<select class='form' name="realms">
-									<option value="<?php echo $dalorealmsTable ?>"><?php echo $dalorealmsTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_dalobilling_rates' class='form'>billing rates</label>
-								<select class='form' name="billing_rates">
-									<option value="<?php echo $dalobillingratesTable ?>">
-										<?php echo $dalobillingratesTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_dalobillingpaypal' class='form'>billing paypal</label>
-								<select class='form' name="billingpaypal">
-									<option value="<?php echo $dalobillingpaypalTable ?>">
-										<?php echo $dalobillingpaypalTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_dalouserinfo' class='form'>userinfo</label>
-								<select class='form' name="userinfo">
-									<option value="<?php echo $dalouserinfoTable ?>"><?php echo $dalouserinfoTable ?>
-									</option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_dictionary' class='form'>userbillinfo</label>
-								<select class='form' name="userbillinfo">
-									<option value="<?php echo $dalouserbillinfoTable ?>">
-										<?php echo $dalouserbillinfoTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_dictionary' class='form'>dictionary</label>
-								<select class='form' name="dictionary">
-									<option value="<?php echo $dictionaryTable ?>"><?php echo $dictionaryTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_billing_merchant' class='form'>billing merchant</label>
-								<select class='form' name="billing_merchant">
-									<option value="<?php echo $dalobillingmerchantTable ?>">
-										<?php echo $dalobillingmerchantTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_billing_plans' class='form'>billing plans</label>
-								<select class='form' name="billing_plans">
-									<option value="<?php echo $dalobillingplansTable ?>">
-										<?php echo $dalobillingplansTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_billing_history' class='form'>billing history</label>
-								<select class='form' name="billing_history">
-									<option value="<?php echo $dalobillinghistoryTable ?>">
-										<?php echo $dalobillinghistoryTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-							<li class='fieldset'>
-								<label for='backup_operators_acl' class='form'>operators_acl</label>
-								<select class='form' name="operators_acl">
-									<option value="<?php echo $dalooperatorsaclTable ?>">
-										<?php echo $dalooperatorsaclTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_operators_acl_files' class='form'>operators_acl_files</label>
-								<select class='form' name="operators_acl_files">
-									<option value="<?php echo $dalooperatorsaclfilesTable ?>">
-										<?php echo $dalooperatorsaclfilesTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-							<li class='fieldset'>
-								<label for='backup_batch_history' class='form'>batch_history</label>
-								<select class='form' name="batch_history">
-									<option value="<?php echo $dalobatchhistoryTable ?>">
-										<?php echo $dalobatchhistoryTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-							<li class='fieldset'>
-								<label for='backup_billing_plans_profiles' class='form'>billing_plans_profiles</label>
-								<select class='form' name="billing_plans_profiles">
-									<option value="<?php echo $dalobillingplansprofilesTable ?>">
-										<?php echo $dalobillingplansprofilesTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-							<li class='fieldset'>
-								<label for='backup_invoice' class='form'>invoice</label>
-								<select class='form' name="invoice">
-									<option value="<?php echo $daloinvoiceTable ?>"><?php echo $daloinvoiceTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-							<li class='fieldset'>
-								<label for='backup_invoice_items' class='form'>invoice_items</label>
-								<select class='form' name="invoice_items">
-									<option value="<?php echo $daloinvoiceitemsTable ?>">
-										<?php echo $daloinvoiceitemsTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-							<li class='fieldset'>
-								<label for='backup_invoice_status' class='form'>invoice_status</label>
-								<select class='form' name="invoice_status">
-									<option value="<?php echo $daloinvoicestatusTable ?>">
-										<?php echo $daloinvoicestatusTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-							<li class='fieldset'>
-								<label for='backup_invoice_type' class='form'>invoice_type</label>
-								<select class='form' name="invoice_type">
-									<option value="<?php echo $daloinvoicetypeTable ?>"><?php echo $daloinvoicetypeTable ?>
-									</option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-							<li class='fieldset'>
-								<label for='backup_payment' class='form'>payment</label>
-								<select class='form' name="payment">
-									<option value="<?php echo $dalopaymentTable ?>"><?php echo $dalopaymentTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-							<li class='fieldset'>
-								<label for='backup_payment_type' class='form'>payment_type</label>
-								<select class='form' name="payment_type">
-									<option value="<?php echo $dalopaymenttypeTable ?>"><?php echo $dalopaymenttypeTable ?>
-									</option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-							<li class='fieldset'>
-								<label for='backup_node' class='form'>node</label>
-								<select class='form' name="node">
-									<option value="<?php echo $dalonodeTable ?>"><?php echo $dalonodeTable ?></option>
-									<option value=""> </option>
-									<option value="no">no</option>
-									<option value="yes">yes</option>
-								</select>
-							</li>
-
-
-
-
-
-
-
-
-							<li class='fieldset'>
-								<br />
-								<hr><br />
-								<input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-							</li>
-
-						</ul>
-
-					</fieldset>
-
-				</div>
-			</div>
-
-
-		</form>
-
-
-		<?php
-		include('include/config/logging.php');
-		?>
-
-	</div>
+    <div class="card">
+        <div class="card-body">
+
+            <h2 id="Intro"><a href="#"
+                    onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'configbackupcreatebackups.php') ?>
+                    <h144>&#x2754;</h144></a></h2>
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'configbackupcreatebackups') ?>
+                <br />
+            </div>
+            <?php
+			include_once('include/management/actionMessages.php');
+			?>
+
+            <form name="createbackups" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+                <div class="tabber">
+
+                    <div class="tabbertab" title="<?php echo t('title', 'FreeRADIUSTables'); ?>">
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'Backups'); ?> </h302>
+                            <br />
+
+                            <label class='form'>Select database tables to backup:</label>
+
+                            <ul>
+
+                                <li class='fieldset'>
+                                    <label for='backup_radacct' class='form'>radacct</label>
+                                    <select class='form' name="radacct">
+                                        <option value="<?php echo $radacctTable ?>"><?php echo $radacctTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_radcheck' class='form'>radcheck</label>
+                                    <select class='form' name="radcheck">
+                                        <option value="<?php echo $radcheckTable ?>"><?php echo $radcheckTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_radreply' class='form'>radreply</label>
+                                    <select class='form' name="radreply">
+                                        <option value="<?php echo $radreplyTable ?>"><?php echo $radreplyTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_radgroupcheck' class='form'>radgroupcheck</label>
+                                    <select class='form' name="radgroupcheck">
+                                        <option value="<?php echo $radgroupcheckTable ?>">
+                                            <?php echo $radgroupcheckTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_radgroupreply' class='form'>radgroupreply</label>
+                                    <select class='form' name="radgroupreply">
+                                        <option value="<?php echo $radgroupreplyTable ?>">
+                                            <?php echo $radgroupreplyTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_radusergroup' class='form'>radusergroup</label>
+                                    <select class='form' name="radusergroup">
+                                        <option value="<?php echo $radusergroupTable ?>">
+                                            <?php echo $radusergroupTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_radpostauth' class='form'>radpostauth</label>
+                                    <select class='form' name="radpostauth">
+                                        <option value="<?php echo $radpostauthTable ?>"><?php echo $radpostauthTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_ippool' class='form'>ippool</label>
+                                    <select class='form' name="ippool">
+                                        <option value="<?php echo $ippoolTable ?>"><?php echo $ippoolTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_nas' class='form'>nas</label>
+                                    <select class='form' name="nas">
+                                        <option value="<?php echo $nasTable ?>"><?php echo $nasTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <br />
+                                    <hr><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                        class='button' />
+                                </li>
+
+                            </ul>
+                        </fieldset>
+
+                    </div>
+
+                    <div class="tabbertab" title="<?php echo t('title', 'daloRADIUSTables'); ?>">
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'Backups'); ?> </h302>
+                            <br />
+
+                            <label class='form'>Select databases tables to backup:</label>
+
+                            <ul>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_dalooperators' class='form'>operators</label>
+                                    <select class='form' name="operators">
+                                        <option value="<?php echo $dalooperatorsTable ?>">
+                                            <?php echo $dalooperatorsTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_dalohotspots' class='form'>hotspots</label>
+                                    <select class='form' name="hotspots">
+                                        <option value="<?php echo $dalohotspotsTable ?>">
+                                            <?php echo $dalohotspotsTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_daloproxys' class='form'>proxys</label>
+                                    <select class='form' name="proxys">
+                                        <option value="<?php echo $daloproxysTable ?>"><?php echo $daloproxysTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_dalorealms' class='form'>realms</label>
+                                    <select class='form' name="realms">
+                                        <option value="<?php echo $dalorealmsTable ?>"><?php echo $dalorealmsTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_dalobilling_rates' class='form'>billing rates</label>
+                                    <select class='form' name="billing_rates">
+                                        <option value="<?php echo $dalobillingratesTable ?>">
+                                            <?php echo $dalobillingratesTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_dalobillingpaypal' class='form'>billing paypal</label>
+                                    <select class='form' name="billingpaypal">
+                                        <option value="<?php echo $dalobillingpaypalTable ?>">
+                                            <?php echo $dalobillingpaypalTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_dalouserinfo' class='form'>userinfo</label>
+                                    <select class='form' name="userinfo">
+                                        <option value="<?php echo $dalouserinfoTable ?>">
+                                            <?php echo $dalouserinfoTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_dictionary' class='form'>userbillinfo</label>
+                                    <select class='form' name="userbillinfo">
+                                        <option value="<?php echo $dalouserbillinfoTable ?>">
+                                            <?php echo $dalouserbillinfoTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_dictionary' class='form'>dictionary</label>
+                                    <select class='form' name="dictionary">
+                                        <option value="<?php echo $dictionaryTable ?>"><?php echo $dictionaryTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_billing_merchant' class='form'>billing merchant</label>
+                                    <select class='form' name="billing_merchant">
+                                        <option value="<?php echo $dalobillingmerchantTable ?>">
+                                            <?php echo $dalobillingmerchantTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_billing_plans' class='form'>billing plans</label>
+                                    <select class='form' name="billing_plans">
+                                        <option value="<?php echo $dalobillingplansTable ?>">
+                                            <?php echo $dalobillingplansTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_billing_history' class='form'>billing history</label>
+                                    <select class='form' name="billing_history">
+                                        <option value="<?php echo $dalobillinghistoryTable ?>">
+                                            <?php echo $dalobillinghistoryTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_operators_acl' class='form'>operators_acl</label>
+                                    <select class='form' name="operators_acl">
+                                        <option value="<?php echo $dalooperatorsaclTable ?>">
+                                            <?php echo $dalooperatorsaclTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_operators_acl_files' class='form'>operators_acl_files</label>
+                                    <select class='form' name="operators_acl_files">
+                                        <option value="<?php echo $dalooperatorsaclfilesTable ?>">
+                                            <?php echo $dalooperatorsaclfilesTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_batch_history' class='form'>batch_history</label>
+                                    <select class='form' name="batch_history">
+                                        <option value="<?php echo $dalobatchhistoryTable ?>">
+                                            <?php echo $dalobatchhistoryTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_billing_plans_profiles'
+                                        class='form'>billing_plans_profiles</label>
+                                    <select class='form' name="billing_plans_profiles">
+                                        <option value="<?php echo $dalobillingplansprofilesTable ?>">
+                                            <?php echo $dalobillingplansprofilesTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_invoice' class='form'>invoice</label>
+                                    <select class='form' name="invoice">
+                                        <option value="<?php echo $daloinvoiceTable ?>"><?php echo $daloinvoiceTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_invoice_items' class='form'>invoice_items</label>
+                                    <select class='form' name="invoice_items">
+                                        <option value="<?php echo $daloinvoiceitemsTable ?>">
+                                            <?php echo $daloinvoiceitemsTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_invoice_status' class='form'>invoice_status</label>
+                                    <select class='form' name="invoice_status">
+                                        <option value="<?php echo $daloinvoicestatusTable ?>">
+                                            <?php echo $daloinvoicestatusTable ?></option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_invoice_type' class='form'>invoice_type</label>
+                                    <select class='form' name="invoice_type">
+                                        <option value="<?php echo $daloinvoicetypeTable ?>">
+                                            <?php echo $daloinvoicetypeTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='backup_payment' class='form'>payment</label>
+                                    <select class='form' name="payment">
+                                        <option value="<?php echo $dalopaymentTable ?>"><?php echo $dalopaymentTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_payment_type' class='form'>payment_type</label>
+                                    <select class='form' name="payment_type">
+                                        <option value="<?php echo $dalopaymenttypeTable ?>">
+                                            <?php echo $dalopaymenttypeTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+                                <li class='fieldset'>
+                                    <label for='backup_node' class='form'>node</label>
+                                    <select class='form' name="node">
+                                        <option value="<?php echo $dalonodeTable ?>"><?php echo $dalonodeTable ?>
+                                        </option>
+                                        <option value=""> </option>
+                                        <option value="no">no</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </li>
+
+
+
+
+
+
+
+
+                                <li class='fieldset'>
+                                    <br />
+                                    <hr><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
+                                        class='button' />
+                                </li>
+
+                            </ul>
+
+                        </fieldset>
+
+                    </div>
+                </div>
+
+
+            </form>
+
+
+            <?php
+			include('include/config/logging.php');
+			?>
+
+        </div>
+    </div>
 </div>
 <div id="footer">
 
-	<?php
+    <?php
 	include 'page-footer.php';
 	?>
 
