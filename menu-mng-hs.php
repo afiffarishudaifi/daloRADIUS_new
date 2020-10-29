@@ -22,7 +22,7 @@
                         <h2>Management</h2>
 
                         <h3>Hotspots Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="mng-hs-list.php"><b>&raquo;</b><?php echo t('button', 'ListHotspots') ?></a>
                             </li>

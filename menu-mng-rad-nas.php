@@ -23,7 +23,7 @@
                         <h2>Management</h2>
 
                         <h3>NAS Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="mng-rad-nas-list.php"
                                     tabindex=1><b>&raquo;</b><?php echo t('button', 'ListNAS') ?></a>

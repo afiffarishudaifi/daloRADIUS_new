@@ -24,7 +24,7 @@
                         <h2>Management</h2>
 
                         <h3>Attributes Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="javascript:document.mngradattributeslist.submit();"><b>&raquo;</b><?php echo t('button', 'ListAttributesforVendor') ?>
                                 </a>

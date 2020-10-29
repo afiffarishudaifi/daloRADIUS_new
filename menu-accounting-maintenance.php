@@ -38,7 +38,7 @@
                         <h2>Accounting</h2>
 
                         <h3>Maintenance</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="acct-maintenance-cleanup.php"><b>&raquo;</b><?php echo t('button', 'CleanupStaleSessions') ?>
                                 </a></li>

@@ -31,7 +31,7 @@
 
                         <h3>Status</h3>
 
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a
                                     href="rep-stat-server.php"><b>&raquo;</b><?php echo t('button', 'ServerStatus') ?></a>

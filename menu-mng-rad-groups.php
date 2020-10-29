@@ -22,7 +22,7 @@
                         <h2>Management</h2>
 
                         <h3>Group Reply Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="mng-rad-groupreply-list.php"><b>&raquo;</b>
                                     <img src='images/icons/groupsList.png' border='0'>
@@ -58,7 +58,7 @@
                         </ul>
 
                         <h3>Group Check Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="mng-rad-groupcheck-list.php"><b>&raquo;</b>
                                     <img src='images/icons/groupsList.png' border='0'>

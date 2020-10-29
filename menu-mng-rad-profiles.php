@@ -19,7 +19,7 @@
                         <h2>Management</h2>
 
                         <h3>Profiles Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="mng-rad-profiles-list.php"><b>&raquo;</b>
                                     <img src='images/icons/groupsList.png' border='0'>

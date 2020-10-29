@@ -43,7 +43,7 @@
                         <h2>Accounting</h2>
 
                         <h3>Hotspots Accounting</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="javascript:document.accthotspot.submit();"><b>&raquo;</b><?php echo t('button', 'HotspotAccounting') ?><a>
                                         <form name="accthotspot" action="acct-hotspot-accounting.php" method="post"

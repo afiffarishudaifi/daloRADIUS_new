@@ -42,7 +42,7 @@
                         <h2>Accounting</h2>
 
                         <h3>Custom Query</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <form name="acctcustomquery" action="acct-custom-query.php" method="get" class="sidebar">
 

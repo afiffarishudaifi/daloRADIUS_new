@@ -35,7 +35,7 @@
                         <h2>Graphs</h2>
 
                         <h3>User Graph</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="javascript:document.overall_logins.submit();"><b>&raquo;</b>
                                     <img src='images/icons/graphsGeneral.gif' border='0'>
@@ -101,7 +101,7 @@
                         </ul>
 
                         <h3>Statistics</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
 
                             <li><a href="javascript:document.alltime_logins.submit();"><b>&raquo;</b>
@@ -207,10 +207,8 @@
                     echo "<script type=\"text/javascript\">
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('usernameLogins','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
-
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('usernameDownloads','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
-
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('usernameUploads','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
                       </script>";

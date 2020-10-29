@@ -22,7 +22,7 @@
                         <h2>Management</h2>
 
                         <h3>Batch Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="mng-batch-list.php"><b>&raquo;</b>
                                     <img src='images/icons/userList.gif' border='0'>

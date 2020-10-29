@@ -44,7 +44,7 @@
                         <h2>Accounting</h2>
 
                         <h3>Users Accounting</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a
                                     href="javascript:document.acctusername.submit();"><b>&raquo;</b><?php echo t('button', 'UserAccounting') ?></a>
