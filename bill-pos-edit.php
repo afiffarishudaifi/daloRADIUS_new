@@ -522,46 +522,46 @@ if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes")
 <script type="text/javascript" src="library/javascript/ajaxGeneric.js"></script>
 
 <script type="text/javascript">
-function disableUser() {
-    strUsername = "username=<?php echo urlencode($username) ?>";
-    if (confirm("You are about to disable this user account\nDo you want to continue?")) {
-        ajaxGeneric("include/management/userOperations.php", "userDisable", "returnMessages", strUsername);
-        window.location.reload();
-        return true;
-    }
-}
+        function disableUser() {
+                strUsername = "username=<?php echo urlencode($username) ?>";
+                if (confirm("You are about to disable this user account\nDo you want to continue?")) {
+                        ajaxGeneric("include/management/userOperations.php", "userDisable", "returnMessages", strUsername);
+                        window.location.reload();
+                        return true;
+                }
+        }
 
-function enableUser() {
-    strUsername = "username=<?php echo urlencode($username) ?>";
-    if (confirm("You are about to enable this user account\nDo you want to continue?")) {
-        ajaxGeneric("include/management/userOperations.php", "userEnable", "returnMessages", strUsername);
-        window.location.reload();
-        return true;
-    }
-}
+        function enableUser() {
+                strUsername = "username=<?php echo urlencode($username) ?>";
+                if (confirm("You are about to enable this user account\nDo you want to continue?")) {
+                        ajaxGeneric("include/management/userOperations.php", "userEnable", "returnMessages", strUsername);
+                        window.location.reload();
+                        return true;
+                }
+        }
 
-function refillSessionTime() {
-    strUsername = "username=<?php echo urlencode($username) ?>";
-    if (confirm(
-            "You are about to refill session time for this user account\nDo you want to continue?\n\nSuch action will also bill the user if set so in the plant the user is associated with!"
-        )) {
-        ajaxGeneric("include/management/userOperations.php", "refillSessionTime", "returnMessages", strUsername);
-        window.location.reload();
-        return true;
-    }
-}
+        function refillSessionTime() {
+                strUsername = "username=<?php echo urlencode($username) ?>";
+                if (confirm(
+                                "You are about to refill session time for this user account\nDo you want to continue?\n\nSuch action will also bill the user if set so in the plant the user is associated with!"
+                        )) {
+                        ajaxGeneric("include/management/userOperations.php", "refillSessionTime", "returnMessages", strUsername);
+                        window.location.reload();
+                        return true;
+                }
+        }
 
 
-function refillSessionTraffic() {
-    strUsername = "username=<?php echo urlencode($username) ?>";
-    if (confirm(
-            "You are about to refill session traffic for this user account\nDo you want to continue?\n\nSuch action will also bill the user if set so in the plant the user is associated with!"
-        )) {
-        ajaxGeneric("include/management/userOperations.php", "refillSessionTraffic", "returnMessages", strUsername);
-        window.location.reload();
-        return true;
-    }
-}
+        function refillSessionTraffic() {
+                strUsername = "username=<?php echo urlencode($username) ?>";
+                if (confirm(
+                                "You are about to refill session traffic for this user account\nDo you want to continue?\n\nSuch action will also bill the user if set so in the plant the user is associated with!"
+                        )) {
+                        ajaxGeneric("include/management/userOperations.php", "refillSessionTraffic", "returnMessages", strUsername);
+                        window.location.reload();
+                        return true;
+                }
+        }
 </script>
 
 <?php
@@ -577,245 +577,226 @@ include("menu-bill-pos.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+        <div class="card">
+                <div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billposedit.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+                        <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billposedit.php') ?>
+                                        <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'billposedit') ?>
-            <br />
-        </div>
-        <?php
-                include_once('include/management/actionMessages.php');
-                ?>
-
-        <?php
-                include_once('include/management/userOperations.php');
-                checkDisabled($username);
-                ?>
-
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <div class="tabber">
-
-                <div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
-
-                    <fieldset>
+                        <div id="helpPage" style="display:none;visibility:visible">
+                                <?php echo t('helpPage', 'billposedit') ?>
+                                <br />
+                        </div>
+                        <?php
+                        include_once('include/management/actionMessages.php');
+                        ?>
 
                         <?php
-                                                include_once('include/management/populate_selectbox.php');
-                                                ?>
+                        include_once('include/management/userOperations.php');
+                        checkDisabled($username);
+                        ?>
 
-                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-                        <ul>
+                                <div class="tabber">
 
-                            <div id='UserContainer'>
-                                <li class='fieldset'>
-                                    <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
-                                    <input name='username' type='hidden'
-                                        value='<?php if (isset($username)) echo $username ?>' />
-                                    <input name='username' type='text' id='username'
-                                        value='<?php if (isset($username)) echo $username ?>' disabled tabindex=100 />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('usernameTooltip')" />
+                                        <div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
 
-                                    <div id='usernameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'usernameTooltip') ?>
-                                    </div>
-                                </li>
+                                                <fieldset>
 
-                                <li class='fieldset'>
-                                    <label for='password' class='form'><?php echo t('all', 'Password') ?></label>
-                                    <input name='password' type='text' id='password'
-                                        value='<?php if (isset($user_password)) echo $user_password ?>'
-                                        <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> disabled
-                                        tabindex=101 />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('passwordTooltip')" />
-
-                                    <div id='passwordTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'passwordTooltip') ?>
-                                    </div>
-                                </li>
-                            </div>
-
-
-
-                            <li class='fieldset'>
-                                <label for='planName' class='form'><?php echo t('all', 'PlanName') ?></label>
-                                <input name='oldplanName' type='hidden'
-                                    value='<?php if (isset($bi_planname)) echo $bi_planname ?>' />
-                                <?php
-                                                                populate_plans("$bi_planname", "planName", "form", NULL, $bi_planname);
-                                                                ?>
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('planNameTooltip')" />
-
-                                <div id='planNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'planNameTooltip') ?>
-                                </div>
-                            </li>
-
-
-                            <div id='UserContainer'>
-                                <li class='fieldset'>
-                                    <label for='reassignplanprofiles'
-                                        class='form'><?php echo t('button', 'ReAssignPlanProfiles') ?></label>
-                                    <input name='reassignplanprofiles' type='checkbox' value='1' />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('reassignplanprofiles')" />
-
-                                    <div id='reassignplanprofiles' style='display:none;visibility:visible'
-                                        class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'reassignplanprofiles') ?>
-                                    </div>
-                                </li>
-
-
-
-
-                                <li class='fieldset'>
-                                    <br />
-                                    <hr><br />
-                                    <br />
-
-                                    <input class='button' type='button' value='Refill Session Time'
-                                        onClick='javascript:refillSessionTime()' />
-                                    <input class='button' type='button' value='Refill Session Traffic'
-                                        onClick='javascript:refillSessionTraffic()' />
-
-                                    <br />
-
-                                    <input class='button' type='button' value='Enable User'
-                                        onClick='javascript:enableUser()' />
-
-                                    <input class='button' type='button' value='Disable User'
-                                        onClick='javascript:disableUser()' />
-
-                                    <br />
-
-                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                        tabindex=10000 class='button' />
-
-                                </li>
-
-                        </ul>
-
-                    </fieldset>
-
-                </div>
-
-
-                <div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
-                    <?php
-                                        $customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
-                                        include_once('include/management/userinfo.php');
-                                        ?>
-                </div>
-
-                <div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
-                    <?php
-                                        $customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
-                                        include_once('include/management/userbillinfo.php');
-                                        ?>
-                </div>
-
-
-
-                <div class="tabbertab" title="<?php echo t('title', 'Profiles'); ?>">
-
-                    <?php
-                                        include 'library/opendb.php';
-                                        $groupTerminology = "Profile";
-                                        $groupTerminologyPriority = "ProfilePriority";
-                                        include_once('include/management/groups.php');
-                                        include 'library/closedb.php';
-                                        ?>
-
-                    </ul>
-
-                    <br />
-                    <h301> Assign New Profiles </h301>
-                    <br />
-                    <ul>
-
-                        <li class='fieldset'>
-
-                        <li class='fieldset'>
-                            <label for='profile' class='form'><?php echo t('all', 'Profile') ?></label>
-                            <?php
-                                                        populate_groups("Select Profile", "newgroups[]");
+                                                        <?php
+                                                        include_once('include/management/populate_selectbox.php');
                                                         ?>
 
-                            <a class='tablenovisit' href='#'
-                                onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerProfiles',genericCounter('divCounter')+'&elemName=newgroups[]');">Add</a>
+                                                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
 
-                            <img src='images/icons/comment.png' alt='Tip' border='0'
-                                onClick="javascript:toggleShowDiv('groupTooltip')" />
+                                                        <ul>
 
-                            <div id='divContainerProfiles'>
-                            </div>
+                                                                <div id='UserContainer'>
+                                                                        <li class='fieldset'>
+                                                                                <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
+                                                                                <input name='username' type='hidden' value='<?php if (isset($username)) echo $username ?>' />
+                                                                                <input name='username' type='text' id='username' value='<?php if (isset($username)) echo $username ?>' disabled tabindex=100 />
+                                                                                <img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('usernameTooltip')" />
 
-                            <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                <?php echo t('Tooltip', 'groupTooltip') ?>
-                            </div>
-                        </li>
+                                                                                <div id='usernameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                                                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                                                                        <?php echo t('Tooltip', 'usernameTooltip') ?>
+                                                                                </div>
+                                                                        </li>
 
-                        <br /><br />
+                                                                        <li class='fieldset'>
+                                                                                <label for='password' class='form'><?php echo t('all', 'Password') ?></label>
+                                                                                <input name='password' type='text' id='password' value='<?php if (isset($user_password)) echo $user_password ?>' <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> disabled tabindex=101 />
+                                                                                <img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('passwordTooltip')" />
 
-                        <br />
-                        <hr><br />
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
-                        </li>
+                                                                                <div id='passwordTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                                                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                                                                        <?php echo t('Tooltip', 'passwordTooltip') ?>
+                                                                                </div>
+                                                                        </li>
+                                                                </div>
 
-                    </ul>
 
-                    </fieldset>
 
-                    <br />
+                                                                <li class='fieldset'>
+                                                                        <label for='planName' class='form'><?php echo t('all', 'PlanName') ?></label>
+                                                                        <input name='oldplanName' type='hidden' value='<?php if (isset($bi_planname)) echo $bi_planname ?>' />
+                                                                        <?php
+                                                                        populate_plans("$bi_planname", "planName", "form", NULL, $bi_planname);
+                                                                        ?>
+                                                                        <img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('planNameTooltip')" />
 
+                                                                        <div id='planNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                                                                <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                                                                <?php echo t('Tooltip', 'planNameTooltip') ?>
+                                                                        </div>
+                                                                </li>
+
+
+                                                                <div id='UserContainer'>
+                                                                        <li class='fieldset'>
+                                                                                <label for='reassignplanprofiles' class='form'><?php echo t('button', 'ReAssignPlanProfiles') ?></label>
+                                                                                <input name='reassignplanprofiles' type='checkbox' value='1' />
+                                                                                <img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('reassignplanprofiles')" />
+
+                                                                                <div id='reassignplanprofiles' style='display:none;visibility:visible' class='ToolTip'>
+                                                                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                                                                        <?php echo t('Tooltip', 'reassignplanprofiles') ?>
+                                                                                </div>
+                                                                        </li>
+
+
+
+
+                                                                        <li class='fieldset'>
+                                                                                <br />
+                                                                                <hr><br />
+                                                                                <br />
+
+                                                                                <input class='button' type='button' value='Refill Session Time' onClick='javascript:refillSessionTime()' />
+                                                                                <input class='button' type='button' value='Refill Session Traffic' onClick='javascript:refillSessionTraffic()' />
+
+                                                                                <br />
+
+                                                                                <input class='button' type='button' value='Enable User' onClick='javascript:enableUser()' />
+
+                                                                                <input class='button' type='button' value='Disable User' onClick='javascript:disableUser()' />
+
+                                                                                <br />
+
+                                                                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000 class='button' />
+
+                                                                        </li>
+
+                                                        </ul>
+
+                                                </fieldset>
+
+                                        </div>
+
+
+                                        <div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
+                                                <?php
+                                                $customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
+                                                include_once('include/management/userinfo.php');
+                                                ?>
+                                        </div>
+
+                                        <div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
+                                                <?php
+                                                $customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
+                                                include_once('include/management/userbillinfo.php');
+                                                ?>
+                                        </div>
+
+
+
+                                        <div class="tabbertab" title="<?php echo t('title', 'Profiles'); ?>">
+
+                                                <?php
+                                                include 'library/opendb.php';
+                                                $groupTerminology = "Profile";
+                                                $groupTerminologyPriority = "ProfilePriority";
+                                                include_once('include/management/groups.php');
+                                                include 'library/closedb.php';
+                                                ?>
+
+                                                </ul>
+
+                                                <br />
+                                                <h301> Assign New Profiles </h301>
+                                                <br />
+                                                <ul>
+
+                                                        <li class='fieldset'>
+
+                                                        <li class='fieldset'>
+                                                                <label for='profile' class='form'><?php echo t('all', 'Profile') ?></label>
+                                                                <?php
+                                                                populate_groups("Select Profile", "newgroups[]");
+                                                                ?>
+
+                                                                <a class='tablenovisit' href='#' onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerProfiles',genericCounter('divCounter')+'&elemName=newgroups[]');">Add</a>
+
+                                                                <img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('groupTooltip')" />
+
+                                                                <div id='divContainerProfiles'>
+                                                                </div>
+
+                                                                <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
+                                                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
+                                                                        <?php echo t('Tooltip', 'groupTooltip') ?>
+                                                                </div>
+                                                        </li>
+
+                                                        <br /><br />
+
+                                                        <br />
+                                                        <hr><br />
+                                                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' class='button' />
+                                                        </li>
+
+                                                </ul>
+
+                                                </fieldset>
+
+                                                <br />
+
+                                        </div>
+
+
+
+                                        <div class="tabbertab" title="<?php echo t('title', 'Invoices'); ?>">
+                                                <?php
+                                                include_once('include/management/userBilling.php');
+                                                userInvoicesStatus($user_id, 1);
+                                                ?>
+                                        </div>
+
+
+                                </div>
+
+                        </form>
+
+
+                        <?php
+                        include_once('include/management/userReports.php');
+                        userPlanInformation($username, 1);
+                        userSubscriptionAnalysis($username, 1);                 // userSubscriptionAnalysis with argument set to 1 for drawing the table
+                        userConnectionStatus($username, 1);                     // userConnectionStatus (same as above)
+                        ?>
+
+
+                        <?php
+                        include('include/config/logging.php');
+                        ?>
                 </div>
-
-
-
-                <div class="tabbertab" title="<?php echo t('title', 'Invoices'); ?>">
-                    <?php
-                                        include_once('include/management/userBilling.php');
-                                        userInvoicesStatus($user_id, 1);
-                                        ?>
-                </div>
-
-
-            </div>
-
-        </form>
-
-
-        <?php
-                include_once('include/management/userReports.php');
-                userPlanInformation($username, 1);
-                userSubscriptionAnalysis($username, 1);                 // userSubscriptionAnalysis with argument set to 1 for drawing the table
-                userConnectionStatus($username, 1);                     // userConnectionStatus (same as above)
-                ?>
-
-
-        <?php
-                include('include/config/logging.php');
-                ?>
-
-    </div>
+        </div>
 </div>
 <div id="footer">
 
-    <?php
+        <?php
         include 'page-footer.php';
         ?>
 

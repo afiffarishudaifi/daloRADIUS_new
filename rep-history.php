@@ -47,52 +47,54 @@ include("menu-reports.php");
 ?>
 
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+        <div class="card">
+                <div class="card-body">
 
-        <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'rephistory.php'); ?>
-                        <h144>&#x2754;</h144></a></h2>
+                        <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'rephistory.php'); ?>
+                                        <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-                <?php echo t('helpPage', 'rephistory') ?>
-                <br />
-        </div>
-        <br />
+                        <div id="helpPage" style="display:none;visibility:visible">
+                                <?php echo t('helpPage', 'rephistory') ?>
+                                <br />
+                        </div>
+                        <br />
 
-        <?php
+                        <?php
 
-        include 'include/management/pages_common.php';
-        include 'library/opendb.php';
-        include 'include/management/pages_numbering.php';               // must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+                        include 'include/management/pages_common.php';
+                        include 'library/opendb.php';
+                        include 'include/management/pages_numbering.php';               // must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-        $sql = "(SELECT 'proxy' as section, proxyname as item, creationdate,creationby,updatedate,updateby FROM proxys) UNION " .
-                " (SELECT 'realm' as section, realmname as item, creationdate,creationby,updatedate,updateby FROM realms) UNION " .
-                " (SELECT 'userinfo' as section, username as item, creationdate,creationby,updatedate,updateby FROM userinfo) UNION " .
-                " (SELECT 'operators' as section, username as item, creationdate,creationby,updatedate,updateby FROM operators) UNION " .
-                " (SELECT 'invoice' as section, id as item, creationdate,creationby,updatedate,updateby FROM invoice) UNION " .
-                " (SELECT 'payment' as section, id as item, creationdate,creationby,updatedate,updateby FROM payment) UNION " .
-                " (SELECT 'hotspot' as section, name as item, creationdate,creationby,updatedate,updateby FROM hotspots) ";
-        $res = $dbSocket->query($sql);
-        $numrows = $res->numRows();
+                        $sql = "(SELECT 'proxy' as section, proxyname as item, creationdate,creationby,updatedate,updateby FROM proxys) UNION " .
+                                " (SELECT 'realm' as section, realmname as item, creationdate,creationby,updatedate,updateby FROM realms) UNION " .
+                                " (SELECT 'userinfo' as section, username as item, creationdate,creationby,updatedate,updateby FROM userinfo) UNION " .
+                                " (SELECT 'operators' as section, username as item, creationdate,creationby,updatedate,updateby FROM operators) UNION " .
+                                " (SELECT 'invoice' as section, id as item, creationdate,creationby,updatedate,updateby FROM invoice) UNION " .
+                                " (SELECT 'payment' as section, id as item, creationdate,creationby,updatedate,updateby FROM payment) UNION " .
+                                " (SELECT 'hotspot' as section, name as item, creationdate,creationby,updatedate,updateby FROM hotspots) ";
+                        $res = $dbSocket->query($sql);
+                        $numrows = $res->numRows();
 
-        $sql = "(SELECT 'proxy' as section, proxyname as item, creationdate,creationby,updatedate,updateby FROM proxys) UNION " .
-                " (SELECT 'realm' as section, realmname as item, creationdate,creationby,updatedate,updateby FROM realms) UNION " .
-                " (SELECT 'userinfo' as section, username as item, creationdate,creationby,updatedate,updateby FROM userinfo) UNION " .
-                " (SELECT 'operators' as section, username as item, creationdate,creationby,updatedate,updateby FROM operators) UNION " .
-                " (SELECT 'invoice' as section, id as item, creationdate,creationby,updatedate,updateby FROM invoice) UNION " .
-                " (SELECT 'payment' as section, id as item, creationdate,creationby,updatedate,updateby FROM payment) UNION " .
-                " (SELECT 'hotspot' as section, name as item, creationdate,creationby,updatedate,updateby FROM hotspots) " .
-                " ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
-        $res = $dbSocket->query($sql);
-        $logDebugSQL = "";
-        $logDebugSQL .= $sql . "\n";
+                        $sql = "(SELECT 'proxy' as section, proxyname as item, creationdate,creationby,updatedate,updateby FROM proxys) UNION " .
+                                " (SELECT 'realm' as section, realmname as item, creationdate,creationby,updatedate,updateby FROM realms) UNION " .
+                                " (SELECT 'userinfo' as section, username as item, creationdate,creationby,updatedate,updateby FROM userinfo) UNION " .
+                                " (SELECT 'operators' as section, username as item, creationdate,creationby,updatedate,updateby FROM operators) UNION " .
+                                " (SELECT 'invoice' as section, id as item, creationdate,creationby,updatedate,updateby FROM invoice) UNION " .
+                                " (SELECT 'payment' as section, id as item, creationdate,creationby,updatedate,updateby FROM payment) UNION " .
+                                " (SELECT 'hotspot' as section, name as item, creationdate,creationby,updatedate,updateby FROM hotspots) " .
+                                " ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
+                        $res = $dbSocket->query($sql);
+                        $logDebugSQL = "";
+                        $logDebugSQL .= $sql . "\n";
 
-        /* START - Related to pages_numbering.php */
-        $maxPage = ceil($numrows / $rowsPerPage);
-        /* END */
+                        /* START - Related to pages_numbering.php */
+                        $maxPage = ceil($numrows / $rowsPerPage);
+                        /* END */
 
-        // creating the table:
-        echo "<table border='0' class='table1'>\n";
-        echo "
+                        // creating the table:
+                        echo "<table border='0' class='table1'>\n";
+                        echo "
                         <thead>
 
                                                         <tr>
@@ -100,21 +102,21 @@ include("menu-reports.php");
                 <br/>
         ";
 
-        if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-                setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+                        if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+                                setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-        echo " </th></tr>
+                        echo " </th></tr>
                                         </thead>
 
                         ";
 
-        if ($orderType == "asc") {
-                $orderTypeNextPage = "desc";
-        } else  if ($orderType == "desc") {
-                $orderTypeNextPage = "asc";
-        }
+                        if ($orderType == "asc") {
+                                $orderTypeNextPage = "desc";
+                        } else  if ($orderType == "desc") {
+                                $orderTypeNextPage = "asc";
+                        }
 
-        echo "<thread> <tr>
+                        echo "<thread> <tr>
                 <th scope='col'>
                 <a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=section&orderType=$orderTypeNextPage\">
 		" . t('all', 'Section') . " 
@@ -147,9 +149,9 @@ include("menu-reports.php");
         </tr> </thread>";
 
 
-        while ($row = $res->fetchRow()) {
+                        while ($row = $res->fetchRow()) {
 
-                printqn("<tr>
+                                printqn("<tr>
                                 <td> $row[0] </td>
                                 <td> $row[1] </td>
                                 <td> $row[2] </td>
@@ -157,41 +159,43 @@ include("menu-reports.php");
                                 <td> $row[4] </td>
                                 <td> $row[5] </td>
                 </tr>");
-        }
+                        }
 
-        echo "
+                        echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='10' align='left'>
         ";
-        setupLinks($pageNum, $maxPage, $orderBy, $orderType);
-        echo "
+                        setupLinks($pageNum, $maxPage, $orderBy, $orderType);
+                        echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
 
-        echo "</table>";
+                        echo "</table>";
 
-        include 'library/closedb.php';
+                        include 'library/closedb.php';
 
-        ?>
+                        ?>
 
 
-        <?php
-        include('include/config/logging.php');
-        ?>
+                        <?php
+                        include('include/config/logging.php');
+                        ?>
 
+                </div>
+        </div>
 </div>
 
-<div id="footer">
+< id="footer">
 
         <?php
         include 'page-footer.php';
         ?>
 
-</div>
+</>
 
 </div>
 </div>

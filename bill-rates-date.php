@@ -56,106 +56,106 @@ include("menu-bill-rates.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billratesdate.php'); ?>
-                <h144>&#x2754;</h144></a></h2>
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'billratesdate') ?>
-            <br />
-        </div>
-        <br />
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billratesdate.php'); ?>
+					<h144>&#x2754;</h144></a></h2>
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'billratesdate') ?>
+				<br />
+			</div>
+			<br />
 
 
-        <?php
+			<?php
 
-		include 'library/opendb.php';
-		include 'include/management/pages_common.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+			include 'library/opendb.php';
+			include 'include/management/pages_common.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-		// we can only use the $dbSocket after we have included 'library/opendb.php' which initialzes the connection and the $dbSocket object
-		$username = $dbSocket->escapeSimple($username);
-		$startdate = $dbSocket->escapeSimple($startdate);
-		$enddate = $dbSocket->escapeSimple($enddate);
-		$ratename = $dbSocket->escapeSimple($ratename);
+			// we can only use the $dbSocket after we have included 'library/opendb.php' which initialzes the connection and the $dbSocket object
+			$username = $dbSocket->escapeSimple($username);
+			$startdate = $dbSocket->escapeSimple($startdate);
+			$enddate = $dbSocket->escapeSimple($enddate);
+			$ratename = $dbSocket->escapeSimple($ratename);
 
-		include_once('include/management/userBilling.php');
-		userBillingRatesSummary($username, $startdate, $enddate, $ratename, 1);				// draw the billing rates summary table
+			include_once('include/management/userBilling.php');
+			userBillingRatesSummary($username, $startdate, $enddate, $ratename, 1);				// draw the billing rates summary table
 
-		include 'library/opendb.php';
+			include 'library/opendb.php';
 
-		// get rate type
-		$sql = "SELECT rateType FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . " WHERE " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateName = '$ratename'";
-		$res = $dbSocket->query($sql);
+			// get rate type
+			$sql = "SELECT rateType FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . " WHERE " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateName = '$ratename'";
+			$res = $dbSocket->query($sql);
 
-		if ($res->numRows() == 0)
-			$failureMsg = "Rate was not found in database, check again please";
-		else {
+			if ($res->numRows() == 0)
+				$failureMsg = "Rate was not found in database, check again please";
+			else {
 
-			$row = $res->fetchRow();
-			list($ratetypenum, $ratetypetime) = explode("/", $row[0]);
+				$row = $res->fetchRow();
+				list($ratetypenum, $ratetypetime) = explode("/", $row[0]);
 
-			switch ($ratetypetime) {					// we need to translate any kind of time into seconds, so a minute is 60 seconds, an hour is 3600,
-				case "second":						// and so on...
-					$multiplicate = 1;
-					break;
-				case "minute":
-					$multiplicate = 60;
-					break;
-				case "hour":
-					$multiplicate = 3600;
-					break;
-				case "day":
-					$multiplicate = 86400;
-					break;
-				case "week":
-					$multiplicate = 604800;
-					break;
-				case "month":
-					$multiplicate = 187488000;			// a month is 31 days
-					break;
-				default:
-					$multiplicate = 0;
-					break;
+				switch ($ratetypetime) {					// we need to translate any kind of time into seconds, so a minute is 60 seconds, an hour is 3600,
+					case "second":						// and so on...
+						$multiplicate = 1;
+						break;
+					case "minute":
+						$multiplicate = 60;
+						break;
+					case "hour":
+						$multiplicate = 3600;
+						break;
+					case "day":
+						$multiplicate = 86400;
+						break;
+					case "week":
+						$multiplicate = 604800;
+						break;
+					case "month":
+						$multiplicate = 187488000;			// a month is 31 days
+						break;
+					default:
+						$multiplicate = 0;
+						break;
+				}
+
+				// then the rate cost would be the amount of seconds times the prefix multiplicator thus:
+				$rateDivisor = ($ratetypenum * $multiplicate);
 			}
 
-			// then the rate cost would be the amount of seconds times the prefix multiplicator thus:
-			$rateDivisor = ($ratetypenum * $multiplicate);
-		}
-
-		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-		$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username), " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress, " .
-			$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " .
-			$configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateCost " .
-			" FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . ", " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . " WHERE (AcctStartTime >= '$startdate') and (AcctStartTime <= '$enddate') and (UserName = '$username') and (" . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateName = '$ratename')";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+			$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username), " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress, " .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " .
+				$configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateCost " .
+				" FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . ", " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . " WHERE (AcctStartTime >= '$startdate') and (AcctStartTime <= '$enddate') and (UserName = '$username') and (" . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateName = '$ratename')";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
 
-		$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username), " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress, " .
-			$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " .
-			$configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateCost " .
-			" FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . ", " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . " WHERE (AcctStartTime >= '$startdate') and (AcctStartTime <= '$enddate') and (UserName = '$username') and (" . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateName = '$ratename')" .
-			" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
+			$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username), " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress, " .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " .
+				$configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateCost " .
+				" FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] . ", " . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . " WHERE (AcctStartTime >= '$startdate') and (AcctStartTime <= '$enddate') and (UserName = '$username') and (" . $configValues['CONFIG_DB_TBL_DALOBILLINGRATES'] . ".rateName = '$ratename')" .
+				" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
 
 
-		if (isset($failureMsg)) {
-			include_once('include/management/actionMessages.php');
-			echo "<br/>";
-		}
+			if (isset($failureMsg)) {
+				include_once('include/management/actionMessages.php');
+				echo "<br/>";
+			}
 
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			echo "<table border='0' class='table1'>\n";
+			echo "
                 <thead>
                         <tr>
                         <th colspan='12' align='left'>
@@ -164,20 +164,20 @@ include("menu-bill-rates.php");
                 <br/>
         ";
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&username=$username&ratename=$ratename&startdate=$startdate&enddate=$enddate");
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&username=$username&ratename=$ratename&startdate=$startdate&enddate=$enddate");
 
-		echo " </th></tr>
+			echo " </th></tr>
 			</thead>
 	";
 
-		if ($orderType == "asc") {
-			$orderTypeNextPage = "desc";
-		} else  if ($orderType == "desc") {
-			$orderTypeNextPage = "asc";
-		}
+			if ($orderType == "asc") {
+				$orderTypeNextPage = "desc";
+			} else  if ($orderType == "desc") {
+				$orderTypeNextPage = "asc";
+			}
 
-		echo "<thread> <tr>
+			echo "<thread> <tr>
 		<th scope='col'>
 		<br/>
 		<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?username=$username&ratename=$ratename&startdate=$startdate&enddate=$enddate&orderBy=username&orderType=$orderTypeNextPage\">
@@ -204,53 +204,52 @@ include("menu-bill-rates.php");
 		</th>
                 </tr> </thread>";
 
-		$sumBilled = 0;
-		$sumSession = 0;
+			$sumBilled = 0;
+			$sumSession = 0;
 
-		while ($row = $res->fetchRow()) {
+			while ($row = $res->fetchRow()) {
 
-			$sessionTime = $row[3];
-			$rateCost = $row[4];
-			$billed = (($sessionTime / $rateDivisor) * $rateCost);
-			$sumBilled += $billed;
-			$sumSession += $sessionTime;
+				$sessionTime = $row[3];
+				$rateCost = $row[4];
+				$billed = (($sessionTime / $rateDivisor) * $rateCost);
+				$sumBilled += $billed;
+				$sumSession += $sessionTime;
 
-			echo "<tr>
+				echo "<tr>
 				<td> $row[0] </td>
 				<td> $row[1] </td>
 				<td> $row[2] </td>
 				<td> " . time2str($row[3]) . " </td>
 				<td> " . number_format($billed, 2) . " </td>
 		</tr>";
-		}
+			}
 
-		echo "
+			echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='12' align='left'>
         ";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&username=$username&ratename=$ratename&startdate=$startdate&enddate=$enddate");
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&username=$username&ratename=$ratename&startdate=$startdate&enddate=$enddate");
+			echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-		echo "</table>";
+			echo "</table>";
 
-		include 'library/closedb.php';
-		?>
+			include 'library/closedb.php';
+			?>
 
-    </div>
-
-
-    <?php
-	include('include/config/logging.php');
-	?>
+			<?php
+			include('include/config/logging.php');
+			?>
+		</div>
+	</div>
 </div>
 <div id="footer">
 
-    <?php
+	<?php
 	include 'page-footer.php';
 	?>
 

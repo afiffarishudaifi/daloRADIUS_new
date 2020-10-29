@@ -80,54 +80,53 @@ include("menu-bill-rates.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billratesdel.php') ?>
-                :: <?php if (isset($ratename)) {
-						echo $ratename;
-					} ?><h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billratesdel.php') ?>
+					:: <?php if (isset($ratename)) {
+							echo $ratename;
+						} ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible"> <?php echo t('helpPage', 'billhsdel') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+			<div id="helpPage" style="display:none;visibility:visible"> <?php echo t('helpPage', 'billhsdel') ?>
+				<br />
+			</div>
+			<?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			<div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-                <fieldset>
+					<fieldset>
 
-                    <h302> <?php echo t('title', 'RateInfo') ?> </h302>
-                    <br />
+						<h302> <?php echo t('title', 'RateInfo') ?> </h302>
+						<br />
 
-                    <label for='ratename' class='form'><?php echo t('all', 'RateName') ?></label>
-                    <input name='ratename[]' type='text' id='ratename' value='<?php echo $ratename ?>' tabindex=100 />
-                    <br />
+						<label for='ratename' class='form'><?php echo t('all', 'RateName') ?></label>
+						<input name='ratename[]' type='text' id='ratename' value='<?php echo $ratename ?>' tabindex=100 />
+						<br />
 
-                    <br /><br />
-                    <hr><br />
+						<br /><br />
+						<hr><br />
 
-                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000
-                        class='button' />
+						<input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000 class='button' />
 
-                </fieldset>
+					</fieldset>
 
-            </form>
-        </div>
+				</form>
+			</div>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
-
-    </div>
+			<?php
+			include('include/config/logging.php');
+			?>
+		</div>
+	</div>
 </div>
 <div id="footer">
 
-    <?php
+	<?php
 	include 'page-footer.php';
 	?>
 

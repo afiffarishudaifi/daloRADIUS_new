@@ -83,55 +83,54 @@ include("menu-bill-payments.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'paymentsdel.php') ?>
-                :: <?php if (isset($payment_id)) {
-						echo $payment_id;
-					} ?><h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'paymentsdel.php') ?>
+					:: <?php if (isset($payment_id)) {
+							echo $payment_id;
+						} ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible"> <?php echo t('helpPage', 'paymentsdel') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+			<div id="helpPage" style="display:none;visibility:visible"> <?php echo t('helpPage', 'paymentsdel') ?>
+				<br />
+			</div>
+			<?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			<div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-                <fieldset>
+					<fieldset>
 
-                    <h302> <?php echo t('title', 'PaymentInfo') ?> </h302>
-                    <br />
+						<h302> <?php echo t('title', 'PaymentInfo') ?> </h302>
+						<br />
 
-                    <label for='payment_id' class='form'><?php echo t('all', 'PaymentId') ?></label>
-                    <input name='payment_id[]' type='text' id='payment_id' value='<?php echo $payment_id ?>'
-                        tabindex=100 />
-                    <br />
+						<label for='payment_id' class='form'><?php echo t('all', 'PaymentId') ?></label>
+						<input name='payment_id[]' type='text' id='payment_id' value='<?php echo $payment_id ?>' tabindex=100 />
+						<br />
 
-                    <br /><br />
-                    <hr><br />
+						<br /><br />
+						<hr><br />
 
-                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000
-                        class='button' />
+						<input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000 class='button' />
 
-                </fieldset>
+					</fieldset>
 
-            </form>
-        </div>
+				</form>
+			</div>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+			<?php
+			include('include/config/logging.php');
+			?>
 
-    </div>
+		</div>
+	</div>
 </div>
 <div id="footer">
 
-    <?php
+	<?php
 	include 'page-footer.php';
 	?>
 

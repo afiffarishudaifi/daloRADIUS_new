@@ -1,5 +1,4 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
@@ -23,7 +22,7 @@
                     <div class="card" id="sidebar">
                         <h2>Configuration</h2>
                         <h3>Reporting Settings</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
                             <li><a href="config-reports-dashboard.php"><b>&raquo;</b>
                                     <?php echo t('button', 'DashboardSettings') ?></a>
                             </li>

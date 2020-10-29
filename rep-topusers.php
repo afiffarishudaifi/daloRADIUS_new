@@ -59,46 +59,48 @@ include("menu-reports.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+	<div class="card">
+		<div class="card-body">
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'reptopusers.php'); ?>
-			<h144>&#x2754;</h144></a></h2></a></h2>
-
-
-	<div id="helpPage" style="display:none;visibility:visible">
-		<?php echo t('helpPage', 'reptopusers') . " " . $orderBy ?>
-		<br />
-	</div>
-	<br />
-
-	<?php
-
-	include 'library/opendb.php';
-	include 'include/management/pages_common.php';
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'reptopusers.php'); ?>
+					<h144>&#x2754;</h144></a></h2></a></h2>
 
 
-	$sql = "SELECT distinct(radacct.UserName), " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress, " .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime,max( " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-		".AcctStopTime), sum(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime) as Time, " .
-		" sum(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctInputOctets) as Upload,sum(" .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctOutputOctets) as Download, " .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctTerminateCause, " .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress, sum(" .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctInputOctets+" .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctOutputOctets) as Bandwidth FROM " .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE AcctStopTime > '0000-00-00 00:00:01' AND AcctStartTime>'$startdate' AND AcctStartTime< '$enddate' AND (Username LIKE '$username') group by UserName order by $orderBy $orderType limit $limit";
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'reptopusers') . " " . $orderBy ?>
+				<br />
+			</div>
+			<br />
 
-	// setup php session variables for exporting
-	$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
-	$_SESSION['reportQuery'] = " WHERE AcctStopTime > '0000-00-00 00:00:01' AND AcctStartTime>'$startdate' AND AcctStartTime< '$enddate' AND (Username LIKE '$username')";
-	$_SESSION['reportType'] = "TopUsers";
+			<?php
 
-	$res = $dbSocket->query($sql);
-	$logDebugSQL = "";
-	$logDebugSQL .= $sql . "\n";
+			include 'library/opendb.php';
+			include 'include/management/pages_common.php';
 
-	echo "<table border='0' class='table1'>\n";
-	echo "
+
+			$sql = "SELECT distinct(radacct.UserName), " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress, " .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime,max( " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				".AcctStopTime), sum(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime) as Time, " .
+				" sum(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctInputOctets) as Upload,sum(" .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctOutputOctets) as Download, " .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctTerminateCause, " .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress, sum(" .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctInputOctets+" .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctOutputOctets) as Bandwidth FROM " .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE AcctStopTime > '0000-00-00 00:00:01' AND AcctStartTime>'$startdate' AND AcctStartTime< '$enddate' AND (Username LIKE '$username') group by UserName order by $orderBy $orderType limit $limit";
+
+			// setup php session variables for exporting
+			$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
+			$_SESSION['reportQuery'] = " WHERE AcctStopTime > '0000-00-00 00:00:01' AND AcctStartTime>'$startdate' AND AcctStartTime< '$enddate' AND (Username LIKE '$username')";
+			$_SESSION['reportType'] = "TopUsers";
+
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
+
+			echo "<table border='0' class='table1'>\n";
+			echo "
 						<input class='button' type='button' value='CSV Export'
                                         	onClick=\"javascript:window.location.href='include/management/fileExport.php?reportFormat=csv'\"
                                         	/>
@@ -111,13 +113,13 @@ include("menu-reports.php");
 			";
 
 
-	if ($orderType == "asc") {
-		$orderType = "desc";
-	} else  if ($orderType == "desc") {
-		$orderType = "asc";
-	}
+			if ($orderType == "asc") {
+				$orderType = "desc";
+			} else  if ($orderType == "desc") {
+				$orderType = "asc";
+			}
 
-	echo "<thread> <tr>
+			echo "<thread> <tr>
 		<th scope='col'> 
 		<br/>
 		<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?limit=$limit&orderBy=username&orderType=$orderType&username=$username&startdate=$startdate&enddate=$enddate\">
@@ -165,8 +167,8 @@ include("menu-reports.php");
 		</th>
 		</tr> </thread>";
 
-	while ($row = $res->fetchRow()) {
-		echo "<tr>
+			while ($row = $res->fetchRow()) {
+				echo "<tr>
 				<td> $row[0] </td>
 				<td> $row[1] </td>
 				<td> $row[2] </td>
@@ -177,18 +179,20 @@ include("menu-reports.php");
 				<td> $row[7] </td>
 				<td> $row[8] </td>
 		</tr>";
-	}
-	echo "</table>";
+			}
+			echo "</table>";
 
-	include 'library/closedb.php';
-	?>
+			include 'library/closedb.php';
+			?>
 
 
 
-	<?php
-	include('include/config/logging.php');
-	?>
+			<?php
+			include('include/config/logging.php');
+			?>
 
+		</div>
+	</div>
 </div>
 
 <div id="footer">

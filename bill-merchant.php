@@ -17,21 +17,22 @@ include("menu-bill-merchant.php");
 
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro"><a href="#"><?php echo t('Intro', 'paypalmain.php') ?></a></h2>
+            <h2 id="Intro"><a href="#"><?php echo t('Intro', 'paypalmain.php') ?></a></h2>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
-
+            <?php
+            include('include/config/logging.php');
+            ?>
+        </div>
     </div>
 </div>
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 
 </div>

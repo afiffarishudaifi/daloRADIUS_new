@@ -66,58 +66,60 @@ include("menu-reports.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+        <div class="card">
+                <div class="card-body">
 
-        <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'repnewusers.php'); ?>
-                        <h144>&#x2754;</h144></a></h2>
+                        <h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'repnewusers.php'); ?>
+                                        <h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-                <?php echo t('helpPage', 'repnewusers'); ?>
-                <br />
-        </div>
-        <br />
-
-
-        <div class="tabber">
-
-                <div class="tabbertab" title="Statistics">
+                        <div id="helpPage" style="display:none;visibility:visible">
+                                <?php echo t('helpPage', 'repnewusers'); ?>
+                                <br />
+                        </div>
                         <br />
 
-                        <?php
 
-                        include 'library/opendb.php';
-                        include 'include/management/pages_common.php';
-                        include 'include/management/pages_numbering.php';               // must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+                        <div class="tabber">
 
-                        //orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-                        $sql = "SELECT CONCAT(MONTH(CreationDate),'-',YEAR(Creationdate)) AS Month, " .
-                                "COUNT(*) As Users FROM " .
-                                $configValues['CONFIG_DB_TBL_DALOUSERINFO'] .
-                                " WHERE CreationDate >='$startdate' AND CreationDate <='$enddate' " .
-                                " GROUP BY Month(Creationdate) ";
-                        $res = $dbSocket->query($sql);
-                        $numrows = $res->numRows();
+                                <div class="tabbertab" title="Statistics">
+                                        <br />
+
+                                        <?php
+
+                                        include 'library/opendb.php';
+                                        include 'include/management/pages_common.php';
+                                        include 'include/management/pages_numbering.php';               // must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+
+                                        //orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+                                        $sql = "SELECT CONCAT(MONTH(CreationDate),'-',YEAR(Creationdate)) AS Month, " .
+                                                "COUNT(*) As Users FROM " .
+                                                $configValues['CONFIG_DB_TBL_DALOUSERINFO'] .
+                                                " WHERE CreationDate >='$startdate' AND CreationDate <='$enddate' " .
+                                                " GROUP BY Month(Creationdate) ";
+                                        $res = $dbSocket->query($sql);
+                                        $numrows = $res->numRows();
 
 
-                        /* we are searching for both kind of attributes for the password, being User-Password, the more
+                                        /* we are searching for both kind of attributes for the password, being User-Password, the more
            common one and the other which is Password, this is also done for considerations of backwards
            compatibility with version 0.7        */
 
 
-                        $sql = "SELECT CONCAT(YEAR(CreationDate),'-',MONTH(Creationdate), '-01') AS Month, " .
-                                "COUNT(*) As Users FROM " .
-                                $configValues['CONFIG_DB_TBL_DALOUSERINFO'] .
-                                " WHERE CreationDate >='$startdate' AND CreationDate <='$enddate' " .
-                                " GROUP BY Month ORDER BY Date(Month);";
-                        $res = $dbSocket->query($sql);
-                        $logDebugSQL = "";
-                        $logDebugSQL .= $sql . "\n";
+                                        $sql = "SELECT CONCAT(YEAR(CreationDate),'-',MONTH(Creationdate), '-01') AS Month, " .
+                                                "COUNT(*) As Users FROM " .
+                                                $configValues['CONFIG_DB_TBL_DALOUSERINFO'] .
+                                                " WHERE CreationDate >='$startdate' AND CreationDate <='$enddate' " .
+                                                " GROUP BY Month ORDER BY Date(Month);";
+                                        $res = $dbSocket->query($sql);
+                                        $logDebugSQL = "";
+                                        $logDebugSQL .= $sql . "\n";
 
 
-                        echo "<form name='usersonline' method='get' >";
+                                        echo "<form name='usersonline' method='get' >";
 
-                        echo "<table border='0' class='table1'>\n";
-                        echo "
+                                        echo "<table border='0' class='table1'>\n";
+                                        echo "
                 <thead>
                         <tr>
                         <th colspan='5' align='left'>
@@ -126,11 +128,11 @@ include("menu-reports.php");
                 ";
 
 
-                        echo "</th></tr>
+                                        echo "</th></tr>
                         </thead>
         ";
 
-                        echo "<thread> <tr>
+                                        echo "<thread> <tr>
                 <th scope='col'>
                 " . t('all', 'Month') . "
                 </th>
@@ -141,55 +143,57 @@ include("menu-reports.php");
 
         </tr> </thread>";
 
-                        while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+                                        while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 
-                                $Month = $row['Month'];
-                                $Users = $row['Users'];
+                                                $Month = $row['Month'];
+                                                $Users = $row['Users'];
 
-                                echo "<tr>
+                                                echo "<tr>
                                 <td> $Month </td>
                                 <td> $Users</td>
                 </tr>";
-                        }
+                                        }
 
-                        echo "
+                                        echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='5' align='left'>
         ";
-                        echo "
+                                        echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-                        echo "</table>";
-                        include 'library/closedb.php';
+                                        echo "</table>";
+                                        include 'library/closedb.php';
 
-                        ?>
+                                        ?>
 
-                </div>
+                                </div>
 
 
-                <div class="tabbertab" title="Graph">
-                        <br />
+                                <div class="tabbertab" title="Graph">
+                                        <br />
+
+
+                                        <?php
+                                        echo "<center>";
+                                        echo "<img src=\"library/graphs-reports-new-users.php?startdate=$startdate&enddate=$enddate\" />";
+                                        echo "</center>";
+                                        ?>
+
+                                </div>
+                        </div>
+
 
 
                         <?php
-                        echo "<center>";
-                        echo "<img src=\"library/graphs-reports-new-users.php?startdate=$startdate&enddate=$enddate\" />";
-                        echo "</center>";
+                        include('include/config/logging.php');
                         ?>
 
                 </div>
         </div>
-
-
-
-        <?php
-        include('include/config/logging.php');
-        ?>
-
 </div>
 
 <div id="footer">

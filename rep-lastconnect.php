@@ -47,109 +47,111 @@ include('./_partials/js.php');
 include("menu-reports.php");
 
 ?>
-<div id="contentnorightbar">
+<div class="col-lg-9">
+	<div class="card">
+		<div class="card-body">
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'replastconnect.php'); ?>
-			<h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'replastconnect.php'); ?>
+					<h144>&#x2754;</h144></a></h2>
 
-	<div id="helpPage" style="display:none;visibility:visible">
-		<?php echo t('helpPage', 'replastconnect') ?>
-		<br />
-	</div>
-	<br />
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'replastconnect') ?>
+				<br />
+			</div>
+			<br />
 
-	<?php
+			<?php
 
-	include 'library/opendb.php';
-	include 'include/management/pages_numbering.php';               // must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+			include 'library/opendb.php';
+			include 'include/management/pages_numbering.php';               // must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-	$radiusReply = $dbSocket->escapeSimple($radiusReply);
-	$radiusReplySQL = "";
-	if ($radiusReply <> "Any") $radiusReplySQL = " AND (" . $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . ".reply = '$radiusReply') ";
+			$radiusReply = $dbSocket->escapeSimple($radiusReply);
+			$radiusReplySQL = "";
+			if ($radiusReply <> "Any") $radiusReplySQL = " AND (" . $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . ".reply = '$radiusReply') ";
 
-	// setting table-related parameters first
-	switch ($configValues['FREERADIUS_VERSION']) {
-		case '1':
-			$tableSetting['postauth']['user'] = 'user';
-			$tableSetting['postauth']['date'] = 'date';
-			break;
-		case '2':
-			// down
-		case '3':
-			// down
-		default:
-			$tableSetting['postauth']['user'] = 'username';
-			$tableSetting['postauth']['date'] = 'authdate';
-			break;
-	}
+			// setting table-related parameters first
+			switch ($configValues['FREERADIUS_VERSION']) {
+				case '1':
+					$tableSetting['postauth']['user'] = 'user';
+					$tableSetting['postauth']['date'] = 'date';
+					break;
+				case '2':
+					// down
+				case '3':
+					// down
+				default:
+					$tableSetting['postauth']['user'] = 'username';
+					$tableSetting['postauth']['date'] = 'authdate';
+					break;
+			}
 
-	// setup php session variables for exporting
-	$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
-	$_SESSION['reportQuery'] = " WHERE (" . $tableSetting['postauth']['user'] . " LIKE '" .
-		$dbSocket->escapeSimple($usernameLastConnect) . "%') $radiusReplySQL " .
-		" AND (" . $tableSetting['postauth']['date'] . " >='$startdate' AND " . $tableSetting['postauth']['date'] . " <='$enddate') ";
-	$_SESSION['reportType'] = "reportsLastConnectionAttempts";
+			// setup php session variables for exporting
+			$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
+			$_SESSION['reportQuery'] = " WHERE (" . $tableSetting['postauth']['user'] . " LIKE '" .
+				$dbSocket->escapeSimple($usernameLastConnect) . "%') $radiusReplySQL " .
+				" AND (" . $tableSetting['postauth']['date'] . " >='$startdate' AND " . $tableSetting['postauth']['date'] . " <='$enddate') ";
+			$_SESSION['reportType'] = "reportsLastConnectionAttempts";
 
-	//orig: used as maethod to get total rows - this is required for the pages_numbering.php page 
-	$sql = "SELECT " .
-		$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['user'] . " 
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page 
+			$sql = "SELECT " .
+				$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['user'] . " 
 		FROM " . $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] .
-		" WHERE (" . $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['user'] . " LIKE '" .
-		$dbSocket->escapeSimple($usernameLastConnect) . "%') $radiusReplySQL " .
-		" AND (" . $tableSetting['postauth']['date'] . " >='$startdate' AND " . $tableSetting['postauth']['date'] . " <='$enddate') ";
+				" WHERE (" . $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['user'] . " LIKE '" .
+				$dbSocket->escapeSimple($usernameLastConnect) . "%') $radiusReplySQL " .
+				" AND (" . $tableSetting['postauth']['date'] . " >='$startdate' AND " . $tableSetting['postauth']['date'] . " <='$enddate') ";
 
-	$res = $dbSocket->query($sql);
-	$numrows = $res->numRows();
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
-	$sql = "SELECT " .
-		$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['user'] . ", " .
-		$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . ".pass, " .
-		$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . ".reply, " .
-		$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['date'] . "
+			$sql = "SELECT " .
+				$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['user'] . ", " .
+				$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . ".pass, " .
+				$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . ".reply, " .
+				$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['date'] . "
 		FROM " . $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . " 
         WHERE (" . $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . "." . $tableSetting['postauth']['user'] . " LIKE '" .
-		$dbSocket->escapeSimple($usernameLastConnect) . "%') $radiusReplySQL " .
-		" AND (" . $tableSetting['postauth']['date'] . " >='$startdate' AND " . $tableSetting['postauth']['date'] . " <='$enddate') 
+				$dbSocket->escapeSimple($usernameLastConnect) . "%') $radiusReplySQL " .
+				" AND (" . $tableSetting['postauth']['date'] . " >='$startdate' AND " . $tableSetting['postauth']['date'] . " <='$enddate') 
 		ORDER BY " . $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] . ".$orderBy $orderType 
 		LIMIT $offset, $rowsPerPage";
 
-	$res = $dbSocket->query($sql);
-	$logDebugSQL = "";
-	$logDebugSQL .= $sql . "\n";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
 
-	/* START - Related to pages_numbering.php */
-	$maxPage = ceil($numrows / $rowsPerPage);
-	/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
-	$array_users = array();
-	$array_pass = array();
-	$array_starttime = array();
-	$array_reply = array();
-	$count = 0;
+			$array_users = array();
+			$array_pass = array();
+			$array_starttime = array();
+			$array_reply = array();
+			$count = 0;
 
-	while ($row = $res->fetchRow()) {
+			while ($row = $res->fetchRow()) {
 
-		// The table that is being procuded is in the format of:
-		// +-------------+-------------+---------------+---------------------+
-		// | user        | pass        | reply         | date                |   
-		// +-------------+-------------+---------------+---------------------+
+				// The table that is being procuded is in the format of:
+				// +-------------+-------------+---------------+---------------------+
+				// | user        | pass        | reply         | date                |   
+				// +-------------+-------------+---------------+---------------------+
 
 
-		$user = $row[0];
-		$pass = $row[1];
-		$starttime = $row[3];
-		$reply = $row[2];
+				$user = $row[0];
+				$pass = $row[1];
+				$starttime = $row[3];
+				$reply = $row[2];
 
-		array_push($array_users, "$user");
-		array_push($array_pass, "$pass");
-		array_push($array_starttime, "$starttime");
-		array_push($array_reply, "$reply");
+				array_push($array_users, "$user");
+				array_push($array_pass, "$pass");
+				array_push($array_starttime, "$starttime");
+				array_push($array_reply, "$reply");
 
-		$count++;
-	}
-	// creating the table:
-	echo "<table border='0' class='table1'>\n";
-	echo "
+				$count++;
+			}
+			// creating the table:
+			echo "<table border='0' class='table1'>\n";
+			echo "
                         <thead>
 
                                                         <tr>
@@ -161,21 +163,21 @@ include("menu-reports.php");
 		                <br/><br/>
         ";
 
-	if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-		setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&usernameLastConnect=$usernameLastConnect&startdate=$startdate&enddate=$enddate");
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&usernameLastConnect=$usernameLastConnect&startdate=$startdate&enddate=$enddate");
 
-	echo " </th></tr>
+			echo " </th></tr>
                                         </thead>
 
                         ";
 
-	if ($orderType == "asc") {
-		$orderTypeNextPage = "desc";
-	} else  if ($orderType == "desc") {
-		$orderTypeNextPage = "asc";
-	}
+			if ($orderType == "asc") {
+				$orderTypeNextPage = "desc";
+			} else  if ($orderType == "desc") {
+				$orderTypeNextPage = "asc";
+			}
 
-	echo "<thread> <tr>
+			echo "<thread> <tr>
                 <th scope='col'>
                 <a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?usernameLastConnect=$usernameLastConnect&startdate=$startdate&enddate=$enddate&orderBy=" . $tableSetting['postauth']['user'] . "&orderType=$orderTypeNextPage\">
 		" . t('all', 'Username') . " 
@@ -198,55 +200,57 @@ include("menu-reports.php");
 
         </tr> </thread>";
 
-	$i = 0;
-	while ($i != $count) {
+			$i = 0;
+			while ($i != $count) {
 
-		if ($array_reply[$i] == "Access-Reject")
-			$reply = "<font color='red'> $array_reply[$i] </font>";
-		else
-			$reply = $array_reply[$i];
+				if ($array_reply[$i] == "Access-Reject")
+					$reply = "<font color='red'> $array_reply[$i] </font>";
+				else
+					$reply = $array_reply[$i];
 
-		echo "<tr>
+				echo "<tr>
                         <td> $array_users[$i] </td>
 					";
 
-		if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
-			echo "<td>[Password is hidden]</td>";
-		} else {
-			echo "<td>$array_pass[$i]</td>";
-		}
+				if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
+					echo "<td>[Password is hidden]</td>";
+				} else {
+					echo "<td>$array_pass[$i]</td>";
+				}
 
-		echo "
+				echo "
                         <td> $array_starttime[$i] </td>
                         <td> $reply </td>
                 </tr>";
-		$i++;
-	}
+				$i++;
+			}
 
-	echo "
+			echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='5' align='left'>
         ";
-	setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&usernameLastConnect=$usernameLastConnect&startdate=$startdate&enddate=$enddate");
-	echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&usernameLastConnect=$usernameLastConnect&startdate=$startdate&enddate=$enddate");
+			echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
 
-	echo "</table>";
+			echo "</table>";
 
-	include 'library/closedb.php';
+			include 'library/closedb.php';
 
-	?>
+			?>
 
 
-	<?php
-	include('include/config/logging.php');
-	?>
+			<?php
+			include('include/config/logging.php');
+			?>
 
+		</div>
+	</div>
 </div>
 
 <div id="footer">

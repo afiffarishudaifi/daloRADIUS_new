@@ -23,17 +23,14 @@
                         <h2>Billing</h2>
 
                         <h3>Plans Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
                             <li><a href="bill-plans-list.php"><b>&raquo;</b><?php echo t('button', 'ListPlans') ?></a>
                             </li>
                             <li><a href="bill-plans-new.php"><b>&raquo;</b><?php echo t('button', 'NewPlan') ?></a></li>
                             <li><a href="javascript:document.billplansedit.submit();""><b>&raquo;</b><?php echo t('button', 'EditPlan') ?><a>
 			<form name=" billplansedit" action="bill-plans-edit.php" method="get" class="sidebar">
-                                    <input name="planName" type="text" id="planNameEdit"
-                                        <?php if ($autoComplete) echo "autocomplete='off'"; ?>
-                                        tooltipText='<?php echo t('Tooltip', 'BillingPlanName'); ?> <br/>'
-                                        value="<?php if (isset($edit_planname)) echo $edit_planname; ?>" tabindex=3>
+                                    <input class="form-control-sm" name="planName" type="text" id="planNameEdit" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'BillingPlanName'); ?> <br/>' value="<?php if (isset($edit_planname)) echo $edit_planname; ?>" tabindex=3>
                                     </form>
                             </li>
 
@@ -60,9 +57,9 @@
                 }
                 ?>
                 <script type="text/javascript">
-                var tooltipObj = new DHTMLgoodies_formTooltip();
-                tooltipObj.setTooltipPosition('right');
-                tooltipObj.setPageBgColor('#EEEEEE');
-                tooltipObj.setTooltipCornerSize(15);
-                tooltipObj.initFormFieldTooltip();
+                    var tooltipObj = new DHTMLgoodies_formTooltip();
+                    tooltipObj.setTooltipPosition('right');
+                    tooltipObj.setPageBgColor('#EEEEEE');
+                    tooltipObj.setTooltipCornerSize(15);
+                    tooltipObj.initFormFieldTooltip();
                 </script>

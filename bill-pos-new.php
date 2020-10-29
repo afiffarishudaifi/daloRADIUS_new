@@ -455,188 +455,180 @@ include("menu-bill-pos.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billposnew.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billposnew.php') ?>
+					<h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'billposnew') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'billposnew') ?>
+				<br />
+			</div>
+			<?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-            <div class="tabber">
+				<div class="tabber">
 
-                <div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
+					<div class="tabbertab" title="<?php echo t('title', 'AccountInfo'); ?>">
 
-                    <fieldset>
+						<fieldset>
 
-                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+							<h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
 
-                        <ul>
+							<ul>
 
-                            <?php
-							include_once('include/management/populate_selectbox.php');
-							?>
-
-                            <div id='UserContainer'>
-                                <li class='fieldset'>
-                                    <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
-                                    <input name='username' type='text' id='username' value='' tabindex=100 />
-                                    <input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('username',8,<?php
-																																			echo "'" . $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] . "'" ?>)" />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('usernameTooltip')" />
-
-                                    <div id='usernameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'usernameTooltip') ?>
-                                    </div>
-                                </li>
-
-                                <li class='fieldset'>
-                                    <label for='password' class='form'><?php echo t('all', 'Password') ?></label>
-                                    <input name='password' type='text' id='password' value=''
-                                        <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> tabindex=101 />
-                                    <input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',8,<?php
-																																			echo "'" . $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] . "'" ?>)" />
-                                    <img src='images/icons/comment.png' alt='Tip' border='0'
-                                        onClick="javascript:toggleShowDiv('passwordTooltip')" />
-
-                                    <div id='passwordTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                        <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                        <?php echo t('Tooltip', 'passwordTooltip') ?>
-                                    </div>
-                                </li>
-                            </div>
-
-
-
-                            <li class='fieldset'>
-                                <label for='planName' class='form'><?php echo t('all', 'PlanName') ?></label>
-                                <?php
-								populate_plans("Select Plan", "planName", "form");
-								?>
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('planNameTooltip')" />
-
-                                <div id='planNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'planNameTooltip') ?>
-                                </div>
-                            </li>
-
-
-                            <li class='fieldset'>
-                                <label for='profile' class='form'><?php echo t('all', 'Profile') ?></label>
-                                <?php
-								populate_groups("Select Profile", "profiles[]");
+								<?php
+								include_once('include/management/populate_selectbox.php');
 								?>
 
-                                <a class='tablenovisit' href='#'
-                                    onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerProfiles',genericCounter('divCounter')+'&elemName=profiles[]');">Add</a>
+								<div id='UserContainer'>
+									<li class='fieldset'>
+										<label for='username' class='form'><?php echo t('all', 'Username') ?></label>
+										<input name='username' type='text' id='username' value='' tabindex=100 />
+										<input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('username',8,<?php
+																																				echo "'" . $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] . "'" ?>)" />
+										<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('usernameTooltip')" />
 
-                                <img src='images/icons/comment.png' alt='Tip' border='0'
-                                    onClick="javascript:toggleShowDiv('groupTooltip')" />
+										<div id='usernameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+											<img src='images/icons/comment.png' alt='Tip' border='0' />
+											<?php echo t('Tooltip', 'usernameTooltip') ?>
+										</div>
+									</li>
 
-                                <div id='divContainerProfiles'>
-                                </div>
+									<li class='fieldset'>
+										<label for='password' class='form'><?php echo t('all', 'Password') ?></label>
+										<input name='password' type='text' id='password' value='' <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> tabindex=101 />
+										<input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',8,<?php
+																																				echo "'" . $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] . "'" ?>)" />
+										<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('passwordTooltip')" />
 
-                                <div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
-                                    <img src='images/icons/comment.png' alt='Tip' border='0' />
-                                    <?php echo t('Tooltip', 'groupTooltip') ?>
-                                </div>
-                            </li>
-
-                            <li class='fieldset'>
-                                <label for='userupdate'
-                                    class='form'><?php echo t('all', 'SendWelcomeNotification') ?></label>
-                                <input type='checkbox' class='form' name='notificationWelcome' value='1' checked />
-                                <br />
-                            </li>
-
-
-                            <li class='fieldset'>
-                                <br />
-                                <hr><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    tabindex=10000 class='button' />
-                            </li>
-
-                        </ul>
-
-                    </fieldset>
-
-                </div>
+										<div id='passwordTooltip' style='display:none;visibility:visible' class='ToolTip'>
+											<img src='images/icons/comment.png' alt='Tip' border='0' />
+											<?php echo t('Tooltip', 'passwordTooltip') ?>
+										</div>
+									</li>
+								</div>
 
 
-                <div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
-                    <?php
-					$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
-					include_once('include/management/userinfo.php');
-					?>
-                </div>
 
-                <div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
-                    <?php
-					$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
-					include_once('include/management/userbillinfo.php');
-					?>
-                </div>
+								<li class='fieldset'>
+									<label for='planName' class='form'><?php echo t('all', 'PlanName') ?></label>
+									<?php
+									populate_plans("Select Plan", "planName", "form");
+									?>
+									<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('planNameTooltip')" />
+
+									<div id='planNameTooltip' style='display:none;visibility:visible' class='ToolTip'>
+										<img src='images/icons/comment.png' alt='Tip' border='0' />
+										<?php echo t('Tooltip', 'planNameTooltip') ?>
+									</div>
+								</li>
 
 
-                <div class="tabbertab" title="<?php echo t('title', 'Advanced'); ?>">
+								<li class='fieldset'>
+									<label for='profile' class='form'><?php echo t('all', 'Profile') ?></label>
+									<?php
+									populate_groups("Select Profile", "profiles[]");
+									?>
 
-                    <fieldset>
+									<a class='tablenovisit' href='#' onClick="javascript:ajaxGeneric('include/management/dynamic_groups.php','getGroups','divContainerProfiles',genericCounter('divCounter')+'&elemName=profiles[]');">Add</a>
 
-                        <h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+									<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('groupTooltip')" />
 
-                        <ul>
+									<div id='divContainerProfiles'>
+									</div>
 
-                            <li class='fieldset'>
-                                <label for='passwordType' class='form'><?php echo t('all', 'PasswordType') ?> </label>
-                                <select class='form' tabindex=102 name='passwordType'>
-                                    <option value='Cleartext-Password'>Cleartext-Password</option>
-                                    <option value='User-Password'>User-Password</option>
-                                    <option value='Crypt-Password'>Crypt-Password</option>
-                                    <option value='MD5-Password'>MD5-Password</option>
-                                    <option value='SHA1-Password'>SHA1-Password</option>
-                                    <option value='CHAP-Password'>CHAP-Password</option>
-                                </select>
-                            </li>
+									<div id='groupTooltip' style='display:none;visibility:visible' class='ToolTip'>
+										<img src='images/icons/comment.png' alt='Tip' border='0' />
+										<?php echo t('Tooltip', 'groupTooltip') ?>
+									</div>
+								</li>
 
-                            <li class='fieldset'>
-                                <br />
-                                <hr><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    tabindex=10000 class='button' />
-                            </li>
+								<li class='fieldset'>
+									<label for='userupdate' class='form'><?php echo t('all', 'SendWelcomeNotification') ?></label>
+									<input type='checkbox' class='form' name='notificationWelcome' value='1' checked />
+									<br />
+								</li>
 
-                        </ul>
 
-                    </fieldset>
+								<li class='fieldset'>
+									<br />
+									<hr><br />
+									<input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000 class='button' />
+								</li>
 
-                </div>
+							</ul>
 
-            </div>
+						</fieldset>
 
-        </form>
+					</div>
 
-        <?php
-		include('include/config/logging.php');
-		?>
 
-    </div>
+					<div class="tabbertab" title="<?php echo t('title', 'UserInfo'); ?>">
+						<?php
+						$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
+						include_once('include/management/userinfo.php');
+						?>
+					</div>
+
+					<div class="tabbertab" title="<?php echo t('title', 'BillingInfo'); ?>">
+						<?php
+						$customApplyButton = "<input type='submit' name='submit' value=" . t('buttons', 'apply') . " class='button' />";
+						include_once('include/management/userbillinfo.php');
+						?>
+					</div>
+
+
+					<div class="tabbertab" title="<?php echo t('title', 'Advanced'); ?>">
+
+						<fieldset>
+
+							<h302> <?php echo t('title', 'AccountInfo'); ?> </h302>
+
+							<ul>
+
+								<li class='fieldset'>
+									<label for='passwordType' class='form'><?php echo t('all', 'PasswordType') ?> </label>
+									<select class='form' tabindex=102 name='passwordType'>
+										<option value='Cleartext-Password'>Cleartext-Password</option>
+										<option value='User-Password'>User-Password</option>
+										<option value='Crypt-Password'>Crypt-Password</option>
+										<option value='MD5-Password'>MD5-Password</option>
+										<option value='SHA1-Password'>SHA1-Password</option>
+										<option value='CHAP-Password'>CHAP-Password</option>
+									</select>
+								</li>
+
+								<li class='fieldset'>
+									<br />
+									<hr><br />
+									<input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000 class='button' />
+								</li>
+
+							</ul>
+
+						</fieldset>
+
+					</div>
+
+				</div>
+
+			</form>
+
+			<?php
+			include('include/config/logging.php');
+			?>
+
+		</div>
+	</div>
 </div>
 <div id="footer">
 
-    <?php
+	<?php
 	include 'page-footer.php';
 	?>
 

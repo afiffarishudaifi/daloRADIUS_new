@@ -66,101 +66,101 @@ include("menu-bill-merchant.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billpaypaltransactions.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billpaypaltransactions.php') ?>
+					<h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'billpaypaltransactions') ?>
-            <br />
-        </div>
-        <br />
-
-
-
-        <?php
-
-		include 'library/opendb.php';
-		include 'include/management/pages_common.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
-
-		// let's sanitize the values passed to us:
-		$payer_email = $dbSocket->escapeSimple($payer_email);
-		$payment_address_status = $dbSocket->escapeSimple($payment_address_status);
-		$payer_status = $dbSocket->escapeSimple($payer_status);
-		$payment_status = $dbSocket->escapeSimple($payment_status);
-		$vendor_type = $dbSocket->escapeSimple($vendor_type);
-		$startdate = $dbSocket->escapeSimple($startdate);
-		$enddate = $dbSocket->escapeSimple($enddate);
-
-		include_once('include/management/userBilling.php');
-		userBillingPayPalSummary($startdate, $enddate, $payer_email, $payment_address_status, $payer_status, $payment_status, $vendor_type, 1);
-		// draw the billing rates summary table
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'billpaypaltransactions') ?>
+				<br />
+			</div>
+			<br />
 
 
-		include 'library/opendb.php';
-		// since we need to span through pages, which we do using GET queries I can't rely on this page
-		// to be processed through POST but rather using GET only (with the current design anyway).
-		// For this reason, I need to build the GET query which I will later use in the page number's links
 
-		$getFields = "";
-		$counter = 0;
-		foreach ($sqlfields as $elements) {
-			$getFields .= "&sqlfields[$counter]=$elements";
-			$counter++;
-		}
+			<?php
 
-		// we should also sanitize the array that we will be passing to this page in the next query
-		$getFields = $dbSocket->escapeSimple($getFields);
+			include 'library/opendb.php';
+			include 'include/management/pages_common.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
+			// let's sanitize the values passed to us:
+			$payer_email = $dbSocket->escapeSimple($payer_email);
+			$payment_address_status = $dbSocket->escapeSimple($payment_address_status);
+			$payer_status = $dbSocket->escapeSimple($payer_status);
+			$payment_status = $dbSocket->escapeSimple($payment_status);
+			$vendor_type = $dbSocket->escapeSimple($vendor_type);
+			$startdate = $dbSocket->escapeSimple($startdate);
+			$enddate = $dbSocket->escapeSimple($enddate);
 
-		$getQuery = "";
-		$getQuery .= "&payer_email=$payer_email";
-		$getQuery .= "&payment_address_status=$payment_address_status";
-		$getQuery .= "&payer_status=$payer_status";
-		$getQuery .= "&payment_status=$payment_status";
-		$getQuery .= "&vendor_type=$vendor_type";
-		$getQuery .= "&startdate=$startdate&enddate=$enddate";
+			include_once('include/management/userBilling.php');
+			userBillingPayPalSummary($startdate, $enddate, $payer_email, $payment_address_status, $payer_status, $payment_status, $vendor_type, 1);
+			// draw the billing rates summary table
 
 
-		$select = implode(",", $sqlfields);
-		// sanitizing the array passed to us in the get request
-		$select = $dbSocket->escapeSimple($select);
+			include 'library/opendb.php';
+			// since we need to span through pages, which we do using GET queries I can't rely on this page
+			// to be processed through POST but rather using GET only (with the current design anyway).
+			// For this reason, I need to build the GET query which I will later use in the page number's links
+
+			$getFields = "";
+			$counter = 0;
+			foreach ($sqlfields as $elements) {
+				$getFields .= "&sqlfields[$counter]=$elements";
+				$counter++;
+			}
+
+			// we should also sanitize the array that we will be passing to this page in the next query
+			$getFields = $dbSocket->escapeSimple($getFields);
 
 
-		$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGMERCHANT'] . " WHERE " .
-			" (payer_email LIKE '$payer_email') AND " .
-			" (payment_address_status LIKE '$payment_address_status') AND " .
-			" (payer_status LIKE '$payer_status') AND " .
-			" (payment_status LIKE '$payment_status') AND " .
-			" (vendor_type LIKE '$vendor_type') AND " .
-			" (payment_date>'$startdate' AND payment_date<'$enddate')";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			$getQuery = "";
+			$getQuery .= "&payer_email=$payer_email";
+			$getQuery .= "&payment_address_status=$payment_address_status";
+			$getQuery .= "&payer_status=$payer_status";
+			$getQuery .= "&payment_status=$payment_status";
+			$getQuery .= "&vendor_type=$vendor_type";
+			$getQuery .= "&startdate=$startdate&enddate=$enddate";
 
 
-		$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGMERCHANT'] . " WHERE " .
-			" (payer_email LIKE '$payer_email') AND " .
-			" (payment_address_status LIKE '$payment_address_status') AND " .
-			" (payer_status LIKE '$payer_status') AND " .
-			" (payment_status LIKE '$payment_status') AND " .
-			" (vendor_type LIKE '$vendor_type') AND " .
-			" (payment_date>'$startdate' AND payment_date<'$enddate') " .
-			" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
+			$select = implode(",", $sqlfields);
+			// sanitizing the array passed to us in the get request
+			$select = $dbSocket->escapeSimple($select);
 
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGMERCHANT'] . " WHERE " .
+				" (payer_email LIKE '$payer_email') AND " .
+				" (payment_address_status LIKE '$payment_address_status') AND " .
+				" (payer_status LIKE '$payer_status') AND " .
+				" (payment_status LIKE '$payment_status') AND " .
+				" (vendor_type LIKE '$vendor_type') AND " .
+				" (payment_date>'$startdate' AND payment_date<'$enddate')";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			$sql = "SELECT $select FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGMERCHANT'] . " WHERE " .
+				" (payer_email LIKE '$payer_email') AND " .
+				" (payment_address_status LIKE '$payment_address_status') AND " .
+				" (payer_status LIKE '$payer_status') AND " .
+				" (payment_status LIKE '$payment_status') AND " .
+				" (vendor_type LIKE '$vendor_type') AND " .
+				" (payment_date>'$startdate' AND payment_date<'$enddate') " .
+				" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
+
+
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
+
+
+			echo "<table border='0' class='table1'>\n";
+			echo "
 					<thead>
 							<tr>
 							<th colspan='25'>" . t('all', 'Records') . "</th>
@@ -171,157 +171,158 @@ include("menu-bill-merchant.php");
                 <br/>
         ";
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, $getFields, $getQuery);
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, $getFields, $getQuery);
 
-		echo " </th></tr>
+			echo " </th></tr>
                                         </thead>
 
                         ";
 
 
-		// building the dybamic table list fields
-		echo "<thread> <tr>";
-		foreach ($sqlfields as $value) {
-			switch ($value) {
-
-				case "id":
-					$title = t('all', 'ID');
-					break;
-				case "username":
-					$title = t('all', 'Username');
-					break;
-				case "password":
-					$title = t('all', 'Password');
-					break;
-				case "txnId":
-					$title = t('all', 'TxnId');
-					break;
-				case "planId":
-					$title = t('all', 'PlanId');
-					break;
-				case "quantity":
-					$title = t('all', 'Quantity');
-					break;
-				case "business_email":
-					$title = t('all', 'ReceiverEmail');
-					break;
-				case "business_id":
-					$title = t('all', 'Business');
-					break;
-				case "payment_tax":
-					$title = t('all', 'Tax');
-					break;
-				case "payment_cost":
-					$title = t('all', 'Cost');
-					break;
-				case "payment_fee":
-					$title = t('all', 'TransactionFee');
-					break;
-				case "payment_total":
-					$title = t('all', 'TotalCost');
-					break;
-				case "payment_currency":
-					$title = t('all', 'PaymentCurrency');
-					break;
-				case "first_name":
-					$title = t('all', 'FirstName');
-					break;
-				case "last_name":
-					$title = t('all', 'LastName');
-					break;
-				case "payer_email":
-					$title = t('all', 'PayerEmail');
-					break;
-				case "payer_address_name":
-					$title = t('all', 'AddressRecipient');
-					break;
-				case "payer_address_street":
-					$title = t('all', 'Street');
-					break;
-				case "payer_address_country":
-					$title = t('all', 'Country');
-					break;
-				case "payer_address_country_code":
-					$title = t('all', 'CountryCode');
-					break;
-				case "payer_address_city":
-					$title = t('all', 'City');
-					break;
-				case "payer_address_state":
-					$title = t('all', 'State');
-					break;
-				case "payer_address_zip":
-					$title = t('all', 'Zip');
-					break;
-				case "payment_date":
-					$title = t('all', 'PaymentDate');
-					break;
-				case "payment_status":
-					$title = t('all', 'PaymentStatus');
-					break;
-				case "payer_status":
-					$title = t('all', 'PayerStatus');
-					break;
-				case "vendor_type":
-					$title = t('all', 'VendorType');
-					break;
-				case "payment_address_status":
-					$title = t('all', 'PaymentAddressStatus');
-					break;
-				default:
-					$title = $value;
-					break;
-			}
-
-			echo "<th scope='col'> $title   </th>";
-		} //foreach $sqlfields
-		echo "</tr> </thread>";
-
-
-		// inserting the values of each field from the database to the table
-		while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
-			echo "<tr>";
+			// building the dybamic table list fields
+			echo "<thread> <tr>";
 			foreach ($sqlfields as $value) {
-				echo "<td> " . $row[$value] . "</td>";
-			}
-			echo "</tr>";
-		}
+				switch ($value) {
 
-		echo "
+					case "id":
+						$title = t('all', 'ID');
+						break;
+					case "username":
+						$title = t('all', 'Username');
+						break;
+					case "password":
+						$title = t('all', 'Password');
+						break;
+					case "txnId":
+						$title = t('all', 'TxnId');
+						break;
+					case "planId":
+						$title = t('all', 'PlanId');
+						break;
+					case "quantity":
+						$title = t('all', 'Quantity');
+						break;
+					case "business_email":
+						$title = t('all', 'ReceiverEmail');
+						break;
+					case "business_id":
+						$title = t('all', 'Business');
+						break;
+					case "payment_tax":
+						$title = t('all', 'Tax');
+						break;
+					case "payment_cost":
+						$title = t('all', 'Cost');
+						break;
+					case "payment_fee":
+						$title = t('all', 'TransactionFee');
+						break;
+					case "payment_total":
+						$title = t('all', 'TotalCost');
+						break;
+					case "payment_currency":
+						$title = t('all', 'PaymentCurrency');
+						break;
+					case "first_name":
+						$title = t('all', 'FirstName');
+						break;
+					case "last_name":
+						$title = t('all', 'LastName');
+						break;
+					case "payer_email":
+						$title = t('all', 'PayerEmail');
+						break;
+					case "payer_address_name":
+						$title = t('all', 'AddressRecipient');
+						break;
+					case "payer_address_street":
+						$title = t('all', 'Street');
+						break;
+					case "payer_address_country":
+						$title = t('all', 'Country');
+						break;
+					case "payer_address_country_code":
+						$title = t('all', 'CountryCode');
+						break;
+					case "payer_address_city":
+						$title = t('all', 'City');
+						break;
+					case "payer_address_state":
+						$title = t('all', 'State');
+						break;
+					case "payer_address_zip":
+						$title = t('all', 'Zip');
+						break;
+					case "payment_date":
+						$title = t('all', 'PaymentDate');
+						break;
+					case "payment_status":
+						$title = t('all', 'PaymentStatus');
+						break;
+					case "payer_status":
+						$title = t('all', 'PayerStatus');
+						break;
+					case "vendor_type":
+						$title = t('all', 'VendorType');
+						break;
+					case "payment_address_status":
+						$title = t('all', 'PaymentAddressStatus');
+						break;
+					default:
+						$title = $value;
+						break;
+				}
+
+				echo "<th scope='col'> $title   </th>";
+			} //foreach $sqlfields
+			echo "</tr> </thread>";
+
+
+			// inserting the values of each field from the database to the table
+			while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+				echo "<tr>";
+				foreach ($sqlfields as $value) {
+					echo "<td> " . $row[$value] . "</td>";
+				}
+				echo "</tr>";
+			}
+
+			echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='25' align='left'>
         ";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType, $getFields, $getQuery);
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType, $getFields, $getQuery);
+			echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-		echo "</table>";
+			echo "</table>";
 
-		include 'library/closedb.php';
+			include 'library/closedb.php';
 
-		?>
+			?>
 
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+			<?php
+			include('include/config/logging.php');
+			?>
 
-    </div>
+		</div>
+	</div>
 </div>
-    <div id="footer">
+<div id="footer">
 
-        <?php
-		include 'page-footer.php';
-		?>
+	<?php
+	include 'page-footer.php';
+	?>
 
 
-    </div>
+</div>
 
 </div>
 </div>

@@ -50,99 +50,101 @@ include("menu-reports-batch.php");
 ?>
 
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+	<div class="card">
+		<div class="card-body">
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'repbatchdetails.php'); ?>
-			<h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'repbatchdetails.php'); ?>
+					<h144>&#x2754;</h144></a></h2>
 
-	<div id="helpPage" style="display:none;visibility:visible">
-		<?php echo t('helpPage', 'repbatchdetails') ?>
-		<br />
-	</div>
-
-
-	<?php
-
-	include 'include/management/pages_common.php';
-	include 'library/opendb.php';
-	include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
-
-	$batch_id = 0;
-
-	if ($batch_name) {
-
-		$batch_name = $dbSocket->escapeSimple($batch_name);
-
-		$sql = "SELECT " .
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id " .
-			" FROM " .
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
-			" WHERE " .
-			$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name = '$batch_name' " .
-			" GROUP by " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name LIMIT 1";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
-		$logDebugSQL .= $sql . "\n";
-
-		if ($numrows > 0) {
-			$row = $res->fetchRow();
-			$batch_id = $row[0];
-		}
-	}
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'repbatchdetails') ?>
+				<br />
+			</div>
 
 
+			<?php
 
-	$_SESSION['reportParams']['batch_id'] = $batch_id;
+			include 'include/management/pages_common.php';
+			include 'library/opendb.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
 
-	$sql = "SELECT " .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_description," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_status," .
+			$batch_id = 0;
 
-		"COUNT(DISTINCT(" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".id)) as total_users," .
-		"COUNT(DISTINCT(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username)) as active_users," .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname," .
-		$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".plancost," .
-		$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".plancurrency," .
-		$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as HotspotName," .
+			if ($batch_name) {
 
+				$batch_name = $dbSocket->escapeSimple($batch_name);
 
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".creationdate," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".creationby," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".updatedate," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".updateby " .
-		" FROM " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
-		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] .
-		" ON " .
-		"(" . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id = " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id) " .
+				$sql = "SELECT " .
+					$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id " .
+					" FROM " .
+					$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
+					" WHERE " .
+					$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name = '$batch_name' " .
+					" GROUP by " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name LIMIT 1";
+				$res = $dbSocket->query($sql);
+				$numrows = $res->numRows();
+				$logDebugSQL .= $sql . "\n";
 
-		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] .
-		" ON " .
-		"(" . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".planname = " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname) " .
-
-		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
-		" ON " .
-		"(" . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".hotspot_id = " .
-		$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".id) " .
-
-		" LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-		" ON " .
-		"(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username = " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username) " .
-
-		" WHERE " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name = '$batch_name' " .
-		" GROUP by " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name ";
+				if ($numrows > 0) {
+					$row = $res->fetchRow();
+					$batch_id = $row[0];
+				}
+			}
 
 
-	$res = $dbSocket->query($sql);
 
-	$logDebugSQL .= $sql . "\n";
+			$_SESSION['reportParams']['batch_id'] = $batch_id;
 
-	echo "<table border='0' class='table1'>\n";
-	echo "
+			$sql = "SELECT " .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_description," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_status," .
+
+				"COUNT(DISTINCT(" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".id)) as total_users," .
+				"COUNT(DISTINCT(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username)) as active_users," .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname," .
+				$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".plancost," .
+				$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".plancurrency," .
+				$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".name as HotspotName," .
+
+
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".creationdate," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".creationby," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".updatedate," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".updateby " .
+				" FROM " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] .
+				" ON " .
+				"(" . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id = " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id) " .
+
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] .
+				" ON " .
+				"(" . $configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'] . ".planname = " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname) " .
+
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] .
+				" ON " .
+				"(" . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".hotspot_id = " .
+				$configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".id) " .
+
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+				" ON " .
+				"(" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".username = " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username) " .
+
+				" WHERE " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name = '$batch_name' " .
+				" GROUP by " . $configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name ";
+
+
+			$res = $dbSocket->query($sql);
+
+			$logDebugSQL .= $sql . "\n";
+
+			echo "<table border='0' class='table1'>\n";
+			echo "
 						<thead>
 								<tr>
 								<th colspan='10' align='left'> 
@@ -156,7 +158,7 @@ include("menu-reports-batch.php");
 								<br/><br/>
 			";
 
-	echo "
+			echo "
 				</th>
 				</tr>
 				</thead>
@@ -205,25 +207,25 @@ include("menu-reports-batch.php");
 			</tr> </thread>";
 
 
-	$active_users_per = 0;
-	$total_users = 0;
-	$active_users = 0;
-	$batch_cost = 0;
-	while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$active_users_per = 0;
+			$total_users = 0;
+			$active_users = 0;
+			$batch_cost = 0;
+			while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 
-		$hotspot_name = $row['HotspotName'];
-		$batch_status = $row['batch_status'];
-		$plancost = $row['plancost'];
-		$total_users = $row['total_users'];
-		$active_users = $row['active_users'];
-		$batch_cost = ($active_users * $plancost);
-		$plan_currency = $row['plancurrency'];
+				$hotspot_name = $row['HotspotName'];
+				$batch_status = $row['batch_status'];
+				$plancost = $row['plancost'];
+				$total_users = $row['total_users'];
+				$active_users = $row['active_users'];
+				$batch_cost = ($active_users * $plancost);
+				$plan_currency = $row['plancurrency'];
 
-		echo "
+				echo "
 				<tr>
 					<td>";
 
-		printqn("
+				printqn("
 					<a class='tablenovisit' href='#'
 						onclick='javascript:return false;'
 						tooltipText='
@@ -237,7 +239,7 @@ include("menu-reports-batch.php");
 				</td>
 			");
 
-		echo "
+				echo "
 			
 					<td>" . $hotspot_name . "
 						
@@ -256,7 +258,7 @@ include("menu-reports-batch.php");
 					</td>
 	
 					<td>" .
-			$row['planname'] . "
+					$row['planname'] . "
 					</td>
 	
 					<td>" . $plancost . "
@@ -266,19 +268,19 @@ include("menu-reports-batch.php");
 					</td>
 					
 					<td>" .
-			$row['creationdate'] . "
+					$row['creationdate'] . "
 					</td>
 	
 					<td>" .
-			$row['creationby'] . "
+					$row['creationby'] . "
 					</td>
 	
 	
 				</tr>
 			";
-	}
+			}
 
-	echo "
+			echo "
 						<tfoot>
 								<tr>
 								<th colspan='10' align='left'> 
@@ -288,7 +290,7 @@ include("menu-reports-batch.php");
 						</tfoot>
 			";
 
-	echo "</table>";
+			echo "</table>";
 
 
 
@@ -310,79 +312,79 @@ include("menu-reports-batch.php");
 
 
 
-	// setup php session variables for exporting
-	$_SESSION['reportTable'] = "";
-	//reportQuery is assigned below to the SQL statement  in $sql
-	$_SESSION['reportQuery'] = "";
-	$_SESSION['reportType'] = "reportsBatchActiveUsers";
+			// setup php session variables for exporting
+			$_SESSION['reportTable'] = "";
+			//reportQuery is assigned below to the SQL statement  in $sql
+			$_SESSION['reportQuery'] = "";
+			$_SESSION['reportType'] = "reportsBatchActiveUsers";
 
-	//orig: used as method to get total rows - this is required for the pages_numbering.php page
-	$sql = "SELECT " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".id," .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username," .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".acctstarttime," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name " .
+			//orig: used as method to get total rows - this is required for the pages_numbering.php page
+			$sql = "SELECT " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".id," .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username," .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".acctstarttime," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name " .
 
-		" FROM " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . "," .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . "," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
+				" FROM " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . "," .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . "," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
 
-		" WHERE " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id = " .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id" .
-		" AND " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id = $batch_id " .
-		" AND " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username = " .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".username" .
+				" WHERE " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id = " .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id" .
+				" AND " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id = $batch_id " .
+				" AND " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username = " .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".username" .
 
-		" GROUP by " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username " .
-		" ORDER BY $orderBy $orderType ," . $configValues['CONFIG_DB_TBL_RADACCT'] . ".radacctid ASC ";
+				" GROUP by " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username " .
+				" ORDER BY $orderBy $orderType ," . $configValues['CONFIG_DB_TBL_RADACCT'] . ".radacctid ASC ";
 
-	// assigning the session reportQuery
-	$_SESSION['reportQuery'] = $sql;
+			// assigning the session reportQuery
+			$_SESSION['reportQuery'] = $sql;
 
-	$res = $dbSocket->query($sql);
-	$numrows = $res->numRows();
-	$logDebugSQL .= $sql . "\n";
-
-
-	$sql = "SELECT " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".id," .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username," .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".acctstarttime," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name " .
-
-		" FROM " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . "," .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . "," .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
-
-		" WHERE " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id = " .
-		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id" .
-		" AND " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id = $batch_id " .
-		" AND " .
-		$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username = " .
-		$configValues['CONFIG_DB_TBL_RADACCT'] . ".username" .
-
-		" GROUP by " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username " .
-		" ORDER BY $orderBy $orderType ," . $configValues['CONFIG_DB_TBL_RADACCT'] . ".radacctid ASC " .
-		" LIMIT $offset, $rowsPerPage;";
-	$res = $dbSocket->query($sql);
-	$logDebugSQL .= $sql . "\n";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
+			$logDebugSQL .= $sql . "\n";
 
 
-	/* START - Related to pages_numbering.php */
-	$maxPage = ceil($numrows / $rowsPerPage);
-	/* END */
+			$sql = "SELECT " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".id," .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username," .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".acctstarttime," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".batch_name " .
 
-	echo "<form name='listallusers' method='get' action='mng-del.php' >";
+				" FROM " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . "," .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . "," .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] .
 
-	echo "<table border='0' class='table1'>\n";
-	echo "
+				" WHERE " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id = " .
+				$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] . ".id" .
+				" AND " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".batch_id = $batch_id " .
+				" AND " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username = " .
+				$configValues['CONFIG_DB_TBL_RADACCT'] . ".username" .
+
+				" GROUP by " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username " .
+				" ORDER BY $orderBy $orderType ," . $configValues['CONFIG_DB_TBL_RADACCT'] . ".radacctid ASC " .
+				" LIMIT $offset, $rowsPerPage;";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL .= $sql . "\n";
+
+
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
+
+			echo "<form name='listallusers' method='get' action='mng-del.php' >";
+
+			echo "<table border='0' class='table1'>\n";
+			echo "
 					<thead>
 							<tr>
 							<th colspan='10' align='left'> 
@@ -393,23 +395,23 @@ include("menu-reports-batch.php");
 		";
 
 
-	/* drawing the number links */
-	if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-		setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+			/* drawing the number links */
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-	echo "
+			echo "
 			</th>
 			</tr>
 			</thead>
 			";
-	$curOrderType = $orderType;
-	if ($orderType == "asc") {
-		$orderType = "desc";
-	} else  if ($orderType == "desc") {
-		$orderType = "asc";
-	}
+			$curOrderType = $orderType;
+			if ($orderType == "asc") {
+				$orderType = "desc";
+			} else  if ($orderType == "desc") {
+				$orderType = "asc";
+			}
 
-	echo "<thread> <tr>
+			echo "<thread> <tr>
 		<th scope='col'> 
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=id&orderType=$orderType\">
 		" . t('all', 'BatchName') . "</a>
@@ -426,17 +428,17 @@ include("menu-reports-batch.php");
 		</tr> </thread>";
 
 
-	$active_users_per = 0;
-	$total_users = 0;
-	$active_users = 0;
-	$batch_cost = 0;
-	while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			$active_users_per = 0;
+			$total_users = 0;
+			$active_users = 0;
+			$batch_cost = 0;
+			while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 
-		$username = $row['username'];
-		$acctstarttime = $row['acctstarttime'];
-		$batch_name = $row['batch_name'];
+				$username = $row['username'];
+				$acctstarttime = $row['acctstarttime'];
+				$batch_name = $row['batch_name'];
 
-		echo "
+				echo "
 				<td>" . $batch_name . "
 				</td>
 
@@ -448,33 +450,35 @@ include("menu-reports-batch.php");
 
 			</tr>
 		";
-	}
+			}
 
-	echo "
+			echo "
 					<tfoot>
 							<tr>
 							<th colspan='10' align='left'> 
 	";
-	setupLinks($pageNum, $maxPage, $orderBy, $curOrderType);
-	echo "							</th>
+			setupLinks($pageNum, $maxPage, $orderBy, $curOrderType);
+			echo "							</th>
 							</tr>
 					</tfoot>
 		";
 
-	echo "</table>";
-	echo "</form>";
+			echo "</table>";
+			echo "</form>";
 
-	include 'library/closedb.php';
+			include 'library/closedb.php';
 
-	?>
-
-
-
-	<?php
-	include('include/config/logging.php');
-	?>
+			?>
 
 
+
+			<?php
+			include('include/config/logging.php');
+			?>
+
+
+		</div>
+	</div>
 </div>
 
 <div id="footer">

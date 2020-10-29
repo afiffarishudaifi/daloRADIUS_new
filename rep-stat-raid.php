@@ -45,78 +45,82 @@ include("menu-reports-status.php");
 ?>
 
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+	<div class="card">
+		<div class="card-body">
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')">RAID Status
-			<h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')">RAID Status
+					<h144>&#x2754;</h144></a></h2>
 
-	<div id="helpPage" style="display:none;visibility:visible">
-		<br />
-	</div>
-	<br />
-
-
-
-	<div class="tabber">
+			<div id="helpPage" style="display:none;visibility:visible">
+				<br />
+			</div>
+			<br />
 
 
-		<?php
 
-		if (!file_exists('/proc/mdstat')) :
-		?>
-			<font color='red'><b>Error</b> accessing RAID device information:</font>
-			<br /><br />
+			<div class="tabber">
 
-		<?php
-		else :
-			exec("cat /proc/mdstat  | awk '/md/ {print $1}'", $mdstat);
 
-		?>
+				<?php
 
-			<font color='red'><b>Error</b> accessing RAID device information:</font>
-			<br /><br />
+				if (!file_exists('/proc/mdstat')) :
+				?>
+					<font color='red'><b>Error</b> accessing RAID device information:</font>
+					<br /><br />
 
-			<?php
-			foreach ($mdstat as $mddevice) :
-			?>
+				<?php
+				else :
+					exec("cat /proc/mdstat  | awk '/md/ {print $1}'", $mdstat);
 
-				<div class="tabbertab" title="<?php echo $mddevice ?>">
+				?>
+
+					<font color='red'><b>Error</b> accessing RAID device information:</font>
+					<br /><br />
 
 					<?php
-					$output = "";
-					$cmd = "sudo /sbin/mdadm --detail /dev/$mddevice";
-					exec($cmd, $output);
+					foreach ($mdstat as $mddevice) :
 					?>
 
-					<table class='summarySection'>
-
-						<?php
-						foreach ($output as $line) :
-						?>
+						<div class="tabbertab" title="<?php echo $mddevice ?>">
 
 							<?php
-							list($var, $val) = split(":", $line);
+							$output = "";
+							$cmd = "sudo /sbin/mdadm --detail /dev/$mddevice";
+							exec($cmd, $output);
 							?>
 
-							<tr>
-								<td class='summaryKey'> <?php echo $var ?> </td>
-								<td class='summaryValue'><span class='sleft'> <?php echo $val ?> </span> </td>
-							</tr>
+							<table class='summarySection'>
 
-						<?php endforeach; ?>
+								<?php
+								foreach ($output as $line) :
+								?>
 
-					</table>
+									<?php
+									list($var, $val) = split(":", $line);
+									?>
 
-				</div>
+									<tr>
+										<td class='summaryKey'> <?php echo $var ?> </td>
+										<td class='summaryValue'><span class='sleft'> <?php echo $val ?> </span> </td>
+									</tr>
 
-			<?php endforeach; ?>
-		<?php endif; ?>
+								<?php endforeach; ?>
 
+							</table>
+
+						</div>
+
+					<?php endforeach; ?>
+				<?php endif; ?>
+
+			</div>
+
+
+
+
+		</div>
 	</div>
-
-
-
-
 </div>
 
 <div id="footer">

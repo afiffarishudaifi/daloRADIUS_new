@@ -32,7 +32,7 @@
 									<img src='images/icons/reportsLogs.png' border='0'>&nbsp;<?php echo t('button', 'daloRADIUSLog') ?>
 								</a>
 								<form name="daloradius_log" action="rep-logs-daloradius.php" method="get" class="sidebar">
-									<select class="" name="daloradiusLineCount" type="text">
+									<select class="form-control-sm" name="daloradiusLineCount" type="text">
 										<?php if (isset($daloradiusLineCount)) {
 											echo "<option value='$daloradiusLineCount'> $daloradiusLineCount Lines </option>";
 										} else {
@@ -46,7 +46,7 @@
 										<option value="500"> 500 Lines </option>
 										<option value="1000"> 1000 Lines </option>
 									</select>
-									<select class="" name="daloradiusFilter" type="text">
+									<select class="form-control-sm" name="daloradiusFilter" type="text">
 										<?php if (isset($daloradiusFilter)) {
 											if ($daloradiusFilter == ".")
 												echo "<option value='$daloradiusFilter'> Any </option>";
@@ -71,7 +71,7 @@
 									<img src='images/icons/reportsLogs.png' border='0'>&nbsp;<?php echo t('button', 'RadiusLog') ?>
 								</a>
 								<form name="radius_log" action="rep-logs-radius.php" method="get" class="sidebar">
-									<select class="" name="radiusLineCount" type="text">
+									<select class="form-control-sm" name="radiusLineCount" type="text">
 										<?php if (isset($radiusLineCount)) {
 											echo "<option value='$radiusLineCount'> $radiusLineCount Lines </option>";
 										} else {
@@ -85,7 +85,7 @@
 										<option value="500"> 500 Lines </option>
 										<option value="1000"> 1000 Lines </option>
 									</select>
-									<select class="" name="radiusFilter" type="text">
+									<select class="form-control-sm" name="radiusFilter" type="text">
 										<?php if (isset($radiusFilter)) {
 											if ($radiusFilter == ".")
 												echo "<option value='$radiusFilter'> Any </option>";
@@ -109,7 +109,7 @@
 									<img src='images/icons/reportsLogs.png' border='0'>&nbsp;<?php echo t('button', 'SystemLog') ?>
 								</a>
 								<form name="system_log" action="rep-logs-system.php" method="get" class="sidebar">
-									<select class="" name="systemLineCount" type="text">
+									<select class="form-control-sm" name="systemLineCount" type="text">
 										<?php if (isset($systemLineCount)) {
 											echo "<option value='$systemLineCount'> $systemLineCount Lines </option>";
 										} else {
@@ -123,7 +123,7 @@
 										<option value="500"> 500 Lines </option>
 										<option value="1000"> 1000 Lines </option>
 									</select>
-									<input type="text" name="systemFilter" tooltipText='<?php echo t('Tooltip', 'Filter'); ?> <br/>' value="<?php if (isset($systemFilter)) echo $systemFilter; ?>" />
+									<input class="form-control-sm" type="text" name="systemFilter" tooltipText='<?php echo t('Tooltip', 'Filter'); ?> <br/>' value="<?php if (isset($systemFilter)) echo $systemFilter; ?>" />
 								</form>
 							</li>
 
@@ -134,7 +134,7 @@
 									<img src='images/icons/reportsLogs.png' border='0'>&nbsp;<?php echo t('button', 'BootLog') ?>
 								</a>
 								<form name="boot_log" action="rep-logs-boot.php" method="get" class="sidebar">
-									<select class="" name="bootLineCount" type="text">
+									<select class="form-control-sm" name="bootLineCount" type="text">
 										<?php if (isset($bootLineCount)) {
 											echo "<option value='$bootLineCount'> $bootLineCount Lines </option>";
 										} else {
@@ -148,7 +148,7 @@
 										<option value="500"> 500 Lines </option>
 										<option value="1000"> 1000 Lines </option>
 									</select>
-									<input type="text" name="bootFilter" tooltipText='<?php echo t('Tooltip', 'Filter'); ?> <br/>' value="<?php if (isset($bootFilter)) echo $bootFilter; ?>" />
+									<input class="form-control-sm" type="text" name="bootFilter" tooltipText='<?php echo t('Tooltip', 'Filter'); ?> <br/>' value="<?php if (isset($bootFilter)) echo $bootFilter; ?>" />
 								</form>
 							</li>
 

@@ -47,83 +47,83 @@ include("menu-bill-pos.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billposlist.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billposlist.php') ?>
+					<h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'billposlist') ?>
-            <br />
-        </div>
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'billposlist') ?>
+				<br />
+			</div>
 
-        <div id="returnMessages">
-        </div>
-
-
-        <?php
-
-		include 'include/management/pages_common.php';
-		include 'library/opendb.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
-
-		$planname = $dbSocket->escapeSimple($planname);
-
-		$_where = "";
-		if (!empty($planname) && ($planname != "%"))
-			$_where = " AND (" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname LIKE '$planname') ";
+			<div id="returnMessages">
+			</div>
 
 
-		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-		$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username), " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".id, " .
-			$configValues['CONFIG_DB_TBL_RADCHECK'] . ".value, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".attribute, " .
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".contactperson, " .
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".billstatus, " .
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname, " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".company, " .
-			$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".firstname " .
-			" FROM " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ", " . $configValues['CONFIG_DB_TBL_RADCHECK'] .
-			" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] .
-			" ON " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username " .
-			" WHERE (" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".username " .
-			" AND ((Attribute LIKE '%-Password') OR (Attribute='Auth-Type')) ) " .
-			$_where .
-			" GROUP BY UserName ";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			<?php
+
+			include 'include/management/pages_common.php';
+			include 'library/opendb.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+
+			$planname = $dbSocket->escapeSimple($planname);
+
+			$_where = "";
+			if (!empty($planname) && ($planname != "%"))
+				$_where = " AND (" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname LIKE '$planname') ";
 
 
-		/* we are searching for both kind of attributes for the password, being User-Password, the more
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+			$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username), " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".id, " .
+				$configValues['CONFIG_DB_TBL_RADCHECK'] . ".value, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".attribute, " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".contactperson, " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".billstatus, " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname, " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".company, " .
+				$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".firstname " .
+				" FROM " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ", " . $configValues['CONFIG_DB_TBL_RADCHECK'] .
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] .
+				" ON " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username " .
+				" WHERE (" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".username " .
+				" AND ((Attribute LIKE '%-Password') OR (Attribute='Auth-Type')) ) " .
+				$_where .
+				" GROUP BY UserName ";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
+
+
+			/* we are searching for both kind of attributes for the password, being User-Password, the more
 	   common one and the other which is Password, this is also done for considerations of backwards
 	   compatibility with version 0.7        */
 
-		$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username), " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".id, " .
-			$configValues['CONFIG_DB_TBL_RADCHECK'] . ".value, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".attribute, " .
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".contactperson, " .
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".billstatus, " .
-			$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname, " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".company, " .
-			$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".firstname, IFNULL(disabled.username,0) as disabled " .
-			" FROM " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ", " . $configValues['CONFIG_DB_TBL_RADCHECK'] .
-			" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] .
-			" ON " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username " .
-			" LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " disabled
+			$sql = "SELECT distinct(" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username), " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".id, " .
+				$configValues['CONFIG_DB_TBL_RADCHECK'] . ".value, " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".attribute, " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".contactperson, " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".billstatus, " .
+				$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".planname, " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".company, " .
+				$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".firstname, IFNULL(disabled.username,0) as disabled " .
+				" FROM " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ", " . $configValues['CONFIG_DB_TBL_RADCHECK'] .
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] .
+				" ON " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . ".username " .
+				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADUSERGROUP'] . " disabled
 			 ON disabled.username=" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username AND disabled.groupname = 'daloRADIUS-Disabled-Users' " .
-			" WHERE (" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".username " .
-			" AND ((Attribute LIKE '%-Password') OR (Attribute='Auth-Type')) )" .
-			$_where .
-			" GROUP BY " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".UserName ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
+				" WHERE (" . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".username=" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".username " .
+				" AND ((Attribute LIKE '%-Password') OR (Attribute='Auth-Type')) )" .
+				$_where .
+				" GROUP BY " . $configValues['CONFIG_DB_TBL_RADCHECK'] . ".UserName ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
 
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
 
-		echo "<form name='listallusers' method='get' action='mng-del.php' >";
+			echo "<form name='listallusers' method='get' action='mng-del.php' >";
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			echo "<table border='0' class='table1'>\n";
+			echo "
 					<thead>
 							<tr>
 							<th colspan='10' align='left'> 
@@ -149,23 +149,23 @@ include("menu-bill-pos.php");
 		";
 
 
-		/* drawing the number links */
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+			/* drawing the number links */
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-		echo "
+			echo "
 			</th>
 			</tr>
 			</thead>
 			";
 
-		if ($orderType == "asc") {
-			$orderTypeNextPage = "desc";
-		} else  if ($orderType == "desc") {
-			$orderTypeNextPage = "asc";
-		}
+			if ($orderType == "asc") {
+				$orderTypeNextPage = "desc";
+			} else  if ($orderType == "desc") {
+				$orderTypeNextPage = "asc";
+			}
 
-		echo "<thread> <tr>
+			echo "<thread> <tr>
 
 		<th scope='col'> 
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=id&orderType=$orderTypeNextPage\">
@@ -198,23 +198,23 @@ include("menu-bill-pos.php");
 
 		</tr> </thread>";
 
-		while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 
-			echo "
+				echo "
 			<tr>
 			<td> <input type='checkbox' name='username[]' value='" . $row['username'] . "'>" . $row['id'] . "</td>
 			<td>" . $row['contactperson'] . "</td>
 			<td>" . $row['company'] . "</td>
 		";
 
-			echo "<td>";
+				echo "<td>";
 
-			if (($row['disabled'] !== '0') || ($row['billstatus'] == "Suspended"))
-				echo "<img title='user is disabled' src='images/icons/userStatusDisabled.gif' alt='[disabled]'>";
-			else
-				echo "<img title='user is enabled' src='images/icons/userStatusActive.gif' alt='[enabled]'>";
+				if (($row['disabled'] !== '0') || ($row['billstatus'] == "Suspended"))
+					echo "<img title='user is disabled' src='images/icons/userStatusDisabled.gif' alt='[disabled]'>";
+				else
+					echo "<img title='user is enabled' src='images/icons/userStatusActive.gif' alt='[enabled]'>";
 
-			printqn("
+				printqn("
 			<a class='tablenovisit' href='#'
                                 onClick='javascript:ajaxGeneric(\"include/management/retUserInfo.php\",\"retBandwidthInfo\",\"divContainerUserInfo\",\"username=" . urlencode($row['username']) . "\");return false;'
                                 tooltipText='
@@ -230,46 +230,47 @@ include("menu-bill-pos.php");
 			</td>
 			");
 
-			if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
-				echo "<td>[Password is hidden]</td>";
-			} else {
-				echo "<td>" . $row['value'] . "</td>";
-			}
-			echo "
+				if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
+					echo "<td>[Password is hidden]</td>";
+				} else {
+					echo "<td>" . $row['value'] . "</td>";
+				}
+				echo "
 			<td>" . $row['planname'] . "</td>
 			</tr>
 		";
-		}
+			}
 
-		echo "
+			echo "
 					<tfoot>
 							<tr>
 							<th colspan='10' align='left'> 
 	";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType);
-		echo "							</th>
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType);
+			echo "							</th>
 							</tr>
 					</tfoot>
 		";
 
-		echo "</table>";
-		echo "</form>";
+			echo "</table>";
+			echo "</form>";
 
-		include 'library/closedb.php';
+			include 'library/closedb.php';
 
-		?>
+			?>
 
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+			<?php
+			include('include/config/logging.php');
+			?>
 
-    </div>
+		</div>
+	</div>
 </div>
 <div id="footer">
 
-    <?php
+	<?php
 	include 'page-footer.php';
 	?>
 
@@ -281,11 +282,11 @@ include("menu-bill-pos.php");
 </div>
 
 <script type="text/javascript">
-var tooltipObj = new DHTMLgoodies_formTooltip();
-tooltipObj.setTooltipPosition('right');
-tooltipObj.setPageBgColor('#EEEEEE');
-tooltipObj.setTooltipCornerSize(15);
-tooltipObj.initFormFieldTooltip();
+	var tooltipObj = new DHTMLgoodies_formTooltip();
+	tooltipObj.setTooltipPosition('right');
+	tooltipObj.setPageBgColor('#EEEEEE');
+	tooltipObj.setTooltipCornerSize(15);
+	tooltipObj.initFormFieldTooltip();
 </script>
 
 </body>

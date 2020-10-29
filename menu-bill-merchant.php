@@ -1,5 +1,4 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
@@ -37,37 +36,30 @@
                         <h2>Billing</h2>
 
                         <h3>Track PayPal Transactions</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
-                            <form name="billpaypaltransactions" action="bill-merchant-transactions.php" method="get"
-                                class="sidebar">
+                            <form name="billpaypaltransactions" action="bill-merchant-transactions.php" method="get" class="sidebar">
 
-                                <input class="sidebutton" type="submit" name="submit"
-                                    value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />
+                                <input class="sidebutton" type="submit" name="submit" value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />
                                 <br /><br />
 
                                 <h109><?php echo t('button', 'BetweenDates'); ?></h109> <br />
 
-                                <input name="startdate" type="text" id="startdate"
-                                    value="<?php if (isset($billing_date_startdate)) echo $billing_date_startdate;
-                                                                                            else echo date("Y-m-01"); ?>">
+                                <input class="form-control-sm" name="startdate" type="text" id="startdate" value="<?php if (isset($billing_date_startdate)) echo $billing_date_startdate;
+                                                                                                                    else echo date("Y-m-01"); ?>">
 
-                                <img src="library/js_date/calendar.gif"
-                                    onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
-                                <div id="chooserSpan" class="dateChooser select-free"
-                                    style="display: none; visibility: hidden;       width: 160px;"></div>
+                                <img src="library/js_date/calendar.gif" onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
+                                <div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden;       width: 160px;"></div>
 
-                                <input name="enddate" type="text" id="enddate" value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
-                                                                                        else echo date("Y-m-t"); ?>">
+                                <input class="form-control-sm" name="enddate" type="text" id="enddate" value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
+                                                                                                                else echo date("Y-m-t"); ?>">
 
-                                <img src="library/js_date/calendar.gif"
-                                    onclick="showChooser(this, 'enddate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
-                                <div id="chooserSpan" class="dateChooser select-free"
-                                    style="display: none; visibility: hidden; width: 160px;"></div>
+                                <img src="library/js_date/calendar.gif" onclick="showChooser(this, 'enddate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
+                                <div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; width: 160px;"></div>
                                 <br /><br />
 
                                 <h109><?php echo t('all', 'VendorType'); ?></h109> <br />
-                                <select name="vendor_type" size="1">
+                                <select class="form-control-sm" name="vendor_type" size="1">
                                     <option value="<?php if (isset($billing_paypal_vendor_type)) echo $billing_paypal_vendor_type;
                                                     else echo "%"; ?>">
                                         <?php if (isset($billing_paypal_vendor_type)) echo $billing_paypal_vendor_type;
@@ -81,12 +73,12 @@
                                 <br /><br />
 
                                 <h109><?php echo t('all', 'PayerEmail'); ?></h109> <br />
-                                <input name="payer_email" type="text" value="<?php if (isset($billing_paypal_payeremail)) echo $billing_paypal_payeremail;
-                                                                                else echo "*"; ?>">
+                                <input class="form-control-sm" name="payer_email" type="text" value="<?php if (isset($billing_paypal_payeremail)) echo $billing_paypal_payeremail;
+                                                                                                        else echo "*"; ?>">
                                 <br />
 
                                 <h109><?php echo t('all', 'PaymentStatus'); ?></h109> <br />
-                                <select name="payment_status" size="1">
+                                <select class="form-control-sm" name="payment_status" size="1">
                                     <option value="<?php if (isset($billing_paypal_paymentstatus)) echo $billing_paypal_paymentstatus;
                                                     else echo "%"; ?>">
                                         <?php if (isset($billing_paypal_paymentstatus)) echo $billing_paypal_paymentstatus;
@@ -167,10 +159,8 @@
                                 <input type="checkbox" name="sqlfields[]" value="vendor_type" checked />
                                 <h109><?php echo t('all', 'VendorType'); ?> </h109> <br />
                                 Select:
-                                <a class="table"
-                                    href="javascript:SetChecked(1,'sqlfields[]','billpaypaltransactions')">All</a>
-                                <a class="table"
-                                    href="javascript:SetChecked(0,'sqlfields[]','billpaypaltransactions')">None</a>
+                                <a class="table" href="javascript:SetChecked(1,'sqlfields[]','billpaypaltransactions')">All</a>
+                                <a class="table" href="javascript:SetChecked(0,'sqlfields[]','billpaypaltransactions')">None</a>
 
 
                                 <br /><br />
@@ -189,8 +179,7 @@
                                         </center>
 
                                         <br />
-                                        <input class="sidebutton" type="submit" name="submit"
-                                            value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />
+                                        <input class="sidebutton" type="submit" name="submit" value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />
 
 
 

@@ -39,29 +39,29 @@ $logDebugSQL = "";
 
 if (isset($_POST['submit'])) {
 
-	$paymentname = $_POST['paymentname'];
-	$paymentnotes = $_POST['paymentnotes'];
+    $paymentname = $_POST['paymentname'];
+    $paymentnotes = $_POST['paymentnotes'];
 
-	if (trim($paymentname) != "") {
+    if (trim($paymentname) != "") {
 
-		$currDate = date('Y-m-d H:i:s');
-		$currBy = $_SESSION['operator_user'];
+        $currDate = date('Y-m-d H:i:s');
+        $currBy = $_SESSION['operator_user'];
 
-		$sql = "UPDATE " . $configValues['CONFIG_DB_TBL_DALOPAYMENTTYPES'] . " SET " .
-			" value='" . $dbSocket->escapeSimple($paymentname) . "', " .
-			" notes='" . $dbSocket->escapeSimple($paymentnotes) .	"', " .
-			" updatedate='$currDate', updateby='$currBy' " .
-			" WHERE value='" . $dbSocket->escapeSimple($paymentname) . "'";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
+        $sql = "UPDATE " . $configValues['CONFIG_DB_TBL_DALOPAYMENTTYPES'] . " SET " .
+            " value='" . $dbSocket->escapeSimple($paymentname) . "', " .
+            " notes='" . $dbSocket->escapeSimple($paymentnotes) .    "', " .
+            " updatedate='$currDate', updateby='$currBy' " .
+            " WHERE value='" . $dbSocket->escapeSimple($paymentname) . "'";
+        $res = $dbSocket->query($sql);
+        $logDebugSQL = "";
+        $logDebugSQL .= $sql . "\n";
 
-		$successMsg = "Updated payment type: <b> $paymentname </b>";
-		$logAction .= "Successfully updated payment type [$paymentname] on page: ";
-	} else {
-		$failureMsg = "no payment type was entered, please specify a payment type to edit.";
-		$logAction .= "Failed updating payment type [$paymentname] on page: ";
-	}
+        $successMsg = "Updated payment type: <b> $paymentname </b>";
+        $logAction .= "Successfully updated payment type [$paymentname] on page: ";
+    } else {
+        $failureMsg = "no payment type was entered, please specify a payment type to edit.";
+        $logAction .= "Failed updating payment type [$paymentname] on page: ";
+    }
 }
 
 
@@ -81,7 +81,7 @@ include 'library/closedb.php';
 
 
 if (trim($paymentname) == "") {
-	$failureMsg = "no payment type was entered or found in database, please specify a payment type to edit";
+    $failureMsg = "no payment type was entered or found in database, please specify a payment type to edit";
 }
 
 
@@ -103,118 +103,116 @@ include("menu-bill-payments.php");
 ?>
 <div class="col-lg-9">
     <div class="card">
+        <div class="card-body">
 
-        <h2 id="Intro" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'paymenttypesedit.php') ?>
-            :: <?php if (isset($paymentname)) {
-					echo $paymentname;
-				} ?><h144>&#x2754;</h144></a></h2>
+            <h2 id="Intro" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'paymenttypesedit.php') ?>
+                :: <?php if (isset($paymentname)) {
+                        echo $paymentname;
+                    } ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'paymenttypesedit') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
-
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-            <div class="tabber">
-
-                <div class="tabbertab" title="<?php echo t('title', 'PayTypeInfo'); ?>">
-
-
-                    <fieldset>
-
-                        <h302> <?php echo t('title', 'PayTypeInfo'); ?> </h302>
-                        <br />
-
-                        <ul>
-
-                            <li class='fieldset'>
-                                <label for='paymentname' class='form'><?php echo t('all', 'PayTypeName') ?></label>
-                                <input disabled name='paymentname' type='text' id='paymentname'
-                                    value='<?php echo $paymentname ?>' tabindex=100 />
-                            </li>
-
-                            <li class='fieldset'>
-                                <label for='paymentnotes' class='form'><?php echo t('all', 'PayTypeNotes') ?></label>
-
-                                <input class='text' name='paymentnotes' type='text' id='paymentnotes'
-                                    value='<?php echo $paymentnotes ?>' tabindex=101 />
-
-                            </li>
-
-                            <li class='fieldset'>
-                                <br />
-                                <hr><br />
-                                <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>'
-                                    tabindex=10000 class='button' />
-                            </li>
-
-                        </ul>
-
-                    </fieldset>
-
-                    <input type=hidden value="<?php echo $paymentname ?>" name="paymentname" />
-
-                </div>
-
-                <div class="tabbertab" title="<?php echo t('title', 'Optional'); ?>">
-
-                    <fieldset>
-
-                        <h302> Optional </h302>
-                        <br />
-
-                        <br />
-                        <h301> Other </h301>
-                        <br />
-
-                        <br />
-                        <label for='creationdate' class='form'><?php echo t('all', 'CreationDate') ?></label>
-                        <input disabled value='<?php if (isset($creationdate)) echo $creationdate ?>' tabindex=313 />
-                        <br />
-
-                        <label for='creationby' class='form'><?php echo t('all', 'CreationBy') ?></label>
-                        <input disabled value='<?php if (isset($creationby)) echo $creationby ?>' tabindex=314 />
-                        <br />
-
-                        <label for='updatedate' class='form'><?php echo t('all', 'UpdateDate') ?></label>
-                        <input disabled value='<?php if (isset($updatedate)) echo $updatedate ?>' tabindex=315 />
-                        <br />
-
-                        <label for='updateby' class='form'><?php echo t('all', 'UpdateBy') ?></label>
-                        <input disabled value='<?php if (isset($updateby)) echo $updateby ?>' tabindex=316 />
-                        <br />
-
-
-                        <br /><br />
-                        <hr><br />
-
-                        <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000
-                            class='button' />
-
-                    </fieldset>
-
-
-                </div>
-
+            <div id="helpPage" style="display:none;visibility:visible">
+                <?php echo t('helpPage', 'paymenttypesedit') ?>
+                <br />
             </div>
+            <?php
+            include_once('include/management/actionMessages.php');
+            ?>
 
-        </form>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-        <?php
-		include('include/config/logging.php');
-		?>
+                <div class="tabber">
 
+                    <div class="tabbertab" title="<?php echo t('title', 'PayTypeInfo'); ?>">
+
+
+                        <fieldset>
+
+                            <h302> <?php echo t('title', 'PayTypeInfo'); ?> </h302>
+                            <br />
+
+                            <ul>
+
+                                <li class='fieldset'>
+                                    <label for='paymentname' class='form'><?php echo t('all', 'PayTypeName') ?></label>
+                                    <input disabled name='paymentname' type='text' id='paymentname' value='<?php echo $paymentname ?>' tabindex=100 />
+                                </li>
+
+                                <li class='fieldset'>
+                                    <label for='paymentnotes' class='form'><?php echo t('all', 'PayTypeNotes') ?></label>
+
+                                    <input class='text' name='paymentnotes' type='text' id='paymentnotes' value='<?php echo $paymentnotes ?>' tabindex=101 />
+
+                                </li>
+
+                                <li class='fieldset'>
+                                    <br />
+                                    <hr><br />
+                                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000 class='button' />
+                                </li>
+
+                            </ul>
+
+                        </fieldset>
+
+                        <input type=hidden value="<?php echo $paymentname ?>" name="paymentname" />
+
+                    </div>
+
+                    <div class="tabbertab" title="<?php echo t('title', 'Optional'); ?>">
+
+                        <fieldset>
+
+                            <h302> Optional </h302>
+                            <br />
+
+                            <br />
+                            <h301> Other </h301>
+                            <br />
+
+                            <br />
+                            <label for='creationdate' class='form'><?php echo t('all', 'CreationDate') ?></label>
+                            <input disabled value='<?php if (isset($creationdate)) echo $creationdate ?>' tabindex=313 />
+                            <br />
+
+                            <label for='creationby' class='form'><?php echo t('all', 'CreationBy') ?></label>
+                            <input disabled value='<?php if (isset($creationby)) echo $creationby ?>' tabindex=314 />
+                            <br />
+
+                            <label for='updatedate' class='form'><?php echo t('all', 'UpdateDate') ?></label>
+                            <input disabled value='<?php if (isset($updatedate)) echo $updatedate ?>' tabindex=315 />
+                            <br />
+
+                            <label for='updateby' class='form'><?php echo t('all', 'UpdateBy') ?></label>
+                            <input disabled value='<?php if (isset($updateby)) echo $updateby ?>' tabindex=316 />
+                            <br />
+
+
+                            <br /><br />
+                            <hr><br />
+
+                            <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=10000 class='button' />
+
+                        </fieldset>
+
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <?php
+            include('include/config/logging.php');
+            ?>
+
+        </div>
     </div>
 </div>
 <div id="footer">
 
     <?php
-	include 'page-footer.php';
-	?>
+    include 'page-footer.php';
+    ?>
 
 
 </div>

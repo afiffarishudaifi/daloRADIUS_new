@@ -69,52 +69,54 @@ include("menu-reports.php");
 
 ?>
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+	<div class="card">
+		<div class="card-body">
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'reponline.php'); ?>
-			<h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'reponline.php'); ?>
+					<h144>&#x2754;</h144></a></h2>
 
-	<div id="helpPage" style="display:none;visibility:visible">
-		<?php echo t('helpPage', 'reponline'); ?>
-		<br />
-	</div>
-	<br />
-
-
-	<div class="tabber">
-
-		<div class="tabbertab" title="Statistics">
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'reponline'); ?>
+				<br />
+			</div>
 			<br />
 
-			<?php
 
-			include 'library/opendb.php';
-			include 'include/management/pages_common.php';
-			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+			<div class="tabber">
 
-			// setup php session variables for exporting
-			$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
-			$_SESSION['reportQuery'] = " WHERE (AcctStopTime IS NULL OR AcctStopTime = '0000-00-00 00:00:00') AND (UserName LIKE '" . $dbSocket->escapeSimple($usernameOnline) . "%')";
-			$_SESSION['reportType'] = "reportsOnlineUsers";
+				<div class="tabbertab" title="Statistics">
+					<br />
 
-			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-			$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress,
+					<?php
+
+					include 'library/opendb.php';
+					include 'include/management/pages_common.php';
+					include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+
+					// setup php session variables for exporting
+					$_SESSION['reportTable'] = $configValues['CONFIG_DB_TBL_RADACCT'];
+					$_SESSION['reportQuery'] = " WHERE (AcctStopTime IS NULL OR AcctStopTime = '0000-00-00 00:00:00') AND (UserName LIKE '" . $dbSocket->escapeSimple($usernameOnline) . "%')";
+					$_SESSION['reportType'] = "reportsOnlineUsers";
+
+					//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+					$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress,
 			" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".CallingStationId, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime,
 			" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress,
 			" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".CalledStationId, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionId FROM " .
-				$configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime IS NULL OR " .
-				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime = '0000-00-00 00:00:00') AND " .
-				" (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username LIKE '" . $dbSocket->escapeSimple($usernameOnline) . "%')";
-			$res = $dbSocket->query($sql);
-			$numrows = $res->numRows();
+						$configValues['CONFIG_DB_TBL_RADACCT'] . " WHERE (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime IS NULL OR " .
+						$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime = '0000-00-00 00:00:00') AND " .
+						" (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username LIKE '" . $dbSocket->escapeSimple($usernameOnline) . "%')";
+					$res = $dbSocket->query($sql);
+					$numrows = $res->numRows();
 
 
-			/* we are searching for both kind of attributes for the password, being User-Password, the more
+					/* we are searching for both kind of attributes for the password, being User-Password, the more
 	   common one and the other which is Password, this is also done for considerations of backwards
 	   compatibility with version 0.7        */
 
 
-			$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress,
+					$sql = "SELECT " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".FramedIPAddress,
 			" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".CallingStationId, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStartTime,
 			" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionTime, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress, 
 			" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".CalledStationId, " . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctSessionId, 
@@ -124,29 +126,29 @@ include("menu-reports.php");
 			" . $configValues['CONFIG_DB_TBL_RADNAS'] . ".shortname AS NASshortname, 
 			" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".Firstname AS Firstname, 
 			" . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".Lastname AS Lastname" .
-				" FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] .
-				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " ON (" . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".mac = " .
-				$configValues['CONFIG_DB_TBL_RADACCT'] . ".CalledStationId)" .
-				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADNAS'] . " ON (" . $configValues['CONFIG_DB_TBL_RADNAS'] . ".nasname = " .
-				$configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress)" .
-				" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . " ON (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username = " .
-				$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".Username)" .
-				" WHERE (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime IS NULL OR " .
-				$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime = '0000-00-00 00:00:00') AND (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username LIKE '" . $dbSocket->escapeSimple($usernameOnline) . "%')" .
-				" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
-			$res = $dbSocket->query($sql);
-			//	echo $sql;
-			$logDebugSQL = "";
-			$logDebugSQL .= $sql . "\n";
+						" FROM " . $configValues['CONFIG_DB_TBL_RADACCT'] .
+						" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . " ON (" . $configValues['CONFIG_DB_TBL_DALOHOTSPOTS'] . ".mac = " .
+						$configValues['CONFIG_DB_TBL_RADACCT'] . ".CalledStationId)" .
+						" LEFT JOIN " . $configValues['CONFIG_DB_TBL_RADNAS'] . " ON (" . $configValues['CONFIG_DB_TBL_RADNAS'] . ".nasname = " .
+						$configValues['CONFIG_DB_TBL_RADACCT'] . ".NASIPAddress)" .
+						" LEFT JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERINFO'] . " ON (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username = " .
+						$configValues['CONFIG_DB_TBL_DALOUSERINFO'] . ".Username)" .
+						" WHERE (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime IS NULL OR " .
+						$configValues['CONFIG_DB_TBL_RADACCT'] . ".AcctStopTime = '0000-00-00 00:00:00') AND (" . $configValues['CONFIG_DB_TBL_RADACCT'] . ".Username LIKE '" . $dbSocket->escapeSimple($usernameOnline) . "%')" .
+						" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
+					$res = $dbSocket->query($sql);
+					//	echo $sql;
+					$logDebugSQL = "";
+					$logDebugSQL .= $sql . "\n";
 
-			/* START - Related to pages_numbering.php */
-			$maxPage = ceil($numrows / $rowsPerPage);
-			/* END */
+					/* START - Related to pages_numbering.php */
+					$maxPage = ceil($numrows / $rowsPerPage);
+					/* END */
 
-			echo "<form name='usersonline' method='get' >";
+					echo "<form name='usersonline' method='get' >";
 
-			echo "<table border='0' class='table1'>\n";
-			echo "
+					echo "<table border='0' class='table1'>\n";
+					echo "
 		<thead>
 			<tr>
 			<th colspan='10' align='left'>
@@ -163,20 +165,20 @@ include("menu-reports.php");
                                 <br/><br/>
                 ";
 
-			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&usernameOnline=$usernameOnline");
+					if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+						setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType, "&usernameOnline=$usernameOnline");
 
-			echo "</th></tr>
+					echo "</th></tr>
 			</thead>
 	";
 
-			if ($orderType == "asc") {
-				$orderTypeNextPage = "desc";
-			} else  if ($orderType == "desc") {
-				$orderTypeNextPage = "asc";
-			}
+					if ($orderType == "asc") {
+						$orderTypeNextPage = "desc";
+					} else  if ($orderType == "desc") {
+						$orderTypeNextPage = "asc";
+					}
 
-			echo "<thread> <tr>
+					echo "<thread> <tr>
 		<th scope='col'>
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?usernameOnline=$usernameOnline&orderBy=username&orderType=$orderTypeNextPage\">
 		" . t('all', 'Username') . "</a>
@@ -215,35 +217,35 @@ include("menu-reports.php");
 
 	</tr> </thread>";
 
-			while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+					while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 
-				$username = $row['Username'];
-				$ip = $row['FramedIPAddress'];
-				$usermac = $row['CallingStationId'];
-				$start = $row['AcctStartTime'];
-				$nasip = $row['NASIPAddress'];
-				$nasmac = $row['CalledStationId'];
-				$hotspot = $row['hotspot'];
-				$nasshortname = $row['NASshortname'];
-				$acctsessionid = $row['AcctSessionId'];
-				$name = $row['Firstname'] . " " . $row['Lastname'];
+						$username = $row['Username'];
+						$ip = $row['FramedIPAddress'];
+						$usermac = $row['CallingStationId'];
+						$start = $row['AcctStartTime'];
+						$nasip = $row['NASIPAddress'];
+						$nasmac = $row['CalledStationId'];
+						$hotspot = $row['hotspot'];
+						$nasshortname = $row['NASshortname'];
+						$acctsessionid = $row['AcctSessionId'];
+						$name = $row['Firstname'] . " " . $row['Lastname'];
 
-				$upload = toxbyte($row['Upload']);
-				$download = toxbyte($row['Download']);
-				$traffic = toxbyte($row['Upload'] + $row['Download']);
+						$upload = toxbyte($row['Upload']);
+						$download = toxbyte($row['Download']);
+						$traffic = toxbyte($row['Upload'] + $row['Download']);
 
-				$totalTime = time2str($row['AcctSessionTime']);
+						$totalTime = time2str($row['AcctSessionTime']);
 
-				echo "<tr>
+						echo "<tr>
 				<td> <input type='checkbox' name='clearSessionsUsers[]' value='$username||$start'>
 					<a class='tablenovisit' href='#'
 					onclick='javascript:return false;'
 					tooltipText=\"
 						<a class='toolTip' href='mng-edit.php?username=$username'>" .
-					t('Tooltip', 'UserEdit') . "</a>
+							t('Tooltip', 'UserEdit') . "</a>
 						&nbsp;
 						<a class='toolTip' href='config-maint-disconnect-user.php?username=$username&nasaddr=$nasip&customattributes=Acct-Session-Id=$acctsessionid,Framed-IP-Address=$ip'>" .
-					t('all', 'Disconnect') . "</a>
+							t('all', 'Disconnect') . "</a>
 						<br/>\"
 					>$username</a>
 					</td>
@@ -254,67 +256,69 @@ include("menu-reports.php");
 				<td> $hotspot $nasshortname </td>
 				<td> " . t('all', 'Upload') . ": $upload <br/> " . t('all', 'Download') . ": $download <br/> " . t('all', 'TotalTraffic') . ": <b>$traffic</b> </td>
 		</tr>";
-			}
+					}
 
-			echo "
+					echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='10' align='left'>
         ";
-			setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&usernameOnline=$usernameOnline");
-			echo "
+					setupLinks($pageNum, $maxPage, $orderBy, $orderType, "&usernameOnline=$usernameOnline");
+					echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
-			echo "</table>";
-			include 'library/closedb.php';
+					echo "</table>";
+					include 'library/closedb.php';
 
-			?>
+					?>
 
-		</div>
+				</div>
 
 
-		<div class="tabbertab" title="Graph">
-			<br />
+				<div class="tabbertab" title="Graph">
+					<br />
 
+
+					<?php
+					echo "<center>";
+					echo "<img src=\"library/graphs-reports-online-users.php\" />";
+					echo "</center>";
+					?>
+
+				</div>
+
+
+
+				<div class="tabbertab" title="Online Nas">
+					<br />
+
+
+					<?php
+					echo "<img src=\"library/graphs-reports-online-nas.php\" />";
+					?>
+
+				</div>
+
+
+
+
+
+
+
+
+
+
+			</div>
 
 			<?php
-			echo "<center>";
-			echo "<img src=\"library/graphs-reports-online-users.php\" />";
-			echo "</center>";
+			include('include/config/logging.php');
 			?>
 
 		</div>
-
-
-
-		<div class="tabbertab" title="Online Nas">
-			<br />
-
-
-			<?php
-			echo "<img src=\"library/graphs-reports-online-nas.php\" />";
-			?>
-
-		</div>
-
-
-
-
-
-
-
-
-
-
 	</div>
-
-	<?php
-	include('include/config/logging.php');
-	?>
-
 </div>
 
 <div id="footer">

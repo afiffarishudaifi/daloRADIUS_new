@@ -60,51 +60,55 @@ include("menu-reports-status.php");
 
 
 
-<div id="contentnorightbar">
+<div class="col-lg-9">
+	<div class="card">
+		<div class="card-body">
 
-	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')">CRON Status
-			<h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')">CRON Status
+					<h144>&#x2754;</h144></a></h2>
 
-	<div id="helpPage" style="display:none;visibility:visible">
-		<br />
+			<div id="helpPage" style="display:none;visibility:visible">
+				<br />
+			</div>
+			<br />
+
+
+			<?php
+
+			exec("/usr/bin/crontab -u $cronUser -l", $output, $retStatus);
+
+			?>
+
+
+			<h3>CRON Entries</h3>
+
+			<a href='rep-stat-cron.php?cmd=enable'>Enable CRON</a>
+			&nbsp;
+			<a href='rep-stat-cron.php?cmd=disable'>Disable CRON</a>
+
+			<br />
+			<br />
+
+			<?php
+			if ($retStatus != 0) :
+			?>
+				<font color='red'><b>Error</b> no crontab is configured for this user or user does not exist</font>
+				<br /><br />
+
+			<?php
+			else :
+
+				$i = 0;
+				foreach ($output as $text) {
+					$i++;
+					echo "<b>#$i:</b> " . $text . '<br/>';
+				}
+
+			endif;
+			?>
+
+		</div>
 	</div>
-	<br />
-
-
-	<?php
-
-	exec("/usr/bin/crontab -u $cronUser -l", $output, $retStatus);
-
-	?>
-
-
-	<h3>CRON Entries</h3>
-
-	<a href='rep-stat-cron.php?cmd=enable'>Enable CRON</a>
-	&nbsp;
-	<a href='rep-stat-cron.php?cmd=disable'>Disable CRON</a>
-
-	<br />
-	<br />
-
-	<?php
-	if ($retStatus != 0) :
-	?>
-		<font color='red'><b>Error</b> no crontab is configured for this user or user does not exist</font>
-		<br /><br />
-
-	<?php
-	else :
-
-		$i = 0;
-		foreach ($output as $text) {
-			$i++;
-			echo "<b>#$i:</b> " . $text . '<br/>';
-		}
-
-	endif;
-	?>
-
 </div>
 
 <div id="footer">

@@ -31,61 +31,43 @@
                         <h2>Billing</h2>
 
                         <h3>Payments Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
-                            <li><a
-                                    href="javascript:document.paymentslist.submit();"><b>&raquo;</b><?php echo t('button', 'ListPayments') ?></a>
+                            <li><a href="javascript:document.paymentslist.submit();"><b>&raquo;</b><?php echo t('button', 'ListPayments') ?></a>
 
                                 <form name="paymentslist" action="bill-payments-list.php" method="get" class="sidebar">
-                                    <input name="username" type="text" id="username" autocomplete='off'
-                                        tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>'
-                                        value="<?php if (isset($edit_username)) echo $edit_username; ?>" tabindex=3>
+                                    <input class="form-control-sm" name="username" type="text" id="username" autocomplete='off' tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/>' value="<?php if (isset($edit_username)) echo $edit_username; ?>" tabindex=3>
 
-                                    <input name="invoice_id" type="text" id="invoice_id"
-                                        tooltipText='<?php echo t('Tooltip', 'invoiceID'); ?> <br/>'
-                                        value="<?php if (isset($edit_invoice_id)) echo $edit_invoice_id; ?>" tabindex=3>
+                                    <input class="form-control-sm" name="invoice_id" type="text" id="invoice_id" tooltipText='<?php echo t('Tooltip', 'invoiceID'); ?> <br/>' value="<?php if (isset($edit_invoice_id)) echo $edit_invoice_id; ?>" tabindex=3>
                                 </form>
 
                             </li>
-                            <li><a
-                                    href="bill-payments-new.php"><b>&raquo;</b><?php echo t('button', 'NewPayment') ?></a>
+                            <li><a href="bill-payments-new.php"><b>&raquo;</b><?php echo t('button', 'NewPayment') ?></a>
                             </li>
-                            <li><a
-                                    href="javascript:document.paymentsedit.submit();"><b>&raquo;</b><?php echo t('button', 'EditPayment') ?></a>
+                            <li><a href="javascript:document.paymentsedit.submit();"><b>&raquo;</b><?php echo t('button', 'EditPayment') ?></a>
                                 <form name="paymentsedit" action="bill-payments-edit.php" method="get" class="sidebar">
-                                    <input name="payment_id" type="text" id="payment_id"
-                                        tooltipText='<?php echo t('Tooltip', 'PaymentId'); ?> <br/>'
-                                        value="<?php if (isset($edit_payment_id)) echo $edit_payment_id; ?>" tabindex=3>
+                                    <input class="form-control-sm" name="payment_id" type="text" id="payment_id" tooltipText='<?php echo t('Tooltip', 'PaymentId'); ?> <br/>' value="<?php if (isset($edit_payment_id)) echo $edit_payment_id; ?>" tabindex=3>
                                 </form>
                             </li>
 
-                            <li><a
-                                    href="bill-payments-del.php"><b>&raquo;</b><?php echo t('button', 'RemovePayment') ?></a>
+                            <li><a href="bill-payments-del.php"><b>&raquo;</b><?php echo t('button', 'RemovePayment') ?></a>
                             </li>
                         </ul>
 
 
                         <h3>Payment Types Management</h3>
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <ul class="subnav">
 
-                            <li><a
-                                    href="bill-payment-types-list.php"><b>&raquo;</b><?php echo t('button', 'ListPayTypes') ?></a>
+                            <li><a href="bill-payment-types-list.php"><b>&raquo;</b><?php echo t('button', 'ListPayTypes') ?></a>
                             </li>
-                            <li><a
-                                    href="bill-payment-types-new.php"><b>&raquo;</b><?php echo t('button', 'NewPayType') ?></a>
+                            <li><a href="bill-payment-types-new.php"><b>&raquo;</b><?php echo t('button', 'NewPayType') ?></a>
                             </li>
                             <li><a href="javascript:document.paymenttypesedit.submit();""><b>&raquo;</b><?php echo t('button', 'EditPayType') ?></a>
-                                                        <form name=" paymenttypesedit"
-                                    action="bill-payment-types-edit.php" method="get" class="sidebar">
-                                    <input name="paymentname" type="text" id="paymentname"
-                                        <?php if ($autoComplete) echo "autocomplete='off'"; ?>
-                                        tooltipText='<?php echo t('Tooltip', 'PayTypeName'); ?> <br/>'
-                                        value="<?php if (isset($edit_paymentName)) echo $edit_paymentName; ?>"
-                                        tabindex=3>
+                                                        <form name=" paymenttypesedit" action="bill-payment-types-edit.php" method="get" class="sidebar">
+                                    <input class="form-control-sm" name="paymentname" type="text" id="paymentname" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'PayTypeName'); ?> <br/>' value="<?php if (isset($edit_paymentName)) echo $edit_paymentName; ?>" tabindex=3>
                                     </form>
                             </li>
-                            <li><a
-                                    href="bill-payment-types-del.php"><b>&raquo;</b><?php echo t('button', 'RemovePayType') ?></a>
+                            <li><a href="bill-payment-types-del.php"><b>&raquo;</b><?php echo t('button', 'RemovePayType') ?></a>
                             </li>
                         </ul>
 
@@ -112,9 +94,9 @@
                 ?>
 
                 <script type="text/javascript">
-                var tooltipObj = new DHTMLgoodies_formTooltip();
-                tooltipObj.setTooltipPosition('right');
-                tooltipObj.setPageBgColor('#EEEEEE');
-                tooltipObj.setTooltipCornerSize(15);
-                tooltipObj.initFormFieldTooltip();
+                    var tooltipObj = new DHTMLgoodies_formTooltip();
+                    tooltipObj.setTooltipPosition('right');
+                    tooltipObj.setPageBgColor('#EEEEEE');
+                    tooltipObj.setTooltipCornerSize(15);
+                    tooltipObj.initFormFieldTooltip();
                 </script>

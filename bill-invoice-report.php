@@ -60,82 +60,82 @@ include("menu-bill-invoice.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billinvoicereport.php') ?>
-                <h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billinvoicereport.php') ?>
+					<h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'billinvoicelist') ?>
-            <br />
-        </div>
-        <br />
-
-
-        <?php
-
-		include 'library/opendb.php';
-		include 'include/management/pages_common.php';
-		include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
-
-		$sql_WHERE = ' WHERE (a.date>="' . $startdate . '" AND a.date<="' . $enddate . '") ';
-
-		if (!empty($username) && $username != '%')
-			$sql_WHERE .= ' AND (b.username LIKE  "' . $dbSocket->escapeSimple($username) . '") ';
-
-		if (!empty($invoice_status) && $invoice_status != '%')
-			$sql_WHERE .= ' AND (a.status_id = "' . $dbSocket->escapeSimple($invoice_status) . '") ';
-
-		//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
-		$sql = "SELECT a.id, a.date, a.status_id, a.type_id, b.contactperson, b.username, " .
-			" c.value AS status, COALESCE(e2.totalpayed, 0) as totalpayed, COALESCE(d2.totalbilled, 0) as totalbilled " .
-			" FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICE'] . " AS a" .
-			" INNER JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . " AS b ON (a.user_id = b.id) " .
-			" INNER JOIN " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICESTATUS'] . " AS c ON (a.status_id = c.id) " .
-			" LEFT JOIN (SELECT SUM(d.amount + d.tax_amount) " .
-			" as totalbilled, invoice_id FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICEITEMS'] . " AS d " .
-			" GROUP BY d.invoice_id) AS d2 ON (d2.invoice_id = a.id) " .
-			" LEFT JOIN (SELECT SUM(e.amount) as totalpayed, invoice_id FROM " .
-			$configValues['CONFIG_DB_TBL_DALOPAYMENTS'] . " AS e GROUP BY e.invoice_id) AS e2 ON (e2.invoice_id = a.id) " .
-			$sql_WHERE .
-			" GROUP BY a.id ";
-		$res = $dbSocket->query($sql);
-		$numrows = $res->numRows();
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'billinvoicelist') ?>
+				<br />
+			</div>
+			<br />
 
 
-		// setup php session variables for exporting
-		$_SESSION['reportTable'] = '';
-		$_SESSION['reportQuery'] = $sql;
-		$_SESSION['reportType'] = "reportsInvoiceList";
+			<?php
+
+			include 'library/opendb.php';
+			include 'include/management/pages_common.php';
+			include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
+
+			$sql_WHERE = ' WHERE (a.date>="' . $startdate . '" AND a.date<="' . $enddate . '") ';
+
+			if (!empty($username) && $username != '%')
+				$sql_WHERE .= ' AND (b.username LIKE  "' . $dbSocket->escapeSimple($username) . '") ';
+
+			if (!empty($invoice_status) && $invoice_status != '%')
+				$sql_WHERE .= ' AND (a.status_id = "' . $dbSocket->escapeSimple($invoice_status) . '") ';
+
+			//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
+			$sql = "SELECT a.id, a.date, a.status_id, a.type_id, b.contactperson, b.username, " .
+				" c.value AS status, COALESCE(e2.totalpayed, 0) as totalpayed, COALESCE(d2.totalbilled, 0) as totalbilled " .
+				" FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICE'] . " AS a" .
+				" INNER JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . " AS b ON (a.user_id = b.id) " .
+				" INNER JOIN " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICESTATUS'] . " AS c ON (a.status_id = c.id) " .
+				" LEFT JOIN (SELECT SUM(d.amount + d.tax_amount) " .
+				" as totalbilled, invoice_id FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICEITEMS'] . " AS d " .
+				" GROUP BY d.invoice_id) AS d2 ON (d2.invoice_id = a.id) " .
+				" LEFT JOIN (SELECT SUM(e.amount) as totalpayed, invoice_id FROM " .
+				$configValues['CONFIG_DB_TBL_DALOPAYMENTS'] . " AS e GROUP BY e.invoice_id) AS e2 ON (e2.invoice_id = a.id) " .
+				$sql_WHERE .
+				" GROUP BY a.id ";
+			$res = $dbSocket->query($sql);
+			$numrows = $res->numRows();
 
 
-		$sql = "SELECT a.id, a.date, a.status_id, a.type_id, b.contactperson, b.username, " .
-			" c.value AS status, COALESCE(e2.totalpayed, 0) as totalpayed, COALESCE(d2.totalbilled, 0) as totalbilled " .
-			" FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICE'] . " AS a" .
-			" INNER JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . " AS b ON (a.user_id = b.id) " .
-			" INNER JOIN " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICESTATUS'] . " AS c ON (a.status_id = c.id) " .
-			" LEFT JOIN (SELECT SUM(d.amount + d.tax_amount) " .
-			" as totalbilled, invoice_id FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICEITEMS'] . " AS d " .
-			" GROUP BY d.invoice_id) AS d2 ON (d2.invoice_id = a.id) " .
-			" LEFT JOIN (SELECT SUM(e.amount) as totalpayed, invoice_id FROM " .
-			$configValues['CONFIG_DB_TBL_DALOPAYMENTS'] . " AS e GROUP BY e.invoice_id) AS e2 ON (e2.invoice_id = a.id) " .
-			$sql_WHERE .
-			" GROUP BY a.id " .
-			" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
-		$res = $dbSocket->query($sql);
-		$logDebugSQL = "";
-		$logDebugSQL .= $sql . "\n";
-
-		/* START - Related to pages_numbering.php */
-		$maxPage = ceil($numrows / $rowsPerPage);
-		/* END */
+			// setup php session variables for exporting
+			$_SESSION['reportTable'] = '';
+			$_SESSION['reportQuery'] = $sql;
+			$_SESSION['reportType'] = "reportsInvoiceList";
 
 
-		echo "<form name='listbillinvoices' method='post' action='bill-invoice-del.php'>";
+			$sql = "SELECT a.id, a.date, a.status_id, a.type_id, b.contactperson, b.username, " .
+				" c.value AS status, COALESCE(e2.totalpayed, 0) as totalpayed, COALESCE(d2.totalbilled, 0) as totalbilled " .
+				" FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICE'] . " AS a" .
+				" INNER JOIN " . $configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'] . " AS b ON (a.user_id = b.id) " .
+				" INNER JOIN " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICESTATUS'] . " AS c ON (a.status_id = c.id) " .
+				" LEFT JOIN (SELECT SUM(d.amount + d.tax_amount) " .
+				" as totalbilled, invoice_id FROM " . $configValues['CONFIG_DB_TBL_DALOBILLINGINVOICEITEMS'] . " AS d " .
+				" GROUP BY d.invoice_id) AS d2 ON (d2.invoice_id = a.id) " .
+				" LEFT JOIN (SELECT SUM(e.amount) as totalpayed, invoice_id FROM " .
+				$configValues['CONFIG_DB_TBL_DALOPAYMENTS'] . " AS e GROUP BY e.invoice_id) AS e2 ON (e2.invoice_id = a.id) " .
+				$sql_WHERE .
+				" GROUP BY a.id " .
+				" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage;";
+			$res = $dbSocket->query($sql);
+			$logDebugSQL = "";
+			$logDebugSQL .= $sql . "\n";
 
-		echo "<table border='0' class='table1'>\n";
-		echo "
+			/* START - Related to pages_numbering.php */
+			$maxPage = ceil($numrows / $rowsPerPage);
+			/* END */
+
+
+			echo "<form name='listbillinvoices' method='post' action='bill-invoice-del.php'>";
+
+			echo "<table border='0' class='table1'>\n";
+			echo "
 					<thead>
                                                         <tr>
                                                         <th colspan='10' align='left'>
@@ -151,21 +151,21 @@ include("menu-bill-invoice.php");
 					
         ";
 
-		if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
-			setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
+			if ($configValues['CONFIG_IFACE_TABLES_LISTING_NUM'] == "yes")
+				setupNumbering($numrows, $rowsPerPage, $pageNum, $orderBy, $orderType);
 
-		echo " </th></tr>
+			echo " </th></tr>
                                         </thead>
 
                         ";
 
-		if ($orderType == "asc") {
-			$orderTypeNextPage = "desc";
-		} else  if ($orderType == "desc") {
-			$orderTypeNextPage = "asc";
-		}
+			if ($orderType == "asc") {
+				$orderTypeNextPage = "desc";
+			} else  if ($orderType == "desc") {
+				$orderTypeNextPage = "asc";
+			}
 
-		echo "<thread> <tr>
+			echo "<thread> <tr>
 		<th scope='col'>
 		<a title='Sort' class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=id&orderType=$orderTypeNextPage\">
 		" . t('all', 'Invoice') . "</a>
@@ -202,71 +202,72 @@ include("menu-bill-invoice.php");
 		
 	</tr> </thread>";
 
-		while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
+			while ($row = $res->fetchRow(DB_FETCHMODE_ASSOC)) {
 
-			echo '<tr>';
+				echo '<tr>';
 
-			$content =  '<a class="toolTip" href="bill-invoice-edit.php?invoice_id=' . $row['id'] . '">' . t('Tooltip', 'InvoiceEdit') . '</a>';
-			$invoice_id = addToolTipBalloon(array(
-				'content' => $content,
-				'onClick' => '',
-				'value' => '#' . $row['id'],
-				'divId' => '',
+				$content =  '<a class="toolTip" href="bill-invoice-edit.php?invoice_id=' . $row['id'] . '">' . t('Tooltip', 'InvoiceEdit') . '</a>';
+				$invoice_id = addToolTipBalloon(array(
+					'content' => $content,
+					'onClick' => '',
+					'value' => '#' . $row['id'],
+					'divId' => '',
 
-			));
+				));
 
-			$content =  '<a class="toolTip" href="bill-pos-edit.php?username=' . urlencode($row['username']) . '">' . t('Tooltip', 'UserEdit') . '</a>';
-			$contactperson = addToolTipBalloon(array(
-				'content' => $content,
-				'onClick' => '',
-				'value' => $row['contactperson'],
-				'divId' => '',
+				$content =  '<a class="toolTip" href="bill-pos-edit.php?username=' . urlencode($row['username']) . '">' . t('Tooltip', 'UserEdit') . '</a>';
+				$contactperson = addToolTipBalloon(array(
+					'content' => $content,
+					'onClick' => '',
+					'value' => $row['contactperson'],
+					'divId' => '',
 
-			));
+				));
 
-			$balance = ($row['totalpayed'] - $row['totalbilled']);
-			if ($balance < 0)
-				$balance = '<font color="red">' . $balance . '</font>';
-			echo '<td> ' . $invoice_id . ' </td>';
-			echo '<td> ' . $contactperson . ' </td>';
-			echo '<td> ' . $row['date'] . ' </td>';
-			echo '<td> ' . $row['totalbilled'] . ' </td>';
-			echo '<td> ' . $row['totalpayed'] . ' </td>';
-			echo '<td> ' . $balance . ' </td>';
-			echo '<td> ' . $row['status'] . ' </td>';
+				$balance = ($row['totalpayed'] - $row['totalbilled']);
+				if ($balance < 0)
+					$balance = '<font color="red">' . $balance . '</font>';
+				echo '<td> ' . $invoice_id . ' </td>';
+				echo '<td> ' . $contactperson . ' </td>';
+				echo '<td> ' . $row['date'] . ' </td>';
+				echo '<td> ' . $row['totalbilled'] . ' </td>';
+				echo '<td> ' . $row['totalpayed'] . ' </td>';
+				echo '<td> ' . $balance . ' </td>';
+				echo '<td> ' . $row['status'] . ' </td>';
 
-			echo '</tr>';
-		}
+				echo '</tr>';
+			}
 
-		echo "
+			echo "
                                         <tfoot>
                                                         <tr>
                                                         <th colspan='10' align='left'>
         ";
-		setupLinks($pageNum, $maxPage, $orderBy, $orderType);
-		echo "
+			setupLinks($pageNum, $maxPage, $orderBy, $orderType);
+			echo "
                                                         </th>
                                                         </tr>
                                         </tfoot>
                 ";
 
 
-		echo "</table>";
-		echo "</form>";
+			echo "</table>";
+			echo "</form>";
 
-		include 'library/closedb.php';
-		?>
+			include 'library/closedb.php';
+			?>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+			<?php
+			include('include/config/logging.php');
+			?>
 
-    </div>
+		</div>
+	</div>
 </div>
 <div id="footer">
 
-    <?php
+	<?php
 	include 'page-footer.php';
 	?>
 
@@ -277,11 +278,11 @@ include("menu-bill-invoice.php");
 </div>
 </div>
 <script type="text/javascript">
-var tooltipObj = new DHTMLgoodies_formTooltip();
-tooltipObj.setTooltipPosition('right');
-tooltipObj.setPageBgColor('#EEEEEE');
-tooltipObj.setTooltipCornerSize(15);
-tooltipObj.initFormFieldTooltip();
+	var tooltipObj = new DHTMLgoodies_formTooltip();
+	tooltipObj.setTooltipPosition('right');
+	tooltipObj.setPageBgColor('#EEEEEE');
+	tooltipObj.setTooltipCornerSize(15);
+	tooltipObj.initFormFieldTooltip();
 </script>
 
 </body>

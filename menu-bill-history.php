@@ -1,5 +1,4 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
@@ -37,32 +36,26 @@
                         <h2>Billing</h2>
 
                         <h3>Track Billing History</h3>
-                        <ul class="">
+                        <ul class="subnav">
 
                             <form name="billhistory" action="bill-history-query.php" method="get" class="sidebar">
 
-                                <input class="sidebutton" type="submit" name="submit"
-                                    value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />
+                                <input class="form-control-sm" class="sidebutton" type="submit" name="submit" value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />
                                 <br /><br />
 
                                 <h109><?php echo t('button', 'BetweenDates'); ?></h109> <br />
 
-                                <input name="startdate" type="text" id="startdate"
-                                    value="<?php if (isset($billing_date_startdate)) echo $billing_date_startdate;
-                                                                                            else echo date("Y-m-01"); ?>">
+                                <input class="form-control-sm" name="startdate" type="text" id="startdate" value="<?php if (isset($billing_date_startdate)) echo $billing_date_startdate;
+                                                                                                                    else echo date("Y-m-01"); ?>">
 
-                                <img src="library/js_date/calendar.gif"
-                                    onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
-                                <div id="chooserSpan" class="dateChooser select-free"
-                                    style="display: none; visibility: hidden;       width: 160px;"></div>
+                                <img src="library/js_date/calendar.gif" onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
+                                <div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden;       width: 160px;"></div>
 
-                                <input name="enddate" type="text" id="enddate" value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
-                                                                                        else echo date("Y-m-t"); ?>">
+                                <input class="form-control-sm" name="enddate" type="text" id="enddate" value="<?php if (isset($billing_date_enddate)) echo $billing_date_enddate;
+                                                                                                                else echo date("Y-m-t"); ?>">
 
-                                <img src="library/js_date/calendar.gif"
-                                    onclick="showChooser(this, 'enddate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
-                                <div id="chooserSpan" class="dateChooser select-free"
-                                    style="display: none; visibility: hidden; width: 160px;"></div>
+                                <img src="library/js_date/calendar.gif" onclick="showChooser(this, 'enddate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
+                                <div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; width: 160px;"></div>
                                 <br /><br />
 
 
@@ -71,7 +64,7 @@
                                                                             else echo "*"; ?>">
 
                                 <h109><?php echo t('all', 'BillAction'); ?></h109> <br />
-                                <select name="billaction" size="1">
+                                <select class="form-control-sm" name="billaction" size="1">
                                     <option value="<?php if (isset($billing_history_billaction)) echo $billing_history_billaction;
                                                     else echo "%"; ?>">
                                         <?php if (isset($billing_history_billaction)) echo $billing_history_billaction;
@@ -153,8 +146,7 @@
                                         </center>
 
                                         <br />
-                                        <input class="sidebutton" type="submit" name="submit"
-                                            value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />
+                                        <input class="sidebutton" type="submit" name="submit" value="<?php echo t('button', 'ProcessQuery') ?>" tabindex=3 />
 
 
 

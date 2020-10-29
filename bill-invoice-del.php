@@ -80,14 +80,13 @@ $log = "visited page: ";
 
 
 
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-    <title>daloRADIUS</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="css/1.css" type="text/css" media="screen,projection" />
+	<title>daloRADIUS</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="css/1.css" type="text/css" media="screen,projection" />
 </head>
 <script src="library/javascript/pages_common.js" type="text/javascript"></script>
 <?php
@@ -95,60 +94,57 @@ include("menu-bill-invoice.php");
 ?>
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billinvoicedel.php') ?>
+					:: <?php if (isset($invoice_id)) {
+							echo $invoice_id;
+						} ?><h144>&#x2754;</h144></a></h2>
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billinvoicedel.php') ?>
-                :: <?php if (isset($invoice_id)) {
-						echo $invoice_id;
-					} ?><h144>&#x2754;</h144></a></h2>
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'billinvoicedel') ?>
+				<br />
+			</div>
+			<?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'billinvoicedel') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+			<div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+					<fieldset>
 
-                <fieldset>
+						<h302> <?php echo t('title', 'InvoiceRemoval') ?> </h302>
+						<br />
 
-                    <h302> <?php echo t('title', 'InvoiceRemoval') ?> </h302>
-                    <br />
+						<label for='invoice_id' class='form'><?php echo t('all', 'InvoiceID') ?></label>
+						<input name='invoice_id[]' type='text' id='invoice_id' value='<?php echo $invoice_id ?>' tabindex=100 autocomplete="off" />
+						<br />
 
-                    <label for='invoice_id' class='form'><?php echo t('all', 'InvoiceID') ?></label>
-                    <input name='invoice_id[]' type='text' id='invoice_id' value='<?php echo $invoice_id ?>'
-                        tabindex=100 autocomplete="off" />
-                    <br />
+						<br /><br />
+						<hr><br />
 
-                    <br /><br />
-                    <hr><br />
+						<input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000 class='button' />
 
-                    <input type='submit' name='submit' value='<?php echo t('buttons', 'apply') ?>' tabindex=1000
-                        class='button' />
+					</fieldset>
 
-                </fieldset>
+				</form>
+			</div>
 
-            </form>
-        </div>
-
-        <?php
-		include('include/config/logging.php');
-		?>
-
-    </div>
+			<?php
+			include('include/config/logging.php');
+			?>
+		</div>
+	</div>
 </div>
-    <div id="footer">
+<div id="footer">
 
-        <?php
-		include 'page-footer.php';
-		?>
+	<?php
+	include 'page-footer.php';
+	?>
 
 
-    </div>
+</div>
 
 </div>
 </div>

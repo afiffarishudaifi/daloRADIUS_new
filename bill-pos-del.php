@@ -146,73 +146,73 @@ include("menu-bill-pos.php");
 
 
 <div class="col-lg-9">
-    <div class="card">
+	<div class="card">
+		<div class="card-body">
 
-        <h2 id="Intro"><a href="#"
-                onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billposdel.php') ?>
-                :: <?php if (isset($username)) {
-						echo $username;
-					} ?><h144>&#x2754;</h144></a></h2>
+			<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro', 'billposdel.php') ?>
+					:: <?php if (isset($username)) {
+							echo $username;
+						} ?><h144>&#x2754;</h144></a></h2>
 
-        <div id="helpPage" style="display:none;visibility:visible">
-            <?php echo t('helpPage', 'billposdel') ?>
-            <br />
-        </div>
-        <?php
-		include_once('include/management/actionMessages.php');
-		?>
+			<div id="helpPage" style="display:none;visibility:visible">
+				<?php echo t('helpPage', 'billposdel') ?>
+				<br />
+			</div>
+			<?php
+			include_once('include/management/actionMessages.php');
+			?>
 
-        <div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+			<div id="removeDiv" style="display:<?php echo $showRemoveDiv ?>;visibility:visible">
+				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
 
-                <fieldset>
+					<fieldset>
 
-                    <h302> <?php echo t('title', 'AccountRemoval') ?> </h302>
-                    <br />
+						<h302> <?php echo t('title', 'AccountRemoval') ?> </h302>
+						<br />
 
-                    <label for='username' class='form'><?php echo t('all', 'Username') ?></label>
-                    <input name='username[]' type='text' id='username' value='<?php echo $username ?>' tabindex=100 />
-                    <br />
+						<label for='username' class='form'><?php echo t('all', 'Username') ?></label>
+						<input name='username[]' type='text' id='username' value='<?php echo $username ?>' tabindex=100 />
+						<br />
 
-                    <label for='delradacct' class='form'><?php echo t('all', 'RemoveRadacctRecords') ?></label>
-                    <select class='form' tabindex=102 name='delradacct' tabindex=101>
-                        <option value='no'>no</option>
-                        <option value='yes'>yes</option>
-                    </select>
-                    <br />
+						<label for='delradacct' class='form'><?php echo t('all', 'RemoveRadacctRecords') ?></label>
+						<select class='form' tabindex=102 name='delradacct' tabindex=101>
+							<option value='no'>no</option>
+							<option value='yes'>yes</option>
+						</select>
+						<br />
 
-                    <br /><br />
-                    <hr><br />
-                    <input type="submit" name="submit" value="<?php echo t('buttons', 'apply') ?>" tabindex=1000
-                        class='button' />
+						<br /><br />
+						<hr><br />
+						<input type="submit" name="submit" value="<?php echo t('buttons', 'apply') ?>" tabindex=1000 class='button' />
 
-                </fieldset>
+					</fieldset>
 
-            </form>
-        </div>
+				</form>
+			</div>
 
 
-        <?php
-		include_once("include/management/autocomplete.php");
+			<?php
+			include_once("include/management/autocomplete.php");
 
-		if ($autoComplete) {
-			echo "<script type=\"text/javascript\">
+			if ($autoComplete) {
+				echo "<script type=\"text/javascript\">
                       autoComEdit = new DHTMLSuite.autoComplete();
                       autoComEdit.add('username','include/management/dynamicAutocomplete.php','_small','getAjaxAutocompleteUsernames');
                       </script>";
-		}
-		?>
+			}
+			?>
 
 
-        <?php
-		include('include/config/logging.php');
-		?>
+			<?php
+			include('include/config/logging.php');
+			?>
 
-    </div>
+		</div>
+	</div>
 </div>
 <div id="footer">
 
-    <?php
+	<?php
 	include 'page-footer.php';
 	?>
 

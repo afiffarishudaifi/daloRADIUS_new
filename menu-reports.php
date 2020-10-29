@@ -20,7 +20,7 @@
 			include_once("./_partials/navbar.php");
 			?>
 
-			<br>
+			<!-- <br> -->
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="card" id="sidebar">
@@ -37,7 +37,7 @@
 								</a>
 
 								<form name="reponline" action="rep-online.php" method="get" class="sidebar">
-									<input name="usernameOnline" type="text" id="usernameOnline" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/> <?php echo t('Tooltip', 'UsernameWildcard') ?> <br/>' value="<?php if (isset($usernameOnline)) echo $usernameOnline ?>" tabindex=1>
+									<input class="form-control-sm" name="usernameOnline" type="text" id="usernameOnline" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/> <?php echo t('Tooltip', 'UsernameWildcard') ?> <br/>' value="<?php if (isset($usernameOnline)) echo $usernameOnline ?>" tabindex=1>
 								</form>
 							</li>
 
@@ -49,8 +49,8 @@
 								</a>
 
 								<form name="replastconnect" action="rep-lastconnect.php" method="get" class="sidebar">
-									<input name="usernameLastConnect" type="text" id="usernameLastConnect" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/> <?php echo t('Tooltip', 'UsernameWildcard') ?> <br/>' value="<?php if (isset($usernameLastConnect)) echo $usernameLastConnect ?>" tabindex=2>
-									<select class="" name="radiusreply" tabindex=3>
+									<input class="form-control-sm" name="usernameLastConnect" type="text" id="usernameLastConnect" <?php if ($autoComplete) echo "autocomplete='off'"; ?> tooltipText='<?php echo t('Tooltip', 'Username'); ?> <br/> <?php echo t('Tooltip', 'UsernameWildcard') ?> <br/>' value="<?php if (isset($usernameLastConnect)) echo $usernameLastConnect ?>" tabindex=2>
+									<select class="form-control-sm" name="radiusreply" tabindex=3>
 										<option value="Any">Any</option>
 										<option value="Access-Accept">Access-Accept</option>
 										<option value="Access-Reject">Access-Reject</option>
@@ -61,8 +61,8 @@
 										<img src="library/js_date/calendar.gif" onclick="showChooser(this, 'startdate_lastconnect', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
 										Start Date
 									</h6>
-									<input name="startdate" type="text" id="startdate_lastconnect" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($startdate)) echo $startdate;
-																																							else echo date("Y-m-01"); ?>">
+									<input class="form-control-sm" name="startdate" type="text" id="startdate_lastconnect" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($startdate)) echo $startdate;
+																																													else echo date("Y-m-01"); ?>">
 									<div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; 	width: 160px;"></div>
 
 									<h6>
@@ -70,8 +70,8 @@
 										<img src="library/js_date/calendar.gif" onclick="showChooser(this, 'enddate_lastconnect', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
 										End Date
 									</h6>
-									<input name="enddate" type="text" id="enddate_lastconnect" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($enddate)) echo $enddate;
-																																						else echo date("Y-m-t"); ?>">
+									<input class="form-control-sm" name="enddate" type="text" id="enddate_lastconnect" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($enddate)) echo $enddate;
+																																												else echo date("Y-m-t"); ?>">
 									<div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; 	width: 160px;"></div>
 								</form>
 							</li>
@@ -89,8 +89,8 @@
 										<img src="library/js_date/calendar.gif" onclick="showChooser(this, 'startdate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
 										Start Date
 									</h6>
-									<input name="startdate" type="text" id="startdate" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($startdate)) echo $startdate;
-																																				else echo date("Y-01-01"); ?>">
+									<input class="form-control-sm" name="startdate" type="text" id="startdate" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($startdate)) echo $startdate;
+																																										else echo date("Y-01-01"); ?>">
 									<div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; 	width: 160px;"></div>
 
 									<h6>
@@ -98,8 +98,8 @@
 										<img src="library/js_date/calendar.gif" onclick="showChooser(this, 'enddate', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
 										End Date
 									</h6>
-									<input name="enddate" type="text" id="enddate" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($enddate)) echo $enddate;
-																																			else echo date("Y-m-t"); ?>">
+									<input class="form-control-sm" name="enddate" type="text" id="enddate" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($enddate)) echo $enddate;
+																																									else echo date("Y-m-t"); ?>">
 									<div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; 	width: 160px;"></div>
 								</form>
 							</li>
@@ -111,7 +111,7 @@
 									<?php echo t('button', 'TopUser') ?>
 								</a>
 								<form name="topusers" action="rep-topusers.php" method="get" class="sidebar">
-									<select class="" name="limit" type="text" tabindex=3>
+									<select class="form-control-sm" name="limit" type="text" tabindex=3>
 										<option value="5"> 5 </option>
 										<option value="10"> 10 </option>
 										<option value="20"> 20 </option>
@@ -122,16 +122,16 @@
 									</select>
 
 									<h6><br>Username Filter</h6>
-									<input name="username" type="text" id="username" value="<?php if (isset($username)) echo $username;
-																							else echo "%"; ?>">
+									<input class="form-control-sm" name="username" type="text" id="username" value="<?php if (isset($username)) echo $username;
+																													else echo "%"; ?>">
 
 									<h6>
 										<br>
 										<img src="library/js_date/calendar.gif" onclick="showChooser(this, 'startdate_topuser', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
 										Start Date
 									</h6>
-									<input name="startdate" type="text" id="startdate_topuser" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($startdate)) echo $startdate;
-																																						else echo date("Y-m-01"); ?>">
+									<input class="form-control-sm" name="startdate" type="text" id="startdate_topuser" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($startdate)) echo $startdate;
+																																												else echo date("Y-m-01"); ?>">
 									<div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; 	width: 160px;">
 									</div>
 
@@ -140,14 +140,14 @@
 										<img src="library/js_date/calendar.gif" onclick="showChooser(this, 'enddate_topuser', 'chooserSpan', 1950, <?php echo date('Y', time()); ?>, 'Y-m-d', false);">
 										End Date
 									</h6>
-									<input name="enddate" type="text" id="enddate_topuser" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($enddate)) echo $enddate;
-																																					else echo date("Y-m-t"); ?>">
+									<input class="form-control-sm" name="enddate" type="text" id="enddate_topuser" tooltipText='<?php echo t('Tooltip', 'Date'); ?>' value="<?php if (isset($enddate)) echo $enddate;
+																																											else echo date("Y-m-t"); ?>">
 									<div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; 	width: 160px;">
 									</div>
 
 									<h6><br>Report By</h6>
 
-									<select class="" name="orderBy" type="text" tabindex=4>
+									<select class="form-control-sm" name="orderBy" type="text" tabindex=4>
 										<option value="Bandwidth"> bandwidth </option>
 										<option value="Time"> time </option>
 									</select>
